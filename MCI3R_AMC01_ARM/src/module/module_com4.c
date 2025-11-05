@@ -1,6 +1,6 @@
 /**************************************************************************************************
 *Filename:     module_com4.c
-*Purpose:      ¹«ÓÃÄ£¿écom4·½·¨¶¨Òå
+*Purpose:      å…¬ç”¨æ¨¡å—com4æ–¹æ³•å®šä¹‰
 *Log:          Date          Author    Modified
 *              2021/9/21     hdq       create
 **************************************************************************************************/
@@ -19,12 +19,12 @@
 /****************************************************************************************************
 * Identifier:   SCOD-AMC01-253 (Trace to: SLD-AMC01-253)
 * Function:     com4RxHandle
-* Description:  ½ÓÊÕÍ¨ĞÅIVÊı¾İ
-* Input:        slot ²ÛÎ»ºÅ
-*               port ¶Ë¿ÚºÅ
-*               pBuf Êı¾İ»º´æ
+* Description:  æ¥æ”¶é€šä¿¡IVæ•°æ®
+* Input:        slot æ§½ä½å·
+*               port ç«¯å£å·
+*               pBuf æ•°æ®ç¼“å­˜
 * Output:       none
-* Return:       ret 0 ½ÓÊÕÊı¾İ³É¹¦ -1 Í¨ĞÅÊ§°Ü£»-2 ÎŞÊı¾İ
+* Return:       ret 0 æ¥æ”¶æ•°æ®æˆåŠŸ -1 é€šä¿¡å¤±è´¥ï¼›-2 æ— æ•°æ®
 *
 * Others:
 * Log:          Date          Author    Modified
@@ -38,7 +38,7 @@ int32_t com4RxHandle(int32_t slot, int32_t port, void *pBuf)
     int32_t offset = 0;
     uint32_t src = 0U;
     portState_t *pPortState = NULL;
-    comFrame_t *pFrame = (comFrame_t *)pBuf; /* ¿ÉÒÔÎÛÈ¾ */
+    comFrame_t *pFrame = (comFrame_t *)pBuf; /* å¯ä»¥æ±¡æŸ“ */
     uint32_t comState = 0U;
 
     LYNX_ASSERT(slot < CASE_SLOT_MAX);
@@ -48,7 +48,7 @@ int32_t com4RxHandle(int32_t slot, int32_t port, void *pBuf)
     src = com1GetAddr(slot, COM_RX1_ADDR);
     src += ((uint32_t)port * ASYNC_EMIF_COM_STEP_ADDR);
 
-    /* ½ÓÊÕÎ¬»¤Êı¾İÖ¡ */
+    /* æ¥æ”¶ç»´æŠ¤æ•°æ®å¸§ */
     pPortState = infoGetPortState(slot, port, RX_PORT);
     LYNX_ASSERT(NULL != pPortState);
 
@@ -56,7 +56,7 @@ int32_t com4RxHandle(int32_t slot, int32_t port, void *pBuf)
     offset = 12 + g_localSlot;
     comState &= (1U << offset); 
 
-    if(pPortState->full == 0) /* ÓĞÊı¾İ */
+    if(pPortState->full == 0) /* æœ‰æ•°æ® */
     {
         err = com1ReadData((void*)pFrame, src, sizeof(comFrame_t));
         if(( err == 0 ) &&
@@ -66,11 +66,11 @@ int32_t com4RxHandle(int32_t slot, int32_t port, void *pBuf)
         }
         else
         {
-            ret = -1; /* Í¨ĞÅ½ÓÊÕÊ§°Ü */
+            ret = -1; /* é€šä¿¡æ¥æ”¶å¤±è´¥ */
         }
     }
     else
-    {   /* ¶Ë¿ÚÊı¾İÎª¿Õ£¬Ã»ÓĞÊı¾İÊı¾İ */
+    {   /* ç«¯å£æ•°æ®ä¸ºç©ºï¼Œæ²¡æœ‰æ•°æ®æ•°æ® */
         ret = -2;
     }
 
@@ -80,10 +80,10 @@ int32_t com4RxHandle(int32_t slot, int32_t port, void *pBuf)
 /****************************************************************************************************
 * Identifier:   SCOD-AMC01-254 (Trace to: SLD-AMC01-254)
 * Function:     com4TxHandle
-* Description:  Ïò¹¤³ÌÊ¦Õ¾·¢ËÍÎ¬»¤Êı¾İ
-* Input:        slot ²ÛÎ»ºÅ
-*               port ¶Ë¿ÚºÅ
-*               pBuf ·¢ËÍÊı¾İÖ¸Õë£¬¿ÉÒÔÎÛÈ¾
+* Description:  å‘å·¥ç¨‹å¸ˆç«™å‘é€ç»´æŠ¤æ•°æ®
+* Input:        slot æ§½ä½å·
+*               port ç«¯å£å·
+*               pBuf å‘é€æ•°æ®æŒ‡é’ˆï¼Œå¯ä»¥æ±¡æŸ“
 * Output:       none
 * Return:       ret 0
 *
@@ -101,7 +101,7 @@ int32_t com4TxHandle(int32_t slot, int32_t port, void *pBuf)
     LYNX_ASSERT(NULL != pBuf);
 
     dst = dst + (ASYNC_EMIF_COM_STEP_ADDR * (uint32_t)port);
-    /* Ğ´ÈëÊı¾İ */
+    /* å†™å…¥æ•°æ® */
     com1WriteData(dst, pBuf, sizeof(comFrame_t));
 
     return ret;
@@ -110,8 +110,8 @@ int32_t com4TxHandle(int32_t slot, int32_t port, void *pBuf)
 /*********************************************************************
 * Identifier:   SCOD-AMC01-255 (Trace to: SLD-AMC01-255)
 * Function:     com4Init
-* Description:  com4 ³õÊ¼»¯
-* Input:        slot ²ÛºÅ
+* Description:  com4 åˆå§‹åŒ–
+* Input:        slot æ§½å·
 * Output:       none
 * Return:       0
 * Others:

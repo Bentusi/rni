@@ -1987,10 +1987,10 @@ boolean SL_SelfTest_PBIST_StopExec(void)
 /****************************************************************************************************
 * Identifier:   SCOD-AMC01-315 (Trace to: SLD-AMC01-315)
 * Function:     SL_SelfTest_STC
-* Description:  STCÕï¶Ï
-* Input:        testType ²âÊÔÀàĞÍ
-*               bmode    ²âÊÔÄ£Ê½
-*               config   ÅäÖÃ²ÎÊı
+* Description:  STCè¯Šæ–­
+* Input:        testType æµ‹è¯•ç±»å‹
+*               bmode    æµ‹è¯•æ¨¡å¼
+*               config   é…ç½®å‚æ•°
 * Output:       none
 * Return:       none
 *
@@ -4141,10 +4141,10 @@ uint32 g_MemIntrCnt_reserved_word;
 /****************************************************************************************************
 * Identifier:   SCOD-AMC01-316 (Trace to: SLD-AMC01-316)
 * Function:     SL_SelfTest_MemoryInterconnect
-* Description:  ÄÚ´æÁ¬½ÓÆ÷Õï¶Ï
-* Input:        testType ²âÊÔÀàĞÍ
-*               bmode    ²âÊÔÄ£Ê½
-*               config   ÅäÖÃ²ÎÊı
+* Description:  å†…å­˜è¿æ¥å™¨è¯Šæ–­
+* Input:        testType æµ‹è¯•ç±»å‹
+*               bmode    æµ‹è¯•æ¨¡å¼
+*               config   é…ç½®å‚æ•°
 * Output:       none
 * Return:       none
 *

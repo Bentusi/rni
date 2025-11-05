@@ -1,6 +1,6 @@
 /**************************************************************************************************
 *Filename:     module_nai01.c
-*Purpose:      ¹«ÓÃÄ£¿énai01·½·¨¶¨Òå
+*Purpose:      å…¬ç”¨æ¨¡å—nai01æ–¹æ³•å®šä¹‰
 *Log:          Date          Author    Modified
 *              2021/9/21     hdq       create
 **************************************************************************************************/
@@ -15,11 +15,11 @@
 /**************************************************************************************************
  * Identifier:   SCOD-AMC01-373 (Trace to: SLD-AMC01-373)
  * Function:     nai01FrameHandle
- * Description:  nai01Ä£¿é½ÓÊÕÊı¾İÖ¡´¦Àí
- * Input:        slot      ²ÛÎ»ºÅ
- *               copyFlag  0 ²»½øĞĞ¸´ÖÆÇÒÖÊÁ¿Î»ÎŞĞ§£¨Òì³£´¦Àí£© !0 Ö´ĞĞ¸´ÖÆ²Ù×÷
- *               pDst      Ä¿µÄµØÖ·
- *               pSrc      Ô´µØÖ·
+ * Description:  nai01æ¨¡å—æ¥æ”¶æ•°æ®å¸§å¤„ç†
+ * Input:        slot      æ§½ä½å·
+ *               copyFlag  0 ä¸è¿›è¡Œå¤åˆ¶ä¸”è´¨é‡ä½æ— æ•ˆï¼ˆå¼‚å¸¸å¤„ç†ï¼‰ !0 æ‰§è¡Œå¤åˆ¶æ“ä½œ
+ *               pDst      ç›®çš„åœ°å€
+ *               pSrc      æºåœ°å€
  * Output:       None                
  * Return:       None                 
  * Date:         Author      Modified 
@@ -37,58 +37,58 @@ static void nai01FrameHandle(int32_t slot, int32_t copyFlag, void *pDst, const v
     {
         infoSetHw(slot, pSrcFrame->info);
 
-        /* ²âÊÔÍ¨µÀÇĞ»»×´Ì¬·´À¡ */
+        /* æµ‹è¯•é€šé“åˆ‡æ¢çŠ¶æ€åé¦ˆ */
         pDstFrame->channelSwitchRec.value = pSrcFrame->channelSwitchRec.value;
         pDstFrame->channelSwitchRec.quality = (pSrcFrame->channelSwitchRec.quality)&0x01U;
         infoSetIoCh(slot, 0, pSrcFrame->channelSwitchRec.quality);
-        /* ²âÊÔÍ¨µÀÑ¡Ôñ·´À¡ */
+        /* æµ‹è¯•é€šé“é€‰æ‹©åé¦ˆ */
         pDstFrame->channelChoiceRec.value = pSrcFrame->channelChoiceRec.value;
         pDstFrame->channelChoiceRec.quality = (pSrcFrame->channelChoiceRec.quality)&0x01U;
         infoSetIoCh(slot, 1, pSrcFrame->channelChoiceRec.quality);
-        /* µµÎ»ĞÅºÅ·´À¡ */
+        /* æ¡£ä½ä¿¡å·åé¦ˆ */
         pDstFrame->gearSignalRec.value = pSrcFrame->gearSignalRec.value;
         pDstFrame->gearSignalRec.quality = (pSrcFrame->gearSignalRec.quality)&0x01U;
         infoSetIoCh(slot, 2, pSrcFrame->gearSignalRec.quality);
-        /* 1¶ÎµçÁ÷ */
+        /* 1æ®µç”µæµ */
         pDstFrame->upCurrent_1.value = pSrcFrame->upCurrent_1.value;
         pDstFrame->upCurrent_1.quality = (pSrcFrame->upCurrent_1.quality)&0x01U;
         infoSetIoCh(slot, 4, pSrcFrame->upCurrent_1.quality);
-        /* 2¶ÎµçÁ÷ */
+        /* 2æ®µç”µæµ */
         pDstFrame->upCurrent_2.value = pSrcFrame->upCurrent_2.value;
         pDstFrame->upCurrent_2.quality = (pSrcFrame->upCurrent_2.quality)&0x01U;
         infoSetIoCh(slot, 5, pSrcFrame->upCurrent_2.quality);
-        /* 3¶ÎµçÁ÷ */
+        /* 3æ®µç”µæµ */
         pDstFrame->upCurrent_3.value = pSrcFrame->upCurrent_3.value;
         pDstFrame->upCurrent_3.quality = (pSrcFrame->upCurrent_3.quality)&0x01U;
         infoSetIoCh(slot, 6, pSrcFrame->upCurrent_3.quality);
-        /* 4¶ÎµçÁ÷ */
+        /* 4æ®µç”µæµ */
         pDstFrame->upCurrent_4.value = pSrcFrame->upCurrent_4.value;
         pDstFrame->upCurrent_4.quality = (pSrcFrame->upCurrent_4.quality)&0x01U;
         infoSetIoCh(slot, 7, pSrcFrame->upCurrent_4.quality);
     }
-    else /* Í¨ĞÅÒì³£Ê±£¬ËùÓĞÎïÀíµãÖÊÁ¿Î»ÎŞĞ§ */
+    else /* é€šä¿¡å¼‚å¸¸æ—¶ï¼Œæ‰€æœ‰ç‰©ç†ç‚¹è´¨é‡ä½æ— æ•ˆ */
     {
-        infoSetHw(slot, 0u); /* Âö³å²É¼¯Ä£¿é×ÔÕï¶Ï×´Ì¬·´À¡ */
+        infoSetHw(slot, 0u); /* è„‰å†²é‡‡é›†æ¨¡å—è‡ªè¯Šæ–­çŠ¶æ€åé¦ˆ */
 
-        /* ²âÊÔÍ¨µÀÇĞ»»×´Ì¬·´À¡ */
+        /* æµ‹è¯•é€šé“åˆ‡æ¢çŠ¶æ€åé¦ˆ */
         pDstFrame->channelSwitchRec.quality = QUALITY_STATE_INVALID;
         infoSetIoCh(slot, 0, QUALITY_STATE_INVALID);
-        /* ²âÊÔÍ¨µÀÑ¡Ôñ·´À¡ */
+        /* æµ‹è¯•é€šé“é€‰æ‹©åé¦ˆ */
         pDstFrame->channelChoiceRec.quality = QUALITY_STATE_INVALID;
         infoSetIoCh(slot, 1, QUALITY_STATE_INVALID);
-        /* µµÎ»ĞÅºÅ·´À¡ */
+        /* æ¡£ä½ä¿¡å·åé¦ˆ */
         pDstFrame->gearSignalRec.quality = QUALITY_STATE_INVALID;
         infoSetIoCh(slot, 2, QUALITY_STATE_INVALID);
-        /* 1¶ÎµçÁ÷ */
+        /* 1æ®µç”µæµ */
         pDstFrame->upCurrent_1.quality = QUALITY_STATE_INVALID;
         infoSetIoCh(slot, 4, QUALITY_STATE_INVALID);
-        /* 2¶ÎµçÁ÷ */
+        /* 2æ®µç”µæµ */
         pDstFrame->upCurrent_2.quality = QUALITY_STATE_INVALID;
         infoSetIoCh(slot, 5, QUALITY_STATE_INVALID);
-        /* 3¶ÎµçÁ÷ */
+        /* 3æ®µç”µæµ */
         pDstFrame->upCurrent_3.quality = QUALITY_STATE_INVALID;
         infoSetIoCh(slot, 6, QUALITY_STATE_INVALID);
-        /* 4¶ÎµçÁ÷ */
+        /* 4æ®µç”µæµ */
         pDstFrame->upCurrent_4.quality = QUALITY_STATE_INVALID;
         infoSetIoCh(slot, 7, QUALITY_STATE_INVALID);
     }
@@ -97,8 +97,8 @@ static void nai01FrameHandle(int32_t slot, int32_t copyFlag, void *pDst, const v
 /*********************************************************************
 * Identifier:   SCOD-AMC01-374 (Trace to: SLD-AMC01-374)
 * Function:     aiRxHandle
-* Description:  ½ÓÊÕAI°æ¿¨µÄÊı¾İºÍ×´Ì¬
-* Input:        slot ²ÛºÅ
+* Description:  æ¥æ”¶AIç‰ˆå¡çš„æ•°æ®å’ŒçŠ¶æ€
+* Input:        slot æ§½å·
 * Output:       none
 * Return:       0
 *
@@ -116,17 +116,17 @@ int32_t nai01RxHandle(int32_t slot, int32_t port, void *pBuf)
 /**************************************************************************************************
 * Identifier:   SCOD-AMC01-375 (Trace to: SLD-AMC01-375)
 * Function:     nai01GetRxChAddr
-* Description:  »ñÈ¡nai01Ä£¿é¶ÔÓ¦Í¨µÀµÄ»º³åÇøµØÖ·
-* Input:        slot ²ÛºÅ
-*               port IO¿¨±£Áô
-*               ch   Í¨µÀºÅ
+* Description:  è·å–nai01æ¨¡å—å¯¹åº”é€šé“çš„ç¼“å†²åŒºåœ°å€
+* Input:        slot æ§½å·
+*               port IOå¡ä¿ç•™
+*               ch   é€šé“å·
 * Output:       none
-* Return:       pSrc Í¨µÀµØÖ·
+* Return:       pSrc é€šé“åœ°å€
 *
 * Others:
 * Log:          Date          Author    Modified
 *               2021/08/31    hdq       create
-*               2023/01/30    wxb       nai01GetInChAddrĞŞ¸ÄÎªnai01GetRxChAddr
+*               2023/01/30    wxb       nai01GetInChAddrä¿®æ”¹ä¸ºnai01GetRxChAddr
 **************************************************************************************************/
 uint8_t *nai01GetRxChAddr(int32_t slot, int32_t port, int32_t ch)
 {
@@ -146,12 +146,12 @@ uint8_t *nai01GetRxChAddr(int32_t slot, int32_t port, int32_t ch)
 /**************************************************************************************************
  * Identifier:   SCOD-AMC01-376 (Trace to: SLD-AMC01-376)
  * Function:     nai01GetTxChAddr
- * Description:  »ñÈ¡nai01Ä£¿éÍ¨µÀµØÖ·
- * Input:        slot  ²ÛÎ»ºÅ
- *               port  ²ÎÊı±£Áô£¬½Ó¿ÚĞèÒª
- *               ch    Í¨µÀºÅ
+ * Description:  è·å–nai01æ¨¡å—é€šé“åœ°å€
+ * Input:        slot  æ§½ä½å·
+ *               port  å‚æ•°ä¿ç•™ï¼Œæ¥å£éœ€è¦
+ *               ch    é€šé“å·
  * Output:       None
- * Return:       pDst  ¶ÔÓ¦Í¨µÀµÄµØÖ·Ö¸Õë
+ * Return:       pDst  å¯¹åº”é€šé“çš„åœ°å€æŒ‡é’ˆ
  * Date:         Author      Modified
  * 2021-11-09    hdq         Create
  *************************************************************************************************/

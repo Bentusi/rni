@@ -1,6 +1,6 @@
 /**************************************************************************************************
 *Filename:     module_di.c
-*Purpose:      ¹«ÓÃÄ£¿édi·½·¨¶¨Òå
+*Purpose:      å…¬ç”¨æ¨¡å—diæ–¹æ³•å®šä¹‰
 *Log:          Date          Author    Modified
 *              2021/9/21     hdq       create
 **************************************************************************************************/
@@ -16,11 +16,11 @@
 /**************************************************************************************************
  * Identifier:   SCOD-AMC01-359 (Trace to: SLD-AMC01-359)
  * Function:     diFrameHandle
- * Description:  Í¨ÓÃdiÄ£¿é½ÓÊÕÊı¾İÖ¡´¦Àí
- * Input:        slot      ²ÛÎ»ºÅ                 
- *               copyFlag  0 ²»½øĞĞ¸´ÖÆÇÒÖÊÁ¿Î»ÎŞĞ§£¨Òì³£´¦Àí£© !0 Ö´ĞĞ¸´ÖÆ²Ù×÷
- *               pDst      Ä¿µÄµØÖ·
- *               pSrc      Ô´µØÖ·
+ * Description:  é€šç”¨diæ¨¡å—æ¥æ”¶æ•°æ®å¸§å¤„ç†
+ * Input:        slot      æ§½ä½å·                 
+ *               copyFlag  0 ä¸è¿›è¡Œå¤åˆ¶ä¸”è´¨é‡ä½æ— æ•ˆï¼ˆå¼‚å¸¸å¤„ç†ï¼‰ !0 æ‰§è¡Œå¤åˆ¶æ“ä½œ
+ *               pDst      ç›®çš„åœ°å€
+ *               pSrc      æºåœ°å€
  * Output:       None
  * Return:       None
  * Date:         Author      Modified
@@ -42,11 +42,11 @@ static void diFrameHandle(int32_t slot, int32_t copyFlag, void *pDst, const void
 
     if(copyFlag != 0)
     {
-        infoSetHw(slot, pSrcFrame->info);/* Ó²¼şĞÅÏ¢ */
+        infoSetHw(slot, pSrcFrame->info);/* ç¡¬ä»¶ä¿¡æ¯ */
         for(ch = 0; ch < DI_CH_MAX; ch++)
         {
             if((enable & (1UL<<ch)) != 0U)
-            {   /* Ô­Ê¼Öµ±£´æµ½ */
+            {   /* åŸå§‹å€¼ä¿å­˜åˆ° */
                 pDstFrame->data[ch].value = pSrcFrame->data[ch].value;
                 pDstFrame->data[ch].quality = (pSrcFrame->data[ch].quality) & 0x01U;
                 value = pSrcFrame->data[ch].quality;
@@ -56,12 +56,12 @@ static void diFrameHandle(int32_t slot, int32_t copyFlag, void *pDst, const void
     }
     else
     {
-        infoSetHw(slot, 0U);/* Ó²¼şĞÅÏ¢ */
+        infoSetHw(slot, 0U);/* ç¡¬ä»¶ä¿¡æ¯ */
         /*invalid all quality that channel is enable. */
         for(ch = 0; ch < DI_CH_MAX; ch++)
-        {   /* Í¨ĞÅÒì³£Ê±£¬ËùÓĞÎïÀíµãÖÊÁ¿Î»ÎŞĞ§ */
+        {   /* é€šä¿¡å¼‚å¸¸æ—¶ï¼Œæ‰€æœ‰ç‰©ç†ç‚¹è´¨é‡ä½æ— æ•ˆ */
             if((enable & ((uint32_t)1<<ch)) != 0U)
-            {   /* Öµ²»±ä£¬ÖÊÁ¿Î»ÎŞĞ§ */
+            {   /* å€¼ä¸å˜ï¼Œè´¨é‡ä½æ— æ•ˆ */
                 pDstFrame->data[ch].quality = QUALITY_STATE_INVALID;
                 infoSetIoCh(slot, ch, QUALITY_STATE_INVALID);
             }
@@ -72,10 +72,10 @@ static void diFrameHandle(int32_t slot, int32_t copyFlag, void *pDst, const void
 /**************************************************************************************************
 * Identifier:   SCOD-AMC01-360 (Trace to: SLD-AMC01-360)
 * Function:     diRxHandle
-* Description:  ½ÓÊÕDIÊı¾İ
-* Input:        slot ²ÛºÅ
-*               para IO¿¨±£Áô
-*               pBuf ½ÓÊÕÊı¾İÖ¸Õë
+* Description:  æ¥æ”¶DIæ•°æ®
+* Input:        slot æ§½å·
+*               para IOå¡ä¿ç•™
+*               pBuf æ¥æ”¶æ•°æ®æŒ‡é’ˆ
 * Output:       none
 * Return:       0
 *
@@ -93,17 +93,17 @@ int32_t diRxHandle(int32_t slot, int32_t para, void *pBuf)
 /**************************************************************************************************
 * Identifier:   SCOD-AMC01-361 (Trace to: SLD-AMC01-361)
 * Function:     diGetRxChAddr
-* Description:  »ñÈ¡diÄ£¿é¶ÔÓ¦Í¨µÀµÄ»º³åÇøµØÖ·
-* Input:        slot ²ÛºÅ
-*               port ²ÎÊı±£Áô£¬½Ó¿ÚĞèÒª
-*               ch   Í¨µÀºÅ
+* Description:  è·å–diæ¨¡å—å¯¹åº”é€šé“çš„ç¼“å†²åŒºåœ°å€
+* Input:        slot æ§½å·
+*               port å‚æ•°ä¿ç•™ï¼Œæ¥å£éœ€è¦
+*               ch   é€šé“å·
 * Output:       none
-* Return:       pSrc Í¨µÀµØÖ·
+* Return:       pSrc é€šé“åœ°å€
 *
 * Others:
 * Log:          Date          Author    Modified
 *               2021/08/31    hdq       create
-*               2023/03/09    wxb       diGetInChAddrĞŞ¸ÄÎªdiGetRxChAddr
+*               2023/03/09    wxb       diGetInChAddrä¿®æ”¹ä¸ºdiGetRxChAddr
 **************************************************************************************************/
 uint8_t *diGetRxChAddr(int32_t slot, int32_t port, int32_t ch)
 {

@@ -341,7 +341,7 @@ void _iCacheInvalidate_(void);
 /* USER CODE END */
 /** @fn void _dCacheFlush_(void)
 *   @brief Update ICache by cgn.
-*   @note Ê¹ÓÃÊ±Ğè±£Ö¤srcLen²ÎÊıÎª32µÄÕûÊı±¶
+*   @note ä½¿ç”¨æ—¶éœ€ä¿è¯srcLenå‚æ•°ä¸º32çš„æ•´æ•°å€
 */
 void _dCacheFlush_(uint32 srcAddr);
 

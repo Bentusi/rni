@@ -1,6 +1,6 @@
 /***************************************************************************************************
  * Filename: module_mpu.c
- * Purpose:  Ö÷¿ØÄ£¿é¹¦ÄÜ¶¨Òå
+ * Purpose:  ä¸»æ§æ¨¡å—åŠŸèƒ½å®šä¹‰
  * Date:         Author      Modified 
  * 2021-09-23    hdq         Create  
 ***************************************************************************************************/
@@ -21,8 +21,8 @@
 /**************************************************************************************************
 * Identifier:   SCOD-AMC01-350 (Trace to: SLD-AMC01-350)
 * Function:     mpuMemInit
-* Description:  Ö÷¿ØÄ£¿éÄÚ´æ·ÖÅä
-* Input:        slot ²ÛºÅ
+* Description:  ä¸»æ§æ¨¡å—å†…å­˜åˆ†é…
+* Input:        slot æ§½å·
 * Output:       none
 * Return:       none
 *
@@ -48,12 +48,12 @@ static void mpuMemInit(int32_t slot)
 /****************************************************************************************************
 * Identifier:   SCOD-AMC01-225 (Trace to: SLD-AMC01-225)
 * Function:     mpuRxHandle
-* Description:  ½ÓÊÕÍ¬²½Êı¾İ£¬Ã¿´Î¶ÁÈ¡4KÊı¾İ
-* Input:        slot  ²ÛÎ»ºÅ
-*               port  ¶Ë¿ÚºÅ
-*               pBuf  Êı¾İ´æ·Å»º´æ
+* Description:  æ¥æ”¶åŒæ­¥æ•°æ®ï¼Œæ¯æ¬¡è¯»å–4Kæ•°æ®
+* Input:        slot  æ§½ä½å·
+*               port  ç«¯å£å·
+*               pBuf  æ•°æ®å­˜æ”¾ç¼“å­˜
 * Output:       none
-* Return:       0:½ÓÊÕÊı¾İÓĞĞ§£»ÆäËü£ºÊı¾İÎŞĞ§
+* Return:       0:æ¥æ”¶æ•°æ®æœ‰æ•ˆï¼›å…¶å®ƒï¼šæ•°æ®æ— æ•ˆ
 *
 * Others:
 * Log:          Date          Author    Modified
@@ -82,7 +82,7 @@ int32_t mpuRxHandle(int32_t slot, int32_t port, void *pBuf)
     
     if((slot == g_localSlot))
     {
-        if(pPortState->full == 0)  /* ÓĞÊı¾İ */
+        if(pPortState->full == 0)  /* æœ‰æ•°æ® */
         {
             for(i = 0; i < 4; i++)
             {
@@ -107,10 +107,10 @@ int32_t mpuRxHandle(int32_t slot, int32_t port, void *pBuf)
             pPortState->avail = 1;
         }
 
-        /* Ğ£ÑéÊı¾İ */
+        /* æ ¡éªŒæ•°æ® */
         if(pPortState->avail == 0)
         {
-            /* ÅĞ¶Ï ÊÇ·ñÎªÓĞĞ§Êı¾İÖ¡ */
+            /* åˆ¤æ–­ æ˜¯å¦ä¸ºæœ‰æ•ˆæ•°æ®å¸§ */
             if(drv2CrcCal((const void*)pSyncFrame, sizeof(syncFrame_t)- sizeof(uint64_t)) != pSyncFrame->crc64)
             {
                 pPortState->avail = 1;
@@ -123,9 +123,9 @@ int32_t mpuRxHandle(int32_t slot, int32_t port, void *pBuf)
 /**************************************************************************************************
  * Identifier:   SCOD-AMC01-226 (Trace to: SLD-AMC01-226)
  * Function:     mpuRxHook
- * Description:  ÈßÓàÍ¬²½Êı¾İ½ÓÊÕ´¦Àí
- * Input:        slot ²ÛÎ»ºÅ
- *               para Êı¾İ´¦Àí·½Ê½ 0 ½ÓÊÕÇ°´¦Àí 1 ½ÓÊÕºó´¦Àí
+ * Description:  å†—ä½™åŒæ­¥æ•°æ®æ¥æ”¶å¤„ç†
+ * Input:        slot æ§½ä½å·
+ *               para æ•°æ®å¤„ç†æ–¹å¼ 0 æ¥æ”¶å‰å¤„ç† 1 æ¥æ”¶åå¤„ç†
  * Output:       None
  * Return:       ret 0
  * Date:         Author      Modified
@@ -150,7 +150,7 @@ int32_t mpuRxHook(int32_t slot, int32_t para)
         {
             if(pPortState->avail == 0)
             {
-                /* ´ÓÄ£¿é½âÎöÃüÁî ²¢´¦Àí */
+                /* ä»æ¨¡å—è§£æå‘½ä»¤ å¹¶å¤„ç† */
                 sbSlaveRxProcess();
             }
         }
@@ -162,12 +162,12 @@ int32_t mpuRxHook(int32_t slot, int32_t para)
 /****************************************************************************************************
 * Identifier:   SCOD-AMC01-227 (Trace to: SLD-AMC01-227)
 * Function:     mpuTxHandle
-* Description:  Í¬²½Êı¾İ·¢ËÍ
-* Input:        slot ²ÛÎ»ºÅ
-*               port ¶Ë¿ÚºÅ
-*               pBuf ·¢ËÍÊı¾İ»º´æÖ¸Õë
+* Description:  åŒæ­¥æ•°æ®å‘é€
+* Input:        slot æ§½ä½å·
+*               port ç«¯å£å·
+*               pBuf å‘é€æ•°æ®ç¼“å­˜æŒ‡é’ˆ
 * Output:       none
-* Return:       ·µ»Ø0
+* Return:       è¿”å›0
 *
 * Others:
 * Log:          Date          Author    Modified
@@ -188,7 +188,7 @@ int32_t mpuTxHandle(int32_t slot, int32_t port, void *pBuf)
     if(slot == g_localSlot)
     {
         for(i = 0; i < 4; i++)
-        {   /* Í¨ĞÅ Õ¼ÓÃÁË 4¸ö ×Ö½Ú */
+        {   /* é€šä¿¡ å ç”¨äº† 4ä¸ª å­—èŠ‚ */
             (void)memcpy((void*)pFrame->data, (const void*)pSrc, (uint32_t)COM_SEG_DATA_SIZE_MAX);
 
             com1WriteData(dst, (void*)pFrame, sizeof(comFrame_t));
@@ -204,8 +204,8 @@ int32_t mpuTxHandle(int32_t slot, int32_t port, void *pBuf)
 /****************************************************************************************************
 * Identifier:   SCOD-AMC01-015 (Trace to: SLD-AMC01-015)
 * Function:     mpuInit
-* Description:  ÏÂ·¢×éÌ¬ÅäÖÃĞÅÏ¢
-* Input:        slot ²ÛÎ»ºÅ
+* Description:  ä¸‹å‘ç»„æ€é…ç½®ä¿¡æ¯
+* Input:        slot æ§½ä½å·
 * Output:       none
 * Return:       0
 *
@@ -227,8 +227,8 @@ int32_t mpuInit(int32_t slot)
     static int32_t allow = 0;
 
     fpgaReadReg_t *pReadReg = (fpgaReadReg_t *)g_fastTxBuffer;
-    lynxID_t cfgId;     /* ÅäÖÃID*/
-    /* È¡³ö¶ÔÓ¦²ÛºÅµÄ ÅäÖÃID */
+    lynxID_t cfgId;     /* é…ç½®ID*/
+    /* å–å‡ºå¯¹åº”æ§½å·çš„ é…ç½®ID */
     cfgId.value = cfgSlotToId(slot);
 
     LYNX_ASSERT(slot < 2);
@@ -236,7 +236,7 @@ int32_t mpuInit(int32_t slot)
 
     mpuMemInit(slot);
 
-    /* ·¢ËÍÖ÷¿ØÅäÖÃĞÅÏ¢ */
+    /* å‘é€ä¸»æ§é…ç½®ä¿¡æ¯ */
     com1CalReadData(slot);
     com1CalWriteData(slot);
     com1CalConfigData(slot);
@@ -246,18 +246,18 @@ int32_t mpuInit(int32_t slot)
 
     if(allow == 0)
     {
-        volDiganostic(1U);     /* ÉÏµç µçÑ¹×Ô¼àÊÓ */
-        /* µÈ´ıFPGA³õÊ¼»¯Íê³É  */
+        volDiganostic(1U);     /* ä¸Šç”µ ç”µå‹è‡ªç›‘è§† */
+        /* ç­‰å¾…FPGAåˆå§‹åŒ–å®Œæˆ  */
         while(1)
         {
-            /* ¶ÁÈ¡Êı¾İ */
+            /* è¯»å–æ•°æ® */
             ret = com1ReadData((void*)pReadReg, MPU_HADR_INFO_ADDR, sizeof(fpgaReadReg_t));
             if(ret == 0)
             {
                 if( ((pReadReg->msg1 & 0x40U) == 0x40U) &&
                     ((pReadReg->slotAndcaseNum >> 5U) == cfgId.detail.caseNum)&&
                     ((pReadReg->stationNum & 0x3FU) == cfgId.detail.stationNum) &&
-                    ((pReadReg->slotAndcaseNum & 0x1FU) < 2U)) /* ²ÛÎ»ºÅÔÚ 0 »ò 1 ²Û */
+                    ((pReadReg->slotAndcaseNum & 0x1FU) < 2U)) /* æ§½ä½å·åœ¨ 0 æˆ– 1 æ§½ */
                  {
                      okCnt++;
                      failCnt = 0U;
@@ -267,16 +267,16 @@ int32_t mpuInit(int32_t slot)
                          cfgId.detail.aOrb = pReadReg->slotAndcaseNum & 0x1FU;
                          cfgId.detail.stationNum = pReadReg->stationNum;
                          g_localSlot = cfgId.detail.aOrb;
-                         initMpuSates(); /* ³õÊ¼»¯ Ö÷¿ØÄ£¿é Æ½Ì¨ĞÅÏ¢ */
-                         infoGetAddr()->moduleInfo[g_localSlot].difInfo.mpuInfo.id = cfgId; /* ÉèÖÃµ±Ç°Ö÷¿ØID */
+                         initMpuSates(); /* åˆå§‹åŒ– ä¸»æ§æ¨¡å— å¹³å°ä¿¡æ¯ */
+                         infoGetAddr()->moduleInfo[g_localSlot].difInfo.mpuInfo.id = cfgId; /* è®¾ç½®å½“å‰ä¸»æ§ID */
                          infoGetAddr()->moduleInfo[g_localSlot].difInfo.mpuInfo.fpgaVersion = pReadReg->fpgaVersion;
                          allow = 1;
                          if(pReadReg->isMaster == 0xFFU)
-                         {/* Ö÷Ä£Ê½ */
+                         {/* ä¸»æ¨¡å¼ */
                              mode = MPU_MASTER;
                          }
                          else
-                         {/* ´ÓÄ£Ê½ */
+                         {/* ä»æ¨¡å¼ */
                              mode = MPU_SLAVE;
                              if(cfgLocalPfMode()== CFG_SINGLE)
                              {
@@ -286,11 +286,11 @@ int32_t mpuInit(int32_t slot)
                          break;
                      }
                  }
-                 else /* ²ÛºÅ¹ÊÕÏ */
+                 else /* æ§½å·æ•…éšœ */
                  {
                      failCnt++;
                      okCnt = 0U;
-                     if(failCnt > 1000U) /* ³¬¹ı10Ãë ÔòÈÏÎª FPGA ³õÊ¼»¯Ê§°Ü */
+                     if(failCnt > 1000U) /* è¶…è¿‡10ç§’ åˆ™è®¤ä¸º FPGA åˆå§‹åŒ–å¤±è´¥ */
                      {
                          errStopHandleInit(FPGA_INIT_ERROR);
                      }
@@ -312,7 +312,7 @@ int32_t mpuInit(int32_t slot)
             infoSetMpuMS(mode);
             com1ReportArmState(ARM_OK);
 
-            /* ·¢ËÍ·ÇÖ÷¿ØÄ£¿é×éÌ¬ÅäÖÃĞÅÏ¢ */
+            /* å‘é€éä¸»æ§æ¨¡å—ç»„æ€é…ç½®ä¿¡æ¯ */
             for(idx = 2; idx < LYNX_SLOT_MAX; idx++)
             {
                 com1CalReadData(idx);

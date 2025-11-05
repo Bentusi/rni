@@ -1,6 +1,6 @@
 /**************************************************************************************************
 *Filename:     error_class.h
-*Purpose:      ¹ÊÕÏ´¦ÀíÄ£¿é£¬´íÎóÂëÏÔÊ¾
+*Purpose:      æ•…éšœå¤„ç†æ¨¡å—ï¼Œé”™è¯¯ç æ˜¾ç¤º
 *Log:          Date          Author    Modified
 *              2021/9/21     hdq       create
 **************************************************************************************************/
@@ -10,59 +10,59 @@
 #include "panel.h"
 #include "diag_class.h"
 
-#define   ERR_CODE_DISP_CONT             (12u)      /* Ò»¸ö ´íÎóÂë ×îÉÙÏÔÊ¾ 12¸öÖÜÆÚ */
-#define   NONE_ERR                       (0u)       /* ÎÞ´íÎó */
-#define   SHOW_ERR                       (1u)       /* ÓÐ´íÎó */
+#define   ERR_CODE_DISP_CONT             (12u)      /* ä¸€ä¸ª é”™è¯¯ç  æœ€å°‘æ˜¾ç¤º 12ä¸ªå‘¨æœŸ */
+#define   NONE_ERR                       (0u)       /* æ— é”™è¯¯ */
+#define   SHOW_ERR                       (1u)       /* æœ‰é”™è¯¯ */
 
-/*  Æ½Ì¨ÐÅÏ¢¹ÊÕÏÂë     ºóÐøÀ©Õ¹×î¶à¿ÉÀ©Õ¹ÖÁ263 ¼´Æ½Ì¨ÐÅÏ¢¹ÊÕÏÂë¹æ»®64¸ö´íÎóÂë  */
+/*  å¹³å°ä¿¡æ¯æ•…éšœç      åŽç»­æ‰©å±•æœ€å¤šå¯æ‰©å±•è‡³263 å³å¹³å°ä¿¡æ¯æ•…éšœç è§„åˆ’64ä¸ªé”™è¯¯ç   */
 
-/* ÈýÀà¹ÊÕÏ ×î¶à32¹ÊÕÏÂë       */
-#define CHECK_PF_CFG_FAIL               (200)     /* ±£Áô     200 */
-#define LOAD_USER_IMAGE_FAIL            (201)     /* ¼ÓÔØËã·¨ÎÄ¼þÊ§°Ü 201 */
-#define CHECK_USER_PARA_FAIL            (202)     /* ²ÎÊýÎÄ¼þÐ£ÑéÊ§°Ü 202 */
-#define CHECK_IMAGE_VERSION_FAIL        (203)     /* ±£Áô     203 */
-#define SOFT_VERSION_ERROR              (204)     /* ±£Áô     204 */
+/* ä¸‰ç±»æ•…éšœ æœ€å¤š32æ•…éšœç        */
+#define CHECK_PF_CFG_FAIL               (200)     /* ä¿ç•™     200 */
+#define LOAD_USER_IMAGE_FAIL            (201)     /* åŠ è½½ç®—æ³•æ–‡ä»¶å¤±è´¥ 201 */
+#define CHECK_USER_PARA_FAIL            (202)     /* å‚æ•°æ–‡ä»¶æ ¡éªŒå¤±è´¥ 202 */
+#define CHECK_IMAGE_VERSION_FAIL        (203)     /* ä¿ç•™     203 */
+#define SOFT_VERSION_ERROR              (204)     /* ä¿ç•™     204 */
 
-#define VERSION_COMPARE_ERROR           (205)     /* ÈßÓàÄ£Ê½  Ö÷´ÓÄ£¿é¹¤³ÌÎÄ¼þ²»Ò»ÖÂ     205 -----*/
-#define SLOT_NUMBER_ERROR               (206)     /* ÔËÐÐÖÐ»úÏäºÅ²ÛºÅÕ¾ºÅ´íÎó       206 */
-#define MODE_INIT_ERROR                 (207)     /* ÏµÍ³ÉÏµçÊ±¼ì²âµ½Ä£Ê½¿ª¹Ø¹ÊÕÏ 207 */
-#define LOCK_INIT_ERROR                 (208)     /* ±£Áô       208 */
-#define ERROR_TOTAL_TICKS               (209)     /* ÈÎÎñÊ±¼ä·ÖÅäÒì³£         209 */
-#define TASK_CREAT_ERROR                (210)     /* ÈÎÎñ´´½¨Ê§°Ü           210 */   
-#define TASK_ORDER_ERROR                (211)     /* ÈÎÎñÖ´ÐÐË³ÐòÒì³£         211 */ 
-#define WTD_READY_ERROR                 (212)     /* ¿´ÃÅ¹·FPGAÆô¶¯Ê§°Ü 212 */
+#define VERSION_COMPARE_ERROR           (205)     /* å†—ä½™æ¨¡å¼  ä¸»ä»Žæ¨¡å—å·¥ç¨‹æ–‡ä»¶ä¸ä¸€è‡´     205 -----*/
+#define SLOT_NUMBER_ERROR               (206)     /* è¿è¡Œä¸­æœºç®±å·æ§½å·ç«™å·é”™è¯¯       206 */
+#define MODE_INIT_ERROR                 (207)     /* ç³»ç»Ÿä¸Šç”µæ—¶æ£€æµ‹åˆ°æ¨¡å¼å¼€å…³æ•…éšœ 207 */
+#define LOCK_INIT_ERROR                 (208)     /* ä¿ç•™       208 */
+#define ERROR_TOTAL_TICKS               (209)     /* ä»»åŠ¡æ—¶é—´åˆ†é…å¼‚å¸¸         209 */
+#define TASK_CREAT_ERROR                (210)     /* ä»»åŠ¡åˆ›å»ºå¤±è´¥           210 */   
+#define TASK_ORDER_ERROR                (211)     /* ä»»åŠ¡æ‰§è¡Œé¡ºåºå¼‚å¸¸         211 */ 
+#define WTD_READY_ERROR                 (212)     /* çœ‹é—¨ç‹—FPGAå¯åŠ¨å¤±è´¥ 212 */
 
-#define COM_FPGA_EMIF_READ_CRC          (215)     /* Ö÷¿ØFPGA½ÓÊÕEMIF½Ó¿ÚÒì³£               215 */
-#define COM_ARM_EMIF_READ_CRC           (216)     /* Ö÷¿ØARM½ÓÊÕEMIF½Ó¿ÚÒì³£                216 */
-#define POWER_ON_ERROR                  (217)     /* ¿ª»úµçÑ¹Òì³£                217 */  /* ÐÂÔöÏÔÊ¾ */
-#define PERIOD_TIME_ERR                 (218)     /* ×éÌ¬ÅäÖÃÖÜÆÚ³¬³ö·¶Î§     218 */
-#define MPUS_ERR                        (219)     /* Ö÷¿ØÄ£¿é¹ÊÕÏ                219 */
-#define MPUS_COM_SYNC_INIT_ERROR        (220)     /* ÉÏµçÍ¬²½Ê§°Ü                220 */
-#define FPGA_INIT_ERROR                 (221)     /* FPGAÆô¶¯Ê§°Ü              221 */
-#define FLASH_ERROR                     (222)     /* ÉÏµçFLASHÕï¶ÏÊ§°Ü         222 */
+#define COM_FPGA_EMIF_READ_CRC          (215)     /* ä¸»æŽ§FPGAæŽ¥æ”¶EMIFæŽ¥å£å¼‚å¸¸               215 */
+#define COM_ARM_EMIF_READ_CRC           (216)     /* ä¸»æŽ§ARMæŽ¥æ”¶EMIFæŽ¥å£å¼‚å¸¸                216 */
+#define POWER_ON_ERROR                  (217)     /* å¼€æœºç”µåŽ‹å¼‚å¸¸                217 */  /* æ–°å¢žæ˜¾ç¤º */
+#define PERIOD_TIME_ERR                 (218)     /* ç»„æ€é…ç½®å‘¨æœŸè¶…å‡ºèŒƒå›´     218 */
+#define MPUS_ERR                        (219)     /* ä¸»æŽ§æ¨¡å—æ•…éšœ                219 */
+#define MPUS_COM_SYNC_INIT_ERROR        (220)     /* ä¸Šç”µåŒæ­¥å¤±è´¥                220 */
+#define FPGA_INIT_ERROR                 (221)     /* FPGAå¯åŠ¨å¤±è´¥              221 */
+#define FLASH_ERROR                     (222)     /* ä¸Šç”µFLASHè¯Šæ–­å¤±è´¥         222 */
 
-/* ËÄÀà¹ÊÕÏ ×î¶à32¸ö¹ÊÕÏÂë */
-#define BACK_MPU_ERROR                  (232)     /* ÈßÓàÖ÷¿Ø²»ÔÚÎ»              232 */
-#define MPUS_COM_RX_FIAL                (234)     /* ÈßÓàÖ÷¿Ø½ÓÊÕÊý¾ÝÊ§°Ü    */
-#define PF_MODE_ERR                     (236)     /* Ö÷´ÓÄ£Ê½´íÎó */
-#define KEY_MODE_ERR                    (237)     /* Ä£Ê½¿ª¹Ø¹ÊÕÏ                237 */
-#define KEY_LOCK_ERR                    (238)     /* ±£Áô */
-#define MODE_NOT_MATCH                  (239)     /* Ö÷´ÓÖ÷¿ØÔËÐÐÄ£Ê½²»Ò»ÖÂ */
+/* å››ç±»æ•…éšœ æœ€å¤š32ä¸ªæ•…éšœç  */
+#define BACK_MPU_ERROR                  (232)     /* å†—ä½™ä¸»æŽ§ä¸åœ¨ä½              232 */
+#define MPUS_COM_RX_FIAL                (234)     /* å†—ä½™ä¸»æŽ§æŽ¥æ”¶æ•°æ®å¤±è´¥    */
+#define PF_MODE_ERR                     (236)     /* ä¸»ä»Žæ¨¡å¼é”™è¯¯ */
+#define KEY_MODE_ERR                    (237)     /* æ¨¡å¼å¼€å…³æ•…éšœ                237 */
+#define KEY_LOCK_ERR                    (238)     /* ä¿ç•™ */
+#define MODE_NOT_MATCH                  (239)     /* ä¸»ä»Žä¸»æŽ§è¿è¡Œæ¨¡å¼ä¸ä¸€è‡´ */
 
-#define TASK0_TIMEOUT_WARN              (248)     /* ½ÓÊÕÊý¾ÝÈÎÎñÔËÐÐ³¬Ê±        248*/
-#define TASK1_TIMEOUT_WARN              (249)     /* ÓÃ»§Ëã·¨ÈÎÎñ³¬Ê±            249*/
-#define TASK2_TIMEOUT_WARN              (250)     /* ÈÈ±¸ÈßÓàÈÎÎñ³¬Ê±            250*/
-#define TASK3_TIMEOUT_WARN              (251)     /* ·¢ËÍÊý¾ÝÈÎÎñÔËÐÐ³¬Ê±        251*/
-#define TASK4_TIMEOUT_WARN              (252)     /* Î¬»¤ÈÎÎñÔËÐÐ³¬Ê±            252*/
-#define CYCLE_TIMEOUT_WARN              (253)     /* ÖÜÆÚ³¬Ê±                253*/
-#define BOARD_VOL_WARN                  (254)     /* °åÄÚµçÑ¹Òì³£              254*/
-#define SLOT_NUMBER_WARING              (255)     /* ÖÜÆÚÔËÐÐ×ÓÕ¾ºÅÒì³£          */
-#define FLASH_WARN                      (256)     /* ÖÜÆÚFLASHÕï¶ÏÊ§°Ü         256 */
+#define TASK0_TIMEOUT_WARN              (248)     /* æŽ¥æ”¶æ•°æ®ä»»åŠ¡è¿è¡Œè¶…æ—¶        248*/
+#define TASK1_TIMEOUT_WARN              (249)     /* ç”¨æˆ·ç®—æ³•ä»»åŠ¡è¶…æ—¶            249*/
+#define TASK2_TIMEOUT_WARN              (250)     /* çƒ­å¤‡å†—ä½™ä»»åŠ¡è¶…æ—¶            250*/
+#define TASK3_TIMEOUT_WARN              (251)     /* å‘é€æ•°æ®ä»»åŠ¡è¿è¡Œè¶…æ—¶        251*/
+#define TASK4_TIMEOUT_WARN              (252)     /* ç»´æŠ¤ä»»åŠ¡è¿è¡Œè¶…æ—¶            252*/
+#define CYCLE_TIMEOUT_WARN              (253)     /* å‘¨æœŸè¶…æ—¶                253*/
+#define BOARD_VOL_WARN                  (254)     /* æ¿å†…ç”µåŽ‹å¼‚å¸¸              254*/
+#define SLOT_NUMBER_WARING              (255)     /* å‘¨æœŸè¿è¡Œå­ç«™å·å¼‚å¸¸          */
+#define FLASH_WARN                      (256)     /* å‘¨æœŸFLASHè¯Šæ–­å¤±è´¥         256 */
 
 #define PF_ERR_MAX                      (264)
 
 
-/* cpu ×´Ì¬¹ÊÕÏ Âë  */
+/* cpu çŠ¶æ€æ•…éšœ ç   */
 /* group1*/
 #define ADC2_PARITY_ERR                 (400)      /* MibADC2 - parity                               Group1  1  */
 #define EPC_ERR                         (401)      /* EPC - Correctable Error                        Group1  4  */
@@ -82,7 +82,7 @@
 #define POWER_CMP_ERR                   (413)      /*Power domain compare error                     Group1  38*/
 #define POWER_SELF_TEST_ERR             (414)      /*Power domain self-test error                   Group1  39*/
 
-#define EFUSE_FARM_EFC_ERR              (415)      /*eFuse farm ¨C EFC error                         Group1  40 */
+#define EFUSE_FARM_EFC_ERR              (415)      /*eFuse farm â€“ EFC error                         Group1  40 */
 #define EFUSE_SELF_TEST_ERR             (416)      /*eFuse farm - self-test error                    Group1  41 */
 #define PLL2_ERR                        (417)      /*PLL2 - slip                                     Group1  42 */
 #define R5F_CACHE_ERR                   (418)      /*Cortex-R5F Core - cache correctable error event Group1  46*/

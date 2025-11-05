@@ -1,6 +1,6 @@
 /**************************************************************************************************
 *Filename:     io_class.c
-*Purpose:      IOÄ£¿é´¦ÀíÏà¹Ø·½·¨
+*Purpose:      IOæ¨¡å—å¤„ç†ç›¸å…³æ–¹æ³•
 *Log:          Date          Author    Modified
 *              2021/08/31    hdq       create
 **************************************************************************************************/
@@ -14,9 +14,9 @@
 /**************************************************************************************************
 * Identifier:   SCOD-AMC01-049 (Trace to: SLD-AMC01-049)
 * Function:     lxGetInChAddr
-* Description:  ½âÎöÊäÈëÀàÄ£¿éÍ¨µÀµÄ»º³åÇøµØÖ·
-* Input:        slot ²ÛºÅ
-                ch:  Í¨µÀºÅ
+* Description:  è§£æè¾“å…¥ç±»æ¨¡å—é€šé“çš„ç¼“å†²åŒºåœ°å€
+* Input:        slot æ§½å·
+                ch:  é€šé“å·
 * Output:       none
 * Return:       none
 *
@@ -42,9 +42,9 @@ uint8_t *lxGetInChAddr(int32_t slot, int32_t ch)
 /**************************************************************************************************
 * Identifier:   SCOD-AMC01-050 (Trace to: SLD-AMC01-050)
 * Function:     lxGetOutChAddr
-* Description:  ½âÎöÊä³öÀàÄ£¿éÍ¨µÀµÄ»º³åÇøµØÖ·
-* Input:        slot   ²ÛºÅ
-                ch     Í¨µÀºÅ
+* Description:  è§£æè¾“å‡ºç±»æ¨¡å—é€šé“çš„ç¼“å†²åŒºåœ°å€
+* Input:        slot   æ§½å·
+                ch     é€šé“å·
 * Output:       none
 * Return:       none
 *
@@ -70,17 +70,17 @@ uint8_t *lxGetOutChAddr(int32_t slot, int32_t ch)
 /****************************************************************************************************
 * Identifier:   SCOD-AMC01-346 (Trace to: SLD-AMC01-346)
 * Function:     ioComRecvData
-* Description:  IO½ÓÊÕÊı¾İÇı¶¯
-* Input:        slot  ²ÛÎ»ºÅ
-*               size  ½ÓÊÕÊı¾İ³¤¶È
-*               pBuf  ½ÓÊÕÊı¾İ»º´æÖ¸Õë
+* Description:  IOæ¥æ”¶æ•°æ®é©±åŠ¨
+* Input:        slot  æ§½ä½å·
+*               size  æ¥æ”¶æ•°æ®é•¿åº¦
+*               pBuf  æ¥æ”¶æ•°æ®ç¼“å­˜æŒ‡é’ˆ
 * Output:       none
-* Return:       0 : ½ÓÊÕÊı¾İÓĞĞ§ 0x10000: ½ÓÊÕÊı¾İÊ±CRC³ö´í
+* Return:       0 : æ¥æ”¶æ•°æ®æœ‰æ•ˆ 0x10000: æ¥æ”¶æ•°æ®æ—¶CRCå‡ºé”™
 *
 * Others:
 * Log:          Date          Author    Modified
 *               2017/08/15
-*               2019/01/24    ÕÅÇìÁÖ    ²ğ·Öº¯Êı¹¦ÄÜ£¬½«½ÓÊÕÍ¨ĞÅIIÊı¾İ¶ÀÁ¢³öÈ¥
+*               2019/01/24    å¼ åº†æ—    æ‹†åˆ†å‡½æ•°åŠŸèƒ½ï¼Œå°†æ¥æ”¶é€šä¿¡IIæ•°æ®ç‹¬ç«‹å‡ºå»
 ****************************************************************************************************/
 int32_t ioComRecvData(int32_t slot, uint32_t size, void *pBuf)
 {
@@ -109,10 +109,10 @@ int32_t ioComRecvData(int32_t slot, uint32_t size, void *pBuf)
 /****************************************************************************************************
 * Identifier:   SCOD-AMC01-347 (Trace to: SLD-AMC01-347)
 * Function:     ioComSendData
-* Description:  IOÊı¾İ·¢ËÍÇı¶¯
-* Input:        slot ²ÛÎ»ºÅ
-*               size Êı¾İ³¤¶È 
-*               pBuf ·¢ËÍÊı¾İ»º´æÖ¸Õë
+* Description:  IOæ•°æ®å‘é€é©±åŠ¨
+* Input:        slot æ§½ä½å·
+*               size æ•°æ®é•¿åº¦ 
+*               pBuf å‘é€æ•°æ®ç¼“å­˜æŒ‡é’ˆ
 * Output:       none
 * Return:       none
 *
@@ -135,10 +135,10 @@ void ioComSendData(int32_t slot, uint32_t size, const void *pBuf)
 /*********************************************************************
 * Identifier:   SCOD-AMC01-348 (Trace to: SLD-AMC01-348)
 * Function:     ioRxHandle
-* Description:  ½ÓÊÕIO°æ¿¨µÄÊı¾İºÍ×´Ì¬
-* Input:        slot  ²ÛºÅ
-*               pBuf  IOÄ£¿éÊı¾İÖ¸Õë
-*       pFrameHandle  ½ÓÊÕÊı¾İ´¦Àí»Øµ÷º¯Êı
+* Description:  æ¥æ”¶IOç‰ˆå¡çš„æ•°æ®å’ŒçŠ¶æ€
+* Input:        slot  æ§½å·
+*               pBuf  IOæ¨¡å—æ•°æ®æŒ‡é’ˆ
+*       pFrameHandle  æ¥æ”¶æ•°æ®å¤„ç†å›è°ƒå‡½æ•°
 * Output:       none
 * Return:       none
 *
@@ -155,13 +155,13 @@ void ioRxHandle(int32_t slot, void *pBuf, pFunRxFrameHandle_t pFrameHandle)
     LYNX_ASSERT(NULL != pBuf);
     LYNX_ASSERT(NULL != pFrameHandle);
 
-    /* »ñÈ¡Ä£¿éÍ¨ĞÅ×´Ì¬ */
+    /* è·å–æ¨¡å—é€šä¿¡çŠ¶æ€ */
     ioComErr = infoGetCom(slot);
-    /* bit12Îª²ÛÎ»0Ö÷¿ØÓëIO¿¨Í¨ĞÅ×´Ì¬ */
+    /* bit12ä¸ºæ§½ä½0ä¸»æ§ä¸IOå¡é€šä¿¡çŠ¶æ€ */
     offset = 12 + g_localSlot;
     ioComErr &= (1u << (uint32_t)offset); 
 
-    /* ½ÓÊÕIOÄ£¿éÊı¾İ */
+    /* æ¥æ”¶IOæ¨¡å—æ•°æ® */
     (void)ioComRecvData(slot, IO_FRAME_SIZE_MAX, pFastRxBuffer);
 
     if(ioComErr == 0x0U)
@@ -178,10 +178,10 @@ void ioRxHandle(int32_t slot, void *pBuf, pFunRxFrameHandle_t pFrameHandle)
 /****************************************************************************************************
 * Identifier:   SCOD-AMC01-349 (Trace to: SLD-AMC01-349)
 * Function:     ioTxHandle
-* Description:  ÏòIOÄ£¿é·¢ËÍÊı¾İ
-* Input:        slot  ²ÛÎ»ºÅ
-*               para  IOÄ£¿é±£Áô
-*               pBuf  ·¢ËÍÊı¾İ»º´æÖ¸Õë
+* Description:  å‘IOæ¨¡å—å‘é€æ•°æ®
+* Input:        slot  æ§½ä½å·
+*               para  IOæ¨¡å—ä¿ç•™
+*               pBuf  å‘é€æ•°æ®ç¼“å­˜æŒ‡é’ˆ
 * Output:       none
 * Return:       none
 *
@@ -199,7 +199,7 @@ int32_t ioTxHandle(int32_t slot, int32_t para, void *pBuf)
     state = infoCurOutputState();
     ((ioFrame_t*)pBuf)->info = state;
 
-    /* Î¬»¤Í¨ĞÅ¹¦ÄÜ */
+    /* ç»´æŠ¤é€šä¿¡åŠŸèƒ½ */
     ioComSendData(slot, sizeof(ioFrame_t), (const void*)pBuf);
 
     return 0;
@@ -208,8 +208,8 @@ int32_t ioTxHandle(int32_t slot, int32_t para, void *pBuf)
 /****************************************************************************************************
 * Identifier:   SCOD-AMC01-011 (Trace to: SLD-AMC01-011)
 * Function:     ioMemInit
-* Description:  ³õÊ¼»¯IOÄ£¿éÄÚ´æ
-* Input:        slot ²ÛÎ»ºÅ
+* Description:  åˆå§‹åŒ–IOæ¨¡å—å†…å­˜
+* Input:        slot æ§½ä½å·
 * Output:       none
 * Return:       none
 *

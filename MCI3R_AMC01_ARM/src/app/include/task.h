@@ -1,6 +1,6 @@
 /**************************************************************************************************
  * Filename: task.h
- * Purpose:  ´´½¨ËùÓĞÔËĞĞÈÎÎñ
+ * Purpose:  åˆ›å»ºæ‰€æœ‰è¿è¡Œä»»åŠ¡
  * Date:         Author      Modified 
  * 2021-09-23    hdq         Create  
 **************************************************************************************************/
@@ -10,20 +10,20 @@
 #include "lynx_types.h"
 
 /* MAX time */
-#define RECEIVE_TASK_TIME           ((uint32_t)3U * (uint32_t)1000U)                /* ½ÓÊÕÈÎÎñ×î´óÊ±¼ä */
-#define MPU_ASM_MAX_TIME            ((uint32_t)1U * (uint32_t)1000U)                /* ÈÈ±¸Í¬²½ÈÎÎñ×î´óÊ±¼ä */
-#define MPU_USR_LOGIC_MAX_TIME      ((cfgMpuPeriod() / 5U) *(uint32_t)1000U)        /* ÓÃ»§Ëã·¨ ×î´óÊ±¼ä */
-#define MPU_SEND_LOCAL_MAX_TIME     ((uint32_t)3U * (uint32_t)1000U)                /* ·¢ËÍÈÎÎñ×î´óÊ±¼ä */
-#define MAINTAIN_TASK_TIME          ((uint32_t)1U * (uint32_t)1000U)                /* Î¬»¤ÈÎÎñ×î´óÊ±¼ä */
+#define RECEIVE_TASK_TIME           ((uint32_t)3U * (uint32_t)1000U)                /* æ¥æ”¶ä»»åŠ¡æœ€å¤§æ—¶é—´ */
+#define MPU_ASM_MAX_TIME            ((uint32_t)1U * (uint32_t)1000U)                /* çƒ­å¤‡åŒæ­¥ä»»åŠ¡æœ€å¤§æ—¶é—´ */
+#define MPU_USR_LOGIC_MAX_TIME      ((cfgMpuPeriod() / 5U) *(uint32_t)1000U)        /* ç”¨æˆ·ç®—æ³• æœ€å¤§æ—¶é—´ */
+#define MPU_SEND_LOCAL_MAX_TIME     ((uint32_t)3U * (uint32_t)1000U)                /* å‘é€ä»»åŠ¡æœ€å¤§æ—¶é—´ */
+#define MAINTAIN_TASK_TIME          ((uint32_t)1U * (uint32_t)1000U)                /* ç»´æŠ¤ä»»åŠ¡æœ€å¤§æ—¶é—´ */
 
 /* TASK define */
-#define LX_RX_TASK        (0)                /* ½ÓÊÕÈÎÎñ */
-#define LX_USR_TASK       (1)                /* ÓÃ»§Ëã·¨ÈÎÎñ */
-#define PF_ASM_TASK       (2)                /* ÈÈ±¸ÈßÓàÈÎÎñ */
-#define PF_TX_TASK        (3)                /* ·¢ËÍÈÎÎñ */
-#define PF_MAIT_TASK      (4)                /* Î¬»¤ÈÎÎñ */
+#define LX_RX_TASK        (0)                /* æ¥æ”¶ä»»åŠ¡ */
+#define LX_USR_TASK       (1)                /* ç”¨æˆ·ç®—æ³•ä»»åŠ¡ */
+#define PF_ASM_TASK       (2)                /* çƒ­å¤‡å†—ä½™ä»»åŠ¡ */
+#define PF_TX_TASK        (3)                /* å‘é€ä»»åŠ¡ */
+#define PF_MAIT_TASK      (4)                /* ç»´æŠ¤ä»»åŠ¡ */
 
-/* Íâ²¿º¯ÊıÉùÃ÷ */
+/* å¤–éƒ¨å‡½æ•°å£°æ˜ */
 extern void createAllTask(void);
 
 #endif

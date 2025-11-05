@@ -1,6 +1,6 @@
 /**************************************************************************************************
 *Filename:     module_nhv01.h
-*Purpose:      ¹«ÓÃÄ£¿énhv01·½·¨¶¨Òå
+*Purpose:      å…¬ç”¨æ¨¡å—nhv01æ–¹æ³•å®šä¹‰
 *Log:          Date          Author    Modified
 *              2022/1/11     hdq       create
 **************************************************************************************************/
@@ -15,46 +15,46 @@
 #define NHV01_RX_FRAME_RSV_SIZE       (94U)
 #define NHV01_TX_FRAME_RSV_SIZE       (64U)
 /**************************************************************************************************
- * ËùÓĞÄ£¿éÅäÖÃĞÅÏ¢
+ * æ‰€æœ‰æ¨¡å—é…ç½®ä¿¡æ¯
  *************************************************************************************************/
 
-/* NHV01Ë½ÓĞÅäÖÃ */
+/* NHV01ç§æœ‰é…ç½® */
 typedef struct
 {
-    float32_t defValue[1];  /* ¸ßÑ¹Ä¬ÈÏÊä³öÖµ */
-    uint8_t   action[1];    /* ¹ÊÕÏ°²È«ĞĞÎª */
-    uint8_t   currentMode;  /* µçÁ÷Á¿³ÌÑ¡Ôñ */
+    float32_t defValue[1];  /* é«˜å‹é»˜è®¤è¾“å‡ºå€¼ */
+    uint8_t   action[1];    /* æ•…éšœå®‰å…¨è¡Œä¸º */
+    uint8_t   currentMode;  /* ç”µæµé‡ç¨‹é€‰æ‹© */
 }nhv01PrivCfg_t;
 
 /**************************************************************************************************
- * Í¨ĞÅÊı¾İÖ¡¶¨Òå
+ * é€šä¿¡æ•°æ®å¸§å®šä¹‰
  *************************************************************************************************/
 
-/* ¸ßÑ¹¿ØÖÆÄ£¿é£¨NHV01£©ÏÂĞĞÊı¾İÖ¡½á¹¹ */
+/* é«˜å‹æ§åˆ¶æ¨¡å—ï¼ˆNHV01ï¼‰ä¸‹è¡Œæ•°æ®å¸§ç»“æ„ */
 typedef struct
 {
-    uint32_t info;                           /* 4¶ÔÓÚ¹¤³ÌÊ¦Õ¾ ±íÊ¾°å¿¨ID */
-    binary6B_t hiPreflatCurveDrawEn;         /* ¸ßÑ¹ÆºÇúÏß»æÖÆÊ¹ÄÜ */
-    binary6B_t posPreLossAlarm;              /* Õı¸ßÑ¹Ê§Ñ¹±¨¾¯ */
-    binary6B_t posPreOverAlarm;              /* Õı¸ßÑ¹¹ıÑ¹±¨¾¯ */
-    analog6BF_t posPreSetVal;                /* Õı¸ßÑ¹Éè¶¨Öµ */
-    uint8_t rsv[NHV01_TX_FRAME_RSV_SIZE];    /* ±£Áô×Ö¶Î */
-    uint8_t rsv1[2];                         /* fpga crc16 Ê¹ÓÃ2B */
-    uint16_t comState;                       /* fpga Í¨ĞÅ×´Ì¬Ê¹ÓÃ2B */
-    uint64_t crc;                            /* fpga Ğ£Ñé 8B */
+    uint32_t info;                           /* 4å¯¹äºå·¥ç¨‹å¸ˆç«™ è¡¨ç¤ºæ¿å¡ID */
+    binary6B_t hiPreflatCurveDrawEn;         /* é«˜å‹åªæ›²çº¿ç»˜åˆ¶ä½¿èƒ½ */
+    binary6B_t posPreLossAlarm;              /* æ­£é«˜å‹å¤±å‹æŠ¥è­¦ */
+    binary6B_t posPreOverAlarm;              /* æ­£é«˜å‹è¿‡å‹æŠ¥è­¦ */
+    analog6BF_t posPreSetVal;                /* æ­£é«˜å‹è®¾å®šå€¼ */
+    uint8_t rsv[NHV01_TX_FRAME_RSV_SIZE];    /* ä¿ç•™å­—æ®µ */
+    uint8_t rsv1[2];                         /* fpga crc16 ä½¿ç”¨2B */
+    uint16_t comState;                       /* fpga é€šä¿¡çŠ¶æ€ä½¿ç”¨2B */
+    uint64_t crc;                            /* fpga æ ¡éªŒ 8B */
 }__attribute__((packed)) nhv01FrameTx_t;
 
-/* ¸ßÑ¹¿ØÖÆÄ£¿é£¨NHV01£©ÉÏĞĞÊı¾İÖ¡½á¹¹ */
+/* é«˜å‹æ§åˆ¶æ¨¡å—ï¼ˆNHV01ï¼‰ä¸Šè¡Œæ•°æ®å¸§ç»“æ„ */
 typedef struct
 {
-    uint32_t info;                            /* ¶ÔÓÚ¹¤³ÌÊ¦Õ¾ ±íÊ¾°å¿¨ID 4B*/
-    binary6B_t hiPreflatCurveDrawRec;         /* ¸ßÑ¹ÆºÇúÏß»æÖÆ×´Ì¬·´À¡ */
-    analog6BF_t posPreOutputRec;              /* ¸ßÑ¹Êä³ö»Ø²É */
-    analog6BF_t outputCurrent;                /* µçÁ÷Öµ */
-    uint8_t rsv[NHV01_RX_FRAME_RSV_SIZE];     /* ±£Áô×Ö¶Î*/
-    uint8_t rsv1[2];                          /* fpga crc16 Ê¹ÓÃ2B */
-    uint16_t comState;                        /* fpga Í¨ĞÅ×´Ì¬Ê¹ÓÃ2B */
-    uint64_t crc;                             /* fpga Ğ£Ñé8B */
+    uint32_t info;                            /* å¯¹äºå·¥ç¨‹å¸ˆç«™ è¡¨ç¤ºæ¿å¡ID 4B*/
+    binary6B_t hiPreflatCurveDrawRec;         /* é«˜å‹åªæ›²çº¿ç»˜åˆ¶çŠ¶æ€åé¦ˆ */
+    analog6BF_t posPreOutputRec;              /* é«˜å‹è¾“å‡ºå›é‡‡ */
+    analog6BF_t outputCurrent;                /* ç”µæµå€¼ */
+    uint8_t rsv[NHV01_RX_FRAME_RSV_SIZE];     /* ä¿ç•™å­—æ®µ*/
+    uint8_t rsv1[2];                          /* fpga crc16 ä½¿ç”¨2B */
+    uint16_t comState;                        /* fpga é€šä¿¡çŠ¶æ€ä½¿ç”¨2B */
+    uint64_t crc;                             /* fpga æ ¡éªŒ8B */
 }__attribute__((packed)) nhv01FrameRx_t;
 
 extern int32_t nhv01RxHandle(int32_t slot, int32_t para, void *pBuf);

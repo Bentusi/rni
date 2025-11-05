@@ -1,15 +1,15 @@
 /****************************************************************************************************
 *FILENAME:     wtd.c
-*PURPOSE:      ¿´ÃÅ¹·Ä£¿é
+*PURPOSE:      çœ‹é—¨ç‹—æ¨¡å—
 *DATE          AUTHOR          CHANGE
-*2017.08.14    Åí»ª¾ü          ´´½¨ÎÄ¼ş
+*2017.08.14    å½­åå†›          åˆ›å»ºæ–‡ä»¶
 ****************************************************************************************************/
 #include "bsp.h"
 #include "wtd.h"
 #include "tm_timer.h"
 #include "error_class.h"
 
-/*º¯ÊıÉùÃ÷*/
+/*å‡½æ•°å£°æ˜*/
 static void watchDogWriteRegister16(uint8_t reg, uint16_t data);
 static uint16_t watchDogReadRegister16(uint8_t reg);
 static void setWatchDog(uint8_t wdIndex , uint16_t time);
@@ -17,7 +17,7 @@ static void setWatchDog(uint8_t wdIndex , uint16_t time);
 /****************************************************************************************************
 * Identifier:   SCOD-AMC01-019 (Trace to: SLD-AMC01-019)
 * Function:     wdInit
-* Description:  ¿´ÃÅ¹·FPGA³õÊ¼»¯£¬ÅĞ¶ÏÊÇ·ñready.
+* Description:  çœ‹é—¨ç‹—FPGAåˆå§‹åŒ–ï¼Œåˆ¤æ–­æ˜¯å¦ready.
 * Input:        none
 * Output:       none
 * Return:       none
@@ -40,9 +40,9 @@ void wdInit(void)
         else
         {
             failCnt++;
-            if(failCnt > 100u) /* ³¬¹ı1Ãë ÔòÈÏÎª¿´ÃÅ¹·FPGAÎ´READY */
+            if(failCnt > 100u) /* è¶…è¿‡1ç§’ åˆ™è®¤ä¸ºçœ‹é—¨ç‹—FPGAæœªREADY */
             {
-                errStopHandleInit(WTD_READY_ERROR); /* Ôö¼Ó±¨¿´ÃÅ¹·Æô¶¯Ê§°Ü´íÎóÂë */
+                errStopHandleInit(WTD_READY_ERROR); /* å¢åŠ æŠ¥çœ‹é—¨ç‹—å¯åŠ¨å¤±è´¥é”™è¯¯ç  */
             }
         }
         tmDelayms(10u);
@@ -52,9 +52,9 @@ void wdInit(void)
 /****************************************************************************************************
 * Identifier:   SCOD-AMC01-278 (Trace to: SLD-AMC01-278)
 * Function:     watchDogWriteRegister16
-* Description:  Ğ´¿´ÃÅ¹·16bit¼Ä´æÆ÷
-* Input:        reg: ¼Ä´æÆ÷µØÖ·
-*               data: Ğ´¼Ä´æÆ÷Êı¾İ
+* Description:  å†™çœ‹é—¨ç‹—16bitå¯„å­˜å™¨
+* Input:        reg: å¯„å­˜å™¨åœ°å€
+*               data: å†™å¯„å­˜å™¨æ•°æ®
 * Output:       none
 * Return:       none
 *
@@ -71,7 +71,7 @@ static void watchDogWriteRegister16(uint8_t reg, uint16_t data)
     outData[1] = data;
 
     SpiCfg.CSNR = (uint8_t)SPI_CS_0;
-    SpiCfg.DFSEL   = SPI_FMT_0;         /* Ê¹ÓÃÊı¾İ¸ñÊ½0 ÅäÖÃ */
+    SpiCfg.DFSEL   = SPI_FMT_0;         /* ä½¿ç”¨æ•°æ®æ ¼å¼0 é…ç½® */
     SpiCfg.WDEL    = 0;
     SpiCfg.CS_HOLD = 1;
 
@@ -81,15 +81,15 @@ static void watchDogWriteRegister16(uint8_t reg, uint16_t data)
 /****************************************************************************************************
 * Identifier:   SCOD-AMC01-279 (Trace to: SLD-AMC01-279)
 * Function:     watchDogReadRegister16
-* Description:  ¶Á¿´ÃÅ¹·16bit¼Ä´æÆ÷
-* Input:        reg: ¼Ä´æÆ÷µØÖ·
+* Description:  è¯»çœ‹é—¨ç‹—16bitå¯„å­˜å™¨
+* Input:        reg: å¯„å­˜å™¨åœ°å€
 * Output:       none
-* Return:       ¶ÁÈ¡µÄÖµ
+* Return:       è¯»å–çš„å€¼
 *
 * Others:
 * Log:          Date          Author    Modified
-*               2017/08/14    hdq       ´´½¨
-*               2023/03/30    wxb       watchDogReadRegieter16ĞŞ¸ÄÎªwatchDogReadRegister16
+*               2017/08/14    hdq       åˆ›å»º
+*               2023/03/30    wxb       watchDogReadRegieter16ä¿®æ”¹ä¸ºwatchDogReadRegister16
 ****************************************************************************************************/
 static uint16_t watchDogReadRegister16(uint8_t reg)
 {
@@ -101,7 +101,7 @@ static uint16_t watchDogReadRegister16(uint8_t reg)
     outData[1] = 0U;
 
     SpiCfg.CSNR = (uint8_t)SPI_CS_0;
-    SpiCfg.DFSEL   = SPI_FMT_0;  /* Ê¹ÓÃÊı¾İ¸ñÊ½0 ÅäÖÃ */
+    SpiCfg.DFSEL   = SPI_FMT_0;  /* ä½¿ç”¨æ•°æ®æ ¼å¼0 é…ç½® */
     SpiCfg.WDEL    = 0;
     SpiCfg.CS_HOLD = 1;
 
@@ -113,11 +113,11 @@ static uint16_t watchDogReadRegister16(uint8_t reg)
 /****************************************************************************************************
 * Identifier:   SCOD-AMC01-280 (Trace to: SLD-AMC01-280)
 * Function:     setWatchDog
-* Description:  ¶Á¿´ÃÅ¹·16bit¼Ä´æÆ÷
-* Input:        wdIndex ¿´ÃÅ¹·ĞòºÅ
-*               time    Î¹¹·Ê±¼ä
+* Description:  è¯»çœ‹é—¨ç‹—16bitå¯„å­˜å™¨
+* Input:        wdIndex çœ‹é—¨ç‹—åºå·
+*               time    å–‚ç‹—æ—¶é—´
 * Output:       none
-* Return:       ¶ÁÈ¡µÄÖµ
+* Return:       è¯»å–çš„å€¼
 *
 * Others:
 * Log:          Date          Author    Modified
@@ -161,9 +161,9 @@ static void setWatchDog(uint8_t wdIndex , uint16_t time)
 /****************************************************************************************************
 * Identifier:   SCOD-AMC01-281 (Trace to: SLD-AMC01-281)
 * Function:     wdStart
-* Description:  Æô¶¯¿´ÃÅ¹·
-* Input:        wdIndex: ¿´ÃÅ¹·ĞòºÅ 
-*               tick:    ¿´ÃÅ¹·³¬Ê±Ê±¼ä
+* Description:  å¯åŠ¨çœ‹é—¨ç‹—
+* Input:        wdIndex: çœ‹é—¨ç‹—åºå· 
+*               tick:    çœ‹é—¨ç‹—è¶…æ—¶æ—¶é—´
 * Output:       none
 * Return:       none
 *
@@ -173,15 +173,15 @@ static void setWatchDog(uint8_t wdIndex , uint16_t time)
 ****************************************************************************************************/
 void wdStart(uint8_t wdIndex, uint16_t tick)
 {
-    setWatchDog(wdIndex, (uint16_t)(tick * 10U)); /* ÉèÖÃ¿´ÃÅ¹·Ê±¼ä */
-    wdEnable(wdIndex);/* Ê¹ÄÜ¿´ÃÅ¹· */
+    setWatchDog(wdIndex, (uint16_t)(tick * 10U)); /* è®¾ç½®çœ‹é—¨ç‹—æ—¶é—´ */
+    wdEnable(wdIndex);/* ä½¿èƒ½çœ‹é—¨ç‹— */
 }
 
 /****************************************************************************************************
 * Identifier:   SCOD-AMC01-282 (Trace to: SLD-AMC01-282)
 * Function:     wdDisable
-* Description:  ¹Ø±Õ¿´ÃÅ¹·
-* Input:        wdIndex ¿´ÃÅ¹·ĞòºÅ
+* Description:  å…³é—­çœ‹é—¨ç‹—
+* Input:        wdIndex çœ‹é—¨ç‹—åºå·
 * Output:       none
 * Return:       none
 *
@@ -204,8 +204,8 @@ void wdDisable(uint8_t wdIndex)
 /****************************************************************************************************
 * Identifier:   SCOD-AMC01-283 (Trace to: SLD-AMC01-283)
 * Function:     wdEnable
-* Description:  Ê¹ÄÜ¿´ÃÅ¹·
-* Input:        wdIndex ¿´ÃÅ¹·ĞòºÅ
+* Description:  ä½¿èƒ½çœ‹é—¨ç‹—
+* Input:        wdIndex çœ‹é—¨ç‹—åºå·
 * Output:       none
 * Return:       none
 *
@@ -227,8 +227,8 @@ void wdEnable(uint8_t wdIndex)
 /****************************************************************************************************
 * Identifier:   SCOD-AMC01-284 (Trace to: SLD-AMC01-284)
 * Function:     wdFeed
-* Description:  Ïò¿´ÃÅ¹··¢ËÍÎ¹¹·ĞÅºÅ
-* Input:        wdIndex ¿´ÃÅ¹·ĞòºÅ
+* Description:  å‘çœ‹é—¨ç‹—å‘é€å–‚ç‹—ä¿¡å·
+* Input:        wdIndex çœ‹é—¨ç‹—åºå·
 * Output:       none
 * Return:       none
 *

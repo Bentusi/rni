@@ -1,9 +1,9 @@
 /****************************************************************************************************
 *FILENAME:     tm_timer.c
-*PURPOSE:      ÏµÍ³Ê±¼ä¹ÜÀí
+*PURPOSE:      ç³»ç»Ÿæ—¶é—´ç®¡ç†
 *DATE          AUTHOR          CHANGE
-*2017.08.09    ºúµÂÈ«          ´´½¨ÎÄ¼ş
-*2019.01.22    ÕÅÇìÁÖ          É¾³ıtmDelayusº¯Êı
+*2017.08.09    èƒ¡å¾·å…¨          åˆ›å»ºæ–‡ä»¶
+*2019.01.22    å¼ åº†æ—          åˆ é™¤tmDelayuså‡½æ•°
 ****************************************************************************************************/
 #include "tm_timer.h"
 #include "tm_private.h"
@@ -11,8 +11,8 @@
 /****************************************************************************************************
 * Identifier:   SCOD-AMC01-275 (Trace to: SLD-AMC01-275)
 * Function:     tmDelayTick
-* Description:  ÑÓÊ±tickÎ¢Ãë
-* Input:        tick: ÑÓÊ±Ê±¼ä£¬µ¥Î»Îªus
+* Description:  å»¶æ—¶tickå¾®ç§’
+* Input:        tick: å»¶æ—¶æ—¶é—´ï¼Œå•ä½ä¸ºus
 * Output:       none
 * Return:       none
 * Others:
@@ -45,8 +45,8 @@ void tmDelayTick(uint32_t tick)
 /****************************************************************************************************
 * Identifier:   SCOD-AMC01-276 (Trace to: SLD-AMC01-276)
 * Function:     tmDelayUS
-* Description:  Î¢ÃëÑÓÊ±
-* Input:        us:    ÑÓÊ±Ê±¼ä
+* Description:  å¾®ç§’å»¶æ—¶
+* Input:        us:    å»¶æ—¶æ—¶é—´
 * Output:       none
 * Return:       none
 * Others:
@@ -61,8 +61,8 @@ void tmDelayus(uint32_t us)
 /****************************************************************************************************
 * Identifier:   SCOD-AMC01-277 (Trace to: SLD-AMC01-277)
 * Function:     tmDelayms
-* Description:  ºÁÃëÑÓÊ±
-* Input:        ms:    ÑÓÊ±Ê±¼ä
+* Description:  æ¯«ç§’å»¶æ—¶
+* Input:        ms:    å»¶æ—¶æ—¶é—´
 * Output:       none
 * Return:       none
 * Others:

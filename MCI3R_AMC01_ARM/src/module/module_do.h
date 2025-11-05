@@ -1,6 +1,6 @@
 /**************************************************************************************************
 *Filename:     module_do.h
-*Purpose:      ¹«ÓÃÄ£¿édo·½·¨¶¨Òå
+*Purpose:      å…¬ç”¨æ¨¡å—doæ–¹æ³•å®šä¹‰
 *Log:          Date          Author    Modified
 *              2021/9/21     hdq       create
 **************************************************************************************************/
@@ -10,14 +10,14 @@
 #define DO_TYPE             (5U)
 #define DO_CH_MAX           (32)
 
-/* DO Ë½ÓĞÅäÖÃ */
+/* DO ç§æœ‰é…ç½® */
 typedef struct
 {
-    uint8_t action[DO_CH_MAX];          /* Òì³£´¦Àí·½Ê½ */
-    uint8_t defValue[DO_CH_MAX];        /* Êä³öÄ¬ÈÏ */
+    uint8_t action[DO_CH_MAX];          /* å¼‚å¸¸å¤„ç†æ–¹å¼ */
+    uint8_t defValue[DO_CH_MAX];        /* è¾“å‡ºé»˜è®¤ */
 }doPrivCfg_t;
 
-/* DO°å¿¨Êı¾İÖ¡¶¨Òå */
+/* DOæ¿å¡æ•°æ®å¸§å®šä¹‰ */
 typedef diFrame_t doFrame_t;
 
 extern int32_t doRxHandle(int32_t slot, int32_t para, void *pBuf);

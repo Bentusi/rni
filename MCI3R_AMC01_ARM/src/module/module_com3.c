@@ -1,6 +1,6 @@
 /**************************************************************************************************
 *Filename:     module_com3.c
-*Purpose:      ¹«ÓÃÄ£¿écom3·½·¨¶¨Òå
+*Purpose:      å…¬ç”¨æ¨¡å—com3æ–¹æ³•å®šä¹‰
 *Log:          Date          Author    Modified
 *              2021/9/21     hdq       create
 **************************************************************************************************/
@@ -18,13 +18,13 @@ static int32_t com3RecvData(int32_t slot, void *pBuf);
 /**************************************************************************************************
 * Identifier:   SCOD-AMC01-258 (Trace to: SLD-AMC01-258)
 * Function:     disableAllRxQuality
-* Description:  Õ¾¼äÍ¨ĞÅ½ÓÊÕÊı¾İÎŞĞ§£¬ÖÊÁ¿Î»ÖÃÎŞĞ§
-* Input:        slot ²ÛºÅ
-*               port ¶Ë¿ÚºÅ
+* Description:  ç«™é—´é€šä¿¡æ¥æ”¶æ•°æ®æ— æ•ˆï¼Œè´¨é‡ä½ç½®æ— æ•ˆ
+* Input:        slot æ§½å·
+*               port ç«¯å£å·
 * Output:       none
 * Return:       none
 *
-* Others:       È¦¸´ÔÓ¶È¹ı¸ßÓÉASSERT¶ÏÑÔÒıÆğ£¬º¯Êı±¾Éí²»¸´ÔÓ
+* Others:       åœˆå¤æ‚åº¦è¿‡é«˜ç”±ASSERTæ–­è¨€å¼•èµ·ï¼Œå‡½æ•°æœ¬èº«ä¸å¤æ‚
 * Log:          Date          Author    Modified
 *               2017/08/14
 **************************************************************************************************/
@@ -32,8 +32,8 @@ static void disableAllRxQuality(int32_t slot, int32_t port)
 {
     uint32_t type = 0U;
     uint8_t *baseAddr = NULL;
-    uint32_t byte1SCnt = 0U;    /* 1bytes single ±äÁ¿¸öÊı */
-    uint32_t byte4SCnt = 0U;    /* 4bytes single ±äÁ¿¸öÊı */
+    uint32_t byte1SCnt = 0U;    /* 1bytes single å˜é‡ä¸ªæ•° */
+    uint32_t byte4SCnt = 0U;    /* 4bytes single å˜é‡ä¸ªæ•° */
     uint32_t i = 0u;
     portAttr_t *com3PortInfo = glGetPortAttr(slot, port, RX_PORT);
 
@@ -69,11 +69,11 @@ static void disableAllRxQuality(int32_t slot, int32_t port)
 /****************************************************************************************************
 * Identifier:   SCOD-AMC01-259 (Trace to: SLD-AMC01-259)
 * Function:     com3RecvData
-* Description:  ½ÓÊÕÍ¨ĞÅ3Êı¾İ
-* Input:        slot ²ÛÎ»ºÅ
-*               pBuf  Êı¾İ´æ·Å»º´æ
+* Description:  æ¥æ”¶é€šä¿¡3æ•°æ®
+* Input:        slot æ§½ä½å·
+*               pBuf  æ•°æ®å­˜æ”¾ç¼“å­˜
 * Output:       none
-* Return:       0    ÎŞ´íÎó EMIF_CRC_ERROR crc´íÎó ÆäËü Í¨ĞÅ×´Ì¬´íÎó
+* Return:       0    æ— é”™è¯¯ EMIF_CRC_ERROR crcé”™è¯¯ å…¶å®ƒ é€šä¿¡çŠ¶æ€é”™è¯¯
 *
 * Others:
 * Log:          Date          Author    Modified
@@ -109,7 +109,7 @@ static int32_t com3RecvData(int32_t slot, void *pBuf)
             }
             else
             {
-                ret = (int32_t)segFrame.comState; /* Í¨ĞÅÒì³££¬·ÅÆúËùÓĞ */
+                ret = (int32_t)segFrame.comState; /* é€šä¿¡å¼‚å¸¸ï¼Œæ”¾å¼ƒæ‰€æœ‰ */
                 break;
             }
         }
@@ -121,10 +121,10 @@ static int32_t com3RecvData(int32_t slot, void *pBuf)
 /**************************************************************************************************
 * Identifier:   SCOD-AMC01-260 (Trace to: SLD-AMC01-260)
 * Function:     com3RxHandle
-* Description:  Í¨ĞÅIII½ÓÊÕº¯Êı
-* Input:        slot ²ÛÎ»ºÅ
-*               port ¶Ë¿ÚºÅ
-*               pBuf Êı¾İÖ¸Õë
+* Description:  é€šä¿¡IIIæ¥æ”¶å‡½æ•°
+* Input:        slot æ§½ä½å·
+*               port ç«¯å£å·
+*               pBuf æ•°æ®æŒ‡é’ˆ
 * Output:       none
 * Return:       0
 * Others:
@@ -152,7 +152,7 @@ int32_t com3RxHandle(int32_t slot, int32_t port, void *pBuf)
     {
         com3RecvData(slot, (void *)pFrame);
 
-        /* »ñÈ¡Í¨ĞÅ×´Ì¬ */
+        /* è·å–é€šä¿¡çŠ¶æ€ */
         comState = infoGetCom(slot);
         offset = 12 + g_localSlot;
         comState &= (1u << offset); 
@@ -176,13 +176,13 @@ int32_t com3RxHandle(int32_t slot, int32_t port, void *pBuf)
                 /* Do nothing */
             }
 
-            /* ÉèÖÃµ±Ç°½ÓÊÕÊı¾İ½ÓÊÕ×´Ì¬ */
+            /* è®¾ç½®å½“å‰æ¥æ”¶æ•°æ®æ¥æ”¶çŠ¶æ€ */
             pPortState->avail = 0;
         }
-        else /* ½ÓÊÕÍ¨ĞÅ ´íÎóÊ± */
+        else /* æ¥æ”¶é€šä¿¡ é”™è¯¯æ—¶ */
         {
             disableAllRxQuality(slot, port);
-            /* ±£´æ ±¾´ÎÊı¾İ ½ÓÊÕ×´Ì¬ */
+            /* ä¿å­˜ æœ¬æ¬¡æ•°æ® æ¥æ”¶çŠ¶æ€ */
             pPortState->avail = 1;
         }
     }
@@ -193,10 +193,10 @@ int32_t com3RxHandle(int32_t slot, int32_t port, void *pBuf)
 /****************************************************************************************************
 * Identifier:   SCOD-AMC01-261 (Trace to: SLD-AMC01-261)
 * Function:     com3SendData
-* Description:  Í¨ĞÅÄ£¿éIII·¢ËÍÊı¾İÇı¶¯½Ó¿Ú
-* Input:        slot ²ÛÎ»ºÅ 
-*               size ·¢ËÍÊı¾İ³¤¶È
-*               pBuf ·¢ËÍÊı¾İ»º´æÖ¸Õë
+* Description:  é€šä¿¡æ¨¡å—IIIå‘é€æ•°æ®é©±åŠ¨æ¥å£
+* Input:        slot æ§½ä½å· 
+*               size å‘é€æ•°æ®é•¿åº¦
+*               pBuf å‘é€æ•°æ®ç¼“å­˜æŒ‡é’ˆ
 * Output:       none
 * Return:       none
 *
@@ -218,7 +218,7 @@ static void com3SendData(int32_t slot, uint32_t size, void *pBuf)
     addr = com1GetAddr(slot, COM_TX1_ADDR);
     for(i = 0U ; i < 4U ;i++)
     {
-        (void)memcpy((void *)&segFrame, (const void *)pSrc, (uint32_t)COM_SEG_DATA_SIZE_MAX);  /* ºÄÊ±50~60us */
+        (void)memcpy((void *)&segFrame, (const void *)pSrc, (uint32_t)COM_SEG_DATA_SIZE_MAX);  /* è€—æ—¶50~60us */
         com1WriteData(addr, (void*)&segFrame, sizeof(comFrame_t));
 
         pSrc += COM_SEG_DATA_SIZE_MAX;
@@ -229,10 +229,10 @@ static void com3SendData(int32_t slot, uint32_t size, void *pBuf)
 /****************************************************************************************************
 * Identifier:   SCOD-AMC01-262 (Trace to: SLD-AMC01-262)
 * Function:     com3TxHandle
-* Description:  ÏòÍ¨ĞÅÄ£¿éIII·¢ËÍÊı¾İ
-* Input:        slot ²ÛÎ»ºÅ
-*               port ²ÎÊı±£Áô£¬½Ó¿ÚĞèÒª
-*               pBuf ·¢ËÍÊı¾İÖ¸Õë
+* Description:  å‘é€šä¿¡æ¨¡å—IIIå‘é€æ•°æ®
+* Input:        slot æ§½ä½å·
+*               port å‚æ•°ä¿ç•™ï¼Œæ¥å£éœ€è¦
+*               pBuf å‘é€æ•°æ®æŒ‡é’ˆ
 * Output:       none
 * Return:       0
 *
@@ -259,10 +259,10 @@ int32_t com3TxHandle(int32_t slot, int32_t port, void *pBuf)
 
     if(0u != enable)
     {
-        /* pack frame sizeÖ¸Ê¾µÄÊÇÊµ¼Ê·¢ËÍµÄ³¤¶È */
+        /* pack frame sizeæŒ‡ç¤ºçš„æ˜¯å®é™…å‘é€çš„é•¿åº¦ */
         size = cfgNetPortTxCfgAddr(slot, port)->totalSize;
 
-        LYNX_ASSERT(size <= COM3_DATA_MAX_SIZE); /* ÖÂÃü´íÎó */
+        LYNX_ASSERT(size <= COM3_DATA_MAX_SIZE); /* è‡´å‘½é”™è¯¯ */
 
         lockState = infoCurOutputState();
         tFrame->ctrl = lockState;
@@ -277,17 +277,17 @@ int32_t com3TxHandle(int32_t slot, int32_t port, void *pBuf)
 /**************************************************************************************************
  * Identifier:   SCOD-AMC01-263 (Trace to: SLD-AMC01-263)
  * Function:     com3RxHook
- * Description:  Í¨ĞÅ3Ä£¿éÈ¥ÈßÓà²Ù×÷
- * Input:        slot ²ÛÎ»ºÅ
- *               para Êı¾İ´¦Àí·½Ê½ 0 ½ÓÊÕÊı¾İÇ°´¦Àí 1 ½ÓÊÕÊı¾İºó´¦Àí
+ * Description:  é€šä¿¡3æ¨¡å—å»å†—ä½™æ“ä½œ
+ * Input:        slot æ§½ä½å·
+ *               para æ•°æ®å¤„ç†æ–¹å¼ 0 æ¥æ”¶æ•°æ®å‰å¤„ç† 1 æ¥æ”¶æ•°æ®åå¤„ç†
  * Output:       None
- * Return:       0£ºÕı³£
+ * Return:       0ï¼šæ­£å¸¸
  * Date:         Author      Modified
  * 2021-11-09    hdq         Create
  *************************************************************************************************/
 int32_t com3RxHook(int32_t slot, int32_t para)
 {
-    int32_t  slotSlave = 0;       /* ÈßÓà¶Ë¿ÚËùÔÚ²ÛÎ»ºÅ */
+    int32_t  slotSlave = 0;       /* å†—ä½™ç«¯å£æ‰€åœ¨æ§½ä½å· */
     uint32_t enable  = 0u;
     portState_t *pPortStateMaster = NULL;
     portState_t *pPortStateSlave = NULL;
@@ -307,7 +307,7 @@ int32_t com3RxHook(int32_t slot, int32_t para)
         enable = cfgGetCardEnableCh(slot) & 0x01u;
         if(0 != enable)
         {
-            /* µ¥ÅäÊ± ÎŞÈßÓà¶Ë¿Ú */
+            /* å•é…æ—¶ æ— å†—ä½™ç«¯å£ */
             if(cfgNetPortRxCfgAddr(slot, 0)->portType == (uint8_t)COM3_MASTER_PORT)
             {
                 slotSlave = (int32_t)(cfgNetPortRxCfgAddr(slot, 0)->backPortId.detail.slot);
@@ -335,9 +335,9 @@ int32_t com3RxHook(int32_t slot, int32_t para)
 /****************************************************************************************************
 * Identifier:   SCOD-AMC01-264 (Trace to: SLD-AMC01-264)
 * Function:     com3TxHook
-* Description:  Ä£¿éIII·¢ËÍÊı¾İÈßÓà´¦Àí
-* Input:        slot ²ÛÎ»ºÅ
-*               para Êı¾İ´¦Àí·½Ê½ 0 ·¢ËÍÊı¾İÇ°´¦Àí 1 ·¢ËÍÊı¾İºó´¦Àí
+* Description:  æ¨¡å—IIIå‘é€æ•°æ®å†—ä½™å¤„ç†
+* Input:        slot æ§½ä½å·
+*               para æ•°æ®å¤„ç†æ–¹å¼ 0 å‘é€æ•°æ®å‰å¤„ç† 1 å‘é€æ•°æ®åå¤„ç†
 * Output:       none
 * Return:       0
 *
@@ -375,8 +375,8 @@ int32_t com3TxHook(int32_t slot, int32_t para)
 /****************************************************************************************************
 * Identifier:   SCOD-AMC01-265 (Trace to: SLD-AMC01-265)
 * Function:     com3Init
-* Description:  Ä£¿éIII³õÊ¼»¯
-* Input:        slot ²ÛÎ»ºÅ
+* Description:  æ¨¡å—IIIåˆå§‹åŒ–
+* Input:        slot æ§½ä½å·
 * Output:       none
 * Return:       0
 *
@@ -387,7 +387,7 @@ int32_t com3TxHook(int32_t slot, int32_t para)
 int32_t com3Init(int32_t slot)
 {
     LYNX_ASSERT(slot < CASE_SLOT_MAX);
-    /* ÒÑ¸ù¾İ×éÌ¬Éú³ÉÓÃ¾²Ì¬ÄÚ´æ */
+    /* å·²æ ¹æ®ç»„æ€ç”Ÿæˆç”¨é™æ€å†…å­˜ */
     return 0;
 }
 

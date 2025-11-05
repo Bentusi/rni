@@ -1,6 +1,6 @@
 /***************************************************************************************************
  * Filename: para_class.h
- * Purpose:  ÎªËã·¨Ìá¹© ²ÎÊı±äÁ¿ ¶ÁĞ´/±£´æ½Ó¿Ú
+ * Purpose:  ä¸ºç®—æ³•æä¾› å‚æ•°å˜é‡ è¯»å†™/ä¿å­˜æ¥å£
  * Date:         Author      Modified 
  * 2021-09-23    hdq         Create  
 ***************************************************************************************************/
@@ -9,7 +9,7 @@
 
 #include "lynx_types.h"
 
-/* º¯ÊıÉùÃ÷ */
+/* å‡½æ•°å£°æ˜ */
 extern void paraMemCpyTo(uint32_t idx, const void *pSrc, uint32_t size);
 extern fileHead_t *lxGetParaHead(void);
 extern int32_t paraSave(void);

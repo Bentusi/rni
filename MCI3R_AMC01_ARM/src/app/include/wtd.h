@@ -1,8 +1,8 @@
 /****************************************************************************************************
 *FILENAME:     wtd.h
-*PURPOSE:      ¿´ÃÅ¹·Ä£¿é
+*PURPOSE:      çœ‹é—¨ç‹—æ¨¡å—
 *DATE          AUTHOR          CHANGE
-*2017.08.14    Åí»ª¾ü          ´´½¨ÎÄ¼ş
+*2017.08.14    å½­åå†›          åˆ›å»ºæ–‡ä»¶
 ****************************************************************************************************/
 #ifndef _WTD_H_
 #define _WTD_H_
@@ -15,52 +15,52 @@
 #define WATCHDOG_CS            ((uint8_t)SPI_CS_0)
 
 
-#define WATCHDOGCMD_R              ((uint16_t)0x8000U)   /* spi ¶ÁÃüÁî*/
-#define WATCHDOGCMD_W              ((uint16_t)0x0000U)   /* spi Ğ´ÃüÁî*/
+#define WATCHDOGCMD_R              ((uint16_t)0x8000U)   /* spi è¯»å‘½ä»¤*/
+#define WATCHDOGCMD_W              ((uint16_t)0x0000U)   /* spi å†™å‘½ä»¤*/
 
 
 
-/* ¿´ÃÅ¹·ĞòºÅ */
-#define WD_1            (1U)        /* ¿´ÃÅ¹·1 */
-#define WD_2            (2U)        /* ¿´ÃÅ¹·2 */
-#define WD_3            (3U)        /* ¿´ÃÅ¹·3 */
-#define WD_4            (4U)        /* ¿´ÃÅ¹·4 */
-#define WD_5            (5U)        /* ¿´ÃÅ¹·5 */
-#define WD_6            (6U)        /* ¿´ÃÅ¹·6 */
+/* çœ‹é—¨ç‹—åºå· */
+#define WD_1            (1U)        /* çœ‹é—¨ç‹—1 */
+#define WD_2            (2U)        /* çœ‹é—¨ç‹—2 */
+#define WD_3            (3U)        /* çœ‹é—¨ç‹—3 */
+#define WD_4            (4U)        /* çœ‹é—¨ç‹—4 */
+#define WD_5            (5U)        /* çœ‹é—¨ç‹—5 */
+#define WD_6            (6U)        /* çœ‹é—¨ç‹—6 */
 
-/* ¿´ÃÅ¹·¼Ä´æÆ÷ */
-#define WD_STATE_ADDR       (0U)        /* wd ×´Ì¬¼Ä´æÆ÷ */
-#define WD_EN_ADDR          (3U)        /* wd Ê¹ÄÜ¼Ä´æÆ÷µØÖ· */
-#define WD_TIMER1_ADDR      (4U)        /* wd1 Ê±¼ä¼Ä´æÆ÷µØÖ· */
-#define WD_TIMER2_ADDR      (5U)        /* wd2 Ê±¼ä¼Ä´æÆ÷µØÖ· */
-#define WD_TIMER3_ADDR      (6U)        /* wd3 Ê±¼ä¼Ä´æÆ÷µØÖ· */
-#define WD_TIMER4_ADDR      (7U)        /* wd4 Ê±¼ä¼Ä´æÆ÷µØÖ· */
-#define WD_TIMER5_ADDR      (8U)        /* wd5 Ê±¼ä¼Ä´æÆ÷µØÖ· */
-#define WD_TIMER6_ADDR      (9U)        /* wd6 Ê±¼ä¼Ä´æÆ÷µØÖ· */
+/* çœ‹é—¨ç‹—å¯„å­˜å™¨ */
+#define WD_STATE_ADDR       (0U)        /* wd çŠ¶æ€å¯„å­˜å™¨ */
+#define WD_EN_ADDR          (3U)        /* wd ä½¿èƒ½å¯„å­˜å™¨åœ°å€ */
+#define WD_TIMER1_ADDR      (4U)        /* wd1 æ—¶é—´å¯„å­˜å™¨åœ°å€ */
+#define WD_TIMER2_ADDR      (5U)        /* wd2 æ—¶é—´å¯„å­˜å™¨åœ°å€ */
+#define WD_TIMER3_ADDR      (6U)        /* wd3 æ—¶é—´å¯„å­˜å™¨åœ°å€ */
+#define WD_TIMER4_ADDR      (7U)        /* wd4 æ—¶é—´å¯„å­˜å™¨åœ°å€ */
+#define WD_TIMER5_ADDR      (8U)        /* wd5 æ—¶é—´å¯„å­˜å™¨åœ°å€ */
+#define WD_TIMER6_ADDR      (9U)        /* wd6 æ—¶é—´å¯„å­˜å™¨åœ°å€ */
 
-/* Î¹¹·ĞÅºÅ Òı½Å·ÖÅä */
+/* å–‚ç‹—ä¿¡å· å¼•è„šåˆ†é… */
 #define WD_SIG1_PORT    (hetPORT1)
-#define WD_SIG1_PIN     (24U)           /* Î¹¹·ĞÅºÅ1       GIOA[0]   */
+#define WD_SIG1_PIN     (24U)           /* å–‚ç‹—ä¿¡å·1       GIOA[0]   */
 
 #define WD_SIG2_PORT    (hetPORT1)
-#define WD_SIG2_PIN     (25U)           /* Î¹¹·ĞÅºÅ2       GIOA[1]   */
+#define WD_SIG2_PIN     (25U)           /* å–‚ç‹—ä¿¡å·2       GIOA[1]   */
 
 #define WD_SIG3_PORT    (hetPORT1)
-#define WD_SIG3_PIN     (26U)           /* Î¹¹·ĞÅºÅ3       GIOA[2]   */
+#define WD_SIG3_PIN     (26U)           /* å–‚ç‹—ä¿¡å·3       GIOA[2]   */
 
 #define WD_SIG4_PORT    (hetPORT1)
-#define WD_SIG4_PIN     (27U)           /* Î¹¹·ĞÅºÅ4       GIOA[3]   */
+#define WD_SIG4_PIN     (27U)           /* å–‚ç‹—ä¿¡å·4       GIOA[3]   */
 
 #define WD_SIG5_PORT    (hetPORT1)
-#define WD_SIG5_PIN     (28U)           /* Î¹¹·ĞÅºÅ5       GIOA[4]   */
+#define WD_SIG5_PIN     (28U)           /* å–‚ç‹—ä¿¡å·5       GIOA[4]   */
 
 #define WD_SIG6_PORT    (hetPORT1)
-#define WD_SIG6_PIN     (29U)           /* Î¹¹·ĞÅºÅ6       GIOA[5]   */
+#define WD_SIG6_PIN     (29U)           /* å–‚ç‹—ä¿¡å·6       GIOA[5]   */
 
 #define WD_EVT_PORT     (gioPORTA)
-#define WD_EVT_PIN      (6U)            /* EVT(Ô¤Áô)       GIOA[6]   */
+#define WD_EVT_PIN      (6U)            /* EVT(é¢„ç•™)       GIOA[6]   */
 
-/* º¯ÊıÉùÃ÷ */
+/* å‡½æ•°å£°æ˜ */
 extern void wdStart(uint8_t wdIndex, uint16_t tick);
 extern void wdDisable(uint8_t wdIndex);
 extern void wdEnable(uint8_t wdIndex);

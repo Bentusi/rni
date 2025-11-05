@@ -1,23 +1,23 @@
 /***************************************************************************************************
  * Filename: diag_class.c
- * Purpose:  Ó¦ÓÃ²ãµÄÕï¶Ï½Ó¿Ú
+ * Purpose:  åº”ç”¨å±‚çš„è¯Šæ–­æ¥å£
  * Date:         Author      Modified 
  * 2021-09-23    hdq         Create  
- * ËµÃ÷£¨ÓÉÓÚ²úÉúÒì³£»òÕßÖĞ¶ÏÒÔÏÂÕï¶Ï±»ÅÅ³ı£©£º
- *              PSCON_ERROR_FORCING_FAULT_INJECT->sl_esm_low_intr_handlerÖĞ¶Ï
- *              PSCON_SELF_TEST_ERROR_FORCING_FAULT_INJECT->sl_esm_low_intr_handlerÖĞ¶Ï
- *              MEMINTRCNT_RESERVED_ACCESS->_excpt_vec_abort_dataÒì³£
- *              MAINPERIPHINTRCNT_RESERVED_ACCESS->_excpt_vec_abort_dataÒì³£
- *              PERIPHSEGINTRCNT_RESERVED_ACCESS->_excpt_vec_abort_dataÒì³£
- *              FLASH_ECC_TEST_MODE_2BIT->sl_esm_high_intr_handlerÖĞ¶Ï
- *              CCMR5F_CPUCOMP_ERROR_FORCING_TEST_FAULT_INJECT->sl_esm_high_intr_handlerÖĞ¶Ï
- *              CCMR5F_PDCOMP_ERROR_FORCING_TEST_FAULT_INJECT->sl_esm_high_intr_handlerÖĞ¶Ï
- *              CCMR5F_INMCOMP_ERROR_FORCING_TEST_FAULT_INJECT->sl_esm_high_intr_handlerÖĞ¶Ï
- *              SRAM_ECC_ERROR_FORCING_1BIT->sl_esm_high_intr_handlerÖĞ¶Ï
- *              SRAM_ECC_ERROR_FORCING_2BIT->sl_esm_high_intr_handlerÖĞ¶Ï
- *              CCMR5F_CPUCOMP_ERROR_FORCING_TEST->sl_esm_high_intr_handlerÖĞ¶Ï
- *              CCMR5F_PDCOMP_ERROR_FORCING_TEST->sl_esm_high_intr_handlerÖĞ¶Ï
- *              CCMR5F_INMCOMP_ERROR_FORCING_TEST->sl_esm_high_intr_handlerÖĞ¶Ï
+ * è¯´æ˜ï¼ˆç”±äºäº§ç”Ÿå¼‚å¸¸æˆ–è€…ä¸­æ–­ä»¥ä¸‹è¯Šæ–­è¢«æ’é™¤ï¼‰ï¼š
+ *              PSCON_ERROR_FORCING_FAULT_INJECT->sl_esm_low_intr_handlerä¸­æ–­
+ *              PSCON_SELF_TEST_ERROR_FORCING_FAULT_INJECT->sl_esm_low_intr_handlerä¸­æ–­
+ *              MEMINTRCNT_RESERVED_ACCESS->_excpt_vec_abort_dataå¼‚å¸¸
+ *              MAINPERIPHINTRCNT_RESERVED_ACCESS->_excpt_vec_abort_dataå¼‚å¸¸
+ *              PERIPHSEGINTRCNT_RESERVED_ACCESS->_excpt_vec_abort_dataå¼‚å¸¸
+ *              FLASH_ECC_TEST_MODE_2BIT->sl_esm_high_intr_handlerä¸­æ–­
+ *              CCMR5F_CPUCOMP_ERROR_FORCING_TEST_FAULT_INJECT->sl_esm_high_intr_handlerä¸­æ–­
+ *              CCMR5F_PDCOMP_ERROR_FORCING_TEST_FAULT_INJECT->sl_esm_high_intr_handlerä¸­æ–­
+ *              CCMR5F_INMCOMP_ERROR_FORCING_TEST_FAULT_INJECT->sl_esm_high_intr_handlerä¸­æ–­
+ *              SRAM_ECC_ERROR_FORCING_1BIT->sl_esm_high_intr_handlerä¸­æ–­
+ *              SRAM_ECC_ERROR_FORCING_2BIT->sl_esm_high_intr_handlerä¸­æ–­
+ *              CCMR5F_CPUCOMP_ERROR_FORCING_TEST->sl_esm_high_intr_handlerä¸­æ–­
+ *              CCMR5F_PDCOMP_ERROR_FORCING_TEST->sl_esm_high_intr_handlerä¸­æ–­
+ *              CCMR5F_INMCOMP_ERROR_FORCING_TEST->sl_esm_high_intr_handlerä¸­æ–­
  ***************************************************************************************************/
 #include "bsp.h"
 #include "diag_class.h"
@@ -59,7 +59,7 @@ static int32_t diagSegment4(void);
 static int32_t checkDiagResult(SL_SelfTest_Result x, int32_t y);
 
 /*
-*  ·ÖÆ¬¶ÎÕï¶Ïº¯ÊıÖ¸ÕëÊı×é
+*  åˆ†ç‰‡æ®µè¯Šæ–­å‡½æ•°æŒ‡é’ˆæ•°ç»„
 */
 static pDiagFun s_diagSeg[]=
 {
@@ -72,12 +72,12 @@ static pDiagFun s_diagSeg[]=
 /**************************************************************************************************
 * Identifier:   SCOD-AMC01-285 (Trace to: SLD-AMC01-285)
 * Function:     checkDiagResult
-* Description:  Ğ£ÑéÕï¶Ï½á¹û
-* Input:        x                   --- Õï¶Ï½á¹û
-*               y                   --- Õï¶Ï¹ı³ÌÊÇ·ñ³É¹¦
+* Description:  æ ¡éªŒè¯Šæ–­ç»“æœ
+* Input:        x                   --- è¯Šæ–­ç»“æœ
+*               y                   --- è¯Šæ–­è¿‡ç¨‹æ˜¯å¦æˆåŠŸ
 * Output:       none
-* Return:       TRUE                --- Õï¶Ï³É¹¦
-*               FALSE               --- Õï¶ÏÊ§°Ü
+* Return:       TRUE                --- è¯Šæ–­æˆåŠŸ
+*               FALSE               --- è¯Šæ–­å¤±è´¥
 * Others:
 * Log:          Date          Author    Modified
 *               2019/01/03    LP        Created
@@ -86,7 +86,7 @@ static int32_t checkDiagResult(SL_SelfTest_Result x, int32_t y)
 {
     int32_t ret = FALSE;/* for misra2004 */
 
-    /* xÎªST_PASS£¬yÎªTRUEÔò·µ»ØÕæ£¬·ñÔòÎª¼Ù */
+    /* xä¸ºST_PASSï¼Œyä¸ºTRUEåˆ™è¿”å›çœŸï¼Œå¦åˆ™ä¸ºå‡ */
     if ((ST_PASS == (x)) && (TRUE == (y)))
     {
         ret = TRUE;
@@ -98,11 +98,11 @@ static int32_t checkDiagResult(SL_SelfTest_Result x, int32_t y)
 /****************************************************************************************************
 * Identifier:   SCOD-AMC01-288 (Trace to: SLD-AMC01-288)
 * Function:     diagEfuseSelfTest
-* Description:  efus×ÔÕï¶Ï
+* Description:  efusè‡ªè¯Šæ–­
 * Input:        none
 * Output:       none
-* Return:       ERR_NO                            --- Õï¶ÏÍ¨¹ı
-*                ERR_EFUSE_SELF_TEST              --- Õï¶ÏÊ§°Ü
+* Return:       ERR_NO                            --- è¯Šæ–­é€šè¿‡
+*                ERR_EFUSE_SELF_TEST              --- è¯Šæ–­å¤±è´¥
 * Others:
 * Log:          Date          Author    Modified
 *               2019/01/03    LP        Created
@@ -120,7 +120,7 @@ static int32_t diagEfuseSelfTest(void)
     stConfigEFuse.failInfo.failInfo= EFUSE_ERROR_NONE;
     retVal = SL_SelfTest_EFuse(EFUSE_SELF_TEST_STUCK_AT_ZERO, TRUE, &stConfigEFuse);
 
-    if(0 == checkDiagResult(stConfigEFuse.failInfo.stResult, retVal))/* ¼ì²âÕï¶Ï½á¹û */
+    if(0 == checkDiagResult(stConfigEFuse.failInfo.stResult, retVal))/* æ£€æµ‹è¯Šæ–­ç»“æœ */
     {
         ret =  ERR_EFUSE_SELF_TEST;
     }
@@ -131,11 +131,11 @@ static int32_t diagEfuseSelfTest(void)
 /****************************************************************************************************
 * Identifier:   SCOD-AMC01-289 (Trace to: SLD-AMC01-289)
 * Function:     diagEfuseEcc
-* Description:  efuse eccÕï¶Ï
+* Description:  efuse eccè¯Šæ–­
 * Input:        none
 * Output:       none
-* Return:       ERR_NO                Õï¶ÏÍ¨¹ı
-*               ERR_EFUSE_ECC         Õï¶ÏÊ§°Ü
+* Return:       ERR_NO                è¯Šæ–­é€šè¿‡
+*               ERR_EFUSE_ECC         è¯Šæ–­å¤±è´¥
 * Others:
 * Log:          Date          Author    Modified
 *               2019/01/03    LP        Created
@@ -152,12 +152,12 @@ static int32_t diagEfuseEcc(void)
     stConfigEFuse.failInfo.failInfo= EFUSE_ERROR_NONE;
     retVal = SL_SelfTest_EFuse(EFUSE_SELF_TEST_ECC, TRUE, &stConfigEFuse);
 
-    while (0 == SL_SelfTest_Status_EFuse(&stConfigEFuse.failInfo))/*µÈ´ıÕï¶Ï½áÊø */
+    while (0 == SL_SelfTest_Status_EFuse(&stConfigEFuse.failInfo))/*ç­‰å¾…è¯Šæ–­ç»“æŸ */
     {
         ;
     }
 
-    if(0 == checkDiagResult(stConfigEFuse.failInfo.stResult, retVal))/* ¼ì²âÕï¶Ï½á¹û */
+    if(0 == checkDiagResult(stConfigEFuse.failInfo.stResult, retVal))/* æ£€æµ‹è¯Šæ–­ç»“æœ */
     {
         ret =  ERR_EFUSE_ECC;
     }
@@ -167,11 +167,11 @@ static int32_t diagEfuseEcc(void)
 /****************************************************************************************************
 * Identifier:   SCOD-AMC01-290 (Trace to: SLD-AMC01-290)
 * Function:     diagSramSelfTest
-* Description:  sram×ÔÕï¶Ï
+* Description:  sramè‡ªè¯Šæ–­
 * Input:        none
 * Output:       none
-* Return:       ERR_NO                      Õï¶ÏÍ¨¹ı
-*               ERR_SRAM_SELF_TEST          Õï¶ÏÊ§°Ü
+* Return:       ERR_NO                      è¯Šæ–­é€šè¿‡
+*               ERR_SRAM_SELF_TEST          è¯Šæ–­å¤±è´¥
 * Others:
 * Log:          Date          Author    Modified
 *               2019/01/03    LP        Created
@@ -186,7 +186,7 @@ static int32_t diagSramSelfTest(void)
     failInfoTCMRAM = ST_FAIL;
     retVal = SL_SelfTest_SRAM(SRAM_RADECODE_DIAGNOSTICS, TRUE, &failInfoTCMRAM);
 
-    if(0 == checkDiagResult(failInfoTCMRAM, retVal))/* ¼ì²âÕï¶Ï½á¹û */
+    if(0 == checkDiagResult(failInfoTCMRAM, retVal))/* æ£€æµ‹è¯Šæ–­ç»“æœ */
     {
         ret =  ERR_SRAM_SELF_TEST;
     }
@@ -197,11 +197,11 @@ static int32_t diagSramSelfTest(void)
 /****************************************************************************************************
 * Identifier:   SCOD-AMC01-291 (Trace to: SLD-AMC01-291)
 * Function:     diagPsonSelfTest
-* Description:  pson×Ô²âÊÔ
+* Description:  psonè‡ªæµ‹è¯•
 * Input:        none
 * Output:       none
-* Return:       ERR_NO                     Õï¶ÏÍ¨¹ı
-*               ERR_PSON_SELF_TEST         Õï¶ÏÊ§°Ü
+* Return:       ERR_NO                     è¯Šæ–­é€šè¿‡
+*               ERR_PSON_SELF_TEST         è¯Šæ–­å¤±è´¥
 * Others:
 * Log:          Date          Author    Modified
 *               2019/01/03    LP        Created
@@ -218,7 +218,7 @@ static int32_t diagPsonSelfTest(void)
     failInfoPSCON.mdFailure = (uint32)0x0U;
     retVal = SL_SelfTest_PSCON(PSCON_SELF_TEST, TRUE, &failInfoPSCON);
 
-    if(0 == checkDiagResult(failInfoPSCON.stResult, retVal))/* ¼ì²âÕï¶Ï½á¹û */
+    if(0 == checkDiagResult(failInfoPSCON.stResult, retVal))/* æ£€æµ‹è¯Šæ–­ç»“æœ */
     {
         ret =  ERR_PSON_SELF_TEST;
     }
@@ -229,11 +229,11 @@ static int32_t diagPsonSelfTest(void)
 /****************************************************************************************************
 * Identifier:   SCOD-AMC01-292 (Trace to: SLD-AMC01-292)
 * Function:     diagPsonErrorForcing
-* Description:  pson ´íÎóÇ¿ÖÆ²âÊÔ
+* Description:  pson é”™è¯¯å¼ºåˆ¶æµ‹è¯•
 * Input:        none
 * Output:       none
-* Return:       ERR_NO                            --- Õï¶ÏÍ¨¹ı
-*               ERR_PSCON_ERR_FORCE               --- Õï¶ÏÊ§°Ü
+* Return:       ERR_NO                            --- è¯Šæ–­é€šè¿‡
+*               ERR_PSCON_ERR_FORCE               --- è¯Šæ–­å¤±è´¥
 * Others:
 * Log:          Date          Author    Modified
 *               2019/01/03    LP        Created
@@ -249,7 +249,7 @@ static int32_t diagPsonErrorForcing(void)
     failInfoPSCON.mdFailure = (uint32)0x0U;
     retVal = SL_SelfTest_PSCON(PSCON_ERROR_FORCING, TRUE, &failInfoPSCON);
 
-    if(0 == checkDiagResult(failInfoPSCON.stResult, retVal))/* ¼ì²âÕï¶Ï½á¹û */
+    if(0 == checkDiagResult(failInfoPSCON.stResult, retVal))/* æ£€æµ‹è¯Šæ–­ç»“æœ */
     {
         ret =  ERR_PSCON_ERR_FORCE;
     }
@@ -260,11 +260,11 @@ static int32_t diagPsonErrorForcing(void)
 /****************************************************************************************************
 * Identifier:   SCOD-AMC01-293 (Trace to: SLD-AMC01-293)
 * Function:     diagPsonSelfTestErrorForcing
-* Description:  pson×Ô²âÊÔ´íÎóÇ¿ÖÆ²âÊÔ
+* Description:  psonè‡ªæµ‹è¯•é”™è¯¯å¼ºåˆ¶æµ‹è¯•
 * Input:        none
 * Output:       none
-* Return:       ERR_NO                            ---  Õï¶ÏÍ¨¹ı
-*               ERR_PSCON_SL_ERR_FORCE            --- Õï¶ÏÊ§°Ü
+* Return:       ERR_NO                            ---  è¯Šæ–­é€šè¿‡
+*               ERR_PSCON_SL_ERR_FORCE            --- è¯Šæ–­å¤±è´¥
 * Others:
 * Log:          Date          Author    Modified
 *               2019/01/03    LP        Created
@@ -280,7 +280,7 @@ static int32_t diagPsonSelfTestErrorForcing(void)
     failInfoPSCON.mdFailure = (uint32)0x0U;
     retVal = SL_SelfTest_PSCON(PSCON_SELF_TEST_ERROR_FORCING, TRUE, &failInfoPSCON);
 
-    if(0 == checkDiagResult(failInfoPSCON.stResult, retVal))/* ¼ì²âÕï¶Ï½á¹û */
+    if(0 == checkDiagResult(failInfoPSCON.stResult, retVal))/* æ£€æµ‹è¯Šæ–­ç»“æœ */
     {
         ret =  ERR_PSCON_SL_ERR_FORCE;
     }
@@ -291,11 +291,11 @@ static int32_t diagPsonSelfTestErrorForcing(void)
 /****************************************************************************************************
 * Identifier:   SCOD-AMC01-294 (Trace to: SLD-AMC01-294)
 * Function:     diagPsonPmaTest
-* Description:  pson pma²âÊÔ
+* Description:  pson pmaæµ‹è¯•
 * Input:        none
 * Output:       none
-* Return:       ERR_NO                       --- Õï¶ÏÍ¨¹ı
-*               ERR_PSON_PMA_TEST            --- Õï¶ÏÊ§°Ü
+* Return:       ERR_NO                       --- è¯Šæ–­é€šè¿‡
+*               ERR_PSON_PMA_TEST            --- è¯Šæ–­å¤±è´¥
 * Others:
 * Log:          Date          Author    Modified
 *               2019/01/03    LP        Created
@@ -310,7 +310,7 @@ static int32_t diagPsonPmaTest(void)
     failInfoPSCON.mdFailure = (uint32)0x0U;
     if(0 != SL_SelfTest_PSCON(PSCON_PMA_TEST, TRUE, &failInfoPSCON))
     {
-        ret =  ERR_PSON_PMA_TEST;/* ¼ì²âÕï¶Ï½á¹û */
+        ret =  ERR_PSON_PMA_TEST;/* æ£€æµ‹è¯Šæ–­ç»“æœ */
     }
 
     return ret;
@@ -319,11 +319,11 @@ static int32_t diagPsonPmaTest(void)
 /****************************************************************************************************
 * Identifier:   SCOD-AMC01-295 (Trace to: SLD-AMC01-295)
 * Function:     diagPerSegIntrCntUnpriAccS1
-* Description:  ÍâÎ§¶ÎS1ÌØÈ¨Ä£Ê½·ÃÎÊÕï¶Ï
+* Description:  å¤–å›´æ®µS1ç‰¹æƒæ¨¡å¼è®¿é—®è¯Šæ–­
 * Input:        none
 * Output:       none
-* Return:       ERR_NO                                --- Õï¶ÏÍ¨¹ı
-*               ERR_PERIPHT_UNPRI_ACC_S1              --- Õï¶ÏÊ§°Ü
+* Return:       ERR_NO                                --- è¯Šæ–­é€šè¿‡
+*               ERR_PERIPHT_UNPRI_ACC_S1              --- è¯Šæ–­å¤±è´¥
 * Others:
 * Log:          Date          Author    Modified
 *               2019/01/03    LP        Created
@@ -341,7 +341,7 @@ static int32_t diagPerSegIntrCntUnpriAccS1(void)
                                                        (volatile uint32*)0xFFFF1020u,
                                                        16u);
 
-    if(0 == checkDiagResult(ST_PASS, !retVal))/* ¼ì²âÕï¶Ï½á¹û */
+    if(0 == checkDiagResult(ST_PASS, !retVal))/* æ£€æµ‹è¯Šæ–­ç»“æœ */
     {
         ret =  ERR_PERIPHT_UNPRI_ACC_S1;
     }
@@ -352,11 +352,11 @@ static int32_t diagPerSegIntrCntUnpriAccS1(void)
 /****************************************************************************************************
 * Identifier:   SCOD-AMC01-296 (Trace to: SLD-AMC01-296)
 * Function:     diagPerSegIntrCntUnpriAccS2
-* Description:  ÍâÎ§¶ÎS2Á¬½ÓÕï¶Ï
+* Description:  å¤–å›´æ®µS2è¿æ¥è¯Šæ–­
 * Input:        none
 * Output:       none
-* Return:       ERR_NO                                  --- Õï¶ÏÍ¨¹ı
-*               ERR_PERIPH_UNPRI_ACC_S2                 --- Õï¶ÏÊ§°Ü
+* Return:       ERR_NO                                  --- è¯Šæ–­é€šè¿‡
+*               ERR_PERIPH_UNPRI_ACC_S2                 --- è¯Šæ–­å¤±è´¥
 * Others:
 * Log:          Date          Author    Modified
 *               2019/01/03    LP        Created
@@ -370,7 +370,7 @@ static int32_t diagPerSegIntrCntUnpriAccS2(void)
      * Note: Segment Instance is not used. */
     retVal = SL_SelfTest_PeripheralSegmentInterconnect(PERIPHSEGINTRCNT_UNPRIVELEGED_ACCESS, SL_PERIPH_SEGMENT2, (volatile uint32*)0xFFFFF000U, (volatile uint32*)0xFFFF1020u, 16u);
 
-    if(0 == checkDiagResult(ST_PASS, !retVal))/* ¼ì²âÕï¶Ï½á¹û */
+    if(0 == checkDiagResult(ST_PASS, !retVal))/* æ£€æµ‹è¯Šæ–­ç»“æœ */
     {
         ret =  ERR_PERIPH_UNPRI_ACC_S2;
     }
@@ -381,11 +381,11 @@ static int32_t diagPerSegIntrCntUnpriAccS2(void)
 /****************************************************************************************************
 * Identifier:   SCOD-AMC01-297 (Trace to: SLD-AMC01-297)
 * Function:     diagPerSegIntrCntUnpriAccS3
-* Description:  ÍâÎ§¶ÎS3È¨Ä£Ê½·ÃÎÊÕï¶Ï
+* Description:  å¤–å›´æ®µS3æƒæ¨¡å¼è®¿é—®è¯Šæ–­
 * Input:        none
 * Output:       none
-* Return:       ERR_NO                                  --- Õï¶ÏÍ¨¹ı
-*               ERR_PERIPH_UNPRI_ACC_S3                 --- Õï¶ÏÊ§°Ü
+* Return:       ERR_NO                                  --- è¯Šæ–­é€šè¿‡
+*               ERR_PERIPH_UNPRI_ACC_S3                 --- è¯Šæ–­å¤±è´¥
 * Others:
 * Log:          Date          Author    Modified
 *               2019/01/03    LP        Created
@@ -399,7 +399,7 @@ static int32_t diagPerSegIntrCntUnpriAccS3(void)
      * Note: Segment Instance is not used. */
     retVal = SL_SelfTest_PeripheralSegmentInterconnect(PERIPHSEGINTRCNT_UNPRIVELEGED_ACCESS, SL_PERIPH_SEGMENT3, (volatile uint32*)0xFFFFF000U, (volatile uint32*)0xFFFF1020u, 16u);
 
-    if(0 == checkDiagResult(ST_PASS, !retVal))/* ¼ì²âÕï¶Ï½á¹û */
+    if(0 == checkDiagResult(ST_PASS, !retVal))/* æ£€æµ‹è¯Šæ–­ç»“æœ */
     {
         ret =  ERR_PERIPH_UNPRI_ACC_S3;
     }
@@ -410,11 +410,11 @@ static int32_t diagPerSegIntrCntUnpriAccS3(void)
 /****************************************************************************************************
 * Identifier:   SCOD-AMC01-298 (Trace to: SLD-AMC01-298)
 * Function:     diagAdc1SramParityTest
-* Description:  adc1Õï¶Ï
+* Description:  adc1è¯Šæ–­
 * Input:        none
 * Output:       none
-* Return:       ERR_NO                                    --- Õï¶ÏÍ¨¹ı
-*               ERR_ADC1_SRAM_PARITY_TEST                 --- Õï¶ÏÊ§°Ü
+* Return:       ERR_NO                                    --- è¯Šæ–­é€šè¿‡
+*               ERR_ADC1_SRAM_PARITY_TEST                 --- è¯Šæ–­å¤±è´¥
 * Others:
 * Log:          Date          Author    Modified
 *               2019/01/03    LP        Created
@@ -431,7 +431,7 @@ static int32_t diagAdc1SramParityTest(void)
     adcConfig.adcbase = adcREG1;
 
     retVal = SL_SelfTest_ADC(ADC_SRAM_PARITY_TEST, FALSE, &adcConfig, &pinStatus);
-    if(0 == checkDiagResult(ST_PASS, retVal))/* ¼ì²âÕï¶Ï½á¹û */
+    if(0 == checkDiagResult(ST_PASS, retVal))/* æ£€æµ‹è¯Šæ–­ç»“æœ */
     {
         ret =  ERR_ADC1_SRAM_PARITY_TEST;
     }
@@ -443,8 +443,8 @@ static int32_t diagAdc1SramParityTest(void)
 * Identifier:   SCOD-AMC01-299 (Trace to: SLD-AMC01-299)
 * Function:     dCacheFlush
 * Description:  flush cache
-* Input:        addr         --- µØÖ·
-*               len          --- ³¤¶È
+* Input:        addr         --- åœ°å€
+*               len          --- é•¿åº¦
 * Output:       none
 * Return:       none
 * Others:
@@ -459,8 +459,8 @@ void dCacheFlush(uint32 addr,uint32 len)
 
     if(len > 0x0U)
     {
-        count =  len / 0x20u;/*È¡0x20µÄÕûÊı±¶*/
-        if((len % 0x20u) != 0x0u)/*²»Âú0x20µÄÉèÖÃÎª0x20*/
+        count =  len / 0x20u;/*å–0x20çš„æ•´æ•°å€*/
+        if((len % 0x20u) != 0x0u)/*ä¸æ»¡0x20çš„è®¾ç½®ä¸º0x20*/
         {
             count = count + 0x1U;
         }
@@ -476,11 +476,11 @@ void dCacheFlush(uint32 addr,uint32 len)
 /****************************************************************************************************
 * Identifier:   SCOD-AMC01-300 (Trace to: SLD-AMC01-300)
 * Function:     diagFlashEccTestMode1bit
-* Description:  FLASH ECC Ä£Ê½1Õï¶Ï
+* Description:  FLASH ECC æ¨¡å¼1è¯Šæ–­
 * Input:        none
 * Output:       none
-* Return:       ERR_NO                                       --- Õï¶ÏÍ¨¹ı
-*               ERR_FLASH_ECC_TEST_MODE_1BIT                 --- Õï¶ÏÊ§°Ü
+* Return:       ERR_NO                                       --- è¯Šæ–­é€šè¿‡
+*               ERR_FLASH_ECC_TEST_MODE_1BIT                 --- è¯Šæ–­å¤±è´¥
 * Others:
 * Log:          Date          Author    Modified
 *               2019/01/03    LP        Created
@@ -495,7 +495,7 @@ static int32_t diagFlashEccTestMode1bit(void)
     failInfoFlash = ST_FAIL;
     dCacheFlush(0U,32U);
     retVal = SL_SelfTest_Flash(FLASH_ECC_TEST_MODE_1BIT, TRUE, &failInfoFlash);
-    if(0 == checkDiagResult(failInfoFlash, retVal))/* ¼ì²âÕï¶Ï½á¹û */
+    if(0 == checkDiagResult(failInfoFlash, retVal))/* æ£€æµ‹è¯Šæ–­ç»“æœ */
     {
         ret =  ERR_FLASH_ECC_TEST_MODE_1BIT;
     }
@@ -506,16 +506,16 @@ static int32_t diagFlashEccTestMode1bit(void)
 /****************************************************************************************************
 * Identifier:   SCOD-AMC01-301 (Trace to: SLD-AMC01-301)
 * Function:     diagPbistOn2PortMem
-* Description:  Ë«¿ÚramÕï¶Ï
-* Input:        p2portMem ÄÚ´æµØÖ·
-*               size ³¤¶È
+* Description:  åŒå£ramè¯Šæ–­
+* Input:        p2portMem å†…å­˜åœ°å€
+*               size é•¿åº¦
 * Output:       none
-* Return:       ERR_NO                                            --- Õï¶ÏÍ¨¹ı
-*               ERR_PBIST_MARCH13N_2PORT_MEMORY                   --- Õï¶ÏÊ§°Ü
+* Return:       ERR_NO                                            --- è¯Šæ–­é€šè¿‡
+*               ERR_PBIST_MARCH13N_2PORT_MEMORY                   --- è¯Šæ–­å¤±è´¥
 * Others:
 * Log:          Date          Author    Modified
 *               2019/01/03    LP        Created
-*               2021/10/21    hdq       Ìí¼Ó²ÎÊı¡¢¿ÉÖØÈë
+*               2021/10/21    hdq       æ·»åŠ å‚æ•°ã€å¯é‡å…¥
 ****************************************************************************************************/
 static int32_t diagPbistOn2PortMem(uint64_t *p2portMem, uint32_t size)
 {
@@ -531,11 +531,11 @@ static int32_t diagPbistOn2PortMem(uint64_t *p2portMem, uint32_t size)
 
         while (0 == SL_SelfTest_Status_PBIST(&failInfoPBISTOthers))
         {
-            ; /* µÈ´ı¼ì²âÍê³É*/
+            ; /* ç­‰å¾…æ£€æµ‹å®Œæˆ*/
         }
 
-        retVal &= SL_SelfTest_PBIST_StopExec();/*Í£Ö¹ÔËĞĞpbist*/
-        if(0 == checkDiagResult(failInfoPBISTOthers.stResult, retVal))/* ¼ì²âÕï¶Ï½á¹û */
+        retVal &= SL_SelfTest_PBIST_StopExec();/*åœæ­¢è¿è¡Œpbist*/
+        if(0 == checkDiagResult(failInfoPBISTOthers.stResult, retVal))/* æ£€æµ‹è¯Šæ–­ç»“æœ */
         {
             ret =  ERR_PBIST_MARCH13N_2PORT_MEMORY;
             break;
@@ -548,11 +548,11 @@ static int32_t diagPbistOn2PortMem(uint64_t *p2portMem, uint32_t size)
 /****************************************************************************************************
 * Identifier:   SCOD-AMC01-302 (Trace to: SLD-AMC01-302)
 * Function:     diagPbistOnRomMem
-* Description:  romÕï¶Ï
+* Description:  romè¯Šæ–­
 * Input:        none
 * Output:       none
-* Return:       ERR_NO                                            --- Õï¶ÏÍ¨¹ı
-*               ERR_PBIST_MARCH13N_ROM_MEMORY                     --- Õï¶ÏÊ§°Ü
+* Return:       ERR_NO                                            --- è¯Šæ–­é€šè¿‡
+*               ERR_PBIST_MARCH13N_ROM_MEMORY                     --- è¯Šæ–­å¤±è´¥
 * Others:
 * Log:          Date          Author    Modified
 *               2019/01/03    LP        Created
@@ -579,11 +579,11 @@ static int32_t diagPbistOnRomMem(void)
 
             while (0 == SL_SelfTest_Status_PBIST(&failInfoPBISTOthers))
             {
-                ; /* µÈ´ı¼ì²âÍê³É*/
+                ; /* ç­‰å¾…æ£€æµ‹å®Œæˆ*/
             }
 
-            retVal &= SL_SelfTest_PBIST_StopExec();/*Í£Ö¹ÔËĞĞpbist*/
-            if(0 == checkDiagResult(failInfoPBISTOthers.stResult, retVal))/* ¼ì²âÕï¶Ï½á¹û */
+            retVal &= SL_SelfTest_PBIST_StopExec();/*åœæ­¢è¿è¡Œpbist*/
+            if(0 == checkDiagResult(failInfoPBISTOthers.stResult, retVal))/* æ£€æµ‹è¯Šæ–­ç»“æœ */
             {
                 ret =  ERR_PBIST_MARCH13N_ROM_MEMORY;
                 break;
@@ -597,11 +597,11 @@ static int32_t diagPbistOnRomMem(void)
 /****************************************************************************************************
 * Identifier:   SCOD-AMC01-306 (Trace to: SLD-AMC01-306)
 * Function:     diagCcmCpuCompSelfTest
-* Description:  ccm cpu×ÔÕï¶Ï
+* Description:  ccm cpuè‡ªè¯Šæ–­
 * Input:        none
 * Output:       none
-* Return:       ERR_NO                                    --- Õï¶ÏÍ¨¹ı
-*               ERR_CCMR5F_CPUCOMP_SL                     --- Õï¶ÏÊ§°Ü
+* Return:       ERR_NO                                    --- è¯Šæ–­é€šè¿‡
+*               ERR_CCMR5F_CPUCOMP_SL                     --- è¯Šæ–­å¤±è´¥
 * Others:
 * Log:          Date          Author    Modified
 *               2019/01/03    LP        Created
@@ -617,7 +617,7 @@ static int32_t diagCcmCpuCompSelfTest(void)
 
     retVal = SL_SelfTest_CCMR5F(CCMR5F_CPUCOMP_SELF_TEST,  TRUE, &failInfoCCMR5F);
 
-    if(0 == checkDiagResult(failInfoCCMR5F.stResult, retVal))/* ¼ì²âÕï¶Ï½á¹û */
+    if(0 == checkDiagResult(failInfoCCMR5F.stResult, retVal))/* æ£€æµ‹è¯Šæ–­ç»“æœ */
     {
         ret =  ERR_CCMR5F_CPUCOMP_SL;
     }
@@ -628,11 +628,11 @@ static int32_t diagCcmCpuCompSelfTest(void)
 /****************************************************************************************************
 * Identifier:   SCOD-AMC01-307 (Trace to: SLD-AMC01-307)
 * Function:     diagCcmCpuCompSelfTestErrForce
-* Description:  ccm cpu×Ô²âÊÔ´íÎóÇ¿ÖÆÕï¶Ï
+* Description:  ccm cpuè‡ªæµ‹è¯•é”™è¯¯å¼ºåˆ¶è¯Šæ–­
 * Input:        none
 * Output:       none
-* Return:       ERR_NO                                    --- Õï¶ÏÍ¨¹ı
-*               ERR_CCMR5F_CPUCOMP_SL_ERR_FORCE           --- Õï¶ÏÊ§°Ü
+* Return:       ERR_NO                                    --- è¯Šæ–­é€šè¿‡
+*               ERR_CCMR5F_CPUCOMP_SL_ERR_FORCE           --- è¯Šæ–­å¤±è´¥
 * Others:
 * Log:          Date          Author    Modified
 *               2019/01/03    LP        Created
@@ -647,7 +647,7 @@ static int32_t diagCcmCpuCompSelfTestErrForce(void)
     failInfoCCMR5F.failInfo = CCMR5F_ST_ERR_COMPARE_MATCH;
 
     retVal = SL_SelfTest_CCMR5F(CCMR5F_CPUCOMP_SELF_TEST_ERROR_FORCING, TRUE, &failInfoCCMR5F);
-    if(0 == checkDiagResult(failInfoCCMR5F.stResult, retVal))/* ¼ì²âÕï¶Ï½á¹û */
+    if(0 == checkDiagResult(failInfoCCMR5F.stResult, retVal))/* æ£€æµ‹è¯Šæ–­ç»“æœ */
     {
         ret =  ERR_CCMR5F_CPUCOMP_SL_ERR_FORCE;
     }
@@ -658,11 +658,11 @@ static int32_t diagCcmCpuCompSelfTestErrForce(void)
 /****************************************************************************************************
 * Identifier:   SCOD-AMC01-308 (Trace to: SLD-AMC01-308)
 * Function:     diagCcmPdCompSelfTest
-* Description:  ccm pd×ÔÕï¶Ï
+* Description:  ccm pdè‡ªè¯Šæ–­
 * Input:        none
 * Output:       none
-* Return:       ERR_NO                            --- Õï¶ÏÍ¨¹ı
-*               ERR_CCMR5F_PDCOMP_SL              --- Õï¶ÏÊ§°Ü
+* Return:       ERR_NO                            --- è¯Šæ–­é€šè¿‡
+*               ERR_CCMR5F_PDCOMP_SL              --- è¯Šæ–­å¤±è´¥
 * Others:
 * Log:          Date          Author    Modified
 *               2019/01/03    LP        Created
@@ -678,7 +678,7 @@ static int32_t diagCcmPdCompSelfTest(void)
 
     retVal = SL_SelfTest_CCMR5F(CCMR5F_PDCOMP_SELF_TEST,  TRUE, &failInfoCCMR5F);
 
-    if(0 == checkDiagResult(failInfoCCMR5F.stResult, retVal))/* ¼ì²âÕï¶Ï½á¹û */
+    if(0 == checkDiagResult(failInfoCCMR5F.stResult, retVal))/* æ£€æµ‹è¯Šæ–­ç»“æœ */
     {
         ret =  ERR_CCMR5F_PDCOMP_SL;
     }
@@ -689,11 +689,11 @@ static int32_t diagCcmPdCompSelfTest(void)
 /****************************************************************************************************
 * Identifier:   SCOD-AMC01-309 (Trace to: SLD-AMC01-309)
 * Function:     diagCcmPdCompSelfTestErrForce
-* Description:  ccm pd×Ô²âÊÔ´íÎóÇ¿ÖÆÕï¶Ï
+* Description:  ccm pdè‡ªæµ‹è¯•é”™è¯¯å¼ºåˆ¶è¯Šæ–­
 * Input:        none
 * Output:       none
-* Return:       ERR_NO                                      --- Õï¶ÏÍ¨¹ı
-*               ERR_CCMR5F_PDCOMP_SL_ERR_FORCE              --- Õï¶ÏÊ§°Ü
+* Return:       ERR_NO                                      --- è¯Šæ–­é€šè¿‡
+*               ERR_CCMR5F_PDCOMP_SL_ERR_FORCE              --- è¯Šæ–­å¤±è´¥
 * Others:
 * Log:          Date          Author    Modified
 *               2019/01/03    LP        Created
@@ -709,7 +709,7 @@ static int32_t diagCcmPdCompSelfTestErrForce(void)
 
     retVal = SL_SelfTest_CCMR5F(CCMR5F_PDCOMP_SELF_TEST_ERROR_FORCING, TRUE, &failInfoCCMR5F);
 
-    if(0 == checkDiagResult(failInfoCCMR5F.stResult, retVal))/* ¼ì²âÕï¶Ï½á¹û */
+    if(0 == checkDiagResult(failInfoCCMR5F.stResult, retVal))/* æ£€æµ‹è¯Šæ–­ç»“æœ */
     {
         ret =  ERR_CCMR5F_PDCOMP_SL_ERR_FORCE;
     }
@@ -720,11 +720,11 @@ static int32_t diagCcmPdCompSelfTestErrForce(void)
 /****************************************************************************************************
 * Identifier:   SCOD-AMC01-310 (Trace to: SLD-AMC01-310)
 * Function:     diagCcmInmCompSelfTest
-* Description:  ccm inm×ÔÕï¶Ï
+* Description:  ccm inmè‡ªè¯Šæ–­
 * Input:        none
 * Output:       none
-* Return:       ERR_NO                             --- Õï¶ÏÍ¨¹ı
-*               ERR_CCMR5F_INMCOMP_SL              --- Õï¶ÏÊ§°Ü
+* Return:       ERR_NO                             --- è¯Šæ–­é€šè¿‡
+*               ERR_CCMR5F_INMCOMP_SL              --- è¯Šæ–­å¤±è´¥
 * Others:
 * Log:          Date          Author    Modified
 *               2019/01/03    LP        Created
@@ -740,7 +740,7 @@ static int32_t diagCcmInmCompSelfTest(void)
 
     retVal = SL_SelfTest_CCMR5F(CCMR5F_INMCOMP_SELF_TEST,  TRUE, &failInfoCCMR5F);
 
-    if(0 == checkDiagResult(failInfoCCMR5F.stResult, retVal))/* ¼ì²âÕï¶Ï½á¹û */
+    if(0 == checkDiagResult(failInfoCCMR5F.stResult, retVal))/* æ£€æµ‹è¯Šæ–­ç»“æœ */
     {
         ret =  ERR_CCMR5F_INMCOMP_SL;
     }
@@ -751,11 +751,11 @@ static int32_t diagCcmInmCompSelfTest(void)
 /****************************************************************************************************
 * Identifier:   SCOD-AMC01-311 (Trace to: SLD-AMC01-311)
 * Function:     diagCcmInmCompSelfTestErrForce
-* Description:  ccm inm×ÔÕï¶Ï
+* Description:  ccm inmè‡ªè¯Šæ–­
 * Input:        none
 * Output:       none
-* Return:       ERR_NO                                       --- Õï¶ÏÍ¨¹ı
-*               ERR_CCMR5F_INMCOMP_SL_ERR_FORCE              --- Õï¶ÏÊ§°Ü
+* Return:       ERR_NO                                       --- è¯Šæ–­é€šè¿‡
+*               ERR_CCMR5F_INMCOMP_SL_ERR_FORCE              --- è¯Šæ–­å¤±è´¥
 * Others:
 * Log:          Date          Author    Modified
 *               2019/01/03    LP        Created
@@ -771,7 +771,7 @@ static int32_t diagCcmInmCompSelfTestErrForce(void)
 
     retVal = SL_SelfTest_CCMR5F(CCMR5F_INMCOMP_SELF_TEST_ERROR_FORCING, TRUE, &failInfoCCMR5F);
 
-    if(0 == checkDiagResult(failInfoCCMR5F.stResult, retVal))/* ¼ì²âÕï¶Ï½á¹û */
+    if(0 == checkDiagResult(failInfoCCMR5F.stResult, retVal))/* æ£€æµ‹è¯Šæ–­ç»“æœ */
     {
         ret =  ERR_CCMR5F_INMCOMP_SL_ERR_FORCE;
     }
@@ -782,15 +782,15 @@ static int32_t diagCcmInmCompSelfTestErrForce(void)
 /****************************************************************************************************
 * Identifier:   SCOD-AMC01-312 (Trace to: SLD-AMC01-312)
 * Function:     diagDcc
-* Description:  DCCÕï¶Ï
+* Description:  DCCè¯Šæ–­
 * Input:        none
 * Output:       none
-* Return:       ERR_NO                --- Õï¶ÏÍ¨¹ı
-*               ERR_DCC               --- Õï¶ÏÊ§°Ü
+* Return:       ERR_NO                --- è¯Šæ–­é€šè¿‡
+*               ERR_DCC               --- è¯Šæ–­å¤±è´¥
 * Others:
 * Log:          Date          Author    Modified
 *               2019/01/03    LP        Created
-*               2024/06/14    WXB       É¾³ı×¢ÊÍ±£´æµÄ´úÂë
+*               2024/06/14    WXB       åˆ é™¤æ³¨é‡Šä¿å­˜çš„ä»£ç 
 ****************************************************************************************************/
 static int32_t diagDcc(void)
 {
@@ -808,11 +808,11 @@ static int32_t diagDcc(void)
 /****************************************************************************************************
 * Identifier:   SCOD-AMC01-313 (Trace to: SLD-AMC01-313)
 * Function:     diagSegment1
-* Description:  ARM·ÖÆ¬×ÔÕï¶Ï1
+* Description:  ARMåˆ†ç‰‡è‡ªè¯Šæ–­1
 * Input:        none
 * Output:       none
 * Return:       none
-* Others:       Êµ¼Ê²âÊÔ ºÄÊ±Ê±¼ä Ô¼ 1580 us
+* Others:       å®é™…æµ‹è¯• è€—æ—¶æ—¶é—´ çº¦ 1580 us
 * Log:          Date          Author    Modified
 *               2017/01/22    zql        
 ****************************************************************************************************/
@@ -892,11 +892,11 @@ static int32_t diagSegment1(void)
 /****************************************************************************************************
 * Identifier:   SCOD-AMC01-303 (Trace to: SLD-AMC01-303)
 * Function:     diagSegment2
-* Description:  ×ÔÕï¶Ï½Ó¿Ú
+* Description:  è‡ªè¯Šæ–­æ¥å£
 * Input:        none
 * Output:       none
 * Return:       none
-* Others:       Êµ¼Ê²âÊÔ ºÄÊ±Ê±¼ä Ô¼ 1830 us
+* Others:       å®é™…æµ‹è¯• è€—æ—¶æ—¶é—´ çº¦ 1830 us
 * Log:          Date          Author    Modified
 *               2019/01/22    zql   
 ****************************************************************************************************/
@@ -921,11 +921,11 @@ static int32_t diagSegment2(void)
 /****************************************************************************************************
 * Identifier:   SCOD-AMC01-304 (Trace to: SLD-AMC01-304)
 * Function:     diagSegment3
-* Description:  ×ÔÕï¶Ï½Ó¿Ú£­Ë«¿ÚRAMÕï¶Ï·ÖÆ¬1
+* Description:  è‡ªè¯Šæ–­æ¥å£ï¼åŒå£RAMè¯Šæ–­åˆ†ç‰‡1
 * Input:        none
 * Output:       none
 * Return:       none
-* Others:       Êµ¼Ê²âÊÔ ºÄÊ±Ê±¼ä Ô¼ 1751 us
+* Others:       å®é™…æµ‹è¯• è€—æ—¶æ—¶é—´ çº¦ 1751 us
 * Log:          Date          Author    Modified
 *               2021/10/21    hdq
 ****************************************************************************************************/
@@ -950,11 +950,11 @@ static int32_t diagSegment3(void)
 /****************************************************************************************************
 * Identifier:   SCOD-AMC01-305 (Trace to: SLD-AMC01-305)
 * Function:     diagSegment4
-* Description:  ×ÔÕï¶Ï½Ó¿Ú£­Ë«¿ÚRAMÕï¶Ï·ÖÆ¬4
+* Description:  è‡ªè¯Šæ–­æ¥å£ï¼åŒå£RAMè¯Šæ–­åˆ†ç‰‡4
 * Input:        none
 * Output:       none
 * Return:       none
-* Others:       Êµ¼Ê²âÊÔ ºÄÊ±Ê±¼ä Ô¼ 1141 us
+* Others:       å®é™…æµ‹è¯• è€—æ—¶æ—¶é—´ çº¦ 1141 us
 * Log:          Date          Author    Modified
 *               2021/10/21    hdq
 ****************************************************************************************************/
@@ -1009,16 +1009,16 @@ static int32_t diagSegment4(void)
         ret = diagDcc();  /* 35 */
     }
 
-    /*  ¶Ôlcd ÆÁ³õÊ¼»¯Ò»´Î ´úÌælcdÆÁÕï¶Ï */
+    /*  å¯¹lcd å±åˆå§‹åŒ–ä¸€æ¬¡ ä»£æ›¿lcdå±è¯Šæ–­ */
     drv2LcdInit(HCMS_INIT_MODE_RUN);
     
     return ret;
-}/* Êµ¼Ê²âÊÔ ºÄÊ±Ê±¼ä Ô¼ 1570 us */
+}/* å®é™…æµ‹è¯• è€—æ—¶æ—¶é—´ çº¦ 1570 us */
 
 /****************************************************************************************************
 * Identifier:   SCOD-AMC01-286 (Trace to: SLD-AMC01-286)
 * Function:     diagHardwareInit
-* Description:  ÉÏµç³õÊ¼»¯Õï¶Ï
+* Description:  ä¸Šç”µåˆå§‹åŒ–è¯Šæ–­
 * Input:        none
 * Output:       none
 * Return:       none
@@ -1031,7 +1031,7 @@ void diagHardwareInit(void)
     int32_t diagRet = 0;
     int32_t i = 0;
 
-    dccInit();        /*dcc³õÊ¼»¯*/
+    dccInit();        /*dccåˆå§‹åŒ–*/
 
     /* Initialise ADC SRAM */
     SL_Init_Memory(RAMTYPE_MIBADC1_RAM);
@@ -1042,7 +1042,7 @@ void diagHardwareInit(void)
 
     for(i = 0; i < (sizeof(s_diagSeg)/sizeof(pDiagFun)); i++)
     {
-        SL_Clear_nERROR();/*ÇåÀíESM´íÎó*/
+        SL_Clear_nERROR();/*æ¸…ç†ESMé”™è¯¯*/
         diagRet = s_diagSeg[i]();
         if(ERR_NO != diagRet)
         {
@@ -1054,7 +1054,7 @@ void diagHardwareInit(void)
 /****************************************************************************************************
 * Identifier:   SCOD-AMC01-287 (Trace to: SLD-AMC01-287)
 * Function:     diagHardwareCycle
-* Description:  ×ÔÕï¶Ï½Ó¿Ú
+* Description:  è‡ªè¯Šæ–­æ¥å£
 * Input:        none
 * Output:       none
 * Return:       none
@@ -1064,10 +1064,10 @@ void diagHardwareInit(void)
 ****************************************************************************************************/
 void diagHardwareCycle(void)
 {
-    static uint32_t   digIndex = 0U; /* ¾²Ì¬±äÁ¿ */
+    static uint32_t   digIndex = 0U; /* é™æ€å˜é‡ */
     int32_t diagRet = 0U;
 
-    SL_Clear_nERROR();    /* Õï¶ÏÇ° Çå³ı´íÎó±ê¼Ç */
+    SL_Clear_nERROR();    /* è¯Šæ–­å‰ æ¸…é™¤é”™è¯¯æ ‡è®° */
     diagRet = s_diagSeg[digIndex]();
     digIndex++;
     if(digIndex >= (sizeof(s_diagSeg)/sizeof(pDiagFun)))
@@ -1084,8 +1084,8 @@ void diagHardwareCycle(void)
 /********************************************************************* 
 * Identifier:   SCOD-AMC01-222 (Trace to: SLD-AMC01-222) 
 * Function:     diagFlash 
-* Description:  Õï¶ÏÍâ²¿flashÊÇ·ñÕı³£ 
-* Input:        flag Õï¶Ï·½Ê½ 0 ÖÜÆÚÕï¶Ï 1 ÉÏµçÕï¶Ï
+* Description:  è¯Šæ–­å¤–éƒ¨flashæ˜¯å¦æ­£å¸¸ 
+* Input:        flag è¯Šæ–­æ–¹å¼ 0 å‘¨æœŸè¯Šæ–­ 1 ä¸Šç”µè¯Šæ–­
 * Output:       none 
 * Return:       none 
 * Others: 
@@ -1128,8 +1128,8 @@ static void diagFlash(uint8_t flag)
 /****************************************************************************************************
 * Identifier:   SCOD-AMC01-088 (Trace to: SLD-AMC01-088)
 * Function:     diagHardwareCyclePlus
-* Description:  Õï¶ÏARMµçÔ´¼°Æ¬ÍâÉè±¸
-* Input:        flag Õï¶Ï·½Ê½ 0 ÖÜÆÚÕï¶Ï 1 ÉÏµçÕï¶Ï
+* Description:  è¯Šæ–­ARMç”µæºåŠç‰‡å¤–è®¾å¤‡
+* Input:        flag è¯Šæ–­æ–¹å¼ 0 å‘¨æœŸè¯Šæ–­ 1 ä¸Šç”µè¯Šæ–­
 * Output:       none
 * Return:       none
 * Others:

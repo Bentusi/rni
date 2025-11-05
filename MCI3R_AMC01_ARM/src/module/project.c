@@ -1,9 +1,9 @@
 /***************************************************************************************************
  * Filename: project.c
- * Purpose:  Դ���̻�������֧��ģ�鶨��
+ * Purpose:  源量程机箱中所支持模块定义
  * Date:         Author      Modified 
  * 2021-10-14    hdq         Create  
- * 2024-06-14    WXB         Ϊg_moduleHandle����ע��
+ * 2024-06-14    WXB         为g_moduleHandle添加注释
 ***************************************************************************************************/
 #include "lynx_types.h"
 #include "module_class.h"
@@ -19,11 +19,11 @@
 #include "force_class.h"
 #include "net_class.h"
 
-/* ģ�鹦�ܺ�������ָ��ṹ�� */
+/* 模块功能函数调用指针结构体 */
 moduleMethod_t g_moduleHandle[MODULE_TYPE_MAX] =
 {
  /*
-  *  ģ������    ��ʼ���ص�����     ���ջص�����    ���ͻص�����    ��ȡ����ͨ����ַ    ��ȡ����ͨ����ַ    ��ȡϵͳ�����ص�����     ���չ��ӻص�����    ���͹��ӻص�����
+  *  模块类型    初始化回调函数     接收回调函数    发送回调函数    获取接收通道地址    获取发送通道地址    获取系统变量回调函数     接收勾子回调函数    发送勾子回调函数
   */
     [MPU_TYPE] = {mpuInit, mpuRxHandle, mpuTxHandle, NULL, NULL, infoGetMpuSysVar, mpuRxHook},
     [AI_TYPE] =  {ioMemInit, aiRxHandle, ioTxHandle, aiGetRxChAddr, NULL, infoGetIoSys},

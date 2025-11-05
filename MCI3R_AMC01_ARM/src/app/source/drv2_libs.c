@@ -1,6 +1,6 @@
 /***************************************************************************************************
  * Filename: drv2_libs.c
- * Purpose:  ³£ÓÃ¹¦ÄÜÄ£¿é¿â
+ * Purpose:  å¸¸ç”¨åŠŸèƒ½æ¨¡å—åº“
  * Date:         Author      Modified 
  * 2021-10-16    hdq         Create  
 ***************************************************************************************************/
@@ -12,11 +12,11 @@
 /****************************************************************************************************
 * Identifier:   SCOD-AMC01-058 (Trace to: SLD-AMC01-058)
 * Function:     drv2CrcCal
-* Description:  ¼ÆËãCRC
-* Input:        pSrc ´ý¼ÆËãµÄÔ´Êý¾Ý
-*               len  ´ý¼ÆËãÊý¾Ý³¤¶È
+* Description:  è®¡ç®—CRC
+* Input:        pSrc å¾…è®¡ç®—çš„æºæ•°æ®
+*               len  å¾…è®¡ç®—æ•°æ®é•¿åº¦
 * Output:       none
-* Return:       u64Signature ¼ÆËã³öµÄCRCÖµ
+* Return:       u64Signature è®¡ç®—å‡ºçš„CRCå€¼
 * Others:
 * Log:          Date          Author    Modified
 *               2017/08/15
@@ -38,7 +38,7 @@ uint64_t drv2CrcCal(const void *pSrc, uint32_t len)
     sCrcParams.block_preload = 0U; /* All counters are disabled in Full CPU mode */
     crcSetConfig(crcREG1, &sCrcParams);
 
-    /* ÉèÖÃÖÖ×Ó */
+    /* è®¾ç½®ç§å­ */
     crcREG1->CTRL2 &=0xFFFFFFFCU;
     crcREG1->PSA_SIGREGL1 = 0xFFFFFFFFU;
     crcREG1->PSA_SIGREGH1 = 0xFFFFFFFFU;

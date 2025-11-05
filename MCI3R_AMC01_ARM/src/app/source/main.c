@@ -1,8 +1,8 @@
 /****************************************************************************************************
 *FILENAME:     main.c
-*PURPOSE:      Ö÷º¯Êı
+*PURPOSE:      ä¸»å‡½æ•°
 *DATE          AUTHOR          CHANGE
-*2017.08.14    ºúµÂÈ«          ´´½¨ÎÄ¼ş
+*2017.08.14    èƒ¡å¾·å…¨          åˆ›å»ºæ–‡ä»¶
 ****************************************************************************************************/
 #include "lynx_types.h"
 #include "bsp.h"
@@ -21,7 +21,7 @@
 /*********************************************************************
 * Identifier:   SCOD-AMC01-241 (Trace to: SLD-AMC01-241)
 * Function:     main
-* Description:  Ö÷³ÌĞòÈë¿Ú
+* Description:  ä¸»ç¨‹åºå…¥å£
 * Input:        none
 * Output:       none
 * Return:       0
@@ -34,18 +34,18 @@ int main(void)
 {
     uint16_t value = 0U;
 
-    bspInit();                    /* ³õÊ¼»¯ËùÓĞ    */
+    bspInit();                    /* åˆå§‹åŒ–æ‰€æœ‰    */
 
     drv2LcdStrDisp((const int8_t *)"DIAG");
     swUserModeInit();
-    com1ReportArmState(ARM_OK);   /* ¸ÃÓï¾ä²»ÄÜÔÙÌáÇ° */
+    com1ReportArmState(ARM_OK);   /* è¯¥è¯­å¥ä¸èƒ½å†æå‰ */
     
-    diagHardwareInit();           /* ÉÏµç³õÊ¼»¯ Õï¶Ï */
+    diagHardwareInit();           /* ä¸Šç”µåˆå§‹åŒ– è¯Šæ–­ */
     tmDelayms(500U);
     drv2LcdStrDisp((const int8_t *)"WAIT");
-    envInit();                    /* ÓÃ»§Ëã·¨»·¾³³õÊ¼»¯ */
+    envInit();                    /* ç”¨æˆ·ç®—æ³•ç¯å¢ƒåˆå§‹åŒ– */
 
-    value = cfgMpuPeriod();       /* ×ª»¯MSµ½US */
+    value = cfgMpuPeriod();       /* è½¬åŒ–MSåˆ°US */
     if((value < 15U)||(value > 200U))
     {
         errStopHandleInit((uint32_t)PERIOD_TIME_ERR);
@@ -53,8 +53,8 @@ int main(void)
     tmInit((uint32_t)value * 1000U);
     createAllTask();
 
-    com1EnableFpga(ENABLA_FPGA);  /* Ê¹ÄÜFPGA ¶ÔARM¶ªÊ§¼ì²â */
-    wdStart(WD_1,(uint16_t)(value * 3U)); /* Æô¶¯¿´ÃÅ¹· */
+    com1EnableFpga(ENABLA_FPGA);  /* ä½¿èƒ½FPGA å¯¹ARMä¸¢å¤±æ£€æµ‹ */
+    wdStart(WD_1,(uint16_t)(value * 3U)); /* å¯åŠ¨çœ‹é—¨ç‹— */
 
     tmStartSchedule();/* MPU cycle schedule,never exit! */
 

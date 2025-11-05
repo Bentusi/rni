@@ -1,26 +1,26 @@
 /**************************************************************************************************
 *Filename:     cfg_class.c
-*Purpose:      °å¿¨ÅäÖÃĞÅÏ¢»òÓ²¼şĞÅÏ¢Ïà¹ØµÄ½Ó¿Úº¯Êı
+*Purpose:      æ¿å¡é…ç½®ä¿¡æ¯æˆ–ç¡¬ä»¶ä¿¡æ¯ç›¸å…³çš„æ¥å£å‡½æ•°
 *Log:          Date          Author    Modified
 *              2021/08/31    hdq       create
 **************************************************************************************************/
 #include "cfg_class.h"
 
-/* Æ½Ì¨ÅäÖÃ¶¨Òå */
+/* å¹³å°é…ç½®å®šä¹‰ */
 static uint8_t *s_pDevCfgHead = NULL;
 
 /**************************************************************************************************
 * Identifier:   SCOD-AMC01-029 (Trace to: SLD-AMC01-029)
 * Function:     cfgCardTypeOnSlot
-* Description:  »ñÈ¡¶ÔÓ¦²ÛÎ»ÅäÖÃµÄ°å¿¨ÀàĞÍ
-* Input:        slot  ²ÛÎ»ºÅ
+* Description:  è·å–å¯¹åº”æ§½ä½é…ç½®çš„æ¿å¡ç±»å‹
+* Input:        slot  æ§½ä½å·
 * Output:       none
-* Return:       value °å¿¨ÀàĞÍ
+* Return:       value æ¿å¡ç±»å‹
 *               
 * Others:
 * Log:          Date          Author    Modified
 *               2017/08/14    hdq       create
-*               2021/08/29    hdq       ĞŞ¸Ä·µ»ØÊı¾İÀàĞÍ
+*               2021/08/29    hdq       ä¿®æ”¹è¿”å›æ•°æ®ç±»å‹
 **************************************************************************************************/
 uint32_t cfgCardTypeOnSlot(int32_t slot)
 {
@@ -39,11 +39,11 @@ uint32_t cfgCardTypeOnSlot(int32_t slot)
 /****************************************************************************************************
 * Identifier:   SCOD-AMC01-030 (Trace to: SLD-AMC01-030)
 * Function:     cfgNetPortRxCfgAddr
-* Description:  »ñÈ¡Í¨ĞÅ¿¨II»òIII ½ÓÊÕ¶Ë¿ÚĞÅÏ¢
-* Input:        slot  ²ÛÎ»ºÅ
-*               port  ¶Ë¿ÚºÅ
+* Description:  è·å–é€šä¿¡å¡IIæˆ–III æ¥æ”¶ç«¯å£ä¿¡æ¯
+* Input:        slot  æ§½ä½å·
+*               port  ç«¯å£å·
 * Output:       none
-* Return:       ¶Ë¿ÚĞÅÏ¢µØÖ·
+* Return:       ç«¯å£ä¿¡æ¯åœ°å€
 *               
 * Others:
 * Log:          Date          Author    Modified
@@ -66,11 +66,11 @@ const comPortCfg_t *cfgNetPortRxCfgAddr(int32_t slot, int32_t port)
 /****************************************************************************************************
 * Identifier:   SCOD-AMC01-031 (Trace to: SLD-AMC01-031)
 * Function:     cfgNetPortTxCfgAddr
-* Description:  »ñÈ¡Í¨ĞÅ¿¨II»òIII ·¢ËÍ¶Ë¿ÚĞÅÏ¢
-* Input:        slot  ²ÛÎ»ºÅ 
-*               port  ¶Ë¿ÚºÅ
+* Description:  è·å–é€šä¿¡å¡IIæˆ–III å‘é€ç«¯å£ä¿¡æ¯
+* Input:        slot  æ§½ä½å· 
+*               port  ç«¯å£å·
 * Output:       none
-* Return:       ¶Ë¿ÚĞÅÏ¢µØÖ·
+* Return:       ç«¯å£ä¿¡æ¯åœ°å€
 *               
 * Others:
 * Log:          Date          Author    Modified
@@ -93,10 +93,10 @@ const comPortCfg_t *cfgNetPortTxCfgAddr(int32_t slot,int32_t port)
 /****************************************************************************************************
 * Identifier:   SCOD-AMC01-032 (Trace to: SLD-AMC01-032)
 * Function:     cfgSlotToId
-* Description:  ¸ù¾İ²ÛÎ»ºÅ»ñÈ¡°å¿¨ID
-* Input:        slot  ²ÛÎ»ºÅ
+* Description:  æ ¹æ®æ§½ä½å·è·å–æ¿å¡ID
+* Input:        slot  æ§½ä½å·
 * Output:       none
-* Return:       idÖµ
+* Return:       idå€¼
 *
 * Others:
 * Log:          Date          Author    Modified
@@ -108,7 +108,7 @@ uint32_t cfgSlotToId(int32_t slot)
     uint32_t value = 0u;
     LYNX_ASSERT(slot < LYNX_SLOT_MAX);
 
-    /* slot ×ª»¯Îª»úÏä ºÅ ²ÛºÅ */
+    /* slot è½¬åŒ–ä¸ºæœºç®± å· æ§½å· */
     cfg = cfgGetBaseAddr(slot);
     if(NULL != cfg)
     {
@@ -121,10 +121,10 @@ uint32_t cfgSlotToId(int32_t slot)
 /****************************************************************************************************
 * Identifier:   SCOD-AMC01-033 (Trace to: SLD-AMC01-033)
 * Function:     cfgGetCardEnableCh
-* Description:  »ñÈ¡°å¿¨Í¨µÀÊ¹ÄÜĞÅÏ¢
-* Input:        slot  ²ÛÎ»ºÅ
+* Description:  è·å–æ¿å¡é€šé“ä½¿èƒ½ä¿¡æ¯
+* Input:        slot  æ§½ä½å·
 * Output:       none
-* Return:       ret  Í¨µÀÊ¹ÄÜĞÅÏ¢
+* Return:       ret  é€šé“ä½¿èƒ½ä¿¡æ¯
 *               
 * Others:
 * Log:          Date          Author    Modified
@@ -147,10 +147,10 @@ uint32_t cfgGetCardEnableCh(int32_t slot)
 /****************************************************************************************************
 * Identifier:   SCOD-AMC01-034 (Trace to: SLD-AMC01-034)
 * Function:     cfgGetBaseAddr
-* Description:  »ñÈ¡»ù´¡ÅäÖÃĞÅÏ¢
-* Input:        slot  ²ÛÎ»ºÅ
+* Description:  è·å–åŸºç¡€é…ç½®ä¿¡æ¯
+* Input:        slot  æ§½ä½å·
 * Output:       none
-* Return:       »ù±¾ÅäÖÃÖ¸Õë
+* Return:       åŸºæœ¬é…ç½®æŒ‡é’ˆ
 *               
 * Others:
 * Log:          Date          Author    Modified
@@ -168,10 +168,10 @@ const baseCfg_t *cfgGetBaseAddr(int32_t slot)
 /**************************************************************************************************
 * Identifier:   SCOD-AMC01-035 (Trace to: SLD-AMC01-035)
 * Function:     lxGetCfgHead
-* Description:  »ñÈ¡Éè±¸ÅäÖÃĞÅÏ¢µØÖ·
+* Description:  è·å–è®¾å¤‡é…ç½®ä¿¡æ¯åœ°å€
 * Input:        noen
 * Output:       none
-* Return:       Éè±¸ÅäÖÃĞÅÏ¢Í·Ö¸Õë
+* Return:       è®¾å¤‡é…ç½®ä¿¡æ¯å¤´æŒ‡é’ˆ
 *
 * Others:
 * Log:          Date          Author    Modified
@@ -185,7 +185,7 @@ fileHead_t *lxGetCfgHead(void)
 /**************************************************************************************************
  * Identifier:   SCOD-AMC01-036 (Trace to: SLD-AMC01-036)
  * Function:     lxSetCfgHead
- * Description:  ÉèÖÃÅäÖÃĞÅÏ¢Í·Ö¸Õë
+ * Description:  è®¾ç½®é…ç½®ä¿¡æ¯å¤´æŒ‡é’ˆ
  * Input:        pHead: the pointer of the device configure file.
  * Output:       None
  * Return:       None
@@ -200,10 +200,10 @@ void lxSetCfgHead(void *pHead)
 /**************************************************************************************************
 * Identifier:   SCOD-AMC01-037 (Trace to: SLD-AMC01-037)
 * Function:     lxGetCfg
-* Description:  »ñÈ¡Éè±¸ÅäÖÃµØÖ·
+* Description:  è·å–è®¾å¤‡é…ç½®åœ°å€
 * Input:        none
 * Output:       none
-* Return:       Éè±¸ÅäÖÃµØÖ·
+* Return:       è®¾å¤‡é…ç½®åœ°å€
 * Others:
 * Log:          Date          Author    Modified
 *               2020/09/01    hdq       create

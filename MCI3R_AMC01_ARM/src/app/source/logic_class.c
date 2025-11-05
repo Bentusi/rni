@@ -1,6 +1,6 @@
 /**************************************************************************************************
 *Filename:     logic_class.c
-*Purpose:      Ëã·¨Ïà¹Ø½Ó¿Ú
+*Purpose:      ç®—æ³•ç›¸å…³æ¥å£
 *Log:          Date          Author    Modified
 *              2021/08/31    hdq       create
 **************************************************************************************************/
@@ -10,18 +10,18 @@
 /* user logiec variable */
 static void *s_pImageHead = NULL;
 
-/* Ëã·¨Ê¹ÓÃµÄÊä³ö»º³åÇø */
+/* ç®—æ³•ä½¿ç”¨çš„è¾“å‡ºç¼“å†²åŒº */
 static void *s_pImageOutput = NULL;
-/* Ëã·¨Ê¹ÓÃµÄÊäÈë»º³åÇø */
+/* ç®—æ³•ä½¿ç”¨çš„è¾“å…¥ç¼“å†²åŒº */
 static void *s_pImageInput = NULL;
 
 /**************************************************************************************************
 * Identifier:   SCOD-AMC01-320 (Trace to: SLD-AMC01-320)
 * Function:     logicGetUsrInAddr
-* Description:  »ñÈ¡Ëã·¨ÊäÈëÇøµØÖ·
+* Description:  è·å–ç®—æ³•è¾“å…¥åŒºåœ°å€
 * Input:        none
 * Output:       none
-* Return:       Ëã·¨ÊäÈëÇøµØÖ·
+* Return:       ç®—æ³•è¾“å…¥åŒºåœ°å€
 * Others:
 * Log:          Date          Author    Modified
 *               2020/09/01    hdq       create
@@ -34,10 +34,10 @@ void *logicGetUsrInAddr(void)
 /**************************************************************************************************
 * Identifier:   SCOD-AMC01-321 (Trace to: SLD-AMC01-321)
 * Function:     logicGetUsrOutAddr
-* Description:  »ñÈ¡Ëã·¨Êä³öÇøµØÖ·
+* Description:  è·å–ç®—æ³•è¾“å‡ºåŒºåœ°å€
 * Input:        none
 * Output:       none
-* Return:       Ëã·¨Êä³öÇøµØÖ·
+* Return:       ç®—æ³•è¾“å‡ºåŒºåœ°å€
 * Others:
 * Log:          Date          Author    Modified
 *               2020/09/01    hdq       create
@@ -50,8 +50,8 @@ void *logicGetUsrOutAddr(void)
 /**************************************************************************************************
 * Identifier:   SCOD-AMC01-322 (Trace to: SLD-AMC01-322)
 * Function:     lxSetUsrInAddr
-* Description:  ÉèÖÃËã·¨ÊäÈëÇøµØÖ·
-* Input:        pAddr Ëã·¨ÊäÈëÇøµØÖ·
+* Description:  è®¾ç½®ç®—æ³•è¾“å…¥åŒºåœ°å€
+* Input:        pAddr ç®—æ³•è¾“å…¥åŒºåœ°å€
 * Output:       none
 * Return:       none
 * Others:
@@ -66,8 +66,8 @@ void lxSetUsrInAddr(void *pAddr)
 /**************************************************************************************************
 * Identifier:   SCOD-AMC01-323 (Trace to: SLD-AMC01-323)
 * Function:     lxSetUsrOutAddr
-* Description:  ÉèÖÃËã·¨Êä³öÇøµØÖ·
-* Input:        pAddr Ëã·¨Êä³öÇøµØÖ·
+* Description:  è®¾ç½®ç®—æ³•è¾“å‡ºåŒºåœ°å€
+* Input:        pAddr ç®—æ³•è¾“å‡ºåŒºåœ°å€
 * Output:       none
 * Return:       none
 * Others:
@@ -82,7 +82,7 @@ void lxSetUsrOutAddr(void *pAddr)
 /**************************************************************************************************
  * Identifier:   SCOD-AMC01-324 (Trace to: SLD-AMC01-324)
  * Function:     lxSetImageHead
- * Description:  ÉèÖÃËã·¨ÊôĞÔĞÅÏ¢Ö¸Õë
+ * Description:  è®¾ç½®ç®—æ³•å±æ€§ä¿¡æ¯æŒ‡é’ˆ
  * Input:        pAddr pointer of the image file.
  * Output:       None
  * Return:       None
@@ -97,10 +97,10 @@ void lxSetImageHead(void *pAddr)
 /**************************************************************************************************
 * Identifier:   SCOD-AMC01-325 (Trace to: SLD-AMC01-325)
 * Function:     lxGetImageHead
-* Description:  »ñÈ¡Ëã·¨ÊôĞÔĞÅÏ¢µØÖ·
+* Description:  è·å–ç®—æ³•å±æ€§ä¿¡æ¯åœ°å€
 * Input:        none
 * Output:       none
-* Return:       Ëã·¨ÊôĞÔĞÅÏ¢µØÖ·
+* Return:       ç®—æ³•å±æ€§ä¿¡æ¯åœ°å€
 * Others:
 * Log:          Date          Author    Modified
 *               2020/09/01    hdq       create

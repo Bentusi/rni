@@ -1,8 +1,8 @@
 /****************************************************************************************************
 *FILENAME:     tm_private.h
-*PURPOSE:      ÈÎÎñ¹ÜÀíË½ÓĞÊı¾İ
+*PURPOSE:      ä»»åŠ¡ç®¡ç†ç§æœ‰æ•°æ®
 *DATE          AUTHOR          CHANGE
-*2017.08.09    ºúµÂÈ«             ´´½¨ÎÄ¼ş
+*2017.08.09    èƒ¡å¾·å…¨             åˆ›å»ºæ–‡ä»¶
 ****************************************************************************************************/
 #ifndef TM_PRIVATE_H
 #define TM_PRIVATE_H
@@ -37,19 +37,19 @@ typedef enum
 
 typedef struct
 {
-    uint32_t     maxTick;   /*ÈÎÎñ¿ÉÓÃÔÊĞíµÄ×î´óÊ±¼ä*/
-    fnInit_t     initTask;  /*ÈÎÎñ³õÊ¼»¯º¯ÊıÖ¸Õë */
-    fnCycle_t    cycleTask; /*ÈÎÎñÖÜÆÚÔËĞĞº¯ÊıÖ¸Õë*/
-    int32_t      priority;  /*ÈÎÎñµÄÓÅÏÈ¼¶£¬ÖµÔ½Ğ¡ÓÅÏÈ¼¶Ô½¸ß*/
-    TaskState_t  state;    /*ÈÎÎñµÄ×´Ì¬*/
-    int8_t       method;   /*ÈÎÎñ¿ÕÏĞÊ±¼ä´¦Àí·½Ê½ */
+    uint32_t     maxTick;   /*ä»»åŠ¡å¯ç”¨å…è®¸çš„æœ€å¤§æ—¶é—´*/
+    fnInit_t     initTask;  /*ä»»åŠ¡åˆå§‹åŒ–å‡½æ•°æŒ‡é’ˆ */
+    fnCycle_t    cycleTask; /*ä»»åŠ¡å‘¨æœŸè¿è¡Œå‡½æ•°æŒ‡é’ˆ*/
+    int32_t      priority;  /*ä»»åŠ¡çš„ä¼˜å…ˆçº§ï¼Œå€¼è¶Šå°ä¼˜å…ˆçº§è¶Šé«˜*/
+    TaskState_t  state;    /*ä»»åŠ¡çš„çŠ¶æ€*/
+    int8_t       method;   /*ä»»åŠ¡ç©ºé—²æ—¶é—´å¤„ç†æ–¹å¼ */
 } Tcb_t;
 
 typedef struct 
 {
-    uint32_t    usedTick;       /*Êµ¼ÊÊ¹ÓÃÊ±¼ä*/
-    uint32_t    timeoutTick;    /*³¬Ê±Ê±¼ä*/
-    int32_t     taskRet;        /*ÈÎÎñ·µ»ØÖµ*/
+    uint32_t    usedTick;       /*å®é™…ä½¿ç”¨æ—¶é—´*/
+    uint32_t    timeoutTick;    /*è¶…æ—¶æ—¶é—´*/
+    int32_t     taskRet;        /*ä»»åŠ¡è¿”å›å€¼*/
 }TcbInfo_t;
 
 typedef struct
@@ -80,7 +80,7 @@ extern uint32_t g_cycleStartTick;
 extern uint32_t g_maxCycleTick;
 #define tmGetMaxCycleTick()          (g_maxCycleTick)
 
-/*Íâ²¿º¯Êı½Ó¿Ú*/
+/*å¤–éƒ¨å‡½æ•°æ¥å£*/
 extern uint32_t tmGetCurTick(void);
 extern void tmTimerStart(uint32_t flag);
 

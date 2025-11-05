@@ -1,6 +1,6 @@
 /**************************************************************************************************
 *Filename:     module_npi01.h
-*Purpose:      ¹«ÓÃÄ£¿énpi01·½·¨¶¨Òå
+*Purpose:      å…¬ç”¨æ¨¡å—npi01æ–¹æ³•å®šä¹‰
 *Log:          Date          Author    Modified
 *              2021/9/21     hdq       create
 **************************************************************************************************/
@@ -12,61 +12,61 @@
 #define NPI01_RX_CH_MAX               (9)
 #define NPI01_TX_CH_MAX               (10)
 
-#define NPI01_RX_FRAME_RSV_SIZE       (58U)  /* PCAÂö³å²É¼¯Ä£¿é */
+#define NPI01_RX_FRAME_RSV_SIZE       (58U)  /* PCAè„‰å†²é‡‡é›†æ¨¡å— */
 #define NPI01_TX_FRAME_RSV_SIZE       (52U)
 /**************************************************************************************************
- * ËùÓĞÄ£¿éÅäÖÃĞÅÏ¢
+ * æ‰€æœ‰æ¨¡å—é…ç½®ä¿¡æ¯
  *************************************************************************************************/
 
-/* NPI01Ë½ÓĞÅäÖÃ */
+/* NPI01ç§æœ‰é…ç½® */
 typedef struct
 {
-    uint32_t  t1;           /* µÍ¼ÆÊıÂÊ¸üĞÂÊ±¼ät1 */
-    float32_t defValue[1];  /* ¸ßÑ¹Ä¬ÈÏÊä³öÖµ */
-    uint8_t   action[1];    /* ¹ÊÕÏ°²È«ĞĞÎª */
+    uint32_t  t1;           /* ä½è®¡æ•°ç‡æ›´æ–°æ—¶é—´t1 */
+    float32_t defValue[1];  /* é«˜å‹é»˜è®¤è¾“å‡ºå€¼ */
+    uint8_t   action[1];    /* æ•…éšœå®‰å…¨è¡Œä¸º */
 }npi01PrivCfg_t;
 
 /**************************************************************************************************
- * Í¨ĞÅÊı¾İÖ¡¶¨Òå
+ * é€šä¿¡æ•°æ®å¸§å®šä¹‰
  *************************************************************************************************/
 
-/* Âö³å²É¼¯Ä£¿é£¨NPI01£©ÉÏĞĞÊı¾İÖ¡½á¹¹ */
+/* è„‰å†²é‡‡é›†æ¨¡å—ï¼ˆNPI01ï¼‰ä¸Šè¡Œæ•°æ®å¸§ç»“æ„ */
 typedef struct
 {
-    uint32_t info;                          /* Âö³å²É¼¯Ä£¿é×ÔÕï¶Ï×´Ì¬·´À¡£¬ ¶ÔÓÚ¹¤³ÌÊ¦Õ¾ ±íÊ¾°å¿¨ID 4B */
-    binary6B_t hiPreLoseFeedback;           /* ¸ßÑ¹ÇĞ³ı·´À¡ĞÅºÅ6B */
-    binary6B_t channelSwitchRec;            /* ²âÊÔÍ¨µÀÇĞ»»×´Ì¬·´À¡6B */
-    binary6B_t flatCurveDrawEn;             /* ÆºÇúÏß»æÖÆÊ¹ÄÜ6B */
-    analog6BI_t lowCountRateUpdate_T1;      /* µÍ¼ÆÊıÂÊ¸üĞÂÊ±¼ät16B */
-    analog6BF_t countRate;                  /* Âö³å¼ÆÊıÂÊ6B */
-    analog6BF_t hiPreOutputRec;             /* ¸ßÑ¹Êä³ö»Ø²É6B */
-    analog6BF_t thresholdOutputRec;         /* Õç±ğ·§Êä³ö»Ø²É6B */
-    binary6B_t ttlSignalLookRec;            /* TTLĞÅºÅ±ÕËø·´À¡ */
-    analog6BF_t countRateRec;               /* ¼ÆÊıÂÊÂË²¨²ÎÊı·´À¡Öµ6B */
-    uint8_t rsv[NPI01_RX_FRAME_RSV_SIZE];   /* ±£Áô×Ö¶Î 58B */
-    uint8_t rsv1[2];                        /* fpga crc16 Ê¹ÓÃ  2B */
-    uint16_t comState;                      /* fpga Í¨ĞÅ×´Ì¬Ê¹ÓÃ2B */
-    uint64_t crc;                           /* fpga Ğ£Ñé 8B */
+    uint32_t info;                          /* è„‰å†²é‡‡é›†æ¨¡å—è‡ªè¯Šæ–­çŠ¶æ€åé¦ˆï¼Œ å¯¹äºå·¥ç¨‹å¸ˆç«™ è¡¨ç¤ºæ¿å¡ID 4B */
+    binary6B_t hiPreLoseFeedback;           /* é«˜å‹åˆ‡é™¤åé¦ˆä¿¡å·6B */
+    binary6B_t channelSwitchRec;            /* æµ‹è¯•é€šé“åˆ‡æ¢çŠ¶æ€åé¦ˆ6B */
+    binary6B_t flatCurveDrawEn;             /* åªæ›²çº¿ç»˜åˆ¶ä½¿èƒ½6B */
+    analog6BI_t lowCountRateUpdate_T1;      /* ä½è®¡æ•°ç‡æ›´æ–°æ—¶é—´t16B */
+    analog6BF_t countRate;                  /* è„‰å†²è®¡æ•°ç‡6B */
+    analog6BF_t hiPreOutputRec;             /* é«˜å‹è¾“å‡ºå›é‡‡6B */
+    analog6BF_t thresholdOutputRec;         /* ç”„åˆ«é˜€è¾“å‡ºå›é‡‡6B */
+    binary6B_t ttlSignalLookRec;            /* TTLä¿¡å·é—­é”åé¦ˆ */
+    analog6BF_t countRateRec;               /* è®¡æ•°ç‡æ»¤æ³¢å‚æ•°åé¦ˆå€¼6B */
+    uint8_t rsv[NPI01_RX_FRAME_RSV_SIZE];   /* ä¿ç•™å­—æ®µ 58B */
+    uint8_t rsv1[2];                        /* fpga crc16 ä½¿ç”¨  2B */
+    uint16_t comState;                      /* fpga é€šä¿¡çŠ¶æ€ä½¿ç”¨2B */
+    uint64_t crc;                           /* fpga æ ¡éªŒ 8B */
 }__attribute__((packed)) npi01FrameRx_t;
 
-/* Âö³å²É¼¯Ä£¿é£¨NPI01£©ÏÂĞĞÊı¾İÖ¡½á¹¹ */
+/* è„‰å†²é‡‡é›†æ¨¡å—ï¼ˆNPI01ï¼‰ä¸‹è¡Œæ•°æ®å¸§ç»“æ„ */
 typedef struct
 {
-    uint32_t info;                           /* 4¶ÔÓÚ¹¤³ÌÊ¦Õ¾ ±íÊ¾°å¿¨ID */
-    binary6B_t hiPreLose;                    /* ¸ßÑ¹ÇĞ³ıĞÅºÅ */
-    binary6B_t hiPreLoseAlarm;               /* ¸ßÑ¹Ê§Ñ¹±¨¾¯ */
-    binary6B_t hiPreOverAlarm;               /* ¸ßÑ¹¹ıÑ¹±¨¾¯ */
-    binary6B_t thresholdLowAlarm;            /* Õç±ğãĞ¹ıµÍ±¨¾¯ */
-    binary6B_t channelSwitchEn;              /* ²âÊÔÍ¨µÀÇĞ»»Ê¹ÄÜ */
-    binary6B_t flatCurveDrawEn;              /* ÆºÇúÏß»æÖÆÊ¹ÄÜ */
-    analog6BF_t countRateValue;              /* ¼ÆÊıÂÊÂË²¨²ÎÊıÉè¶¨Öµ£¬±£Áô */
-    analog6BF_t hiPreSetVal;                 /* ¸ßÑ¹Éè¶¨Öµ */
-    analog6BF_t thresholdSetVal;             /* Õç±ğãĞÉè¶¨Öµ */
-    binary6B_t ttlSignalLook;                /* TTLĞÅºÅ±ÕËø */
-    uint8_t rsv[NPI01_TX_FRAME_RSV_SIZE];    /* ±£Áô×Ö¶Î */
-    uint8_t rsv1[2];                         /* fpga crc16 Ê¹ÓÃ2B */
-    uint16_t comState;                       /* fpga Í¨ĞÅ×´Ì¬Ê¹ÓÃ2B */
-    uint64_t crc;                            /* fpga Ğ£Ñé 8B */
+    uint32_t info;                           /* 4å¯¹äºå·¥ç¨‹å¸ˆç«™ è¡¨ç¤ºæ¿å¡ID */
+    binary6B_t hiPreLose;                    /* é«˜å‹åˆ‡é™¤ä¿¡å· */
+    binary6B_t hiPreLoseAlarm;               /* é«˜å‹å¤±å‹æŠ¥è­¦ */
+    binary6B_t hiPreOverAlarm;               /* é«˜å‹è¿‡å‹æŠ¥è­¦ */
+    binary6B_t thresholdLowAlarm;            /* ç”„åˆ«é˜ˆè¿‡ä½æŠ¥è­¦ */
+    binary6B_t channelSwitchEn;              /* æµ‹è¯•é€šé“åˆ‡æ¢ä½¿èƒ½ */
+    binary6B_t flatCurveDrawEn;              /* åªæ›²çº¿ç»˜åˆ¶ä½¿èƒ½ */
+    analog6BF_t countRateValue;              /* è®¡æ•°ç‡æ»¤æ³¢å‚æ•°è®¾å®šå€¼ï¼Œä¿ç•™ */
+    analog6BF_t hiPreSetVal;                 /* é«˜å‹è®¾å®šå€¼ */
+    analog6BF_t thresholdSetVal;             /* ç”„åˆ«é˜ˆè®¾å®šå€¼ */
+    binary6B_t ttlSignalLook;                /* TTLä¿¡å·é—­é” */
+    uint8_t rsv[NPI01_TX_FRAME_RSV_SIZE];    /* ä¿ç•™å­—æ®µ */
+    uint8_t rsv1[2];                         /* fpga crc16 ä½¿ç”¨2B */
+    uint16_t comState;                       /* fpga é€šä¿¡çŠ¶æ€ä½¿ç”¨2B */
+    uint64_t crc;                            /* fpga æ ¡éªŒ 8B */
 }__attribute__((packed)) npi01FrameTx_t;
 
 extern int32_t npi01RxHandle(int32_t slot, int32_t para, void *pBuf);

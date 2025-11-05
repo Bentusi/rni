@@ -1,6 +1,6 @@
 /**************************************************************************************************
 *Filename:     info_class.c
-*Purpose:      Æ½Ì¨×´Ì¬¹ÜÀíÄ£¿é
+*Purpose:      å¹³å°çŠ¶æ€ç®¡ç†æ¨¡å—
 *Log:          Date          Author    Modified
 *              2021/9/20     hdq       create
 **************************************************************************************************/
@@ -24,8 +24,8 @@ static void infoUpdateSlot(int32_t slot);
 /****************************************************************************************************
 * Identifier:   SCOD-AMC01-041 (Trace to: SLD-AMC01-041)
 * Function:     infoSetSysState
-* Description:  ÉèÖÃµ±Ç°ÕæÊµµÄÄ£Ê½
-* Input:        s  µ±Ç°Ä£Ê½
+* Description:  è®¾ç½®å½“å‰çœŸå®çš„æ¨¡å¼
+* Input:        s  å½“å‰æ¨¡å¼
 * Output:       none
 * Return:       none
 *               
@@ -44,8 +44,8 @@ void infoSetSysState(int32_t s)
 /****************************************************************************************************
 * Identifier:   SCOD-AMC01-013 (Trace to: SLD-AMC01-013)
 * Function:     infoSetOutputState
-* Description:  ÉèÖÃ±ÕËø×´Ì¬
-* Input:        s  µ±Ç°±ÕËø¿ª¹Ø×´Ì¬
+* Description:  è®¾ç½®é—­é”çŠ¶æ€
+* Input:        s  å½“å‰é—­é”å¼€å…³çŠ¶æ€
 * Output:       none
 * Return:       none
 *
@@ -64,8 +64,8 @@ void infoSetOutputState(uint8_t s)
 /****************************************************************************************************
 * Identifier:   SCOD-AMC01-068 (Trace to: SLD-AMC01-068)
 * Function:     infoUpdateSlot
-* Description:   ¸üĞÂÖ÷¿ØÄ£¿é×´Ì¬ĞÅÏ¢
-* Input:        slot  ²ÛÎ»ºÅ
+* Description:   æ›´æ–°ä¸»æ§æ¨¡å—çŠ¶æ€ä¿¡æ¯
+* Input:        slot  æ§½ä½å·
 * Output:       none
 * Return:       none
 *               
@@ -93,13 +93,13 @@ static void infoUpdateSlot(int32_t slot)
         infoSetsoft(slot,1U);
     }
 
-    /* comInfo ÒÑÔÚ½ÓÊÕÈÎÎñÖĞ¸üĞÂ */
+    /* comInfo å·²åœ¨æ¥æ”¶ä»»åŠ¡ä¸­æ›´æ–° */
 }
 
 /**************************************************************************************************
  * Identifier:   SCOD-AMC01-224 (Trace to: SLD-AMC01-224)
  * Function:     infoClearSlot
- * Description:  ÉèÖÃÈßÓàÖ÷¿ØÄ£¿éÖ¸¶¨×´Ì¬ĞÅÏ¢
+ * Description:  è®¾ç½®å†—ä½™ä¸»æ§æ¨¡å—æŒ‡å®šçŠ¶æ€ä¿¡æ¯
  * Input:        slot  slot number of the module.
  * Output:       None
  * Return:       None
@@ -118,7 +118,7 @@ void infoClearSlot(int32_t slot)
 /****************************************************************************************************
 * Identifier:   SCOD-AMC01-069 (Trace to: SLD-AMC01-069)
 * Function:     infoUpdateMpuStates
-* Description:   ¸üĞÂÏµÍ³×´Ì¬
+* Description:   æ›´æ–°ç³»ç»ŸçŠ¶æ€
 * Input:        none
 * Output:       none
 * Return:       none
@@ -134,7 +134,7 @@ void infoUpdateMpuStates(void)
     mpuPrivInfo_t *pMpuInfo = &infoGetAddr()->moduleInfo[g_localSlot].difInfo.mpuInfo;
     LYNX_ASSERT(NULL != pMpuInfo);
 
-    /*  ¼ÆËãCPUÊ¹ÓÃÂÊ */
+    /*  è®¡ç®—CPUä½¿ç”¨ç‡ */
     temp = tmGetTaskUsedTick(LX_USR_TASK);
     temp = ((temp * 100U) / MPU_USR_LOGIC_MAX_TIME);
     if(temp == 0U )
@@ -177,11 +177,11 @@ void infoUpdateMpuStates(void)
             infoClearPfError(TASK0_TIMEOUT_WARN + i);
         }
     }
-    /* »ñÈ¡ÖÜÆÚÊ¹ÓÃÊ±¼ä */
+    /* è·å–å‘¨æœŸä½¿ç”¨æ—¶é—´ */
     temp = tmGetCurCycleTick();
     pMpuInfo->cycTime = temp;
 
-    /* »ñÈ¡ÖÜÆÚ³¬Ê±Ê±¼ä */
+    /* è·å–å‘¨æœŸè¶…æ—¶æ—¶é—´ */
     temp = tmGetCycleTimeoutTick();
     pMpuInfo->cycTimeT = temp;
     if(temp != 0U)
@@ -195,7 +195,7 @@ void infoUpdateMpuStates(void)
 
     pMpuInfo->cycleCnt = tmGetCycleCnt();
 
-    /* ¸üĞÂÖ÷¿ØÄ£¿é×´Ì¬ */
+    /* æ›´æ–°ä¸»æ§æ¨¡å—çŠ¶æ€ */
     infoUpdateSlot(g_localSlot);
     infoUpdateSlot(1 - g_localSlot);
 }
@@ -203,8 +203,8 @@ void infoUpdateMpuStates(void)
 /****************************************************************************************************
 * Identifier:   SCOD-AMC01-070 (Trace to: SLD-AMC01-070)
 * Function:     infoSetPfError
-* Description:  ¼ÇÂ¼Æ½Ì¨´íÎóĞÅÏ¢
-* Input:        err  ´íÎóĞÅÏ¢
+* Description:  è®°å½•å¹³å°é”™è¯¯ä¿¡æ¯
+* Input:        err  é”™è¯¯ä¿¡æ¯
 * Output:       none
 * Return:       none
 *               
@@ -260,10 +260,10 @@ void infoClearPfError(int32_t err)
 /****************************************************************************************************
 * Identifier:   SCOD-AMC01-066 (Trace to: SLD-AMC01-066)
 * Function:     infoGetPfErrorState
-* Description:  ¸ù¾İ´íÎóÂë·µ»Øµ±Ç°×´Ì¬.
+* Description:  æ ¹æ®é”™è¯¯ç è¿”å›å½“å‰çŠ¶æ€.
 * Input:        err - err code.
 * Output:       none
-* Return:       ret 0 ÎŞ¹ÊÕÏ 1 ÓĞ¹ÊÕÏ
+* Return:       ret 0 æ— æ•…éšœ 1 æœ‰æ•…éšœ
 *               
 * Others:
 * Log:          Date          Author    Modified
@@ -292,8 +292,8 @@ int32_t infoGetPfErrorState(int32_t err)
 /****************************************************************************************************
 * Identifier:   SCOD-AMC01-072 (Trace to: SLD-AMC01-072)
 * Function:     infoSetStError
-* Description:  ÉèÖÃARM×ÔÕï¶Ï¹ÊÕÏĞÅÏ¢
-* Input:        err  ´íÎóĞÅÏ¢
+* Description:  è®¾ç½®ARMè‡ªè¯Šæ–­æ•…éšœä¿¡æ¯
+* Input:        err  é”™è¯¯ä¿¡æ¯
 * Output:       none
 * Return:       none
 *               
@@ -319,8 +319,8 @@ void infoSetStError(int32_t err)
 /****************************************************************************************************
 * Identifier:   SCOD-AMC01-073 (Trace to: SLD-AMC01-073)
 * Function:     infoClearStError
-* Description:  Çå³ıARM×ÔÕï¶Ï¹ÊÕÏĞÅÏ¢
-* Input:        err  ¹ÊÕÏĞòºÅ
+* Description:  æ¸…é™¤ARMè‡ªè¯Šæ–­æ•…éšœä¿¡æ¯
+* Input:        err  æ•…éšœåºå·
 * Output:       none
 * Return:       none
 *               
@@ -347,8 +347,8 @@ void infoClearStError(int32_t err)
 /****************************************************************************************************
 * Identifier:   SCOD-AMC01-074 (Trace to: SLD-AMC01-074)
 * Function:     infoSetHw
-* Description:  ÉèÖÃÄ£¿éÓ²¼ş×´Ì¬ĞÅÏ¢
-* Input:        slot  ²ÛÎ»ºÅ value Ó²¼ş×´Ì¬
+* Description:  è®¾ç½®æ¨¡å—ç¡¬ä»¶çŠ¶æ€ä¿¡æ¯
+* Input:        slot  æ§½ä½å· value ç¡¬ä»¶çŠ¶æ€
 * Output:       none
 * Return:       none
 *               
@@ -367,10 +367,10 @@ void infoSetHw(int32_t slot, uint32_t value)
 /****************************************************************************************************
 * Identifier:   SCOD-AMC01-075 (Trace to: SLD-AMC01-075)
 * Function:     infoSetIoCh
-* Description:  Ä£¿éÍ¨µÀ×´Ì¬ĞÅÏ¢
-* Input:        slot  ²ÛÎ»ºÅ
-*               ch    Í¨µÀºÅ
-*               value ×´Ì¬
+* Description:  æ¨¡å—é€šé“çŠ¶æ€ä¿¡æ¯
+* Input:        slot  æ§½ä½å·
+*               ch    é€šé“å·
+*               value çŠ¶æ€
 * Output:       none
 * Return:       none
 * 
@@ -396,11 +396,11 @@ void infoSetIoCh(int32_t slot, int32_t ch, uint8_t value)
 /****************************************************************************************************
 * Identifier:   SCOD-AMC01-076 (Trace to: SLD-AMC01-076)
 * Function:     infoGetIoCh
-* Description:  »ñÈ¡Ä£¿éÍ¨µÀ×´Ì¬ĞÅÏ¢
-* Input:        slot  ²ÛÎ»ºÅ
-*               ch    Í¨µÀºÅ
+* Description:  è·å–æ¨¡å—é€šé“çŠ¶æ€ä¿¡æ¯
+* Input:        slot  æ§½ä½å·
+*               ch    é€šé“å·
 * Output:       none
-* Return:       value Ä£¿éÍ¨µÀ×´Ì¬ĞÅÏ¢
+* Return:       value æ¨¡å—é€šé“çŠ¶æ€ä¿¡æ¯
 *               
 * Others:
 * Log:          Date          Author    Modified
@@ -421,9 +421,9 @@ uint32_t infoGetIoCh(int32_t slot, int32_t ch)
 /****************************************************************************************************
 * Identifier:   SCOD-AMC01-077 (Trace to: SLD-AMC01-077)
 * Function:     infoSetCom
-* Description:  ¸üĞÂÄ£¿éÍ¨ĞÅ×´Ì¬
-* Input:        slot  ²ÛÎ»ºÅ
-*               value Í¨ĞÅ×´Ì¬
+* Description:  æ›´æ–°æ¨¡å—é€šä¿¡çŠ¶æ€
+* Input:        slot  æ§½ä½å·
+*               value é€šä¿¡çŠ¶æ€
 * Output:       none
 * Return:       none
 *
@@ -440,10 +440,10 @@ void infoSetCom(int32_t slot, uint32_t value)
 /****************************************************************************************************
 * Identifier:   SCOD-AMC01-078 (Trace to: SLD-AMC01-078)
 * Function:     infoGetCom
-* Description:  »ñÈ¡Ä£¿éÍ¨ĞÅ×´Ì¬ĞÅÏ¢
-* Input:        slot  ²ÛÎ»ºÅ
+* Description:  è·å–æ¨¡å—é€šä¿¡çŠ¶æ€ä¿¡æ¯
+* Input:        slot  æ§½ä½å·
 * Output:       none
-* Return:       Í¨ĞÅ×´Ì¬
+* Return:       é€šä¿¡çŠ¶æ€
 *               
 * Others:
 * Log:          Date          Author    Modified
@@ -457,9 +457,9 @@ uint32_t infoGetCom(int32_t slot)
 /**************************************************************************************************
  * Identifier:   SCOD-AMC01-079 (Trace to: SLD-AMC01-079)
  * Function:     infoSetsoft
- * Description:  ÉèÖÃÄ£¿éµÄÔËĞĞ×´Ì¬
- * Input:        slot  ²ÛÎ»ºÅ
- *               value Ä£¿éÔËĞĞ×´Ì¬
+ * Description:  è®¾ç½®æ¨¡å—çš„è¿è¡ŒçŠ¶æ€
+ * Input:        slot  æ§½ä½å·
+ *               value æ¨¡å—è¿è¡ŒçŠ¶æ€
  * Output:       None
  * Return:       None
  * Date:         Author      Modified
@@ -474,10 +474,10 @@ void infoSetsoft(int32_t slot, uint32_t value)
 /**************************************************************************************************
  * Identifier:   SCOD-AMC01-080 (Trace to: SLD-AMC01-080)
  * Function:     infoGetsoft
- * Description:  »ñÈ¡Ä£¿éµÄÔËĞĞ×´Ì¬
- * Input:        slot ²ÛÎ»ºÅ
+ * Description:  è·å–æ¨¡å—çš„è¿è¡ŒçŠ¶æ€
+ * Input:        slot æ§½ä½å·
  * Output:       None
- * Return:       Ä£¿éµÄÔËĞĞ×´Ì¬
+ * Return:       æ¨¡å—çš„è¿è¡ŒçŠ¶æ€
  * Date:         Author      Modified
  * 2021-11-29    hdq         Create
  *************************************************************************************************/
@@ -490,8 +490,8 @@ uint32_t infoGetsoft(int32_t slot)
 /****************************************************************************************************
 * Identifier:   SCOD-AMC01-046 (Trace to: SLD-AMC01-046)
 * Function:     infoSetMpuMS
-* Description:  ÉèÖÃÖ÷´Ó×´Ì¬
-* Input:        value  µ±Ç°×´Ì¬
+* Description:  è®¾ç½®ä¸»ä»çŠ¶æ€
+* Input:        value  å½“å‰çŠ¶æ€
 * Output:       none
 * Return:       none
 *               
@@ -520,10 +520,10 @@ void infoSetMpuMS(uint8_t value)
 /****************************************************************************************************
 * Identifier:   SCOD-AMC01-047 (Trace to: SLD-AMC01-047)
 * Function:     infoGetMpuMS
-* Description:  »ñÈ¡Ö÷´Ó×´Ì¬
+* Description:  è·å–ä¸»ä»çŠ¶æ€
 * Input:        none
 * Output:       none
-* Return:       ·µ»Øµ±Ç°Ö÷´Ó×´Ì¬
+* Return:       è¿”å›å½“å‰ä¸»ä»çŠ¶æ€
 *
 * Others:
 * Log:          Date          Author    Modified
@@ -537,7 +537,7 @@ uint32_t infoGetMpuMS(void)
 /****************************************************************************************************
 * Identifier:   SCOD-AMC01-314 (Trace to: SLD-AMC01-314)
 * Function:     infoCurCpuError
-* Description:  »ñÈ¡CPU×´Ì¬
+* Description:  è·å–CPUçŠ¶æ€
 * Input:        none
 * Output:       none
 * Return:       none
@@ -556,11 +556,11 @@ void infoCurCpuError(void)
 /**************************************************************************************************
 * Identifier:   SCOD-AMC01-329 (Trace to: SLD-AMC01-329)
 * Function:     infoGetSysVar
-* Description:  ÏµÍ³±äÁ¿½Ó¿Úº¯Êı£¬¿ÉÒÔÉèÖÃÇ¿ÖÆÖµ
-* Input:        slot  ²ÛÎ»ºÅ
-                para  ÏµÍ³±äÁ¿Ë÷ÒıºÅ
+* Description:  ç³»ç»Ÿå˜é‡æ¥å£å‡½æ•°ï¼Œå¯ä»¥è®¾ç½®å¼ºåˆ¶å€¼
+* Input:        slot  æ§½ä½å·
+                para  ç³»ç»Ÿå˜é‡ç´¢å¼•å·
 * Output:       none
-* Return:       sysInfo ÏµÍ³±äÁ¿Öµ£¨ÓëInt¼æÈİ£©
+* Return:       sysInfo ç³»ç»Ÿå˜é‡å€¼ï¼ˆä¸Intå…¼å®¹ï¼‰
 *
 * Others:
 * Log:          Date          Author    Modified
@@ -576,7 +576,7 @@ int32_t infoGetSysVar(int32_t slot, int32_t para)
     LYNX_ASSERT(slot < LYNX_SLOT_MAX);
     if(g_moduleHandle[type].pFunGetSysInfo)
     {
-        /* ÏµÍ³±äÁ¿¹¤×÷Ä£Ê½Ö»»ñÈ¡µ±Ç°Ö÷¿ØµÄ¹¤×÷Ä£Ê½£¨ÔËĞĞ»òÎ¬»¤£© */
+        /* ç³»ç»Ÿå˜é‡å·¥ä½œæ¨¡å¼åªè·å–å½“å‰ä¸»æ§çš„å·¥ä½œæ¨¡å¼ï¼ˆè¿è¡Œæˆ–ç»´æŠ¤ï¼‰ */
         if(149u == para)
         {
             curSlot = g_localSlot;
@@ -590,7 +590,7 @@ int32_t infoGetSysVar(int32_t slot, int32_t para)
 /****************************************************************************************************
 * Identifier:   SCOD-AMC01-081 (Trace to: SLD-AMC01-081)
 * Function:     infoUpdateCardError
-* Description:  ¸üĞÂ·ÇÖ÷¿ØÄ£¿é¹ÊÕÏĞÅÏ¢
+* Description:  æ›´æ–°éä¸»æ§æ¨¡å—æ•…éšœä¿¡æ¯
 * Input:        none
 * Output:       none
 * Return:       none
@@ -611,7 +611,7 @@ void infoUpdateCardError(void)
 
     for(slot = 2; slot < LYNX_SLOT_MAX; slot++)
     {
-        /*slot ×ª»¯Îª»úÏä ºÅ ²ÛºÅ*/
+        /*slot è½¬åŒ–ä¸ºæœºç®± å· æ§½å·*/
         cfg = cfgGetBaseAddr(slot);
         LYNX_ASSERT(NULL != cfg);
         id.value = cfg->id.value;
@@ -647,7 +647,7 @@ void infoUpdateCardError(void)
                 error |= (1UL << 3);
             }        
 
-            break; /* ·¢ÏÖ°å¿¨³ö´í ¾ÍÌø³ö²éÕÒ */
+            break; /* å‘ç°æ¿å¡å‡ºé”™ å°±è·³å‡ºæŸ¥æ‰¾ */
         }
     }
     infoGetAddr()->moduleInfo[g_localSlot].difInfo.mpuInfo.error = error;
@@ -656,10 +656,10 @@ void infoUpdateCardError(void)
 /**************************************************************************************************
  * Identifier:   SCOD-AMC01-038 (Trace to: SLD-AMC01-038)
  * Function:     infoGetAddr
- * Description:  »ñÈ¡È«¾Ö±äÁ¿Æ½Ì¨ĞÅÏ¢µØÖ·
+ * Description:  è·å–å…¨å±€å˜é‡å¹³å°ä¿¡æ¯åœ°å€
  * Input:        None
  * Output:       None
- * Return:       È«¾Ö±äÁ¿Æ½Ì¨ĞÅÏ¢Ö¸Õë
+ * Return:       å…¨å±€å˜é‡å¹³å°ä¿¡æ¯æŒ‡é’ˆ
  * Date:         Author      Modified
  * 2021-11-08    hdq         Create
  *************************************************************************************************/
@@ -671,12 +671,12 @@ lynxInfo_t *infoGetAddr(void)
 /**************************************************************************************************
 * Identifier:   SCOD-AMC01-082 (Trace to: SLD-AMC01-082)
 * Function:     infoGetPortState
-* Description:  »ñÈ¡Í¨ĞÅÄ£¿é¶Ë¿Ú½ÓÊÕ»º´æµ±Ç°Êı¾İ×´Ì¬
-* Input:        slot ²ÛÎ»ºÅ
-*               port ¶Ë¿ÚºÅ
-*               para 0£º½ÓÊÕ¶Ë¿Ú£»ÆäËü£º·¢ËÍ¶Ë¿Ú
+* Description:  è·å–é€šä¿¡æ¨¡å—ç«¯å£æ¥æ”¶ç¼“å­˜å½“å‰æ•°æ®çŠ¶æ€
+* Input:        slot æ§½ä½å·
+*               port ç«¯å£å·
+*               para 0ï¼šæ¥æ”¶ç«¯å£ï¼›å…¶å®ƒï¼šå‘é€ç«¯å£
 * Output:       none
-* Return:       Êı¾İ×´Ì¬
+* Return:       æ•°æ®çŠ¶æ€
 * Others:
 * Log:          Date          Author    Modified
 *               2017/08/14
@@ -705,10 +705,10 @@ portState_t *infoGetPortState(int32_t slot, int32_t port, int32_t para)
 /****************************************************************************************************
 * Identifier:   SCOD-AMC01-104 (Trace to: SLD-AMC01-104)
 * Function:     infoModuleIoToSys
-* Description:  °ÑÄ£¿é×´Ì¬×ª»»³ÉÏµÍ³±äÁ¿
-* Input:        slot  ²ÛÎ»ºÅ
+* Description:  æŠŠæ¨¡å—çŠ¶æ€è½¬æ¢æˆç³»ç»Ÿå˜é‡
+* Input:        slot  æ§½ä½å·
 * Output:       none
-* Return:       32Î»ÏµÍ³±äÁ¿
+* Return:       32ä½ç³»ç»Ÿå˜é‡
 *
 * Others:
 * Log:          Date          Author    Modified
@@ -733,10 +733,10 @@ uint32_t infoModuleIoToSys(int32_t slot)
 /****************************************************************************************************
 * Identifier:   SCOD-AMC01-111 (Trace to: SLD-AMC01-111)
 * Function:     infoModuleComToSysPatch
-* Description:  °ÑÍ¨ĞÅÄ£¿éÔËĞĞ×´Ì¬×ª»»³ÉÏµÍ³±äÁ¿
-* Input:        slot  ²ÛÎ»ºÅ
+* Description:  æŠŠé€šä¿¡æ¨¡å—è¿è¡ŒçŠ¶æ€è½¬æ¢æˆç³»ç»Ÿå˜é‡
+* Input:        slot  æ§½ä½å·
 * Output:       none
-* Return:       Ä£¿éÏµÍ³±äÁ¿
+* Return:       æ¨¡å—ç³»ç»Ÿå˜é‡
 *
 * Others:
 * Log:          Date          Author    Modified
@@ -749,7 +749,7 @@ uint32_t infoModuleComToSysPatch(int32_t slot)
     uint32_t soft = infoGetsoft(slot);
     LYNX_ASSERT(slot < LYNX_SLOT_MAX);
 
-    /*»ñÈ¡Í¨ĞÅ¿¨µçÔ´¹ÊÕÏºÍ¿´ÃÅ¹·Õï¶Ï¹ÊÕÏ*/
+    /*è·å–é€šä¿¡å¡ç”µæºæ•…éšœå’Œçœ‹é—¨ç‹—è¯Šæ–­æ•…éšœ*/
     value = ((soft >> 8U) & 0x01U)
         ||((soft >> 10U) & 0x01U);
     if(value != 0U)
@@ -763,10 +763,10 @@ uint32_t infoModuleComToSysPatch(int32_t slot)
 /****************************************************************************************************
 * Identifier:   SCOD-AMC01-105 (Trace to: SLD-AMC01-105)
 * Function:     infoIoChToSys
-* Description:  °ÑÍ¨µÀ×´Ì¬×ª»»³ÉÏµÍ³±äÁ¿
-* Input:        slot  ²ÛÎ»ºÅ
+* Description:  æŠŠé€šé“çŠ¶æ€è½¬æ¢æˆç³»ç»Ÿå˜é‡
+* Input:        slot  æ§½ä½å·
 * Output:       none
-* Return:       32Î»ÏµÍ³±äÁ¿
+* Return:       32ä½ç³»ç»Ÿå˜é‡
 *
 * Others:
 * Log:          Date          Author    Modified
@@ -792,10 +792,10 @@ static uint32_t infoIoChToSys(int32_t slot)
 /****************************************************************************************************
 * Identifier:   SCOD-AMC01-106 (Trace to: SLD-AMC01-106)
 * Function:     infoHwToSys
-* Description:  ÏµÍ³±äÁ¿»ñÈ¡Ó²¼ş×´Ì¬
-* Input:        slot  ²ÛÎ»ºÅ
+* Description:  ç³»ç»Ÿå˜é‡è·å–ç¡¬ä»¶çŠ¶æ€
+* Input:        slot  æ§½ä½å·
 * Output:       none
-* Return:       32Î»ÏµÍ³±äÁ¿
+* Return:       32ä½ç³»ç»Ÿå˜é‡
 *
 * Others:
 * Log:          Date          Author    Modified
@@ -814,10 +814,10 @@ uint32_t infoHwToSys(int32_t slot)
 /****************************************************************************************************
 * Identifier:   SCOD-AMC01-107 (Trace to: SLD-AMC01-107)
 * Function:     infoSoftToSys
-* Description:  ÏµÍ³±äÁ¿»ñÈ¡ÔËĞĞ×´Ì¬
-* Input:        slot  ²ÛÎ»ºÅ
+* Description:  ç³»ç»Ÿå˜é‡è·å–è¿è¡ŒçŠ¶æ€
+* Input:        slot  æ§½ä½å·
 * Output:       none
-* Return:       32Î»ÏµÍ³±äÁ¿
+* Return:       32ä½ç³»ç»Ÿå˜é‡
 *
 * Others:
 * Log:          Date          Author    Modified
@@ -836,10 +836,10 @@ uint32_t infoSoftToSys(int32_t slot)
 /**************************************************************************************************
  * Identifier:   SCOD-AMC01-108 (Trace to: SLD-AMC01-108)
  * Function:     infoComToSys
- * Description:  ¹¦ÄÜÄ£¿éµÄÍ¨ĞÅ×´Ì¬×ª»¯ÎªÏµÍ³±äÁ¿
- * Input:        slot  ²ÛÎ»ºÅ
+ * Description:  åŠŸèƒ½æ¨¡å—çš„é€šä¿¡çŠ¶æ€è½¬åŒ–ä¸ºç³»ç»Ÿå˜é‡
+ * Input:        slot  æ§½ä½å·
  * Output:       None
- * Return:       Ä£¿éµÄÏµÍ³±äÁ¿
+ * Return:       æ¨¡å—çš„ç³»ç»Ÿå˜é‡
  * Date:         Author      Modified
  * 2021-11-08    hdq         Create
  *************************************************************************************************/
@@ -857,12 +857,12 @@ uint32_t infoComToSys(int32_t slot)
 /**************************************************************************************************
  * Identifier:   SCOD-AMC01-109 (Trace to: SLD-AMC01-109)
  * Function:     infoGetIoSys
- * Description:  »ñÈ¡Ö¸¶¨²ÛÎ»µÄÄ£¿éÏµÍ³±äÁ¿
- * Input:        slot  ²ÛÎ»ºÅ
- *               para  IOÄ£¿é±£Áô
- *               index ÏµÍ³±äÁ¿µÄË÷ÒıºÅ
+ * Description:  è·å–æŒ‡å®šæ§½ä½çš„æ¨¡å—ç³»ç»Ÿå˜é‡
+ * Input:        slot  æ§½ä½å·
+ *               para  IOæ¨¡å—ä¿ç•™
+ *               index ç³»ç»Ÿå˜é‡çš„ç´¢å¼•å·
  * Output:       None
- * Return:       ÓÃ»§ÆÚÍûµÄÏµÍ³±äÁ¿
+ * Return:       ç”¨æˆ·æœŸæœ›çš„ç³»ç»Ÿå˜é‡
  * Date:         Author      Modified
  * 2021-11-08    hdq         Create
  *************************************************************************************************/
@@ -874,27 +874,27 @@ int32_t infoGetIoSys(int32_t slot, int32_t para, int32_t idx)
 
     switch((uint32_t)idx)
     {
-    case 0U: /* Ä£¿é×´Ì¬  0*/
+    case 0U: /* æ¨¡å—çŠ¶æ€  0*/
         sysVar = infoModuleIoToSys(slot);
         break;
 
-    case 1U: /* Í¨ĞÅ×´Ì¬ 1*/
+    case 1U: /* é€šä¿¡çŠ¶æ€ 1*/
         sysVar = infoComToSys(slot);
         break;
 
-    case 2U: /* Í¨µÀ×´Ì¬ 1*/
+    case 2U: /* é€šé“çŠ¶æ€ 1*/
         sysVar = infoIoChToSys(slot);
         break;
 
-    case 32U: /* Ó²¼ş×´Ì¬ 1*/
+    case 32U: /* ç¡¬ä»¶çŠ¶æ€ 1*/
         sysVar = infoHwToSys(slot);
         break;
 
-    case 48U: /* ÔËĞĞ×´Ì¬ 1*/
+    case 48U: /* è¿è¡ŒçŠ¶æ€ 1*/
         sysVar = infoSoftToSys(slot);
         break;
 
-    case 96U ... 127U: /* Í¨µÀ×´Ì¬ÏêÇé */
+    case 96U ... 127U: /* é€šé“çŠ¶æ€è¯¦æƒ… */
         sysVar = infoGetIoCh(slot, idx-96);
         break;
 
@@ -908,12 +908,12 @@ int32_t infoGetIoSys(int32_t slot, int32_t para, int32_t idx)
 /**************************************************************************************************
  * Identifier:   SCOD-AMC01-110 (Trace to: SLD-AMC01-110)
  * Function:     infoGetIoSys
- * Description:  »ñÈ¡Í¨ĞÅÄ£¿éÏµÍ³±äÁ¿
- * Input:        slot  ²ÛÎ»ºÅ
- *               para  IOÄ£¿é±£Áô
- *               index ÏµÍ³±äÁ¿µÄË÷ÒıºÅ
+ * Description:  è·å–é€šä¿¡æ¨¡å—ç³»ç»Ÿå˜é‡
+ * Input:        slot  æ§½ä½å·
+ *               para  IOæ¨¡å—ä¿ç•™
+ *               index ç³»ç»Ÿå˜é‡çš„ç´¢å¼•å·
  * Output:       None
- * Return:       ÓÃ»§ÆÚÍûµÄÏµÍ³±äÁ¿
+ * Return:       ç”¨æˆ·æœŸæœ›çš„ç³»ç»Ÿå˜é‡
  * Date:         Author      Modified
  * 2021-11-08    hdq         Create
  *************************************************************************************************/
@@ -925,15 +925,15 @@ int32_t infoGetComSys(int32_t slot, int32_t para, int32_t idx)
 
     switch((uint32_t)idx)
     {
-    case 0U: /* Ä£¿é×´Ì¬ 0*/
+    case 0U: /* æ¨¡å—çŠ¶æ€ 0*/
         sysVar = infoModuleComToSysPatch(slot);
         break;
 
-    case 1U: /* Í¨ĞÅ×´Ì¬ 1*/
+    case 1U: /* é€šä¿¡çŠ¶æ€ 1*/
         sysVar = infoComToSys(slot);
         break;
 
-    case 48U: /* ÔËĞĞ×´Ì¬ 1*/
+    case 48U: /* è¿è¡ŒçŠ¶æ€ 1*/
         sysVar = infoSoftToSys(slot);
         break;
 
@@ -948,12 +948,12 @@ int32_t infoGetComSys(int32_t slot, int32_t para, int32_t idx)
 /****************************************************************************************************
 * Identifier:   SCOD-AMC01-330 (Trace to: SLD-AMC01-330)
 * Function:     infoGetMpuSysVar
-* Description:  »ñÈ¡Ö÷¿ØÄ£¿éÏµÍ³±äÁ¿
-* Input:        slot  ²ÛÎ»ºÅ
-*               para  ±£Áô
-*               idx   ÏµÍ³±äÁ¿Ë÷Òı
+* Description:  è·å–ä¸»æ§æ¨¡å—ç³»ç»Ÿå˜é‡
+* Input:        slot  æ§½ä½å·
+*               para  ä¿ç•™
+*               idx   ç³»ç»Ÿå˜é‡ç´¢å¼•
 * Output:       none
-* Return:       sysVar  ÏµÍ³±äÁ¿Öµ
+* Return:       sysVar  ç³»ç»Ÿå˜é‡å€¼
 *
 * Others:
 * Log:          Date          Author    Modified
@@ -971,11 +971,11 @@ int32_t infoGetMpuSysVar(int32_t slot, int32_t para, int32_t idx)
 
     switch((uint32_t)idx)
     {
-    case 0U: /* Ä£¿é×´Ì¬0 */
+    case 0U: /* æ¨¡å—çŠ¶æ€0 */
         sysVar = pMpuInfo[5] & 0xFFFF0000U;
         break; 
 
-    case 1U: /* Ä£¿é×´Ì¬1 */
+    case 1U: /* æ¨¡å—çŠ¶æ€1 */
         sysVar = pMpuInfo[5] & 0x0000FFFFU;
         break;
 
@@ -1001,11 +1001,11 @@ int32_t infoGetMpuSysVar(int32_t slot, int32_t para, int32_t idx)
 /**************************************************************************************************
  * Identifier:   SCOD-AMC01-067 (Trace to: SLD-AMC01-067)
  * Function:     infoIOComPatch
- * Description:  ·Ö·¢IOÍ¨ĞÅ·¢ËÍ×´Ì¬£¬½«Ö÷¿ØÄ£¿éÍ¨ĞÅ×´Ì¬·´Ìîµ½IOÄ£¿éÍ¨ĞÅ×´Ì¬¡£
-                 Ö÷¿ØÄ£¿é:bit[11:2]Ö÷¿Øslot2-slot11µã¶ÔµãÍ¨ĞÅ½ÓÊÕÒì³£
-                 IOÄ£¿é:bit[14]ÉÏĞĞÊı¾İÍ¨ĞÅ´íÎó
-                        bit[13]slot2Ö÷¿Ø½ÓÊÕIOÄ£¿éÍ¨ĞÅ´íÎó
-                        bit[12]slot1Ö÷¿Ø½ÓÊÕIOÄ£¿éÍ¨ĞÅ´íÎó
+ * Description:  åˆ†å‘IOé€šä¿¡å‘é€çŠ¶æ€ï¼Œå°†ä¸»æ§æ¨¡å—é€šä¿¡çŠ¶æ€åå¡«åˆ°IOæ¨¡å—é€šä¿¡çŠ¶æ€ã€‚
+                 ä¸»æ§æ¨¡å—:bit[11:2]ä¸»æ§slot2-slot11ç‚¹å¯¹ç‚¹é€šä¿¡æ¥æ”¶å¼‚å¸¸
+                 IOæ¨¡å—:bit[14]ä¸Šè¡Œæ•°æ®é€šä¿¡é”™è¯¯
+                        bit[13]slot2ä¸»æ§æ¥æ”¶IOæ¨¡å—é€šä¿¡é”™è¯¯
+                        bit[12]slot1ä¸»æ§æ¥æ”¶IOæ¨¡å—é€šä¿¡é”™è¯¯
  * Input:        None
  * Output:       None
  * Return:       None
@@ -1026,19 +1026,19 @@ void infoIOComPatch(void)
         ioComInfo &= ~((uint32_t)7U << 12);
 
         if(comInfo0 & ((uint32_t)1U << idx))
-        {/* ÉèÖÃÖ÷¿Ø0ÓëIOÄ£¿éµã¶ÔµãÍ¨ĞÅ×´Ì¬ */
+        {/* è®¾ç½®ä¸»æ§0ä¸IOæ¨¡å—ç‚¹å¯¹ç‚¹é€šä¿¡çŠ¶æ€ */
             ioComInfo |= ((uint32_t)1U << 12);
             if(MPU_MASTER == infoGetAddr()->moduleInfo[0].difInfo.mpuInfo.curMSState)
-            {/* È¥³ı´ÓÄ£¿é×´Ì¬ */
+            {/* å»é™¤ä»æ¨¡å—çŠ¶æ€ */
                 ioComInfo |= ((uint32_t)1U << 14);
             }
         }
 
         if(comInfo1 & ((uint32_t)1U << idx))
-        {/* ÉèÖÃÖ÷¿Ø1ÓëIOÄ£¿éµã¶ÔµãÍ¨ĞÅ×´Ì¬ */
+        {/* è®¾ç½®ä¸»æ§1ä¸IOæ¨¡å—ç‚¹å¯¹ç‚¹é€šä¿¡çŠ¶æ€ */
             ioComInfo |= ((uint32_t)1U << 13);
             if(MPU_MASTER == infoGetAddr()->moduleInfo[1].difInfo.mpuInfo.curMSState)
-            {/* È¥³ı´ÓÄ£¿é×´Ì¬ */
+            {/* å»é™¤ä»æ¨¡å—çŠ¶æ€ */
                 ioComInfo |= ((uint32_t)1U << 14);
             }
         }
@@ -1049,8 +1049,8 @@ void infoIOComPatch(void)
 /****************************************************************************************************
 * Identifier:   SCOD-AMC01-381 (Trace to: SLD-AMC01-381)
 * Function:     infoGetStation
-* Description:  º¯ÊıÊµÏÖ¹¦ÄÜÎª»ñÈ¡ÏµÍ³Õ¾ºÅ
-* Input:        st Õ¾ºÅ
+* Description:  å‡½æ•°å®ç°åŠŸèƒ½ä¸ºè·å–ç³»ç»Ÿç«™å·
+* Input:        st ç«™å·
 * Output:       none
 * Return:       none
 *

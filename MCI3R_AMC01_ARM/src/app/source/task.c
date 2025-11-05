@@ -1,6 +1,6 @@
 /**************************************************************************************************
  * Filename: task.c
- * Purpose:  ´´½¨ËùÓĞÔËĞĞÈÎÎñ
+ * Purpose:  åˆ›å»ºæ‰€æœ‰è¿è¡Œä»»åŠ¡
  * Date:         Author      Modified 
  * 2021-09-23    hdq         Create  
 **************************************************************************************************/
@@ -26,7 +26,7 @@ static int32_t txLocalTask(void);
 /*********************************************************************
 * Identifier:   SCOD-AMC01-352 (Trace to: SLD-AMC01-352)
 * Function:     rxLocalTask
-* Description:  ½ÓÊÕ±¾µØËùÓĞ°å¿¨µÄÊı¾İ
+* Description:  æ¥æ”¶æœ¬åœ°æ‰€æœ‰æ¿å¡çš„æ•°æ®
 * Input:        none
 * Output:       none
 * Return:       0
@@ -41,7 +41,7 @@ static int32_t rxLocalTask(void)
     uint32_t type = 0U;
     portAttr_t *pMsg = NULL;
 
-    /* ×´Ì¬ÊÕ¼¯ */
+    /* çŠ¶æ€æ”¶é›† */
     com1UpdateCaseState(0);
     com1UpdateMpuState();
 
@@ -148,7 +148,7 @@ static int32_t txLocalTask(void)
 /*********************************************************************
 * Identifier:   SCOD-AMC01-256 (Trace to: SLD-AMC01-256)
 * Function:     tmIdleTaskHook
-* Description:  ¿ÕÏĞÈÎÎñº¯Êı
+* Description:  ç©ºé—²ä»»åŠ¡å‡½æ•°
 * Input:        none
 * Output:       none
 * Return:       none
@@ -166,21 +166,21 @@ void tmIdleTaskHook(void)
     sbCheckMode();
     mtMSMtDataProcess();
 
-    /* ARM CPU ×´Ì¬ */
+    /* ARM CPU çŠ¶æ€ */
     infoCurCpuError();
-    /* ARM ÄÚ²¿Ó²¼ş×ÔÕï¶Ï */
+    /* ARM å†…éƒ¨ç¡¬ä»¶è‡ªè¯Šæ–­ */
     diagHardwareCycle();
 
     diagHardwareCyclePlus(0U);
 
-    /* ¸üĞÂlynxËùÓĞ×´Ì¬ */
+    /* æ›´æ–°lynxæ‰€æœ‰çŠ¶æ€ */
     infoUpdateMpuStates();
     
     wdFeed(WD_1);
 
     com1ReportArmState(ARM_OK);
 
-    /* ¶ÔÆ½Ì¨ÖĞ´íÎó½øĞĞ´¦Àí²¢ÏÔÊ¾ */
+    /* å¯¹å¹³å°ä¸­é”™è¯¯è¿›è¡Œå¤„ç†å¹¶æ˜¾ç¤º */
     if(allow > 10)
     {
         infoSetOutputState(CUR_STATE_ENABLE_OUTPUT);
@@ -190,7 +190,7 @@ void tmIdleTaskHook(void)
             errStopHandleCycle();
         }
         sbSyncLedShow();
-        /* ·¢ËÍÆ½Ì¨µÄÎ¬»¤Êı¾İ */
+        /* å‘é€å¹³å°çš„ç»´æŠ¤æ•°æ® */
         mtTxHandle();
     }
     else
@@ -204,7 +204,7 @@ void tmIdleTaskHook(void)
 /****************************************************************************************************
 * Identifier:   SCOD-AMC01-016 (Trace to: SLD-AMC01-016)
 * Function:     createAllTask
-* Description:  ´´½¨ËùÓĞµÄÔËĞĞÈÎÎñ
+* Description:  åˆ›å»ºæ‰€æœ‰çš„è¿è¡Œä»»åŠ¡
 * Input:        none
 * Output:       none
 * Return:       none
@@ -229,7 +229,7 @@ void createAllTask(void)
 
     if(cfgLocalPfMode() == CFG_REDUNDANCY)
     {
-        /* ÈÈ±¸ÈßÓà */
+        /* çƒ­å¤‡å†—ä½™ */
         ret = tmCreateTask(PF_ASM_TASK,
                            MPU_ASM_MAX_TIME,
                            USED_WAIT,
@@ -277,7 +277,7 @@ void createAllTask(void)
         errStopHandleInit(TASK_CREAT_ERROR);
     }
 
-    /* µ±Ç°ÔËĞĞÄ£Ê½²»ÔÚÎ¬»¤Ä£Ê½ÏÂĞè ¹ÒÆğÎ¬»¤ÈÎÎñ */
+    /* å½“å‰è¿è¡Œæ¨¡å¼ä¸åœ¨ç»´æŠ¤æ¨¡å¼ä¸‹éœ€ æŒ‚èµ·ç»´æŠ¤ä»»åŠ¡ */
     if(infoCurSysMode() != (uint32_t)SYS_MAIT)
     {
         tmSuspendTask(PF_MAIT_TASK);

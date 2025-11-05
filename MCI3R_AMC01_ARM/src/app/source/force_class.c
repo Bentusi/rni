@@ -1,8 +1,8 @@
 /****************************************************************************************************
 *FILENAME:     force_class.c
-*PURPOSE:      Ç¿ÖÆÊı¾İÇı¶¯½Ó¿ÚÎÄ¼ş
+*PURPOSE:      å¼ºåˆ¶æ•°æ®é©±åŠ¨æ¥å£æ–‡ä»¶
 *DATE          AUTHOR          CHANGE
-*2017.08.14    ºúµÂÈ«          ´´½¨ÎÄ¼ş
+*2017.08.14    èƒ¡å¾·å…¨          åˆ›å»ºæ–‡ä»¶
 ****************************************************************************************************/
 #include "force_class.h"
 #include "com_hw.h"
@@ -12,16 +12,16 @@
 #include "env.h"
 #include "algInterface.h"
 
-/* Ëã·¨Ê¹ÓÃµÄÇ¿ÖÆ»º³åÇø */
+/* ç®—æ³•ä½¿ç”¨çš„å¼ºåˆ¶ç¼“å†²åŒº */
 static uint8_t *s_pForceHead = NULL;
 
 /**************************************************************************************************
 * Identifier:   SCOD-AMC01-326 (Trace to: SLD-AMC01-326)
 * Function:     forceCopyTo
-* Description:  ÏòÇ¿ÖÆ±äÁ¿ÇøĞ´ÈëÊı¾İ
-* Input:        idx  Ç¿ÖÆ±íÖĞµÄË÷ÒıºÅ
-                pSrc    Ô´µØÖ·
-                size   ³¤¶È
+* Description:  å‘å¼ºåˆ¶å˜é‡åŒºå†™å…¥æ•°æ®
+* Input:        idx  å¼ºåˆ¶è¡¨ä¸­çš„ç´¢å¼•å·
+                pSrc    æºåœ°å€
+                size   é•¿åº¦
 * Output:       none
 * Return:       none
 * Others:
@@ -41,8 +41,8 @@ void forceCopyTo(uint32_t idx, const void *pSrc, uint32_t size)
 /**************************************************************************************************
 * Identifier:   SCOD-AMC01-317 (Trace to: SLD-AMC01-317)
 * Function:     lxSetForceAddr
-* Description:  ÉèÖÃÇ¿ÖÆÇøµØÖ·
-* Input:        pAddr  Ç¿ÖÆÇøµØÖ·
+* Description:  è®¾ç½®å¼ºåˆ¶åŒºåœ°å€
+* Input:        pAddr  å¼ºåˆ¶åŒºåœ°å€
 * Output:       none
 * Return:       none
 * Others:
@@ -57,10 +57,10 @@ void lxSetForceHead(void *pAddr)
 /**************************************************************************************************
 * Identifier:   SCOD-AMC01-318 (Trace to: SLD-AMC01-318)
 * Function:     lxGetForceHead
-* Description:  »ñÈ¡Ç¿ÖÆÇøµØÖ·
+* Description:  è·å–å¼ºåˆ¶åŒºåœ°å€
 * Input:        none
 * Output:       none
-* Return:       Ç¿ÖÆÇøµØÖ·
+* Return:       å¼ºåˆ¶åŒºåœ°å€
 * Others:
 * Log:          Date          Author    Modified
 *               2020/09/01    hdq       create
@@ -73,10 +73,10 @@ fileHead_t *lxGetForceHead(void)
 /**************************************************************************************************
 * Identifier:   SCOD-AMC01-319 (Trace to: SLD-AMC01-319)
 * Function:     lxGetForce
-* Description:  »ñÈ¡Ç¿ÖÆÇøµØÖ·
+* Description:  è·å–å¼ºåˆ¶åŒºåœ°å€
 * Input:        none
 * Output:       none
-* Return:       Ç¿ÖÆÇøµØÖ·
+* Return:       å¼ºåˆ¶åŒºåœ°å€
 * Others:
 * Log:          Date          Author    Modified
 *               2020/09/01    hdq       create

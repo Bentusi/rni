@@ -1,6 +1,6 @@
 /*********************************************************
  * FILENAME:panel.c
- * PURPOSE: Ç°Ãæ°åÖ¸Ê¾µÆÇı¶¯
+ * PURPOSE: å‰é¢æ¿æŒ‡ç¤ºç¯é©±åŠ¨
  * DATE             ARTHOR             CHANGE
  *2017-10-9         wch                Created
  *********************************************************/
@@ -203,9 +203,9 @@ static void drv2HcmsDotRegWrite(const uint8_t *pDotData);
 /****************************************************************************************************
 * Identifier:   SCOD-AMC01-089 (Trace to: SLD-AMC01-089)
 * Function:     drv2PanelRedLedSet
-* Description:  ¿ØÖÆÇ°Ãæ°åºìÉ«Ö¸Ê¾µÆ
-* Input:        led      ºìledĞòºÅ
-*               value    ¾ßÌåÖµ
+* Description:  æ§åˆ¶å‰é¢æ¿çº¢è‰²æŒ‡ç¤ºç¯
+* Input:        led      çº¢ledåºå·
+*               value    å…·ä½“å€¼
 * Output:       none
 * Return:       none
 * Others:
@@ -244,9 +244,9 @@ void drv2PanelRedLedSet(panelled_t led, uint8_t value)
 /****************************************************************************************************
 * Identifier:   SCOD-AMC01-090 (Trace to: SLD-AMC01-090)
 * Function:     drv2PanelGreenLedSet
-* Description:  ¿ØÖÆÇ°Ãæ°åÂÌÉ«Ö¸Ê¾µÆ
-* Input:        led        ÂÌledĞòºÅ
-*               value      ¾ßÌåÖµ
+* Description:  æ§åˆ¶å‰é¢æ¿ç»¿è‰²æŒ‡ç¤ºç¯
+* Input:        led        ç»¿ledåºå·
+*               value      å…·ä½“å€¼
 * Output:       none
 * Return:       none
 * Others:
@@ -284,15 +284,15 @@ void drv2PanelGreenLedSet(panelled_t led, uint8_t value)
 /****************************************************************************************************
 * Identifier:   SCOD-AMC01-040 (Trace to: SLD-AMC01-040)
 * Function:     drv2PanelSwitchStateGet
-* Description:  »ñÈ¡Ô¿³×¿ª¹ØÖµ
+* Description:  è·å–é’¥åŒ™å¼€å…³å€¼
 * Input:        none
 * Output:       none
-* Return:       swval ¶ÁÈ¡µ½µÄÖµ
+* Return:       swval è¯»å–åˆ°çš„å€¼
 *               
 * Others:
 * Log:          Date          Author    Modified
 *               2017/08/14        
-*               2021/09/01    hdq       É¾³ı±ÕËø·ÖÖ§
+*               2021/09/01    hdq       åˆ é™¤é—­é”åˆ†æ”¯
 ****************************************************************************************************/
 uint32_t drv2PanelSwitchStateGet(void)
 {
@@ -315,10 +315,10 @@ uint32_t drv2PanelSwitchStateGet(void)
 /****************************************************************************************************
 * Identifier:   SCOD-AMC01-099 (Trace to: SLD-AMC01-099)
 * Function:     drv2HcmsRegWrite
-* Description:  Ğ´¼Ä´æÆ÷
-* Input:        reg      ¼Ä´æÆ÷µØÖ·
-*               pdata    Êı¾İ
-*               ndata    Êı¾İ³¤¶È
+* Description:  å†™å¯„å­˜å™¨
+* Input:        reg      å¯„å­˜å™¨åœ°å€
+*               pdata    æ•°æ®
+*               ndata    æ•°æ®é•¿åº¦
 * Output:       none
 * Return:       none
 * Others:
@@ -366,8 +366,8 @@ void drv2HcmsRegWrite(hcms_reg_t reg, const uint8_t* pdata, uint32_t ndata)
 /****************************************************************************************************
 * Identifier:   SCOD-AMC01-100 (Trace to: SLD-AMC01-100)
 * Function:     drv2HcmsCtrlRegWrite
-* Description:  Ğ´¿ØÖÆ¼Ä´æÆ÷
-* Input:        regval      ¼Ä´æÆ÷Öµ
+* Description:  å†™æ§åˆ¶å¯„å­˜å™¨
+* Input:        regval      å¯„å­˜å™¨å€¼
 * Output:       none
 * Return:       none
 * Others:
@@ -376,14 +376,14 @@ void drv2HcmsRegWrite(hcms_reg_t reg, const uint8_t* pdata, uint32_t ndata)
 ****************************************************************************************************/
 static void drv2HcmsCtrlRegWrite(uint8_t regval)
 {
-    drv2HcmsRegWrite(HCMS_RegCtrl, &regval, sizeof(regval));/* ÉèÖÃ¿ØÖÆ¼Ä´æÆ÷ */
+    drv2HcmsRegWrite(HCMS_RegCtrl, &regval, sizeof(regval));/* è®¾ç½®æ§åˆ¶å¯„å­˜å™¨ */
 }
 
 /****************************************************************************************************
 * Identifier:   SCOD-AMC01-101 (Trace to: SLD-AMC01-101)
 * Function:     drv2HcmsDotRegWrite
-* Description:  Ğ´µãÕó¼Ä´æÆ÷
-* Input:        pDotData    µãÕóÖµ
+* Description:  å†™ç‚¹é˜µå¯„å­˜å™¨
+* Input:        pDotData    ç‚¹é˜µå€¼
 * Output:       none
 * Return:       none
 * Others:
@@ -392,13 +392,13 @@ static void drv2HcmsCtrlRegWrite(uint8_t regval)
 ****************************************************************************************************/
 static void drv2HcmsDotRegWrite(const uint8_t *pDotData)
 {
-    drv2HcmsRegWrite(HCMS_RegDot, pDotData, 20U);    /* ÉèÖÃ×Ö·û */
+    drv2HcmsRegWrite(HCMS_RegDot, pDotData, 20U);    /* è®¾ç½®å­—ç¬¦ */
 }
 
 /****************************************************************************************************
 * Identifier:   SCOD-AMC01-102 (Trace to: SLD-AMC01-102)
 * Function:     drv2HcmsClear
-* Description:  Çå³ıËùÓĞ×Ö·ûÏÔÊ¾
+* Description:  æ¸…é™¤æ‰€æœ‰å­—ç¬¦æ˜¾ç¤º
 * Input:        none
 * Output:       none
 * Return:       none
@@ -416,9 +416,9 @@ void drv2HcmsClear(void)
 /****************************************************************************************************
 * Identifier:   SCOD-AMC01-103 (Trace to: SLD-AMC01-103)
 * Function:     drv2HcmsInit
-* Description:  ³õÊ¼»¯3906
-* Input:        mode    ³õÊ¼»¯Ä£Ê½
-*               params  Hcms²ÎÊı
+* Description:  åˆå§‹åŒ–3906
+* Input:        mode    åˆå§‹åŒ–æ¨¡å¼
+*               params  Hcmså‚æ•°
 * Output:       none
 * Return:       0
 * Others:
@@ -435,7 +435,7 @@ int32_t drv2HcmsInit(hcms_int_mode_t mode, const hcms_params_t *params)
     uint32 delay = 10000U;
     LYNX_ASSERT(NULL != params);
 
-    /* »ñÈ¡ÉÏ²ãÅäÖÃĞÅÏ¢ */
+    /* è·å–ä¸Šå±‚é…ç½®ä¿¡æ¯ */
     (void)memcpy((void*)&pinst->spi, (const void*)&params->spi, sizeof(hcms_spi_t));
     (void)memcpy((void*)&pinst->ioport, (const void*)&params->ioport, sizeof(hcms_ioport_t));
     (void)memcpy((void*)&pinst->ioidx, (const void*)&params->ioidx, sizeof(hcms_ioidx_t));
@@ -496,14 +496,14 @@ int32_t drv2HcmsInit(hcms_int_mode_t mode, const hcms_params_t *params)
 /****************************************************************************************************
 * Identifier:   SCOD-AMC01-091 (Trace to: SLD-AMC01-091)
 * Function:     drv2ModeLedSet
-* Description:  Ä£Ê½µÆ¿ØÖÆ½Ó¿Ú
-* Input:        ledNum ledµÆË÷Òı
+* Description:  æ¨¡å¼ç¯æ§åˆ¶æ¥å£
+* Input:        ledNum ledç¯ç´¢å¼•
 * Output:       none
 * Return:       none
 * Others:
 * Log:          Date          Author    Modified
 *               2017/08/14
-*               2021/09/01    hdq       É¾³ıÏÂÔØÄ£Ê½·ÖÖ§
+*               2021/09/01    hdq       åˆ é™¤ä¸‹è½½æ¨¡å¼åˆ†æ”¯
 ****************************************************************************************************/
 void drv2ModeLedSet(panelled_t ledNum)
 {
@@ -516,9 +516,9 @@ void drv2ModeLedSet(panelled_t ledNum)
 /****************************************************************************************************
 * Identifier:   SCOD-AMC01-092 (Trace to: SLD-AMC01-092)
 * Function:     drv2LedTurnOn
-* Description:  µãÁÁLED
-* Input:        ledNum       ledĞòºÅ
-*               ledColor     1ÎªºìµÆ£¬0ÎªÂÌµÆ
+* Description:  ç‚¹äº®LED
+* Input:        ledNum       ledåºå·
+*               ledColor     1ä¸ºçº¢ç¯ï¼Œ0ä¸ºç»¿ç¯
 * Output:       none
 * Return:       none
 * Others:
@@ -529,20 +529,20 @@ void drv2LedTurnOn(panelled_t ledNum, ledColor_t ledColor)
 {
     if(RED == ledColor)
     {
-        drv2PanelRedLedSet(ledNum,1U); /* µãÁÁºìµÆ */
+        drv2PanelRedLedSet(ledNum,1U); /* ç‚¹äº®çº¢ç¯ */
     }
     else
     {
-        drv2PanelGreenLedSet(ledNum,1U); /* µãÁÁÂÌµÆ */
+        drv2PanelGreenLedSet(ledNum,1U); /* ç‚¹äº®ç»¿ç¯ */
     }
 }
 
 /****************************************************************************************************
 * Identifier:   SCOD-AMC01-093 (Trace to: SLD-AMC01-093)
 * Function:     drv2LedTurnOff
-* Description:  Ï¨ÃğLED
-* Input:        ledNum      ledĞòºÅ
-*               ledColor    1ÎªºìµÆ£¬0ÎªÂÌµÆ
+* Description:  ç†„ç­LED
+* Input:        ledNum      ledåºå·
+*               ledColor    1ä¸ºçº¢ç¯ï¼Œ0ä¸ºç»¿ç¯
 * Output:       none
 * Return:       none
 * Others:
@@ -553,19 +553,19 @@ void drv2LedTurnOff(panelled_t ledNum, ledColor_t ledColor)
 {
     if(RED == ledColor)
     {
-        drv2PanelRedLedSet(ledNum,0U); /* Ï¨ÃğºìµÆ */
+        drv2PanelRedLedSet(ledNum,0U); /* ç†„ç­çº¢ç¯ */
     }
     else
     {
-        drv2PanelGreenLedSet(ledNum,0U); /* Ï¨ÃğÂÌµÆ */
+        drv2PanelGreenLedSet(ledNum,0U); /* ç†„ç­ç»¿ç¯ */
     }
 }
 
 /****************************************************************************************************
 * Identifier:   SCOD-AMC01-094 (Trace to: SLD-AMC01-094)
 * Function:     drv2LcdStrDisp
-* Description:  lcdÏÔÊ¾×Ö·û´®
-* Input:        str      ×Ö·û´®
+* Description:  lcdæ˜¾ç¤ºå­—ç¬¦ä¸²
+* Input:        str      å­—ç¬¦ä¸²
 * Output:       none
 * Return:       none
 * Others:
@@ -578,7 +578,7 @@ void drv2LcdStrDisp(const int8_t *str)
     uint32_t charcount = (uint32_t)0U;
     uint8_t charidx = (uint8_t)0U;
 
-    /* ÉèÖÃÏÔÊ¾Êı¾İ */
+    /* è®¾ç½®æ˜¾ç¤ºæ•°æ® */
     for (charcount = 0U; charcount < 4U; charcount++)
     {
         const uint32_t dotdataIdx = charcount * 5U;
@@ -591,14 +591,14 @@ void drv2LcdStrDisp(const int8_t *str)
         dotdata[dotdataIdx + 4U] = g_hcms3906_charAsciiTbl[charidx][4U];
     }
 
-    drv2HcmsRegWrite(HCMS_RegDot, dotdata, 20U);    /* ·¢ËÍµ½3906 */
+    drv2HcmsRegWrite(HCMS_RegDot, dotdata, 20U);    /* å‘é€åˆ°3906 */
 }
 
 /****************************************************************************************************
 * Identifier:   SCOD-AMC01-095 (Trace to: SLD-AMC01-095)
 * Function:     drv2LcdInit
-* Description:  lcd³õÊ¼»¯
-* Input:        mode   Ä£Ê½
+* Description:  lcdåˆå§‹åŒ–
+* Input:        mode   æ¨¡å¼
 * Output:       none
 * Return:       none
 * Others:
@@ -607,7 +607,7 @@ void drv2LcdStrDisp(const int8_t *str)
 ****************************************************************************************************/
 void drv2LcdInit(hcms_int_mode_t mode)
 {
-    /* ÅäÖÃ³õÊ¼»¯²ÎÊı */
+    /* é…ç½®åˆå§‹åŒ–å‚æ•° */
     const hcms_params_t params = {
         .spi = {
             .regbase = spiREG3,
@@ -632,29 +632,29 @@ void drv2LcdInit(hcms_int_mode_t mode)
         .pwmBrt     = (uint8_t)8U
     };
 
-    (void)drv2HcmsInit(mode,&params);    /* ÉèÖÃ³õÊ¼»¯ */
+    (void)drv2HcmsInit(mode,&params);    /* è®¾ç½®åˆå§‹åŒ– */
 }
 
 /**************************************************************************************************
 * Identifier:   SCOD-AMC01-096 (Trace to: SLD-AMC01-096)
 * Function:     drv2LedInit
-* Description:  led³õÊ¼»¯
+* Description:  ledåˆå§‹åŒ–
 * Input:        none
 * Output:       none
 * Return:       none
 * Others:
 * Log:          Date          Author    Modified
 *               2018/12/27    LP        Created
-*               2021/09/01    hdq       É¾³ı±ÕËø/ÏÂ×°Ä£Ê½·ÖÖ§
+*               2021/09/01    hdq       åˆ é™¤é—­é”/ä¸‹è£…æ¨¡å¼åˆ†æ”¯
 **************************************************************************************************/
 static void drv2LedInit(void)
 {
-    /* Ï¨ÃğËùÊ¾ÂÌµÆ */
+    /* ç†„ç­æ‰€ç¤ºç»¿ç¯ */
     drv2PanelGreenLedSet(PanelLedRun,0U);
     drv2PanelGreenLedSet(PanelLedMaint,0U);
     drv2PanelGreenLedSet(PanelLedErr,0U);
 
-    /* Ï¨ÃğËùÓĞºìµÆ */
+    /* ç†„ç­æ‰€æœ‰çº¢ç¯ */
     drv2PanelRedLedSet(PanelLedRun,0U);
     drv2PanelRedLedSet(PanelLedMaint,0U);
     drv2PanelRedLedSet(PanelLedErr,0U);
@@ -663,7 +663,7 @@ static void drv2LedInit(void)
 /****************************************************************************************************
 * Identifier:   SCOD-AMC01-098 (Trace to: SLD-AMC01-098)
 * Function:     drv2DisplayInit
-* Description:  ³õÊ¼»¯ÏÔÊ¾½Ó¿Ú
+* Description:  åˆå§‹åŒ–æ˜¾ç¤ºæ¥å£
 * Input:        none
 * Output:       none
 * Return:       none
@@ -673,7 +673,7 @@ static void drv2LedInit(void)
 ****************************************************************************************************/
 void drv2DisplayInit(void)
 {
-    drv2LedInit();                      /* µ÷ÓÃled³õÊ¼»¯½Ó¿Ú */
-    drv2LcdInit(HCMS_INIT_MODE_START);  /* µ÷ÓÃlcd³õÊ¼»¯½Ó¿Ú */
+    drv2LedInit();                      /* è°ƒç”¨ledåˆå§‹åŒ–æ¥å£ */
+    drv2LcdInit(HCMS_INIT_MODE_START);  /* è°ƒç”¨lcdåˆå§‹åŒ–æ¥å£ */
 }
 

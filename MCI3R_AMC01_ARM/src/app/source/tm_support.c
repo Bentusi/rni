@@ -1,9 +1,9 @@
 /****************************************************************************************************
 *FILENAME:     tm_support.c
-*PURPOSE:      ÈÎÎñ¹ÜÀí
+*PURPOSE:      ä»»åŠ¡ç®¡ç†
 *DATE          AUTHOR          CHANGE
-*2017.08.09    ºúµÂÈ«          ´´½¨ÎÄ¼ş
-*2019.01.22    ÕÅÇìÁÖ          É¾³ıtmTimerInitº¯Êı
+*2017.08.09    èƒ¡å¾·å…¨          åˆ›å»ºæ–‡ä»¶
+*2019.01.22    å¼ åº†æ—          åˆ é™¤tmTimerInitå‡½æ•°
 ****************************************************************************************************/
 #include "tm.h"
 #include "info_class.h"
@@ -26,7 +26,7 @@
 ****************************************************************************************************/
 uint32_t tmGetCurTick(void)
 {
-    /*×î´óÖ»ÄÜµ½0xffffffff*/
+    /*æœ€å¤§åªèƒ½åˆ°0xffffffff*/
     /**
      * rtiGetCounter - get the current value of specified free running counter
      * @param counter: counter number, 0/1, or macro RTI_COUNTER0/1
@@ -38,8 +38,8 @@ uint32_t tmGetCurTick(void)
 /****************************************************************************************************
 * Identifier:   SCOD-AMC01-274 (Trace to: SLD-AMC01-274)
 * Function:     tmTimerStart
-* Description:  Ê¹ÄÜ¶¨Ê±Æ÷»ò¹Ø±Õ¶¨Ê±Æ÷1
-* Input:        flag £º1 Í£Ö¹ 2 Ê¹ÄÜ
+* Description:  ä½¿èƒ½å®šæ—¶å™¨æˆ–å…³é—­å®šæ—¶å™¨1
+* Input:        flag ï¼š1 åœæ­¢ 2 ä½¿èƒ½
 * Output:       none
 * Return:       none
 * Others:
@@ -63,7 +63,7 @@ void tmTimerStart(uint32_t flag)
 /****************************************************************************************************
 * Identifier:   SCOD-AMC01-087 (Trace to: SLD-AMC01-087)
 * Function:     tmStopHook
-* Description:  ÈÎÎñ¹ÜÀíÄ£¿é¹ÊÕÏÍ£»ú´¦Àí
+* Description:  ä»»åŠ¡ç®¡ç†æ¨¡å—æ•…éšœåœæœºå¤„ç†
 * Input:        none
 * Output:       none
 * Return:       none
@@ -73,7 +73,7 @@ void tmTimerStart(uint32_t flag)
 ****************************************************************************************************/
 void tmStopHook(void)
 {
-    /*ÏÔÊ¾´íÎóÂë*/
+    /*æ˜¾ç¤ºé”™è¯¯ç */
     int32_t err = tmGetError();
 
     infoSetPfError(ERROR_TOTAL_TICKS + err - 1);
@@ -82,15 +82,15 @@ void tmStopHook(void)
     drv2LedTurnOff(PanelLedMaint, GREEN);
     drv2LedTurnOn(PanelLedErr, RED);
 
-    /* ÏÔÊ¾ ´íÎóÂë  */
+    /* æ˜¾ç¤º é”™è¯¯ç   */
     (void)errHandle();
-    /*³ÌĞò²»ÔÊĞíµ½ÕâÀï£¬À´ÁË¾ÍÊÇÓĞÎÊÌâÁË¡£*/
+    /*ç¨‹åºä¸å…è®¸åˆ°è¿™é‡Œï¼Œæ¥äº†å°±æ˜¯æœ‰é—®é¢˜äº†ã€‚*/
     while(1)
     {
-        /*Î¹¹· */
+        /*å–‚ç‹— */
         wdFeed(WD_1);
         tmDelayms(15U);
-        /* ·¢ËÍÆ½Ì¨µÄÎ¬»¤Êı¾İ */
+        /* å‘é€å¹³å°çš„ç»´æŠ¤æ•°æ® */
         mtTxHandle();
     }
 }

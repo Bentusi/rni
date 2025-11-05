@@ -1,6 +1,6 @@
 /***************************************************************************************************
 *Filename:     error_class.c
-*Purpose:      ¹ÊÕÏ´¦ÀíÄ£¿é£¬´íÎóÂëÏÔÊ¾
+*Purpose:      æ•…éšœå¤„ç†æ¨¡å—ï¼Œé”™è¯¯ç æ˜¾ç¤º
 *Log:          Date          Author    Modified
 *              2021/9/21     hdq       create
 ***************************************************************************************************/
@@ -22,7 +22,7 @@ static void normalDisplay(void);
 /*********************************************************************
 * Identifier:   SCOD-AMC01-059 (Trace to: SLD-AMC01-059)
 * Function:     errStopHandleCycle
-* Description:  ÑÏÖØ¹ÊÕÏÊ±£¬ÏÔÊ¾¹ÊÕÏÂëºóÏµÍ³Í£Ö¹
+* Description:  ä¸¥é‡æ•…éšœæ—¶ï¼Œæ˜¾ç¤ºæ•…éšœç åç³»ç»Ÿåœæ­¢
 * Input:        none
 * Output:       none
 * Return:       none
@@ -45,7 +45,7 @@ void errStopHandleCycle(void)
         {
             infoSetMpuMS(MPU_SLAVE);
         }
-        /*Í£»ú Î¹¹· */
+        /*åœæœº å–‚ç‹— */
         wdFeed(WD_1);
         tmDelayms(15U);
         (void)errHandle();
@@ -55,8 +55,8 @@ void errStopHandleCycle(void)
 /*********************************************************************
 * Identifier:   SCOD-AMC01-060 (Trace to: SLD-AMC01-060)
 * Function:     errStopHandleInit
-* Description:  ¿ª»úÊ±ÑÏÖØ¹ÊÕÏÍ£»ú´¦Àí
-* Input:        err : ´íÎóÂë
+* Description:  å¼€æœºæ—¶ä¸¥é‡æ•…éšœåœæœºå¤„ç†
+* Input:        err : é”™è¯¯ç 
 * Output:       none
 * Return:       none
 *               
@@ -89,11 +89,11 @@ void errStopHandleInit(int32_t err)
 /*********************************************************************
 * Identifier:   SCOD-AMC01-061 (Trace to: SLD-AMC01-061)
 * Function:     errCodeProcess
-* Description:  ´íÎóÂëÊı¾İ´¦Àí
-* Input:        state Ö÷¿Ø×´Ì¬
-*               errString ´íÎóÂëÏÔÊ¾µØÖ·
+* Description:  é”™è¯¯ç æ•°æ®å¤„ç†
+* Input:        state ä¸»æ§çŠ¶æ€
+*               errString é”™è¯¯ç æ˜¾ç¤ºåœ°å€
 * Output:       none
-* Return:       errLevel ´íÎóµÈ¼¶
+* Return:       errLevel é”™è¯¯ç­‰çº§
 *               
 * Others:
 * Log:          Date          Author    Modified
@@ -102,7 +102,7 @@ void errStopHandleInit(int32_t err)
 static int32_t errCodeProcess(mpuPrivInfo_t state, int8_t *errString)
 {
     int32_t errCodeOffset[5] = {400,300,200,200, 0};
-                                /*1¼¶  2¼¶  3¼¶  4¼¶ 5¼¶ */                                   
+                                /*1çº§  2çº§  3çº§  4çº§ 5çº§ */                                   
     int32_t errLevel = 0;
     int32_t err = 0;
 
@@ -115,12 +115,12 @@ static int32_t errCodeProcess(mpuPrivInfo_t state, int8_t *errString)
     (void)memcpy((void*)&cpuErr, (const void*)state.cpuErr, sizeof(uint64_t));
     (void)memcpy((void*)&stErr, (const void*)state.stErr, sizeof(uint64_t));
     (void)memcpy((void*)&pfErr, (const void*)state.pfErr, sizeof(uint64_t));
-    if(cpuErr != 0U) /* 1¼¶¹ÊÕÏ */
+    if(cpuErr != 0U) /* 1çº§æ•…éšœ */
     {
         err = findFirstOne(cpuErr);
         errLevel = 1;
     }
-    else if(stErr != 0U)/* 2¼¶¹ÊÕÏ */
+    else if(stErr != 0U)/* 2çº§æ•…éšœ */
     {
         err = findFirstOne(stErr);
         errLevel = 2;
@@ -128,11 +128,11 @@ static int32_t errCodeProcess(mpuPrivInfo_t state, int8_t *errString)
     else if(pfErr != 0U)
     {
         err = findFirstOne(pfErr);
-        if(err < 32)                       /* pfErrµÄ bit[31: 0] ±íÊ¾ 3¼¶¹ÊÕÏ ×î¶à32¸ö3¼¶¹ÊÕÏ */
+        if(err < 32)                       /* pfErrçš„ bit[31: 0] è¡¨ç¤º 3çº§æ•…éšœ æœ€å¤š32ä¸ª3çº§æ•…éšœ */
         {
             errLevel = 3;
         }
-        else                                /* pfErrµÄ bit[63:32] ±íÊ¾ 4¼¶¹ÊÕÏ  ×î¶à32¸ö4¼¶¹ÊÕÏ*/
+        else                                /* pfErrçš„ bit[63:32] è¡¨ç¤º 4çº§æ•…éšœ  æœ€å¤š32ä¸ª4çº§æ•…éšœ*/
         {
             errLevel = 4;
         }
@@ -144,14 +144,14 @@ static int32_t errCodeProcess(mpuPrivInfo_t state, int8_t *errString)
     }
     else 
     {
-        /* ÎŞ¹ÊÕÏ */
+        /* æ— æ•…éšœ */
         errLevel = 0;
     }
 
-    if(errLevel != 0)/* ¹ÊÕÏË÷Òı×ª»»Îª¹ÊÕÏÂë    */
+    if(errLevel != 0)/* æ•…éšœç´¢å¼•è½¬æ¢ä¸ºæ•…éšœç     */
     {
         err += errCodeOffset[errLevel - 1];
-        /* ´íÎóÂë×ª»»ÎªÏÔÊ¾×Ö·û´® */
+        /* é”™è¯¯ç è½¬æ¢ä¸ºæ˜¾ç¤ºå­—ç¬¦ä¸² */
         switch((uint32_t)errLevel)
         {
             case 1U:
@@ -181,7 +181,7 @@ static int32_t errCodeProcess(mpuPrivInfo_t state, int8_t *errString)
                 value = (value >> 8U) & 0xFFU;
                 errString[2] = (int8_t)value + '0';
 
-                value = (uint32_t)err; /* 16 ½øÖÆÏÔÊ¾*/
+                value = (uint32_t)err; /* 16 è¿›åˆ¶æ˜¾ç¤º*/
                 value = (value >> 0U) & 0xFFU;
                 if(value < 10U)
                 {
@@ -204,7 +204,7 @@ static int32_t errCodeProcess(mpuPrivInfo_t state, int8_t *errString)
 /*********************************************************************
 * Identifier:   SCOD-AMC01-062 (Trace to: SLD-AMC01-062)
 * Function:     normalDisplay
-* Description:  ÏÔÊ¾ÎŞ¹ÊÕÏ±êÊ¶$
+* Description:  æ˜¾ç¤ºæ— æ•…éšœæ ‡è¯†$
 * Input:        none
 * Output:       none
 * Return:       none
@@ -237,10 +237,10 @@ static void normalDisplay(void)
 /*********************************************************************
 * Identifier:   SCOD-AMC01-063 (Trace to: SLD-AMC01-063)
 * Function:     errHandle
-* Description:  ¹ÊÕÏÏÔÊ¾´¦Àí
+* Description:  æ•…éšœæ˜¾ç¤ºå¤„ç†
 * Input:        none
 * Output:       none
-* Return:       errLevel ´íÎóµÈ¼¶
+* Return:       errLevel é”™è¯¯ç­‰çº§
 *               
 * Others:
 * Log:          Date          Author    Modified
@@ -251,12 +251,12 @@ int32_t errHandle(void)
     int8_t errString[4] = {'$','=','=','='};
     static int8_t dispString[4] = {'$','=','=','='};
 
-    int32_t errLevel = 0;   /* Ö÷Ä£¿é ¹ÊÕÏµÈ¼¶ */
+    int32_t errLevel = 0;   /* ä¸»æ¨¡å— æ•…éšœç­‰çº§ */
     
-    static uint8_t dispCnt = 0U;   /* µ±Ç°¹ÊÕÏÂëÒÑÏÔÊ¾ÖÜÆÚÊı */
+    static uint8_t dispCnt = 0U;   /* å½“å‰æ•…éšœç å·²æ˜¾ç¤ºå‘¨æœŸæ•° */
     static uint8_t errFlag = 0U;
     
-    /* ¸üĞÂ·ÇÖ÷¿Ø´íÎó²ÛÎ»ĞÅÏ¢ */
+    /* æ›´æ–°éä¸»æ§é”™è¯¯æ§½ä½ä¿¡æ¯ */
     infoUpdateCardError();
 
     errLevel = errCodeProcess(infoGetAddr()->moduleInfo[g_localSlot].difInfo.mpuInfo, errString);
@@ -268,7 +268,7 @@ int32_t errHandle(void)
             errFlag = SHOW_ERR;
         }
         
-        if(memcmp((const void*)dispString, (const void*)errString, 4U) != 0)/* ´íÎóÂë¸Ä±ä */
+        if(memcmp((const void*)dispString, (const void*)errString, 4U) != 0)/* é”™è¯¯ç æ”¹å˜ */
         {
             dispCnt++;
         }
@@ -301,7 +301,7 @@ int32_t errHandle(void)
         }
     }
 
-    /* ÏÔÊ¾ */
+    /* æ˜¾ç¤º */
     if(errFlag != NONE_ERR)
     {
         drv2LcdStrDisp((const int8_t *)dispString);
@@ -317,8 +317,8 @@ int32_t errHandle(void)
 /****************************************************************************************************
 * Identifier:   SCOD-AMC01-064 (Trace to: SLD-AMC01-064)
 * Function:     errEmifCrcHandle
-* Description:  CRC¹ÊÕÏ´¦Àíº¯Êı
-* Input:        err ´íÎóÂë
+* Description:  CRCæ•…éšœå¤„ç†å‡½æ•°
+* Input:        err é”™è¯¯ç 
 * Output:       none
 * Return:       none
 *

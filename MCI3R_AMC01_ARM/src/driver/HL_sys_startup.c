@@ -252,7 +252,7 @@ void _c_int00(void)
 /****************************************************************************************************
 * Identifier:   SCOD-LOAD-007 (Trace to: SLD-LOAD-007)
 * Function:     afterSTC
-* Description:  cache、esm等功能初始化
+* Description:  cache銆乪sm绛夊姛鑳藉垵濮嬪寲
 * Input:        none
 * Output:       none
 * Return:       none

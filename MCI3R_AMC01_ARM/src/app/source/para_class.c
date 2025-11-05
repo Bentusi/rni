@@ -1,6 +1,6 @@
 /***************************************************************************************************
  * Filename: para_class.c
- * Purpose:  ÎªËã·¨Ìá¹© ²ÎÊý±äÁ¿ ¶ÁÐ´/±£´æ½Ó¿Ú
+ * Purpose:  ä¸ºç®—æ³•æä¾› å‚æ•°å˜é‡ è¯»å†™/ä¿å­˜æŽ¥å£
  * Date:         Author      Modified 
  * 2021-09-23    hdq         Create  
 ***************************************************************************************************/
@@ -12,14 +12,14 @@
 #include "algInterface.h"
 
 /* for parameter */
-static uint8_t *s_pParaHead = NULL;                      /* ²ÎÊýÇø */
+static uint8_t *s_pParaHead = NULL;                      /* å‚æ•°åŒº */
 static int32_t s_paraLocker = 0;
 
 /****************************************************************************************************
 * Identifier:   SCOD-AMC01-023 (Trace to: SLD-AMC01-023)
 * Function:     paraLockFile
-* Description:  ²ÎÊýËø¶¨¹¦ÄÜ
-* Input:        req    0 Î´Ëø¶¨ 1 Ëø¶¨
+* Description:  å‚æ•°é”å®šåŠŸèƒ½
+* Input:        req    0 æœªé”å®š 1 é”å®š
 * Output:       none
 * Return:       none
 * Others:
@@ -52,16 +52,16 @@ int32_t paraLockFile(int32_t req)
 /****************************************************************************************************
 * Identifier:   SCOD-AMC01-024 (Trace to: SLD-AMC01-024)
 * Function:     paraMemCpyTo
-* Description:  ²ÎÊý±äÁ¿ÇøÊý¾ÝÐÞ¸Ä
-* Input:        idx     ²ÎÊý±äÁ¿ÔÚ²ÎÊý±íÖÐµÄÏÂ±ê
-                pSrc    Ô´µØÖ·
-                size    ³¤¶È 
+* Description:  å‚æ•°å˜é‡åŒºæ•°æ®ä¿®æ”¹
+* Input:        idx     å‚æ•°å˜é‡åœ¨å‚æ•°è¡¨ä¸­çš„ä¸‹æ ‡
+                pSrc    æºåœ°å€
+                size    é•¿åº¦ 
 * Output:       none 
 * Return:       none
 * Others:
 * Log:          Date          Author    Modified
 *               2017/08/14    hdq       create
-*               2021/08/31    hdq       Ê¹ÓÃË÷Òý±í½øÐÐ²ÎÊýÐÞ¸Ä
+*               2021/08/31    hdq       ä½¿ç”¨ç´¢å¼•è¡¨è¿›è¡Œå‚æ•°ä¿®æ”¹
 ****************************************************************************************************/
 void paraMemCpyTo(uint32_t idx, const void *pSrc, uint32_t size)
 {
@@ -76,9 +76,9 @@ void paraMemCpyTo(uint32_t idx, const void *pSrc, uint32_t size)
 /**************************************************************************************************
  * Identifier:   SCOD-AMC01-025 (Trace to: SLD-AMC01-025)
  * Function:     lxSetParaAddr
- * Description:  ÉèÖÃ²ÎÊýÇøµØÖ·
- * Input:        pAddr         ²ÎÊýÇøµØÖ·
- * Output:       s_pUserPara   ²ÎÊýÇøµØÖ·È«¾Ö±äÁ¿
+ * Description:  è®¾ç½®å‚æ•°åŒºåœ°å€
+ * Input:        pAddr         å‚æ•°åŒºåœ°å€
+ * Output:       s_pUserPara   å‚æ•°åŒºåœ°å€å…¨å±€å˜é‡
  * Return:       None
  * Date:         Author      Modified
  * 2021-11-09    hdq         Create
@@ -91,10 +91,10 @@ void lxSetParaHead(void *pAddr)
 /**************************************************************************************************
  * Identifier:   SCOD-AMC01-026 (Trace to: SLD-AMC01-026)
  * Function:     lxGetPara
- * Description:  »ñÈ¡²ÎÊýÇøÍ·µØÖ·
+ * Description:  èŽ·å–å‚æ•°åŒºå¤´åœ°å€
  * Input:        None
  * Output:       None
- * Return:       ²ÎÊýÇøµØÖ·Ö¸Õë
+ * Return:       å‚æ•°åŒºåœ°å€æŒ‡é’ˆ
  * Date:         Author      Modified
  * 2021-11-09    hdq         Create
  *************************************************************************************************/
@@ -106,10 +106,10 @@ fileHead_t *lxGetParaHead(void)
 /**************************************************************************************************
  * Identifier:   SCOD-AMC01-027 (Trace to: SLD-AMC01-027)
  * Function:     lxGetPara
- * Description:  »ñÈ¡²ÎÊýÇøµØÖ·
+ * Description:  èŽ·å–å‚æ•°åŒºåœ°å€
  * Input:        None
  * Output:       None
- * Return:       ²ÎÊýÇøµØÖ·Ö¸Õë
+ * Return:       å‚æ•°åŒºåœ°å€æŒ‡é’ˆ
  * Date:         Author      Modified
  * 2021-11-09    hdq         Create
  *************************************************************************************************/
@@ -121,10 +121,10 @@ void *lxGetPara(void)
 /****************************************************************************************************
 * Identifier:   SCOD-AMC01-028 (Trace to: SLD-AMC01-028)
 * Function:     paraSave
-* Description:  ±£´æ²ÎÊýÎÄ¼þ
+* Description:  ä¿å­˜å‚æ•°æ–‡ä»¶
 * Input:        none
 * Output:       none
-* Return:       0 Õý³£ 1 Ê§°Ü
+* Return:       0 æ­£å¸¸ 1 å¤±è´¥
 *
 * Others:
 * Log:          Date          Author    Modified
@@ -137,7 +137,7 @@ int32_t paraSave(void)
     fileHead_t *pHead = lxGetParaHead();
     LYNX_ASSERT(NULL != pHead);
     
-    if(pHead->length != 0) /* Îª0 Ò²ºÏ·¨ */
+    if(pHead->length != 0) /* ä¸º0 ä¹Ÿåˆæ³• */
     {
         ret = flashWriteNoblock(USER_PARA_BASE_ADDRESS, (const void *)pHead, pHead->length + sizeof(fileHead_t));
     }

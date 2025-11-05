@@ -1,6 +1,6 @@
 /**************************************************************************************************
 *Filename:     flash.c
-*Purpose:      flash²Ù×÷½Ó¿Ú
+*Purpose:      flashæ“ä½œæ¥å£
 *Log:          Date          Author    Modified
 *              2021/9/18     hdq       create
 **************************************************************************************************/
@@ -8,19 +8,19 @@
 #include "flash.h"
 #include "bsp.h"
 
-/* º¯ÊıÉùÃ÷ */
+/* å‡½æ•°å£°æ˜ */
 static void spiTxData(spiBASE_t *spi,const spiDAT1_t *dataconfig_t,uint32 blocksize,const uint16 *srcbuff,uint32 hold);
 static void s25flWriteEnable(void);
 
 /****************************************************************************************************
 * Identifier:   SCOD-AMC01-112 (Trace to: SLD-AMC01-112)
 * Function:     spiTxData
-* Description:  SPI·¢ËÍÊı¾İ
-* Input:        spi          spi»ùµØÖ·
-*               dataconfig_t spiÅäÖÃÊı¾İ
-*               blocksize    ·¢ËÍÊı¾İ³¤¶È
-*               srcbuff      ·¢ËÍÊı¾İµØÖ·
-*               hold         Á¬Ğø·¢ËÍ±êÖ¾
+* Description:  SPIå‘é€æ•°æ®
+* Input:        spi          spiåŸºåœ°å€
+*               dataconfig_t spié…ç½®æ•°æ®
+*               blocksize    å‘é€æ•°æ®é•¿åº¦
+*               srcbuff      å‘é€æ•°æ®åœ°å€
+*               hold         è¿ç»­å‘é€æ ‡å¿—
 * Output:       none
 * Return:       none
 *
@@ -75,12 +75,12 @@ static void spiTxData(spiBASE_t *spi,
 /****************************************************************************************************
 * Identifier:   SCOD-AMC01-113 (Trace to: SLD-AMC01-113)
 * Function:     spiRxData
-* Description:  SPI½ÓÊÕÊı¾İ
-* Input:        spi          spi»ùµØÖ·
-*               dataconfig_t spiÅäÖÃÊı¾İ
-*               blocksize    ½ÓÊÕÊı¾İ³¤¶È
-*               destbuff     ½ÓÊÕÊı¾İµØÖ·
-*               hold         Á¬Ğø½ÓÊÕ±êÖ¾
+* Description:  SPIæ¥æ”¶æ•°æ®
+* Input:        spi          spiåŸºåœ°å€
+*               dataconfig_t spié…ç½®æ•°æ®
+*               blocksize    æ¥æ”¶æ•°æ®é•¿åº¦
+*               destbuff     æ¥æ”¶æ•°æ®åœ°å€
+*               hold         è¿ç»­æ¥æ”¶æ ‡å¿—
 * Output:       none
 * Return:       none
 *
@@ -132,10 +132,10 @@ static void spiRxData(spiBASE_t *spi,
 /****************************************************************************************************
 * Identifier:   SCOD-AMC01-114 (Trace to: SLD-AMC01-114)
 * Function:     s25flIsBusy
-* Description:  s25FlashÃ¦¼ì²â
+* Description:  s25Flashå¿™æ£€æµ‹
 * Input:        none
 * Output:       none
-* Return:       ret  Ã¦±êÖ¾ 1 Ã¦Âµ×´Ì¬ 0 ´ı»ú×´Ì¬ 
+* Return:       ret  å¿™æ ‡å¿— 1 å¿™ç¢ŒçŠ¶æ€ 0 å¾…æœºçŠ¶æ€ 
 *
 * Others:
 * Log:          Date          Author    Modified
@@ -149,8 +149,8 @@ static int32_t s25flIsBusy(void)
     uint16_t inData[2U] = {0U};
     uint32_t wrLen = sizeof(inData)/sizeof(uint16_t);
 
-    SpiCfg.CSNR = (uint8_t)SPI_CS_0;    /* SPIÆ¬Ñ¡½ÅÑ¡Ôñ */
-    SpiCfg.DFSEL   = SPI_FMT_1;         /* Ê¹ÓÃÊı¾İ¸ñÊ½0 ÅäÖÃ*/
+    SpiCfg.CSNR = (uint8_t)SPI_CS_0;    /* SPIç‰‡é€‰è„šé€‰æ‹© */
+    SpiCfg.DFSEL   = SPI_FMT_1;         /* ä½¿ç”¨æ•°æ®æ ¼å¼0 é…ç½®*/
     SpiCfg.WDEL    = 1U;
     SpiCfg.CS_HOLD = 1U;
 
@@ -168,7 +168,7 @@ static int32_t s25flIsBusy(void)
 /****************************************************************************************************
 * Identifier:   SCOD-AMC01-115 (Trace to: SLD-AMC01-115)
 * Function:     s25flWriteEnable
-* Description:  s25FlashĞ´Ê¹ÄÜ
+* Description:  s25Flashå†™ä½¿èƒ½
 * Input:        none
 * Output:       none
 * Return:       none 
@@ -183,7 +183,7 @@ static void s25flWriteEnable(void)
     uint16 inData = FLASH_WRITE_ENABLE;
 
     SpiCfg.CSNR = (uint8_t)SPI_CS_0;
-    SpiCfg.DFSEL   = SPI_FMT_1;         /* Ê¹ÓÃÊı¾İ¸ñÊ½0 ÅäÖÃ */
+    SpiCfg.DFSEL   = SPI_FMT_1;         /* ä½¿ç”¨æ•°æ®æ ¼å¼0 é…ç½® */
     SpiCfg.WDEL    = 1U;
     SpiCfg.CS_HOLD = 1U;
 
@@ -193,8 +193,8 @@ static void s25flWriteEnable(void)
 /****************************************************************************************************
 * Identifier:   SCOD-AMC01-116 (Trace to: SLD-AMC01-116)
 * Function:     s25flEraseSector
-* Description:  ²Á³ıÉÈÇø£¬µ¥¸öÉÈÇø´óĞ¡Îª4K
-* Input:        addr ²Á³ıµØÖ·
+* Description:  æ“¦é™¤æ‰‡åŒºï¼Œå•ä¸ªæ‰‡åŒºå¤§å°ä¸º4K
+* Input:        addr æ“¦é™¤åœ°å€
 * Output:       none
 * Return:       none 
 *
@@ -209,8 +209,8 @@ static void s25flEraseSector(uint32_t addr)
     uint16_t inData[4U] = {0U};
     uint32_t wrLen = sizeof(inData)/sizeof(uint16_t);
 
-    SpiCfg.CSNR = (uint8_t)SPI_CS_0;    /* SPIÆ¬Ñ¡½ÅÑ¡Ôñ */
-    SpiCfg.DFSEL   = SPI_FMT_1;         /* Ê¹ÓÃÊı¾İ¸ñÊ½0 ÅäÖÃ*/
+    SpiCfg.CSNR = (uint8_t)SPI_CS_0;    /* SPIç‰‡é€‰è„šé€‰æ‹© */
+    SpiCfg.DFSEL   = SPI_FMT_1;         /* ä½¿ç”¨æ•°æ®æ ¼å¼0 é…ç½®*/
     SpiCfg.WDEL    = 1U;
     SpiCfg.CS_HOLD = 1U;
 
@@ -219,7 +219,7 @@ static void s25flEraseSector(uint32_t addr)
     inData[2U] = (uint8_t)(addr >> 8U);
     inData[3U] = (uint8_t)(addr >> 0U);
     
-    /* flash Ğ´Ê¹ÄÜ */
+    /* flash å†™ä½¿èƒ½ */
     s25flWriteEnable();
     (void)spiTransmitAndReceiveData(FLASH_SPI,&SpiCfg, wrLen,inData,outBuf);
 }
@@ -227,10 +227,10 @@ static void s25flEraseSector(uint32_t addr)
 /****************************************************************************************************
 * Identifier:   SCOD-AMC01-117 (Trace to: SLD-AMC01-117)
 * Function:     s25flWritePage
-* Description:  Ğ´ÈëÒ³Êı¾İ£¬Ò³´óĞ¡Îª256B
-* Input:        addr Ğ´FlashÊ×µØÖ·
-*               pBuf Êı¾İÊ×µØÖ·
-*               length Êı¾İ³¤¶È
+* Description:  å†™å…¥é¡µæ•°æ®ï¼Œé¡µå¤§å°ä¸º256B
+* Input:        addr å†™Flashé¦–åœ°å€
+*               pBuf æ•°æ®é¦–åœ°å€
+*               length æ•°æ®é•¿åº¦
 * Output:       none
 * Return:       none 
 *
@@ -243,8 +243,8 @@ static void s25flWritePage(uint32_t addr, const uint8_t *pBuf, uint32_t length)
     spiDAT1_t SpiCfg;
     uint8_t inData[6] = {0U};
 
-    SpiCfg.CSNR = (uint8_t)SPI_CS_0;   /* Ñ¡ÔñÆ¬Ñ¡ */
-    SpiCfg.DFSEL   = SPI_FMT_0;        /* Ñ¡Ôñ16Î»´«ÊäÄ£Ê½ */
+    SpiCfg.CSNR = (uint8_t)SPI_CS_0;   /* é€‰æ‹©ç‰‡é€‰ */
+    SpiCfg.DFSEL   = SPI_FMT_0;        /* é€‰æ‹©16ä½ä¼ è¾“æ¨¡å¼ */
     SpiCfg.WDEL    = 1U;
     SpiCfg.CS_HOLD = 1U;
 
@@ -261,10 +261,10 @@ static void s25flWritePage(uint32_t addr, const uint8_t *pBuf, uint32_t length)
 /****************************************************************************************************
 * Identifier:   SCOD-AMC01-118 (Trace to: SLD-AMC01-118)
 * Function:     s25flReadBytes
-* Description:  ¶ÁFlashÊı¾İ
-* Input:        addr ¶ÁFlashÊ×µØÖ·
-*               pBuf Êı¾İ»º´æÊ×µØÖ·
-*               length Êı¾İ³¤¶È
+* Description:  è¯»Flashæ•°æ®
+* Input:        addr è¯»Flashé¦–åœ°å€
+*               pBuf æ•°æ®ç¼“å­˜é¦–åœ°å€
+*               length æ•°æ®é•¿åº¦
 * Output:       none
 * Return:       none 
 *
@@ -280,7 +280,7 @@ static void s25flReadBytes(uint32_t addr, uint8_t *pBuf, uint32_t length)
     uint8_t inData[4];
 
     SpiCfg.CSNR = (uint8_t)SPI_CS_0;
-    SpiCfg.DFSEL   = SPI_FMT_0;         /* Ñ¡Ôñ16Î»´«ÊäÄ£Ê½ */
+    SpiCfg.DFSEL   = SPI_FMT_0;         /* é€‰æ‹©16ä½ä¼ è¾“æ¨¡å¼ */
     SpiCfg.WDEL    = 1U;
     SpiCfg.CS_HOLD = 1U;
 
@@ -297,10 +297,10 @@ static void s25flReadBytes(uint32_t addr, uint8_t *pBuf, uint32_t length)
 /****************************************************************************************************
 * Identifier:   SCOD-AMC01-221 (Trace to: SLD-AMC01-221)
 * Function:     flashEraseSector
-* Description:  ²Á³ıFlashÊı¾İ½Ó¿Úº¯Êı
-* Input:        addr ²Á³ıFlashÊ×µØÖ·
+* Description:  æ“¦é™¤Flashæ•°æ®æ¥å£å‡½æ•°
+* Input:        addr æ“¦é™¤Flashé¦–åœ°å€
 * Output:       none
-* Return:       ·µ»Ø0 
+* Return:       è¿”å›0 
 *
 * Others:
 * Log:          Date          Author    Modified
@@ -314,12 +314,12 @@ void flashEraseSector(uint32_t addr)
 /****************************************************************************************************
 * Identifier:   SCOD-AMC01-220 (Trace to: SLD-AMC01-220)
 * Function:     flashWriteByBytes
-* Description:  Ğ´FlashÊı¾İ½Ó¿Úº¯Êı
-* Input:        addr ¶ÁFlashÊ×µØÖ·
-*               pBuf Êı¾İ»º´æÊ×µØÖ·
-*               length Êı¾İ³¤¶È
+* Description:  å†™Flashæ•°æ®æ¥å£å‡½æ•°
+* Input:        addr è¯»Flashé¦–åœ°å€
+*               pBuf æ•°æ®ç¼“å­˜é¦–åœ°å€
+*               length æ•°æ®é•¿åº¦
 * Output:       none
-* Return:       ·µ»Ø0 
+* Return:       è¿”å›0 
 *
 * Others:
 * Log:          Date          Author    Modified
@@ -334,12 +334,12 @@ int32_t flashWriteByBytes(uint32_t addr, const uint8_t *pBuf, uint32_t length)
 /****************************************************************************************************
 * Identifier:   SCOD-AMC01-119 (Trace to: SLD-AMC01-119)
 * Function:     flashReadByBytes
-* Description:  ¶ÁFlashÊı¾İ½Ó¿Úº¯Êı
-* Input:        addr ¶ÁFlashÊ×µØÖ·
-*               pBuf Êı¾İ»º´æÊ×µØÖ·
-*               length Êı¾İ³¤¶È
+* Description:  è¯»Flashæ•°æ®æ¥å£å‡½æ•°
+* Input:        addr è¯»Flashé¦–åœ°å€
+*               pBuf æ•°æ®ç¼“å­˜é¦–åœ°å€
+*               length æ•°æ®é•¿åº¦
 * Output:       none
-* Return:       ·µ»Ø0 
+* Return:       è¿”å›0 
 *
 * Others:
 * Log:          Date          Author    Modified
@@ -354,12 +354,12 @@ int32_t flashReadByBytes(uint32_t addr, uint8_t *pBuf, uint32_t length)
 /****************************************************************************************************
 * Identifier:   SCOD-AMC01-223 (Trace to: SLD-AMC01-223)
 * Function:     flashWriteNoblock
-* Description:  ±£´æ²ÎÊıÎÄ¼ş
-* Input:        dstAddr ²ÎÊıÎÄ¼şµØÖ·
-*               pBuf    ²ÎÊıÎÄ¼ş
-*               bufSize ²ÎÊıÎÄ¼ş´óĞ¡
+* Description:  ä¿å­˜å‚æ•°æ–‡ä»¶
+* Input:        dstAddr å‚æ•°æ–‡ä»¶åœ°å€
+*               pBuf    å‚æ•°æ–‡ä»¶
+*               bufSize å‚æ•°æ–‡ä»¶å¤§å°
 * Output:       none
-* Return:       0:Õı³££»1£ºÊ§°Ü
+* Return:       0:æ­£å¸¸ï¼›1ï¼šå¤±è´¥
 *
 * Others:
 * Log:          Date          Author    Modified

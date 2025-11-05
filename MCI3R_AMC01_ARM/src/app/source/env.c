@@ -1,8 +1,8 @@
 /****************************************************************************************************
 *FILENAME:     env.c
-*PURPOSE:      ÏµÍ³»·¾³³õÊ¼»¯
+*PURPOSE:      ç³»ç»Ÿç¯å¢ƒåˆå§‹åŒ–
 *DATE          AUTHOR          CHANGE
-*2017.08.14    ºúµÂÈ«          ´´½¨ÎÄ¼ş
+*2017.08.14    èƒ¡å¾·å…¨          åˆ›å»ºæ–‡ä»¶
 ****************************************************************************************************/
 #include <string.h>
 #include "env.h"
@@ -21,7 +21,7 @@
 #include "com_hw.h"
 #include "algInterface.h"
 
-/* È«¾Ö±äÁ¿Êı¾İ¶¨Òå */
+/* å…¨å±€å˜é‡æ•°æ®å®šä¹‰ */
 static int8_t s_arFlashFlag[USER_FLAG_SIZE];
 static void loadParameter(void);
 static void platformInit(void);
@@ -31,11 +31,11 @@ static int32_t verifyRamData(const fileHead_t *info, const void *data);
 /*********************************************************************
 * Identifier:   SCOD-AMC01-020 (Trace to: SLD-AMC01-020)
 * Function:     verifyRamData
-* Description:  ¸ù¾İÎÄ¼şÍ·ĞÅÏ¢¶ÔÎÄ¼ş½øĞĞCRCĞ£Ñé
-* Input:        info  ²ÎÊıÎÄ¼şÍ·ĞÅÏ¢
-*               data  ²ÎÊıÎÄ¼şÊı¾İ
+* Description:  æ ¹æ®æ–‡ä»¶å¤´ä¿¡æ¯å¯¹æ–‡ä»¶è¿›è¡ŒCRCæ ¡éªŒ
+* Input:        info  å‚æ•°æ–‡ä»¶å¤´ä¿¡æ¯
+*               data  å‚æ•°æ–‡ä»¶æ•°æ®
 * Output:       none
-* Return:       ³É¹¦ 0 Ê§°Ü 1
+* Return:       æˆåŠŸ 0 å¤±è´¥ 1
 * Others:
 * Log:          Date          Author    Modified
 *               2017/08/14        
@@ -58,17 +58,17 @@ static int32_t verifyRamData(const fileHead_t *info, const void *data)
 /*********************************************************************
 * Identifier:   SCOD-AMC01-021 (Trace to: SLD-AMC01-021)
 * Function:     checkFlashData
-* Description:  ¶ÔÖ¸¶¨µÄ´æ´¢Êı¾İ½øĞĞĞ£Ñé
-* Input:        pFile     ²ÎÊıÎÄ¼şÖ¸Õë
-*               maxSize   Ğ£ÑéÊı¾İµÄ×î´ó³¤¶È
+* Description:  å¯¹æŒ‡å®šçš„å­˜å‚¨æ•°æ®è¿›è¡Œæ ¡éªŒ
+* Input:        pFile     å‚æ•°æ–‡ä»¶æŒ‡é’ˆ
+*               maxSize   æ ¡éªŒæ•°æ®çš„æœ€å¤§é•¿åº¦
 * Output:       none
 * Return:       
-*               ret: 1 Êı¾İ³¤¶ÈÔ½½ç
-                     2 Êı¾İĞ£ÑéÊ§°Ü
-                     0 Ğ£ÑéÕıÈ·
+*               ret: 1 æ•°æ®é•¿åº¦è¶Šç•Œ
+                     2 æ•°æ®æ ¡éªŒå¤±è´¥
+                     0 æ ¡éªŒæ­£ç¡®
 * Others:
 * Log:          Date          Author    Modified
-*               2023/03/09    wxb       É¾³ı²ÎÊıbaseAddr
+*               2023/03/09    wxb       åˆ é™¤å‚æ•°baseAddr
 ***********************************************************************/
 static int32_t checkFlashData(void *pFile, uint32_t maxSize)
 {
@@ -91,7 +91,7 @@ static int32_t checkFlashData(void *pFile, uint32_t maxSize)
         crc = drv2CrcCal((const void*)addr, size);
         if(crc != pHead->crc)
         {
-            /* Ğ£ÑéÊ±Ê§°Ü */
+            /* æ ¡éªŒæ—¶å¤±è´¥ */
             ret = 0x02;
         }
     }
@@ -102,7 +102,7 @@ static int32_t checkFlashData(void *pFile, uint32_t maxSize)
 /*********************************************************************
 * Identifier:   SCOD-AMC01-022 (Trace to: SLD-AMC01-022)
 * Function:     loadParameter
-* Description:  Ğ£Ñé¼ÓÔØ¸üĞÂRAM²ÎÊıÎÄ¼ş
+* Description:  æ ¡éªŒåŠ è½½æ›´æ–°RAMå‚æ•°æ–‡ä»¶
 * Input:        none
 * Output:       none
 * Return:       none
@@ -126,7 +126,7 @@ static void loadParameter(void)
     }
     else
     {
-        /* Ğ£Ñé²ÎÊıÊı¾İ */
+        /* æ ¡éªŒå‚æ•°æ•°æ® */
         res = checkFlashData((void*)pHead, USER_PARA_MAX_SIZE);
         if(0 != res)
         {
@@ -147,7 +147,7 @@ static void loadParameter(void)
     switch(ret)
     {
         case 0U:
-            /* ¼ÓÔØflashÊı¾İ */
+            /* åŠ è½½flashæ•°æ® */
             (void)memcpy((void*)lxGetParaHead(), (const void*)pHead, sizeof(fileHead_t));
             (void)memcpy(lxGetPara(), (const void*)pData, (size_t)pHead->length);
             ret = (uint32_t)verifyRamData((const fileHead_t *)lxGetParaHead(), (const void*)lxGetPara());
@@ -173,7 +173,7 @@ static void loadParameter(void)
 /*********************************************************************
 * Identifier:   SCOD-AMC01-003 (Trace to: SLD-AMC01-003)
 * Function:     platformInit
-* Description:  ³õÊ¼»¯ËùÓĞÄ£¿é
+* Description:  åˆå§‹åŒ–æ‰€æœ‰æ¨¡å—
 * Input:        none
 * Output:       none
 * Return:       none
@@ -186,7 +186,7 @@ static void platformInit(void)
     int32_t slot = 0;
     uint32_t type = 0u;
 
-    /* ·¢ËÍÖ÷¿ØÅäÖÃĞÅÏ¢ */
+    /* å‘é€ä¸»æ§é…ç½®ä¿¡æ¯ */
     for(slot = 0; slot < LYNX_SLOT_MAX; slot++)
     {
         type = cfgCardTypeOnSlot(slot);
@@ -201,7 +201,7 @@ static void platformInit(void)
 /****************************************************************************************************
 * Identifier:   SCOD-AMC01-004 (Trace to: SLD-AMC01-004)
 * Function:     initMpuSates
-* Description:  ³õÊ¼»¯Æ½Ì¨ĞÅÏ¢
+* Description:  åˆå§‹åŒ–å¹³å°ä¿¡æ¯
 * Input:        none
 * Output:       none
 * Return:       none
@@ -209,7 +209,7 @@ static void platformInit(void)
 * Others:
 * Log:          Date          Author    Modified
 *               2017/08/14
-*               2019/06/20       º¯ÊıÃû±ä¸ü: Ô­º¯ÊıÃûlxInitCardStates±ä¸üÎªinitMpuSates
+*               2019/06/20       å‡½æ•°åå˜æ›´: åŸå‡½æ•°ålxInitCardStateså˜æ›´ä¸ºinitMpuSates
 ****************************************************************************************************/
 void initMpuSates(void)
 {
@@ -218,7 +218,7 @@ void initMpuSates(void)
     infoGetAddr()->moduleInfo[curSlot].difInfo.mpuInfo.id.value = cfgLocalMpuId();
     infoGetAddr()->moduleInfo[curSlot].difInfo.mpuInfo.version = LYNX_VERSION;
 
-    /*  ¹¤³ÌÎÄ¼ş °æ±¾ºÅ */
+    /*  å·¥ç¨‹æ–‡ä»¶ ç‰ˆæœ¬å· */
     infoGetAddr()->moduleInfo[curSlot].difInfo.mpuInfo.userImageVer = lxGetImageHead()->version;
     infoGetAddr()->moduleInfo[curSlot].difInfo.mpuInfo.userParaVer  = lxGetParaHead()->version;
     infoGetAddr()->moduleInfo[curSlot].difInfo.mpuInfo.pfCfgVer     = lxGetCfgHead()->version;
@@ -227,7 +227,7 @@ void initMpuSates(void)
 /*********************************************************************
 * Identifier:   SCOD-AMC01-002 (Trace to: SLD-AMC01-002)
 * Function:     envInit
-* Description:  ÔËĞĞ»·¾³³õÊ¼»¯
+* Description:  è¿è¡Œç¯å¢ƒåˆå§‹åŒ–
 * Input:        none
 * Output:       none
 * Return:       none

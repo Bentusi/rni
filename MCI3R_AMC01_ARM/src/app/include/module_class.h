@@ -1,6 +1,6 @@
 /**************************************************************************************************
 *Filename:     module_class.h
-*Purpose:      ËùÓĞÍ¨ÓÃÄ£¿é½ÓÊÕ·¢ËÍ´¦Àí½Ó¿Ú
+*Purpose:      æ‰€æœ‰é€šç”¨æ¨¡å—æ¥æ”¶å‘é€å¤„ç†æ¥å£
 *Log:          Date          Author    Modified
 *              2021/9/18     hdq       create
 **************************************************************************************************/
@@ -10,12 +10,12 @@
 #include "lynx_types.h"
 
 #define CUR_STATE_INIT              (0U)
-#define CUR_STATE_ENABLE_OUTPUT     (1U)            /* ·Ç±ÕËø×´Ì¬ */
-#define CUR_STATE_DISABLE_OUTPUT    (2U)            /* ±ÕËø×´Ì¬ */
+#define CUR_STATE_ENABLE_OUTPUT     (1U)            /* éé—­é”çŠ¶æ€ */
+#define CUR_STATE_DISABLE_OUTPUT    (2U)            /* é—­é”çŠ¶æ€ */
 #define CUR_STATE_ERROR             (3U)
 
-#define QUALITY_STATE_AVAILED       (0x00U)         /* ÖÊÁ¿Î»ÓĞĞ§ */
-#define QUALITY_STATE_INVALID       (0x01U)         /* ÖÊÁ¿Î»ÎŞĞ§ */
+#define QUALITY_STATE_AVAILED       (0x00U)         /* è´¨é‡ä½æœ‰æ•ˆ */
+#define QUALITY_STATE_INVALID       (0x01U)         /* è´¨é‡ä½æ— æ•ˆ */
 
 #define PRE_ACTION                  (0x0)
 #define POST_ACTION                 (0x1)

@@ -1,6 +1,6 @@
 /***************************************************************************************************
  * Filename: monitor.h
- * Purpose:  °å¿¨µçÔ´µçÑ¹Õï¶Ï´¦Àí
+ * Purpose:  æ¿å¡ç”µæºç”µå‹è¯Šæ–­å¤„ç†
  * Date:         Author      Modified 
  * 2021-09-23    hdq         Create  
 ***************************************************************************************************/
@@ -9,7 +9,7 @@
 
 #include "lynx_types.h"
 
-/* ÎÂ¶ÈÏà¹Ø     temperature_calibration */
+/* æ¸©åº¦ç›¸å…³     temperature_calibration */
 typedef struct OTP_temperature_calibra_data
 {
     uint16_t Temperature;
@@ -30,11 +30,11 @@ typedef struct
 } adcValue_t;
 
 #define THERMISTOR_CAL_DATA   (0xF0080310U)     /* OTP Temperature Sensor Data Location */
-#define FLOAT_EPS             (0.000001f)       /* ¸¡µãĞÍµ¥¾«¶È ×îĞ¡¾«¶È */
+#define FLOAT_EPS             (0.000001f)       /* æµ®ç‚¹å‹å•ç²¾åº¦ æœ€å°ç²¾åº¦ */
 /*************************************************************************************/
 
-#define VCC_REF                  ((float32_t)2.5f)           /* ²Î¿¼µçÑ¹ 2.5V */
-/* ¶¨Òå²É¼¯Í¨µÀ ID */
+#define VCC_REF                  ((float32_t)2.5f)           /* å‚è€ƒç”µå‹ 2.5V */
+/* å®šä¹‰é‡‡é›†é€šé“ ID */
 #define VCC_MCU_1V2_CHID         (0U)      /* ADC[0] */
 #define VCC_FPGA_1V2_CHID        (1U)      /* ADC[1] */
 #define VCC_WD_1V5_CHID          (2U)
@@ -47,7 +47,7 @@ typedef struct
 #define VCC_24V1_CHID            (9U)
 #define VCC_24V2_CHID            (10U)
 
-/* µçÑ¹¹ÊÕÏ´úÂë */
+/* ç”µå‹æ•…éšœä»£ç  */
 #define VCC_MCU_1V2_ERROR       (0x00000001U)
 #define VCC_FPGA_1V2_ERROR      (0x00000002U)
 #define VCC_WD_1V5_ERROR        (0x00000004U)
@@ -62,11 +62,11 @@ typedef struct
 #define VCC_24V1_ERROR          (0x00000200U)
 #define VCC_24V2_ERROR          (0x00000400U)
 
-#define CH_NUM                  (11U)  /* µçÔ´µçÑ¹Õï¶Ï Í¨µÀÊıÄ¿ */
-#define MAX_ADC_CH              (32U)  /* ADC×î´óÍ¨µÀÊı */
-#define SMAPLE_COUNT            (10U)  /* µçÑ¹²É¼¯´ÎÊı */
+#define CH_NUM                  (11U)  /* ç”µæºç”µå‹è¯Šæ–­ é€šé“æ•°ç›® */
+#define MAX_ADC_CH              (32U)  /* ADCæœ€å¤§é€šé“æ•° */
+#define SMAPLE_COUNT            (10U)  /* ç”µå‹é‡‡é›†æ¬¡æ•° */
 
-/* µçÑ¹²Î¿¼·¶Î§ */
+/* ç”µå‹å‚è€ƒèŒƒå›´ */
 #define VCC_FPGA_1V2_MAX        (1.258f)
 #define VCC_FPGA_1V2_MIN        (1.137f)
 
@@ -119,7 +119,7 @@ typedef struct
 #define CHANNEL11   ((uint32_t)1U << (uint32_t)10U)
 
 
-/* Ñ¡ÓÃ Í¨µÀ */
+/* é€‰ç”¨ é€šé“ */
 #define CHANNLES            (CHANNEL1  | \
                              CHANNEL2  | \
                              CHANNEL3  | \

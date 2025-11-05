@@ -1,6 +1,6 @@
 /**************************************************************************************************
 *Filename:     module_do.c
-*Purpose:      ¹«ÓÃÄ£¿édo·½·¨¶¨Òå
+*Purpose:      å…¬ç”¨æ¨¡å—doæ–¹æ³•å®šä¹‰
 *Log:          Date          Author    Modified
 *              2021/9/21     hdq       create
 **************************************************************************************************/
@@ -15,11 +15,11 @@
 /**************************************************************************************************
  * Identifier:   SCOD-AMC01-362 (Trace to: SLD-AMC01-362)
  * Function:     doFrameHandle
- * Description:  Í¨ÓÃdoÄ£¿é½ÓÊÕÊı¾İÖ¡´¦Àí
- * Input:        slot      ²ÛÎ»ºÅ
- *               copyFlag  0 ²»½øĞĞ¸´ÖÆÇÒÖÊÁ¿Î»ÎŞĞ§£¨Òì³£´¦Àí£© !0 Ö´ĞĞ¸´ÖÆ²Ù×÷
- *               pDst      Ä¿µÄµØÖ·
- *               pSrc      Ô´µØÖ·
+ * Description:  é€šç”¨doæ¨¡å—æ¥æ”¶æ•°æ®å¸§å¤„ç†
+ * Input:        slot      æ§½ä½å·
+ *               copyFlag  0 ä¸è¿›è¡Œå¤åˆ¶ä¸”è´¨é‡ä½æ— æ•ˆï¼ˆå¼‚å¸¸å¤„ç†ï¼‰ !0 æ‰§è¡Œå¤åˆ¶æ“ä½œ
+ *               pDst      ç›®çš„åœ°å€
+ *               pSrc      æºåœ°å€
  * Output:       None
  * Return:       None
  * Date:         Author      Modified
@@ -41,25 +41,25 @@ static void doFrameHandle(int32_t slot, int32_t copyFlag, void *pDst, const void
 
     if(copyFlag)
     {
-        infoSetHw(slot, pSrcFrame->info);/* Ó²¼şĞÅÏ¢ */
+        infoSetHw(slot, pSrcFrame->info);/* ç¡¬ä»¶ä¿¡æ¯ */
         for(ch = 0; ch < DO_CH_MAX; ch++)
         {
             if((enable & ((uint32_t)1<<ch)) != 0u)
             {
             	pDstFrame->data[ch].quality = QUALITY_STATE_INVALID;
-                value = pSrcFrame->data[ch].quality; /* Ô­Ê¼Öµ±£´æµ½ */
+                value = pSrcFrame->data[ch].quality; /* åŸå§‹å€¼ä¿å­˜åˆ° */
                 infoSetIoCh(slot, ch, value);
             }
         }
     }
     else
     {
-        infoSetHw(slot, 0U);/* Ó²¼şĞÅÏ¢ */
+        infoSetHw(slot, 0U);/* ç¡¬ä»¶ä¿¡æ¯ */
         /* invalid all quality that channel is enable. */
         for(ch = 0; ch < DO_CH_MAX; ch++)
-        {   /* Í¨ĞÅÒì³£Ê±£¬ËùÓĞÎïÀíµãÖÊÁ¿Î»ÎŞĞ§ */
+        {   /* é€šä¿¡å¼‚å¸¸æ—¶ï¼Œæ‰€æœ‰ç‰©ç†ç‚¹è´¨é‡ä½æ— æ•ˆ */
             if((enable & ((uint32_t)1<<ch)) != 0u)
-            {   /* Öµ²»±ä£¬ÖÊÁ¿Î»ÎŞĞ§ */
+            {   /* å€¼ä¸å˜ï¼Œè´¨é‡ä½æ— æ•ˆ */
                 pDstFrame->data[ch].quality = QUALITY_STATE_INVALID;
                 infoSetIoCh(slot, ch, QUALITY_STATE_INVALID);
             }
@@ -70,10 +70,10 @@ static void doFrameHandle(int32_t slot, int32_t copyFlag, void *pDst, const void
 /**************************************************************************************************
 * Identifier:   SCOD-AMC01-363 (Trace to: SLD-AMC01-363)
 * Function:     doRxHandle
-* Description:  ½ÓÊÕµÄÊÇDOµÄ×´Ì¬Êı¾İ£¬°üÀ¨Õï¶Ï£¬Í¨µÀ×´Ì¬
-* Input:        slot ²ÛºÅ
-*               para IO¿¨±£Áô
-*               pBuf ½ÓÊÕÊı¾İÖ¸Õë
+* Description:  æ¥æ”¶çš„æ˜¯DOçš„çŠ¶æ€æ•°æ®ï¼ŒåŒ…æ‹¬è¯Šæ–­ï¼Œé€šé“çŠ¶æ€
+* Input:        slot æ§½å·
+*               para IOå¡ä¿ç•™
+*               pBuf æ¥æ”¶æ•°æ®æŒ‡é’ˆ
 * Output:       none
 * Return:       0
 *
@@ -91,12 +91,12 @@ int32_t doRxHandle(int32_t slot, int32_t para, void *pBuf)
 /**************************************************************************************************
  * Identifier:   SCOD-AMC01-364 (Trace to: SLD-AMC01-364)
  * Function:     doGetTxChAddr
- * Description:  »ñÈ¡Í¨ÓÃDOÄ£¿éÍ¨µÀµØÖ·
- * Input:        slot ²ÛÎ»ºÅ
- *               port ²ÎÊı±£Áô£¬½Ó¿ÚĞèÒª
- *               ch   Í¨µÀºÅ
+ * Description:  è·å–é€šç”¨DOæ¨¡å—é€šé“åœ°å€
+ * Input:        slot æ§½ä½å·
+ *               port å‚æ•°ä¿ç•™ï¼Œæ¥å£éœ€è¦
+ *               ch   é€šé“å·
  * Output:       None
- * Return:       pDst ¶ÔÓ¦Í¨µÀµÄµØÖ·Ö¸Õë
+ * Return:       pDst å¯¹åº”é€šé“çš„åœ°å€æŒ‡é’ˆ
  * Date:         Author      Modified
  * 2021-11-09    hdq         Create
  *************************************************************************************************/

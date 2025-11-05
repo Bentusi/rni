@@ -1,6 +1,6 @@
 /**************************************************************************************************
 *Filename:     kcg_libs.c
-*Purpose:      ±äÁ¿¶ÁĞ´½Ó¿Ú
+*Purpose:      å˜é‡è¯»å†™æ¥å£
 *Log:          Date          Author    Modified
 *              2021/08/31    hdq       create
 **************************************************************************************************/
@@ -11,13 +11,13 @@
 /**************************************************************************************************
 * Identifier:   SCOD-AMC01-338 (Trace to: SLD-AMC01-338)
 * Function:     lxCpyToIo
-* Description:  ¿½±´Ëã·¨Êä³ö±äÁ¿µ½IO
-* Input:        slot    Ä£¿éµÄ²ÛÎ»ºÅ
-*               ch      Í¨µÀºÅ
-*               pSrc    ÕæÊµÖµÖ¸Õë
-*               size    Êı¾İ´óĞ¡
-*               pForce  Ç¿ÖÆÖµÖ¸Õë
-*               pFlag   Ç¿ÖÆ±êÖ¾Ö¸Õë
+* Description:  æ‹·è´ç®—æ³•è¾“å‡ºå˜é‡åˆ°IO
+* Input:        slot    æ¨¡å—çš„æ§½ä½å·
+*               ch      é€šé“å·
+*               pSrc    çœŸå®å€¼æŒ‡é’ˆ
+*               size    æ•°æ®å¤§å°
+*               pForce  å¼ºåˆ¶å€¼æŒ‡é’ˆ
+*               pFlag   å¼ºåˆ¶æ ‡å¿—æŒ‡é’ˆ
 * Output:       none
 * Return:       none
 * Others:
@@ -43,10 +43,10 @@ void lxCpyToIo(int32_t slot, int32_t ch, void *pSrc, size_t size, void *pForce, 
 
     switch(flag)
     {
-        case FORCE_N:/* ²»Ç¿ÖÆ */
+        case FORCE_N:/* ä¸å¼ºåˆ¶ */
             break;
 
-        case FORCE_V:/* Ç¿ÖÆÖµ */
+        case FORCE_V:/* å¼ºåˆ¶å€¼ */
             if(2U == size)
             {
                 (void)memcpy(pSrc, pForce, 1u);
@@ -61,7 +61,7 @@ void lxCpyToIo(int32_t slot, int32_t ch, void *pSrc, size_t size, void *pForce, 
             }
             break;
 
-        case FORCE_Q:/* Ç¿ÖÆÖÊÁ¿Î» */
+        case FORCE_Q:/* å¼ºåˆ¶è´¨é‡ä½ */
             if(2U == size)
             {
                 (void)memcpy((uint8_t*)pSrc + 1u, (uint8_t *)pForce + 1u, 1u);
@@ -76,11 +76,11 @@ void lxCpyToIo(int32_t slot, int32_t ch, void *pSrc, size_t size, void *pForce, 
             }
             break;
 
-        case FORCE_A:/* Ç¿ÖÆÈ«²¿ */
+        case FORCE_A:/* å¼ºåˆ¶å…¨éƒ¨ */
             (void)memcpy(pSrc, pForce, size);
             break;
 
-        default: /* ²»Ç¿ÖÆ */
+        default: /* ä¸å¼ºåˆ¶ */
             break;
     }
     (void)memcpy(pDst, pSrc, size);
@@ -89,13 +89,13 @@ void lxCpyToIo(int32_t slot, int32_t ch, void *pSrc, size_t size, void *pForce, 
 /**************************************************************************************************
 * Identifier:   SCOD-AMC01-339 (Trace to: SLD-AMC01-339)
 * Function:     lxCpyFromIo
-* Description:  ¿½±´IOÊı¾İµ½ÊäÈëÇø
-* Input:        pDst    Ä¿±êµØÖ·
-*               slot    Ä£¿éµÄ²ÛÎ»ºÅ
-*               ch      Í¨µÀºÅ
-*               size    Êı¾İ´óĞ¡
-*               pForce  Ç¿ÖÆÖµÖ¸Õë
-*               pFlag   Ç¿ÖÆ±êÖ¾Ö¸Õë
+* Description:  æ‹·è´IOæ•°æ®åˆ°è¾“å…¥åŒº
+* Input:        pDst    ç›®æ ‡åœ°å€
+*               slot    æ¨¡å—çš„æ§½ä½å·
+*               ch      é€šé“å·
+*               size    æ•°æ®å¤§å°
+*               pForce  å¼ºåˆ¶å€¼æŒ‡é’ˆ
+*               pFlag   å¼ºåˆ¶æ ‡å¿—æŒ‡é’ˆ
 * Output:       none
 * Return:       none
 * Others:
@@ -121,11 +121,11 @@ void lxCpyFromIo(void *pDst, int32_t slot, int32_t ch, size_t size, void *pForce
 
     switch(flag)
     {
-        case FORCE_N:/* ²»Ç¿ÖÆ */
+        case FORCE_N:/* ä¸å¼ºåˆ¶ */
             (void)memcpy(pDst, pSrc, size);
             break;
 
-        case FORCE_V:/* Ç¿ÖÆÖµ */
+        case FORCE_V:/* å¼ºåˆ¶å€¼ */
             if(2U == size)
             {
                 (void)memcpy(pDst, pForce, 1u);
@@ -141,7 +141,7 @@ void lxCpyFromIo(void *pDst, int32_t slot, int32_t ch, size_t size, void *pForce
                 /* Do Nothing */
             }
             break;
-        case FORCE_Q:/* Ç¿ÖÆÖÊÁ¿Î» */
+        case FORCE_Q:/* å¼ºåˆ¶è´¨é‡ä½ */
             if(2U == size)
             {
                 (void)memcpy(pDst, pSrc, 1u);
@@ -158,7 +158,7 @@ void lxCpyFromIo(void *pDst, int32_t slot, int32_t ch, size_t size, void *pForce
             }
             break;
 
-        case FORCE_A:/* Ç¿ÖÆÈ«²¿ */
+        case FORCE_A:/* å¼ºåˆ¶å…¨éƒ¨ */
             (void)memcpy(pDst, pForce, size);
             break;
 
@@ -170,12 +170,12 @@ void lxCpyFromIo(void *pDst, int32_t slot, int32_t ch, size_t size, void *pForce
 /**************************************************************************************************
 * Identifier:   SCOD-AMC01-340 (Trace to: SLD-AMC01-340)
 * Function:     lxCpyOutputToNet
-* Description:  ¿½±´Ëã·¨Êä³öÊı¾İµ½ÍøÂç
-* Input:        pDst    Ä¿µÄµØÖ·
-*               pSrc    Ô´µØÖ·
-*               size    Êı¾İ´óĞ¡
-*               pForce  Ç¿ÖÆÖµµÄµØÖ·
-*               pFlag   Ç¿ÖÆ±êÖ¾µØÖ·
+* Description:  æ‹·è´ç®—æ³•è¾“å‡ºæ•°æ®åˆ°ç½‘ç»œ
+* Input:        pDst    ç›®çš„åœ°å€
+*               pSrc    æºåœ°å€
+*               size    æ•°æ®å¤§å°
+*               pForce  å¼ºåˆ¶å€¼çš„åœ°å€
+*               pFlag   å¼ºåˆ¶æ ‡å¿—åœ°å€
 * Output:       none
 * Return:       none
 * Others:
@@ -200,10 +200,10 @@ void lxCpyOutputToNet(void *pDst, void *pSrc, size_t size, void *pForce, uint8_t
 
     switch(flag)
     {
-        case FORCE_N:/* ²»Ç¿ÖÆ */
+        case FORCE_N:/* ä¸å¼ºåˆ¶ */
             break;
 
-        case FORCE_V:/* Ç¿ÖÆÖµ */
+        case FORCE_V:/* å¼ºåˆ¶å€¼ */
             if(2U == size)
             {
                 (void)memcpy(pSrc, pForce, 1u);
@@ -218,7 +218,7 @@ void lxCpyOutputToNet(void *pDst, void *pSrc, size_t size, void *pForce, uint8_t
             }
             break;
 
-        case FORCE_Q:/* Ç¿ÖÆÖÊÁ¿Î» */
+        case FORCE_Q:/* å¼ºåˆ¶è´¨é‡ä½ */
             if(2U == size)
             {
                 (void)memcpy((uint8_t*)pSrc + 1u, (uint8_t *)pForce + 1u, 1u);
@@ -233,11 +233,11 @@ void lxCpyOutputToNet(void *pDst, void *pSrc, size_t size, void *pForce, uint8_t
             }
             break;
 
-        case FORCE_A:/* Ç¿ÖÆÈ«²¿ */
+        case FORCE_A:/* å¼ºåˆ¶å…¨éƒ¨ */
             (void)memcpy(pSrc, pForce, size);
             break;
 
-        default: /* ²»Ç¿ÖÆ */
+        default: /* ä¸å¼ºåˆ¶ */
             break;
     }
     (void)memcpy(pDst, pSrc, size);
@@ -246,12 +246,12 @@ void lxCpyOutputToNet(void *pDst, void *pSrc, size_t size, void *pForce, uint8_t
 /****************************************************************************************************
 * Identifier:   SCOD-AMC01-341 (Trace to: SLD-AMC01-341)
 * Function:     lxCpyParaToInput
-* Description:  ¿½±´²ÎÊıÊäÈëÊı¾İµ½ÊäÈëÇø
-* Input:        pDst    Ä¿µÄµØÖ·
-*               pSrc    Ô´µØÖ·
-*               size    Êı¾İ´óĞ¡
-*               pForce  Ç¿ÖÆÖµµÄµØÖ·
-*               pFlag   Ç¿ÖÆ±êÖ¾µØÖ·
+* Description:  æ‹·è´å‚æ•°è¾“å…¥æ•°æ®åˆ°è¾“å…¥åŒº
+* Input:        pDst    ç›®çš„åœ°å€
+*               pSrc    æºåœ°å€
+*               size    æ•°æ®å¤§å°
+*               pForce  å¼ºåˆ¶å€¼çš„åœ°å€
+*               pFlag   å¼ºåˆ¶æ ‡å¿—åœ°å€
 * Output:       none
 * Return:       none
 * Others:
@@ -276,11 +276,11 @@ void lxCpyParaToInput(void *pDst, void *pSrc, size_t size, void *pForce, uint8_t
 
     switch(flag)
     {
-        case FORCE_N:/* ²»Ç¿ÖÆ */
+        case FORCE_N:/* ä¸å¼ºåˆ¶ */
             break;
 
-        case FORCE_V:/* Ç¿ÖÆÖµ */
-        case FORCE_A:/* Ç¿ÖÆÈ«²¿ */
+        case FORCE_V:/* å¼ºåˆ¶å€¼ */
+        case FORCE_A:/* å¼ºåˆ¶å…¨éƒ¨ */
             (void)memcpy(pSrc, pForce, size);
             break;
 
@@ -293,13 +293,13 @@ void lxCpyParaToInput(void *pDst, void *pSrc, size_t size, void *pForce, uint8_t
 /**************************************************************************************************
 * Identifier:   SCOD-AMC01-342 (Trace to: SLD-AMC01-342)
 * Function:     lxCpyFromInfo
-* Description:  ´øÇ¿ÖÆ¹¦ÄÜµÄÏµÍ³±äÁ¿¶ÁÈ¡
-* Input:        pDst    Ä¿±êµØÖ·
-*               slot    Ä£¿éµÄ²ÛÎ»ºÅ
-*               para    ¸ÃÄ£¿éÏµÍ³±äÁ¿Ë÷ÒıºÅ
-*               size    Êı¾İ´óĞ¡
-*               pForce  Ç¿ÖÆÖµÖ¸Õë
-*               pFlag   Ç¿ÖÆ±êÖ¾Ö¸Õë
+* Description:  å¸¦å¼ºåˆ¶åŠŸèƒ½çš„ç³»ç»Ÿå˜é‡è¯»å–
+* Input:        pDst    ç›®æ ‡åœ°å€
+*               slot    æ¨¡å—çš„æ§½ä½å·
+*               para    è¯¥æ¨¡å—ç³»ç»Ÿå˜é‡ç´¢å¼•å·
+*               size    æ•°æ®å¤§å°
+*               pForce  å¼ºåˆ¶å€¼æŒ‡é’ˆ
+*               pFlag   å¼ºåˆ¶æ ‡å¿—æŒ‡é’ˆ
 * Output:       none
 * Return:       none
 * Others:
@@ -325,19 +325,19 @@ void lxCpyFromInfo(void *pDst, int32_t slot, int32_t para, size_t size, const vo
 
     switch(flag)
     {
-        case FORCE_N:/* ²»Ç¿ÖÆ */
+        case FORCE_N:/* ä¸å¼ºåˆ¶ */
             (void)memcpy(pDst, &src, size);
             break;
 
-        case FORCE_V:/* Ç¿ÖÆÖµ */
-        case FORCE_A:/* Ç¿ÖÆÈ«²¿ */
+        case FORCE_V:/* å¼ºåˆ¶å€¼ */
+        case FORCE_A:/* å¼ºåˆ¶å…¨éƒ¨ */
             (void)memcpy(pDst, pForce, size);
             break;
 
-        case FORCE_Q:/* Ç¿ÖÆÖÊÁ¿Î» */
+        case FORCE_Q:/* å¼ºåˆ¶è´¨é‡ä½ */
             break;
 
-        default: /* ²»Ç¿ÖÆ */
+        default: /* ä¸å¼ºåˆ¶ */
             break;
     }
 }
@@ -345,12 +345,12 @@ void lxCpyFromInfo(void *pDst, int32_t slot, int32_t para, size_t size, const vo
 /**************************************************************************************************
 * Identifier:   SCOD-AMC01-343 (Trace to: SLD-AMC01-343)
 * Function:     lxCpyNetToInput
-* Description:  ¿½±´ÍøÂçÊı¾İµ½ÊäÈëÇø
-* Input:        pDst    Ä¿µÄµØÖ·
-*               pSrc    Ô´µØÖ·
-*               size    Êı¾İ´óĞ¡
-*               pForce  Ç¿ÖÆÖµµÄµØÖ·
-*               pFlag   Ç¿ÖÆ±êÖ¾µØÖ·
+* Description:  æ‹·è´ç½‘ç»œæ•°æ®åˆ°è¾“å…¥åŒº
+* Input:        pDst    ç›®çš„åœ°å€
+*               pSrc    æºåœ°å€
+*               size    æ•°æ®å¤§å°
+*               pForce  å¼ºåˆ¶å€¼çš„åœ°å€
+*               pFlag   å¼ºåˆ¶æ ‡å¿—åœ°å€
 * Output:       none
 * Return:       none
 * Others:
@@ -375,11 +375,11 @@ void lxCpyNetToInput(void *pDst, const void *pSrc, size_t size, void *pForce, ui
 
     switch(flag)
     {
-        case FORCE_N:/* ²»Ç¿ÖÆ */
+        case FORCE_N:/* ä¸å¼ºåˆ¶ */
             (void)memcpy(pDst, pSrc, size);
             break;
 
-        case FORCE_V:/* Ç¿ÖÆÖµ */
+        case FORCE_V:/* å¼ºåˆ¶å€¼ */
             if(2U == size)
             {
                 (void)memcpy(pDst, pForce, 1u);
@@ -395,7 +395,7 @@ void lxCpyNetToInput(void *pDst, const void *pSrc, size_t size, void *pForce, ui
                 (void)memcpy(pDst, pForce, size);
             }
             break;
-        case FORCE_Q:/* Ç¿ÖÆÖÊÁ¿Î» */
+        case FORCE_Q:/* å¼ºåˆ¶è´¨é‡ä½ */
             if(2U == size)
             {
                 (void)memcpy(pDst, pSrc, 1u);
@@ -411,7 +411,7 @@ void lxCpyNetToInput(void *pDst, const void *pSrc, size_t size, void *pForce, ui
                 /* Do Nothing */
             }
             break;
-        case FORCE_A:/* Ç¿ÖÆÈ«²¿ */
+        case FORCE_A:/* å¼ºåˆ¶å…¨éƒ¨ */
             (void)memcpy(pDst, pForce, size);
             break;
 

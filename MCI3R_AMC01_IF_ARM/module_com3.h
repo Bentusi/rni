@@ -1,6 +1,6 @@
 /**************************************************************************************************
 *Filename:     module_com3.h
-*Purpose:      ¹«ÓÃÄ£¿écom3·½·¨¶¨Òå
+*Purpose:      å…¬ç”¨æ¨¡å—com3æ–¹æ³•å®šä¹‰
 *Log:          Date          Author    Modified
 *              2021/9/21     hdq       create
 **************************************************************************************************/
@@ -13,19 +13,19 @@
 
 #define COM3_DATA_MAX_SIZE              (4040U)
 
-/* COM3 Ö÷´Ó¶Ë¿Ú */
-#define COM3_SLAVE_PORT                 (0x03U) /* COM3¶Ë¿ÚÎª´Ó¶Ë¿Ú */
-#define COM3_MASTER_PORT                (0x02U) /* COM3¶Ë¿ÚÎªÖ÷¶Ë¿Ú */
-#define COM3_PORT                       (0x01U) /* COM3¶Ë¿Úµ¥ÅäÖÃ */
+/* COM3 ä¸»ä»ç«¯å£ */
+#define COM3_SLAVE_PORT                 (0x03U) /* COM3ç«¯å£ä¸ºä»ç«¯å£ */
+#define COM3_MASTER_PORT                (0x02U) /* COM3ç«¯å£ä¸ºä¸»ç«¯å£ */
+#define COM3_PORT                       (0x01U) /* COM3ç«¯å£å•é…ç½® */
 
 typedef portDataInfo_t com3PrivInfo_t;
 
-/* com3°å¿¨Êı¾İÖ¡¶¨Òå, Ó¦ÓÃ²ãÎŞĞ£Ñé */
+/* com3æ¿å¡æ•°æ®å¸§å®šä¹‰, åº”ç”¨å±‚æ— æ ¡éªŒ */
 typedef struct
 {
-    uint8_t  data[COM3_DATA_MAX_SIZE]; /* ÓĞĞ§Êı¾İ, ÓÉÓÚfpgaÔ­Òò£¬×î´óÖ»Ö§³Ö4048£¬¾»ºÉ4048£­sizeof(ctrl)-sizeof(magic) */
-    uint32_t ctrl;                     /* Ê¹ÄÜ¿ØÖÆÎ» */
-    uint32_t magic;                    /* ÅäÖÃÎÄ¼şCRCĞ£ÑéÖµ */
+    uint8_t  data[COM3_DATA_MAX_SIZE]; /* æœ‰æ•ˆæ•°æ®, ç”±äºfpgaåŸå› ï¼Œæœ€å¤§åªæ”¯æŒ4048ï¼Œå‡€è·4048ï¼sizeof(ctrl)-sizeof(magic) */
+    uint32_t ctrl;                     /* ä½¿èƒ½æ§åˆ¶ä½ */
+    uint32_t magic;                    /* é…ç½®æ–‡ä»¶CRCæ ¡éªŒå€¼ */
 }__attribute__((packed)) com3Frame_t;
 
 extern int32_t com3Init(int32_t slot);

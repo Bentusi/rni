@@ -1,6 +1,6 @@
 /***************************************************************************************************
  * Filename: maintain.c
- * Purpose:  Î¬»¤Ä£Ê½½Ó¿ÚÄ£¿é
+ * Purpose:  ç»´æŠ¤æ¨¡å¼æŽ¥å£æ¨¡å—
  * Date:         Author      Modified 
  * 2021-09-23    hdq         Create  
 ***************************************************************************************************/
@@ -29,8 +29,8 @@ static int32_t s_mtPort = 0;
 /*********************************************************************
 * Identifier:   SCOD-AMC01-242 (Trace to: SLD-AMC01-242)
 * Function:     mtRxData
-* Description:  ½ÓÊÕÎ¬»¤Êý¾Ý½Ó¿Ú
-* Input:        pBuf Êý¾Ý»º´æÖ¸Õë
+* Description:  æŽ¥æ”¶ç»´æŠ¤æ•°æ®æŽ¥å£
+* Input:        pBuf æ•°æ®ç¼“å­˜æŒ‡é’ˆ
 * Output:       none
 * Return:       0
 *
@@ -54,7 +54,7 @@ static int32_t mtRxData(void *pBuf)
 /**************************************************************************************************
  * Identifier:   SCOD-AMC01-243 (Trace to: SLD-AMC01-243)
  * Function:     mtTxData
- * Description:  ·¢ËÍÎ¬»¤Êý¾Ý½Ó¿Ú
+ * Description:  å‘é€ç»´æŠ¤æ•°æ®æŽ¥å£
  * Input:        pBuf: send buffer address
  * Output:       None
  * Return:       0: success; other:fail
@@ -80,10 +80,10 @@ static int32_t mtTxData(void *pBuf)
 /****************************************************************************************************
 * Identifier:   SCOD-AMC01-244 (Trace to: SLD-AMC01-244)
 * Function:     checkFrame
-* Description:  Êý¾ÝÖ¡¼ì²â
-* Input:        frame  Êý¾ÝÖ¡Ö¸Õë
+* Description:  æ•°æ®å¸§æ£€æµ‹
+* Input:        frame  æ•°æ®å¸§æŒ‡é’ˆ
 * Output:       none
-* Return:       ret     ¼ì²â½á¹û£¬ 0 Õý³£ ÆäËü ÎÞÐ§
+* Return:       ret     æ£€æµ‹ç»“æžœï¼Œ 0 æ­£å¸¸ å…¶å®ƒ æ— æ•ˆ
 *
 * Others:
 * Log:          Date          Author    Modified
@@ -97,7 +97,7 @@ static int32_t checkFrame(const com4Frame_t *frame)
 
     if(0 != infoGetPfErrorState(MODE_NOT_MATCH))
     {
-        /* Ä£Ê½²»Ò»ÖÂ  ½ûÖ¹Ö´ÐÐÎ¬»¤ÃüÁî */
+        /* æ¨¡å¼ä¸ä¸€è‡´  ç¦æ­¢æ‰§è¡Œç»´æŠ¤å‘½ä»¤ */
         ret = FRAME_ERR_MODE;
     }
 
@@ -136,10 +136,10 @@ static int32_t checkFrame(const com4Frame_t *frame)
 /****************************************************************************************************
 * Identifier:   SCOD-AMC01-245 (Trace to: SLD-AMC01-245)
 * Function:     ackMtsData
-* Description:  Í¨ÐÅ½ÓÊÕÊý¾ÝÏìÓ¦Ö¡
-* Input:        cmd ÏìÓ¦ÃüÁî
-*              para ÏìÓ¦²ÎÊý
-*             fType ÏìÓ¦ÎÄ¼þÀàÐÍ
+* Description:  é€šä¿¡æŽ¥æ”¶æ•°æ®å“åº”å¸§
+* Input:        cmd å“åº”å‘½ä»¤
+*              para å“åº”å‚æ•°
+*             fType å“åº”æ–‡ä»¶ç±»åž‹
 * Output:       none
 * Return:       none
 *
@@ -151,12 +151,12 @@ static void ackMtsData(int32_t cmd, int32_t para, int16_t fType)
 {
     com4Frame_t *pTxFrame = (com4Frame_t *)g_fastTxBuffer;
 
-    /* ±¾Ö¡»Ø¸´ */
+    /* æœ¬å¸§å›žå¤ */
     pTxFrame->id = infoCurMpuId().value;
-    pTxFrame->type = fType;    /* ÎÄ¼þÀàÐÍ */
-    pTxFrame->idxMax = 1U;     /* ·ÖÆ¬Êý¾ÝÖ¡×ÜÊý¾ÝÁ¿ */
-    pTxFrame->idx = 0U;        /* Ö¡ÐòºÅ */
-    pTxFrame->size = 4U;       /* µ±Ç°Ö¡³¤¶È */
+    pTxFrame->type = fType;    /* æ–‡ä»¶ç±»åž‹ */
+    pTxFrame->idxMax = 1U;     /* åˆ†ç‰‡æ•°æ®å¸§æ€»æ•°æ®é‡ */
+    pTxFrame->idx = 0U;        /* å¸§åºå· */
+    pTxFrame->size = 4U;       /* å½“å‰å¸§é•¿åº¦ */
     pTxFrame->cmd = cmd;
 
     (void)memcpy((void*)pTxFrame->data, (const void*)&para, sizeof(int32_t));
@@ -168,10 +168,10 @@ static void ackMtsData(int32_t cmd, int32_t para, int16_t fType)
 * Identifier:   SCOD-AMC01-246 (Trace to: SLD-AMC01-246)
 * Function:     ackMtsData
 * Description:  checkMagic
-* Input:        magic Ð£ÑéÖµ
-*                type ÎÄ¼þÀàÐÍ
+* Input:        magic æ ¡éªŒå€¼
+*                type æ–‡ä»¶ç±»åž‹
 * Output:       none
-* Return:       ret   Ð£Ñé½á¹û
+* Return:       ret   æ ¡éªŒç»“æžœ
 *
 * Others:
 * Log:          Date          Author    Modified
@@ -187,14 +187,14 @@ static int32_t checkMagic(uint32_t magic, uint32_t type)
         case FILE_MODIFY_T2:
             if(magic != lxGetForceHead()->magic)
             {
-                ret = -1; /* ¹¤³Ì²»Æ¥Åä */
+                ret = -1; /* å·¥ç¨‹ä¸åŒ¹é… */
             }
             break;
 
         case FILE_MODIFY_PARA:
             if(magic != lxGetParaHead()->magic)
             {
-                ret = -2; /* ¹¤³Ì²»Æ¥Åä */
+                ret = -2; /* å·¥ç¨‹ä¸åŒ¹é… */
             }
             break;
 
@@ -209,10 +209,10 @@ static int32_t checkMagic(uint32_t magic, uint32_t type)
 /*********************************************************************
 * Identifier:   SCOD-AMC01-247 (Trace to: SLD-AMC01-247)
 * Function:     mtFileProcess
-* Description:  ½âÎöÇ¿ÖÆÎÄ¼þ
-* Input:        pBuf Ç¿ÖÆÎÄ¼þÊäÈëÖ¸Õë
+* Description:  è§£æžå¼ºåˆ¶æ–‡ä»¶
+* Input:        pBuf å¼ºåˆ¶æ–‡ä»¶è¾“å…¥æŒ‡é’ˆ
 * Output:       none
-* Return:       0    ³É¹¦ 1 ÎÄ¼þÐ£ÑéÊ§°Ü 2 ²»Ö§³ÖÎÄ¼þÀàÐÍ 3 ¹¤³Ì²»Æ¥Åä
+* Return:       0    æˆåŠŸ 1 æ–‡ä»¶æ ¡éªŒå¤±è´¥ 2 ä¸æ”¯æŒæ–‡ä»¶ç±»åž‹ 3 å·¥ç¨‹ä¸åŒ¹é…
 * Others:
 * Log:          Date          Author    Modified
 *               2017/08/14
@@ -231,11 +231,11 @@ static int32_t mtFileProcess(void *pBuf)
 
     LYNX_ASSERT(NULL != pBuf);
 
-    /* ËùÓÐÊý¾Ý½øÐÐÐ£Ñé */
+    /* æ‰€æœ‰æ•°æ®è¿›è¡Œæ ¡éªŒ */
     crc = drv2CrcCal((const void*)pBuf + sizeof(fileHead_t), pInfo->length);
     if( crc == pInfo->crc)
     {
-        /* Êý¾ÝOK */
+        /* æ•°æ®OK */
         type = pInfo->type;
         switch(type)
         {
@@ -243,7 +243,7 @@ static int32_t mtFileProcess(void *pBuf)
             case FILE_MODIFY_T2:
                 if(checkMagic(pInfo->magic, FILE_MODIFY_FORCE) != 0)
                 {
-                    ret = 3; /* ¹¤³Ì²»Æ¥Åä */
+                    ret = 3; /* å·¥ç¨‹ä¸åŒ¹é… */
                 }
                 else
                 {
@@ -252,7 +252,7 @@ static int32_t mtFileProcess(void *pBuf)
                         size = ((modifyHead_t*)curAddr)->valueSize;
                         idx = ((modifyHead_t*)curAddr)->index;
                         curAddr += sizeof(modifyHead_t);
-                        forceCopyTo(idx, (const void*)curAddr, size); /* ¿½±´Ç¿ÖÆÎÄ¼þ */
+                        forceCopyTo(idx, (const void*)curAddr, size); /* æ‹·è´å¼ºåˆ¶æ–‡ä»¶ */
                         curAddr += size;
                     }
                 }
@@ -261,7 +261,7 @@ static int32_t mtFileProcess(void *pBuf)
             case FILE_MODIFY_PARA:
                 if(checkMagic(pInfo->magic, FILE_MODIFY_PARA) != 0)
                 {
-                    ret = 3; /* ¹¤³Ì²»Æ¥Åä */
+                    ret = 3; /* å·¥ç¨‹ä¸åŒ¹é… */
                 }
                 else
                 {
@@ -285,7 +285,7 @@ static int32_t mtFileProcess(void *pBuf)
     }
     else
     {
-        /* ÎÄ¼þÐ£ÑéÊ§°Ü */
+        /* æ–‡ä»¶æ ¡éªŒå¤±è´¥ */
         ret = 1;
     }
 
@@ -295,10 +295,10 @@ static int32_t mtFileProcess(void *pBuf)
 /****************************************************************************************************
 * Identifier:   SCOD-AMC01-248 (Trace to: SLD-AMC01-248)
 * Function:     mtRxFile
-* Description:  ½ÓÍ¨ÐÅIVÊý¾Ý£¬²¢·¢³öÏìÓ¦Ö¡
-* Input:        pFile ½ÓÊÕÎÄ¼þ»º´æ
+* Description:  æŽ¥é€šä¿¡IVæ•°æ®ï¼Œå¹¶å‘å‡ºå“åº”å¸§
+* Input:        pFile æŽ¥æ”¶æ–‡ä»¶ç¼“å­˜
 * Output:       none
-* Return:       0 ½ÓÊÕÊý¾ÝÍê³É 1 Ö¡Ð£ÑéÊ§°Ü 2 Í¨ÐÅ³ö´í 4 ÎÄ¼þÕýÔÚ½ÓÊÕÖÐ
+* Return:       0 æŽ¥æ”¶æ•°æ®å®Œæˆ 1 å¸§æ ¡éªŒå¤±è´¥ 2 é€šä¿¡å‡ºé”™ 4 æ–‡ä»¶æ­£åœ¨æŽ¥æ”¶ä¸­
 *
 * Others:
 * Log:          Date          Author    Modified
@@ -314,36 +314,36 @@ static int32_t mtRxFile(void *pFile)
 
     const com4Frame_t *pRxFrame = (com4Frame_t *)g_fastRxBuffer;
 
-    /* ½ÓÊÕÎ¬»¤Êý¾ÝÖ¡ */
+    /* æŽ¥æ”¶ç»´æŠ¤æ•°æ®å¸§ */
     result = mtRxData((void*)pRxFrame);
     if(result == 0)
     {
-        /* Êý¾ÝÖ¡¼ì²â */
+        /* æ•°æ®å¸§æ£€æµ‹ */
         result = checkFrame(pRxFrame);
         if(result == 0)
         {
-            /* ¸ù¾ÝË÷Òý±£´æÊý¾Ý */
+            /* æ ¹æ®ç´¢å¼•ä¿å­˜æ•°æ® */
             cpySize = pRxFrame->size;
             idx = pRxFrame->idx;
             curAddr = (uint8_t *)pFile + (idx * COM4_DATA_SIZE_MAX);
             (void)memcpy((void*)curAddr, (const void*)pRxFrame->data, (size_t)cpySize);
 
-            /* ½«½ÓÊÕµ½µÄÎ¬»¤ÃüÁîÖ¡¸´ÖÆµ½Í¬²½·¢ËÍ»º´æ ÏÂÒ»ÖÜÆÚ·¢ËÍ */
+            /* å°†æŽ¥æ”¶åˆ°çš„ç»´æŠ¤å‘½ä»¤å¸§å¤åˆ¶åˆ°åŒæ­¥å‘é€ç¼“å­˜ ä¸‹ä¸€å‘¨æœŸå‘é€ */
             sbSyncForceData((const uint8_t *)pRxFrame);
 
-            ret = 4; /* ÎÄ¼þÕýÔÚ½ÓÊÕÖÐ */
+            ret = 4; /* æ–‡ä»¶æ­£åœ¨æŽ¥æ”¶ä¸­ */
         }
         else
         {
-            ret = 1; /* Ö¡Ð£ÑéÊ§°Ü */
+            ret = 1; /* å¸§æ ¡éªŒå¤±è´¥ */
         }
 
-        /* ±¾Ö¡»Ø¸´ */
+        /* æœ¬å¸§å›žå¤ */
         ackMtsData(0x200, result, pRxFrame->type);
 
-        /* Ö¡½ÓÊÕÍê³É */
+        /* å¸§æŽ¥æ”¶å®Œæˆ */
         if((idx >= (pRxFrame->idxMax - (uint16_t)1U)) &&
-                (ret == 4)) /* ×îºóÒ»Ö¡ Êý¾Ý ÇÒÊý¾ÝÖ¡Õý³£ */
+                (ret == 4)) /* æœ€åŽä¸€å¸§ æ•°æ® ä¸”æ•°æ®å¸§æ­£å¸¸ */
         {
             result = mtFileProcess(pFile);
             result += FILE_OK;
@@ -353,7 +353,7 @@ static int32_t mtRxFile(void *pFile)
     }
     else if(result == -1)
     {
-        ret = 2; /* Í¨ÐÅ½ÓÊÕÊ§°Ü */
+        ret = 2; /* é€šä¿¡æŽ¥æ”¶å¤±è´¥ */
         ackMtsData(0x200, FRAME_COM_ERR, pRxFrame->type);
     }
     else
@@ -367,10 +367,10 @@ static int32_t mtRxFile(void *pFile)
 /****************************************************************************************************
 * Identifier:   SCOD-AMC01-249 (Trace to: SLD-AMC01-249)
 * Function:     mtTxFile
-* Description:  Ïò¹¤³ÌÊ¦Õ¾·¢ËÍÎ¬»¤Êý¾Ý
-* Input:        pBuf ·¢ËÍÊý¾ÝÖ¸Õë
+* Description:  å‘å·¥ç¨‹å¸ˆç«™å‘é€ç»´æŠ¤æ•°æ®
+* Input:        pBuf å‘é€æ•°æ®æŒ‡é’ˆ
 * Output:       none
-* Return:       ret  µ±Ç°ÎÄ¼þÊÇ·ñ·¢ËÍÍê³É 1 Î´·¢Íê 0 ·¢ËÍÍê³É
+* Return:       ret  å½“å‰æ–‡ä»¶æ˜¯å¦å‘é€å®Œæˆ 1 æœªå‘å®Œ 0 å‘é€å®Œæˆ
 *
 * Others:
 * Log:          Date          Author    Modified
@@ -379,9 +379,9 @@ static int32_t mtRxFile(void *pFile)
 static int32_t mtTxFile(void *pBuf)
 {
     static int8_t locker = 0;
-    /* µ±Ç°Ê£ÓàÊý¾ÝÁ¿ */
+    /* å½“å‰å‰©ä½™æ•°æ®é‡ */
     static uint32_t remainSize = 0U;
-    /* µ±Ç°Òª·¢ËÍ»º³åÇøµØÖ· */
+    /* å½“å‰è¦å‘é€ç¼“å†²åŒºåœ°å€ */
     static uint32_t curPosition = 0U;
     static uint16_t curIndex = 0U;
     static uint16_t maxIndex = 0U;
@@ -394,7 +394,7 @@ static int32_t mtTxFile(void *pBuf)
 
     LYNX_ASSERT(NULL != pFileHead);
 
-    if(0 == locker) /* µÚÒ»´Î*/
+    if(0 == locker) /* ç¬¬ä¸€æ¬¡*/
     {
         remainSize = pFileHead->length + sizeof(fileHead_t);
         maxIndex = (uint16_t)(remainSize/COM4_DATA_SIZE_MAX);
@@ -407,7 +407,7 @@ static int32_t mtTxFile(void *pBuf)
         locker = 0x55;
     }
 
-    /* ×îºóÒ»Ö¡ */
+    /* æœ€åŽä¸€å¸§ */
     if(remainSize > COM4_DATA_SIZE_MAX)
     {
         cpySize = COM4_DATA_SIZE_MAX;
@@ -435,12 +435,12 @@ static int32_t mtTxFile(void *pBuf)
     }
     remainSize -= cpySize;
 
-    /* Ã»ÓÐÌí¼ÓCRC¼ÆËã£¬Ô­ÒòÎª£º½ÚÔ¼Ê±¼äÇÒÕâÐ©Êý¾Ý·Ç°²È« */
+    /* æ²¡æœ‰æ·»åŠ CRCè®¡ç®—ï¼ŒåŽŸå› ä¸ºï¼šèŠ‚çº¦æ—¶é—´ä¸”è¿™äº›æ•°æ®éžå®‰å…¨ */
     pFrame->id = infoCurMpuId().value;
-    pFrame->type = (int16_t)pFileHead->type;   /* ÎÄ¼þÀàÐÍ */
-    pFrame->idxMax = maxIndex;                 /* ·ÖÆ¬Êý¾ÝÖ¡×ÜÊý¾ÝÁ¿ */
-    pFrame->idx = curIndex;                    /* Ö¡ÐòºÅ */
-    pFrame->size = (uint16_t)cpySize;          /* µ±Ç°Ö¡³¤¶È */
+    pFrame->type = (int16_t)pFileHead->type;   /* æ–‡ä»¶ç±»åž‹ */
+    pFrame->idxMax = maxIndex;                 /* åˆ†ç‰‡æ•°æ®å¸§æ€»æ•°æ®é‡ */
+    pFrame->idx = curIndex;                    /* å¸§åºå· */
+    pFrame->size = (uint16_t)cpySize;          /* å½“å‰å¸§é•¿åº¦ */
     pFrame->cmd = 0x1000;
 
     /* send data */
@@ -453,7 +453,7 @@ static int32_t mtTxFile(void *pBuf)
 /****************************************************************************************************
 * Identifier:   SCOD-AMC01-250 (Trace to: SLD-AMC01-250)
 * Function:     mtTxHandle
-* Description:  ÏòSU·þÎñµ¥Ôª·¢ËÍÎ¬»¤Êý¾Ý
+* Description:  å‘SUæœåŠ¡å•å…ƒå‘é€ç»´æŠ¤æ•°æ®
 * Input:        none
 * Output:       none
 * Return:       none
@@ -470,7 +470,7 @@ void mtTxHandle(void)
 
     if(infoGetAddr()->moduleInfo[g_localSlot].difInfo.mpuInfo.mtSize == 0U)
     {
-        /* ¼ÆËãÎ¬»¤Êý¾Ý ×Ü³¤¶È */
+        /* è®¡ç®—ç»´æŠ¤æ•°æ® æ€»é•¿åº¦ */
         mtSize += sizeof(lynxInfo_t);
         mtSize += cfgInputRamSize();
         mtSize += cfgOutputRamSize();
@@ -519,7 +519,7 @@ void mtTxHandle(void)
                 head.para = (uint32_t)lxGetForce();
                 break;
 
-            /* ²ÎÊýÇøÉÏ´«½Ó¿Ú */
+            /* å‚æ•°åŒºä¸Šä¼ æŽ¥å£ */
             case 4U:
                 head.magic = lxGetParaHead()->magic;
                 head.length = cfgParaRamSize();
@@ -550,7 +550,7 @@ void mtTxHandle(void)
 /*********************************************************************
 * Identifier:   SCOD-AMC01-251 (Trace to: SLD-AMC01-251)
 * Function:     mtModeTask
-* Description:  Î¬»¤ÈÎÎñº¯Êý
+* Description:  ç»´æŠ¤ä»»åŠ¡å‡½æ•°
 * Input:        none
 * Output:       none
 * Return:       0
@@ -588,8 +588,8 @@ int32_t mtModeTask(void)
 /*********************************************************************
 * Identifier:   SCOD-AMC01-014 (Trace to: SLD-AMC01-014)
 * Function:     mtSetSlot
-* Description:  ÉèÖÃÍ¨ÐÅ4²ÛÎ»ºÅ
-* Input:        slot ²ÛÎ»ºÅ
+* Description:  è®¾ç½®é€šä¿¡4æ§½ä½å·
+* Input:        slot æ§½ä½å·
 * Output:       none
 * Return:       none
 * Others:
@@ -604,7 +604,7 @@ void mtSetSlot(int32_t slot)
 /*********************************************************************
 * Identifier:   SCOD-AMC01-042 (Trace to: SLD-AMC01-042)
 * Function:     mtUserModeProcess
-* Description:  Ä£Ê½ÇÐ»»Ê±Êý¾Ý´¦Àí
+* Description:  æ¨¡å¼åˆ‡æ¢æ—¶æ•°æ®å¤„ç†
 * Input:        none
 * Output:       none
 * Return:       none
@@ -614,19 +614,19 @@ void mtSetSlot(int32_t slot)
 ***********************************************************************/
 void mtUserModeProcess(void)
 {
-    /* ¶ÔÓÃ»§µÄÄ£Ê½ÊäÈë½øÐÐ´¦Àí */
+    /* å¯¹ç”¨æˆ·çš„æ¨¡å¼è¾“å…¥è¿›è¡Œå¤„ç† */
     swUserHandle();
 
     switch(infoCurSysMode())
     {
         case SYS_MAIT:
             tmResumeTask(PF_MAIT_TASK);
-            /* ËµÃ÷µ±Ç°ÎªÎ¬»¤Ä£Ê½ */
+            /* è¯´æ˜Žå½“å‰ä¸ºç»´æŠ¤æ¨¡å¼ */
             break;
 
         case SYS_NOR:
-            /* µ±´ÓÆäËüÄ£Ê½½øÈëÕý³£ÔËÐÐÄ£Ê½Ê±£¬Òª¶ÔÇ¿ÖÆÇø½øÐÐÇå³ý
-            * ¸ÃÇå³ýÊ±¼äÓÐµã³¤£¬Í¨ÐÅ»á³öÏÖ³¬Ê±¾¯¸æ£¬µ«Ö»ÔËÐÐÒ»´Î */
+            /* å½“ä»Žå…¶å®ƒæ¨¡å¼è¿›å…¥æ­£å¸¸è¿è¡Œæ¨¡å¼æ—¶ï¼Œè¦å¯¹å¼ºåˆ¶åŒºè¿›è¡Œæ¸…é™¤
+            * è¯¥æ¸…é™¤æ—¶é—´æœ‰ç‚¹é•¿ï¼Œé€šä¿¡ä¼šå‡ºçŽ°è¶…æ—¶è­¦å‘Šï¼Œä½†åªè¿è¡Œä¸€æ¬¡ */
             tmSuspendTask(PF_MAIT_TASK);
             break;
 
@@ -639,8 +639,8 @@ void mtUserModeProcess(void)
 /****************************************************************************************************
 * Identifier:   SCOD-AMC01-252 (Trace to: SLD-AMC01-252)
 * Function:     mtSaveFile
-* Description:  ½âÎöÎ¬»¤Êý¾ÝÍ¬²½Ö¡
-* Input:        pBuf Êý¾ÝÖ¸Õë
+* Description:  è§£æžç»´æŠ¤æ•°æ®åŒæ­¥å¸§
+* Input:        pBuf æ•°æ®æŒ‡é’ˆ
 * Output:
 * Return:       none
 *
@@ -652,7 +652,7 @@ void mtSaveFile(uint8_t *pBuf)
 {
     uint8_t *pDst = g_flieBuf;
     fileHead_t *pHead = (fileHead_t*)g_flieBuf;
-    /* ¶ÁÈ¡Êý¾Ýµ½ÎÄ¼þ */
+    /* è¯»å–æ•°æ®åˆ°æ–‡ä»¶ */
     com4Frame_t *pFrame = (com4Frame_t *)pBuf;
 
     LYNX_ASSERT(NULL != pBuf);
@@ -661,16 +661,16 @@ void mtSaveFile(uint8_t *pBuf)
     pDst += pFrame->idx * COM4_DATA_SIZE_MAX;
     (void)memcpy((void*)pDst, (const void*)pFrame->data, (size_t)pFrame->size);
 
-    if(pFrame->idxMax == (pFrame->idx +1U))    /* ×îºóÒ»Ö¡Êý¾Ý */
+    if(pFrame->idxMax == (pFrame->idx +1U))    /* æœ€åŽä¸€å¸§æ•°æ® */
     {
-        /* ÎÄ¼þÍêÕûÐÔÐ£Ñé */
+        /* æ–‡ä»¶å®Œæ•´æ€§æ ¡éªŒ */
         if(drv2CrcCal((const void*)(g_flieBuf + sizeof(fileHead_t)), pHead->length) == pHead->crc)
         {
             (void)mtFileProcess((void*)g_flieBuf);
         }
         else
         {
-            /* Êý¾Ý²»ÍêÕû Ôò¶ªÆúÊý¾Ý */
+            /* æ•°æ®ä¸å®Œæ•´ åˆ™ä¸¢å¼ƒæ•°æ® */
         }
     }
 }
@@ -678,7 +678,7 @@ void mtSaveFile(uint8_t *pBuf)
 /****************************************************************************************************
 * Identifier:   SCOD-AMC01-048 (Trace to: SLD-AMC01-048)
 * Function:     mtMSMtDataProcess
-* Description:  ÈßÓàÄ£Ê½ÏÂÖ÷¿ØÄ£¿éÄ£Ê½ÇÐ»»Ç¿ÖÆÊý¾Ý´¦Àí
+* Description:  å†—ä½™æ¨¡å¼ä¸‹ä¸»æŽ§æ¨¡å—æ¨¡å¼åˆ‡æ¢å¼ºåˆ¶æ•°æ®å¤„ç†
 * Input:        none
 * Output:       none
 * Return:       none
@@ -696,7 +696,7 @@ void mtMSMtDataProcess(void)
     if(infoGetMpuMS() == MPU_SLAVE)
     {
         if((SYS_MAIT == localTrueMode) && (SYS_NOR == standbyTrueMode) && (0 == lock))
-        {   /* µ±´ÓÄ£¿éÔÚÎ¬»¤Ä£Ê½£¬Ö÷Ä£¿éÔÚÔËÐÐÄ£Ê½Ê±£¬Çå³ý */
+        {   /* å½“ä»Žæ¨¡å—åœ¨ç»´æŠ¤æ¨¡å¼ï¼Œä¸»æ¨¡å—åœ¨è¿è¡Œæ¨¡å¼æ—¶ï¼Œæ¸…é™¤ */
             (void)memset(lxGetForce(), 0, (size_t)lxGetForceHead()->length);
             lock = 1;
         }

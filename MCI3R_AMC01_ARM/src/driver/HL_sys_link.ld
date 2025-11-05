@@ -19,7 +19,7 @@ MEMORY
     VECTORS(rx)     : ORIGIN = 0x00000000, LENGTH = 0x00000020
     FLASH  (rx)     : ORIGIN = 0x00000020, LENGTH = (0x001FFFE0 + 0x00200000)
     RAM (xrw)       : ORIGIN = 0x08010000, LENGTH = 0x00040000 /* 64K*7 -4K */
-    RAM_SL (xrw)    : ORIGIN = 0x0807F000, LENGTH = 0x00001000 /* 4K flash ×ÔÕï¶Ïº¯ÊýÇø   */
+    RAM_SL (xrw)    : ORIGIN = 0x0807F000, LENGTH = 0x00001000 /* 4K flash è‡ªè¯Šæ–­å‡½æ•°åŒº   */
     MEMORY_B1 (rx)  : ORIGIN = 0x60000000, LENGTH = 0K
 }
 

@@ -1,8 +1,8 @@
 /**************************************************************************************************
 *FILENAME:     algInterface.c
-*PURPOSE:      »ù´¡¹Ì¼şÓëÏµÍ³Ó¦ÓÃ½Ó¿Ú
+*PURPOSE:      åŸºç¡€å›ºä»¶ä¸ç³»ç»Ÿåº”ç”¨æ¥å£
 *DATE          AUTHOR          CHANGE
-*2023.05.12    wxb             ´´½¨ÎÄ¼ş
+*2023.05.12    wxb             åˆ›å»ºæ–‡ä»¶
 **************************************************************************************************/
 #include "algInterface.h"
 #include "project.h"
@@ -39,10 +39,10 @@ algMethod_t g_algMethodHandle =
 /*********************************************************************
 * Identifier:   SCOD-AMC01-333 (Trace to: SLD-AMC01-333)
 * Function:     ifAgLoadInit
-* Description:  ¼ÓÔØËã·¨»·¾³
+* Description:  åŠ è½½ç®—æ³•ç¯å¢ƒ
 * Input:        none
 * Output:       none
-* Return:       ret 0 ¼ÓÔØÕıÈ· -1 ¼ÓÔØÊ§°Ü
+* Return:       ret 0 åŠ è½½æ­£ç¡® -1 åŠ è½½å¤±è´¥
 *
 * Others:
 * Log:          Date          Author    Modified
@@ -63,7 +63,7 @@ int32_t ifAgLoadInit(void)
 /*********************************************************************
 * Identifier:   SCOD-AMC01-334 (Trace to: SLD-AMC01-334)
 * Function:     ifAgLogicTaskInit
-* Description:  Ëã·¨ÎÄ¼ş³õÊ¼»¯
+* Description:  ç®—æ³•æ–‡ä»¶åˆå§‹åŒ–
 * Input:        none
 * Output:       none
 * Return:       none
@@ -80,10 +80,10 @@ void ifAgLogicTaskInit(void)
 /*********************************************************************
 * Identifier:   SCOD-AMC01-335 (Trace to: SLD-AMC01-335)
 * Function:     ifAgLogicTaskRun
-* Description:  Ëã·¨ÖÜÆÚÔËĞĞÈë¿Úº¯Êı
+* Description:  ç®—æ³•å‘¨æœŸè¿è¡Œå…¥å£å‡½æ•°
 * Input:        none
 * Output:       none
-* Return:       ·µ»Ø Ëã·¨ÔËĞĞ½á¹û
+* Return:       è¿”å› ç®—æ³•è¿è¡Œç»“æœ
 *
 * Others:
 * Log:          Date          Author    Modified
@@ -97,10 +97,10 @@ int32_t ifAgLogicTaskRun(void)
 /*********************************************************************
 * Identifier:   SCOD-AMC01-336 (Trace to: SLD-AMC01-336)
 * Function:     ifAgGetOneForceAddr
-* Description:  »ñÈ¡Ç¿ÖÆÊı¾İ½Ó¿Úº¯Êı
-* Input:        index Ç¿ÖÆÊı¾İµÄË÷Òı
+* Description:  è·å–å¼ºåˆ¶æ•°æ®æ¥å£å‡½æ•°
+* Input:        index å¼ºåˆ¶æ•°æ®çš„ç´¢å¼•
 * Output:       none
-* Return:       Ç¿ÖÆÊı¾İµØÖ·
+* Return:       å¼ºåˆ¶æ•°æ®åœ°å€
 *
 * Others:
 * Log:          Date          Author    Modified
@@ -114,10 +114,10 @@ const uint32_t *ifAgGetOneForceAddr(uint32_t index)
 /*********************************************************************
 * Identifier:   SCOD-AMC01-337 (Trace to: SLD-AMC01-337)
 * Function:     ifAgGetOneParaAddr
-* Description:  »ñÈ¡²ÎÊıÊı¾İ½Ó¿Úº¯Êı
-* Input:        index ²ÎÊıÊı¾İµÄË÷Òı
+* Description:  è·å–å‚æ•°æ•°æ®æ¥å£å‡½æ•°
+* Input:        index å‚æ•°æ•°æ®çš„ç´¢å¼•
 * Output:       none
-* Return:       ²ÎÊıÊı¾İµØÖ·
+* Return:       å‚æ•°æ•°æ®åœ°å€
 *
 * Others:
 * Log:          Date          Author    Modified

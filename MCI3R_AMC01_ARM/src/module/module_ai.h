@@ -1,6 +1,6 @@
 /**************************************************************************************************
 *Filename:     module_ai.h
-*Purpose:      ¹«ÓÃÄ£¿éai·½·¨¶¨Òå
+*Purpose:      å…¬ç”¨æ¨¡å—aiæ–¹æ³•å®šä¹‰
 *Log:          Date          Author    Modified
 *              2021/9/21     hdq       create
 **************************************************************************************************/
@@ -12,28 +12,28 @@
 #define AI_CH_MAX                       (12)
 #define AI_FRAME_RSV_SIZE               (40)
 
-/* AIÄ£¿éË½ÓĞÅäÖÃ */
+/* AIæ¨¡å—ç§æœ‰é…ç½® */
 typedef struct
 {
-    float32_t maxValue[AI_CH_MAX];      /* ¹¤³ÌÁ¿ÉÏÏŞÖµ */
-    float32_t minValue[AI_CH_MAX];      /* ¹¤³ÌÁ¿ÏÂÏŞÖµ */
+    float32_t maxValue[AI_CH_MAX];      /* å·¥ç¨‹é‡ä¸Šé™å€¼ */
+    float32_t minValue[AI_CH_MAX];      /* å·¥ç¨‹é‡ä¸‹é™å€¼ */
 
-    float32_t maxOriValue[AI_CH_MAX];   /* µçÆøÁ¿ÉÏÏŞÖµ */
-    float32_t minOriValue[AI_CH_MAX];   /* µçÆøÁ¿ÏÂÏŞÖµ */
+    float32_t maxOriValue[AI_CH_MAX];   /* ç”µæ°”é‡ä¸Šé™å€¼ */
+    float32_t minOriValue[AI_CH_MAX];   /* ç”µæ°”é‡ä¸‹é™å€¼ */
 
-    float32_t maxViewValue[AI_CH_MAX];  /* ¼à²â¹¤³ÌÁ¿ÉÏÏŞÖµ */
-    float32_t minViewValue[AI_CH_MAX];  /* ¼à²â¹¤³ÌÁ¿ÏÂÏŞÖµ */
+    float32_t maxViewValue[AI_CH_MAX];  /* ç›‘æµ‹å·¥ç¨‹é‡ä¸Šé™å€¼ */
+    float32_t minViewValue[AI_CH_MAX];  /* ç›‘æµ‹å·¥ç¨‹é‡ä¸‹é™å€¼ */
 } aiPrivCfg_t;
 
-/* Ai°å¿¨Êı¾İÖ¡¶¨Òå */
+/* Aiæ¿å¡æ•°æ®å¸§å®šä¹‰ */
 typedef struct
 {
-    uint32_t info;                    /* ¶ÔÓÚ¹¤³ÌÊ¦Õ¾ ±íÊ¾°å¿¨ID 4B */
-    analog6BF_t data[AI_CH_MAX];      /* 12Í¨µÀ£¬Ã¿Í¨µÀÒ»¸öÄ£ÄâÁ¿£¬12x6 = 72B */
-    uint8_t rsv[AI_FRAME_RSV_SIZE];   /* ±£Áô×Ö¶Î 40B */
-    uint8_t rsv1[2];                  /* fpga crc16 Ê¹ÓÃ 2B */
-    uint16_t comState;                /* fpga Í¨ĞÅ×´Ì¬Ê¹ÓÃ 2B */
-    uint64_t crc;                     /* fpga Ğ£Ñé 8B */
+    uint32_t info;                    /* å¯¹äºå·¥ç¨‹å¸ˆç«™ è¡¨ç¤ºæ¿å¡ID 4B */
+    analog6BF_t data[AI_CH_MAX];      /* 12é€šé“ï¼Œæ¯é€šé“ä¸€ä¸ªæ¨¡æ‹Ÿé‡ï¼Œ12x6 = 72B */
+    uint8_t rsv[AI_FRAME_RSV_SIZE];   /* ä¿ç•™å­—æ®µ 40B */
+    uint8_t rsv1[2];                  /* fpga crc16 ä½¿ç”¨ 2B */
+    uint16_t comState;                /* fpga é€šä¿¡çŠ¶æ€ä½¿ç”¨ 2B */
+    uint64_t crc;                     /* fpga æ ¡éªŒ 8B */
 }__attribute__((packed)) aiFrame_t;
 
 extern int32_t aiRxHandle(int32_t slot, int32_t ch, void *pBuf);

@@ -1,6 +1,6 @@
 /**************************************************************************************************
 *Filename:     module_nai01.h
-*Purpose:      ¹«ÓÃÄ£¿énai01·½·¨¶¨Òå
+*Purpose:      å…¬ç”¨æ¨¡å—nai01æ–¹æ³•å®šä¹‰
 *Log:          Date          Author    Modified
 *              2022/3/18     hdq       create
 **************************************************************************************************/
@@ -15,40 +15,40 @@
 #define NAI01_RX_FRAME_RSV_SIZE         (70U)
 #define NAI01_TX_FRAME_RSV_SIZE         (100U)
 
-/* NAI01Ä£¿éË½ÓĞÅäÖÃ */
+/* NAI01æ¨¡å—ç§æœ‰é…ç½® */
 typedef struct
 {
-    uint32_t  gear;      /* µµÎ»Ñ¡Ôñ*/
+    uint32_t  gear;      /* æ¡£ä½é€‰æ‹©*/
 } nai01PrivCfg_t;
 
-/* PRµçÁ÷²É¼¯Ä£¿é£¨NAI01£©ÉÏĞĞÊı¾İÖ¡½á¹¹ */
+/* PRç”µæµé‡‡é›†æ¨¡å—ï¼ˆNAI01ï¼‰ä¸Šè¡Œæ•°æ®å¸§ç»“æ„ */
 typedef struct
 {
-    uint32_t info;                         /* PRµçÁ÷²É¼¯Ä£¿é×ÔÕï¶Ï×´Ì¬·´À¡,4¶ÔÓÚ¹¤³ÌÊ¦Õ¾ ±íÊ¾°å¿¨ID */
-    binary6B_t channelSwitchRec;           /* ²âÊÔÍ¨µÀÇĞ»»×´Ì¬·´À¡ */
-    analog6BI_t channelChoiceRec;          /* ²âÊÔÍ¨µÀÑ¡Ôñ·´À¡ */
-    analog6BI_t gearSignalRec;             /* µµÎ»ĞÅºÅ·´À¡ */
-    analog6BI_t rsv2;                      /* ±£Áô */
-    analog6BF_t upCurrent_1;               /* 1¶ÎµçÁ÷ */
-    analog6BF_t upCurrent_2;               /* 2¶ÎµçÁ÷ */
-    analog6BF_t upCurrent_3;               /* 3¶ÎµçÁ÷ */
-    analog6BF_t upCurrent_4;               /* 4¶ÎµçÁ÷ */
-    uint8_t rsv[NAI01_RX_FRAME_RSV_SIZE];  /* ±£Áô×Ö¶Î */
-    uint8_t rsv1[2];                       /* fpga crc16 Ê¹ÓÃ2B */
-    uint16_t comState;                     /* fpga Í¨ĞÅ×´Ì¬Ê¹ÓÃ2B */
-    uint64_t crc;                          /* fpga Ğ£Ñé 8B*/
+    uint32_t info;                         /* PRç”µæµé‡‡é›†æ¨¡å—è‡ªè¯Šæ–­çŠ¶æ€åé¦ˆ,4å¯¹äºå·¥ç¨‹å¸ˆç«™ è¡¨ç¤ºæ¿å¡ID */
+    binary6B_t channelSwitchRec;           /* æµ‹è¯•é€šé“åˆ‡æ¢çŠ¶æ€åé¦ˆ */
+    analog6BI_t channelChoiceRec;          /* æµ‹è¯•é€šé“é€‰æ‹©åé¦ˆ */
+    analog6BI_t gearSignalRec;             /* æ¡£ä½ä¿¡å·åé¦ˆ */
+    analog6BI_t rsv2;                      /* ä¿ç•™ */
+    analog6BF_t upCurrent_1;               /* 1æ®µç”µæµ */
+    analog6BF_t upCurrent_2;               /* 2æ®µç”µæµ */
+    analog6BF_t upCurrent_3;               /* 3æ®µç”µæµ */
+    analog6BF_t upCurrent_4;               /* 4æ®µç”µæµ */
+    uint8_t rsv[NAI01_RX_FRAME_RSV_SIZE];  /* ä¿ç•™å­—æ®µ */
+    uint8_t rsv1[2];                       /* fpga crc16 ä½¿ç”¨2B */
+    uint16_t comState;                     /* fpga é€šä¿¡çŠ¶æ€ä½¿ç”¨2B */
+    uint64_t crc;                          /* fpga æ ¡éªŒ 8B*/
 }__attribute__((packed)) nai01RxFrame_t;
 
-/* PRµçÁ÷²É¼¯Ä£¿é£¨NAI01£©ÏÂĞĞÊı¾İÖ¡½á¹¹ */
+/* PRç”µæµé‡‡é›†æ¨¡å—ï¼ˆNAI01ï¼‰ä¸‹è¡Œæ•°æ®å¸§ç»“æ„ */
 typedef struct
 {
-    uint32_t info;                         /* 4¶ÔÓÚ¹¤³ÌÊ¦Õ¾ ±íÊ¾°å¿¨ID */
-    binary6B_t channelSwitchEn;            /* ²âÊÔÍ¨µÀÇĞ»»Ê¹ÄÜ */
-    analog6BI_t channelChoice;             /* ²âÊÔÍ¨µÀÑ¡Ôñ */
-    uint8_t rsv[NAI01_TX_FRAME_RSV_SIZE];  /* ±£Áô×Ö¶Î */
-    uint8_t rsv1[2];                       /* fpga crc16 Ê¹ÓÃ2B */
-    uint16_t comState;                     /* fpga Í¨ĞÅ×´Ì¬Ê¹ÓÃ2B */
-    uint64_t crc;                          /* fpga Ğ£Ñé8B */
+    uint32_t info;                         /* 4å¯¹äºå·¥ç¨‹å¸ˆç«™ è¡¨ç¤ºæ¿å¡ID */
+    binary6B_t channelSwitchEn;            /* æµ‹è¯•é€šé“åˆ‡æ¢ä½¿èƒ½ */
+    analog6BI_t channelChoice;             /* æµ‹è¯•é€šé“é€‰æ‹© */
+    uint8_t rsv[NAI01_TX_FRAME_RSV_SIZE];  /* ä¿ç•™å­—æ®µ */
+    uint8_t rsv1[2];                       /* fpga crc16 ä½¿ç”¨2B */
+    uint16_t comState;                     /* fpga é€šä¿¡çŠ¶æ€ä½¿ç”¨2B */
+    uint64_t crc;                          /* fpga æ ¡éªŒ8B */
 }__attribute__((packed)) nai01TxFrame_t;
 
 extern int32_t nai01RxHandle(int32_t slot, int32_t ch, void *pBuf);

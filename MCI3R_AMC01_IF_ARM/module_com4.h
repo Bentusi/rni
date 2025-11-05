@@ -1,6 +1,6 @@
 /**************************************************************************************************
 *Filename:     module_com4.h
-*Purpose:      ¹«ÓÃÄ£¿écom4·½·¨¶¨Òå
+*Purpose:      å…¬ç”¨æ¨¡å—com4æ–¹æ³•å®šä¹‰
 *Log:          Date          Author    Modified
 *              2021/9/21     hdq       create
 **************************************************************************************************/
@@ -32,19 +32,19 @@ typedef enum
     FILE_SAVE_ERR
 }ackInfo_e;
 
-/* com4°å¿¨Êı¾İÖ¡¶¨Òå*/
+/* com4æ¿å¡æ•°æ®å¸§å®šä¹‰*/
 typedef struct
 {
-    uint32_t id;                        /* Ö¸Ê¾µÄÊÇÔ´ID£¬·½±ã¹¤×÷Ê¦Õ¾Çø·ÖÔ´Ä£¿é */
-    int16_t  type;                      /* ÎÄ¼şÀàĞÍ */
-    uint16_t idxMax;                    /* ·ÖÆ¬Êı¾İÖ¡×ÜÊı¾İÁ¿ */
-    uint16_t idx;                       /* Ö¡ĞòºÅ */
-    uint16_t size;                      /* µ±Ç°Ö¡³¤¶È */
-    int32_t cmd;                        /* ¿ØÖÆÃüÁî */
-    uint8_t  data[COM4_DATA_SIZE_MAX];  /* ÓĞĞ§Êı¾İ */
-    uint8_t rsv1[2];                    /* fpga crc16 Ê¹ÓÃ 2B */
-    uint16_t comState;                  /* fpga Í¨ĞÅ×´Ì¬Ê¹ÓÃ 2B */
-    uint64_t crc;                       /* fpga Ğ£Ñé 8B */
+    uint32_t id;                        /* æŒ‡ç¤ºçš„æ˜¯æºIDï¼Œæ–¹ä¾¿å·¥ä½œå¸ˆç«™åŒºåˆ†æºæ¨¡å— */
+    int16_t  type;                      /* æ–‡ä»¶ç±»å‹ */
+    uint16_t idxMax;                    /* åˆ†ç‰‡æ•°æ®å¸§æ€»æ•°æ®é‡ */
+    uint16_t idx;                       /* å¸§åºå· */
+    uint16_t size;                      /* å½“å‰å¸§é•¿åº¦ */
+    int32_t cmd;                        /* æ§åˆ¶å‘½ä»¤ */
+    uint8_t  data[COM4_DATA_SIZE_MAX];  /* æœ‰æ•ˆæ•°æ® */
+    uint8_t rsv1[2];                    /* fpga crc16 ä½¿ç”¨ 2B */
+    uint16_t comState;                  /* fpga é€šä¿¡çŠ¶æ€ä½¿ç”¨ 2B */
+    uint64_t crc;                       /* fpga æ ¡éªŒ 8B */
 }__attribute__((packed)) com4Frame_t;
 
 extern int32_t com4Init(int32_t slot);

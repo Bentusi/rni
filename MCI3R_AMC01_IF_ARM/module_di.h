@@ -1,6 +1,6 @@
 /**************************************************************************************************
 *Filename:     module_di.h
-*Purpose:      ¹«ÓÃÄ£¿édi·½·¨¶¨Òå
+*Purpose:      å…¬ç”¨æ¨¡å—diæ–¹æ³•å®šä¹‰
 *Log:          Date          Author    Modified
 *              2021/9/21     hdq       create
 **************************************************************************************************/
@@ -12,21 +12,21 @@
 #define DI_CH_MAX                       (32)
 #define DI_FRAME_RSV_SIZE               (48)
 
-/* DIË½ÓĞÅäÖÃ */
+/* DIç§æœ‰é…ç½® */
 typedef struct
 {
-    uint32_t jitter[DI_CH_MAX];        /* Ïû¶¶Ê±¼ä:us */
+    uint32_t jitter[DI_CH_MAX];        /* æ¶ˆæŠ–æ—¶é—´:us */
 } diPrivCfg_t;
 
-/* DI°å¿¨Êı¾İÖ¡¶¨Òå*/
+/* DIæ¿å¡æ•°æ®å¸§å®šä¹‰*/
 typedef struct
 {
-    uint32_t info;                    /* ¶ÔÓÚ¹¤³ÌÊ¦Õ¾ ±íÊ¾°å¿¨ID 4B */
-    binary2B_t data[DI_CH_MAX];       /* 32Í¨µÀ£¬Ã¿Í¨µÀÒ»¸öÊı×ÖÁ¿ 64B */
-    uint8_t rsv[DI_FRAME_RSV_SIZE];   /* ±£Áô×Ö¶Î 48B */
-    uint8_t rsv1[2];                  /* fpga crc16 Ê¹ÓÃ 2B */
-    uint16_t comState;                /* fpga Í¨ĞÅ×´Ì¬Ê¹ÓÃ 2B */
-    uint64_t crc;                     /* fpga Ğ£Ñé 8B */
+    uint32_t info;                    /* å¯¹äºå·¥ç¨‹å¸ˆç«™ è¡¨ç¤ºæ¿å¡ID 4B */
+    binary2B_t data[DI_CH_MAX];       /* 32é€šé“ï¼Œæ¯é€šé“ä¸€ä¸ªæ•°å­—é‡ 64B */
+    uint8_t rsv[DI_FRAME_RSV_SIZE];   /* ä¿ç•™å­—æ®µ 48B */
+    uint8_t rsv1[2];                  /* fpga crc16 ä½¿ç”¨ 2B */
+    uint16_t comState;                /* fpga é€šä¿¡çŠ¶æ€ä½¿ç”¨ 2B */
+    uint64_t crc;                     /* fpga æ ¡éªŒ 8B */
 }__attribute__((packed)) diFrame_t;
 
 extern int32_t diRxHandle(int32_t slot, int32_t para, void *pBuf);

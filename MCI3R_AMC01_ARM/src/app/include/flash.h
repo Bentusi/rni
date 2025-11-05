@@ -1,6 +1,6 @@
 /**************************************************************************************************
 *Filename:     flash.h
-*Purpose:      flash²Ù×÷½Ó¿Ú
+*Purpose:      flashæ“ä½œæ¥å£
 *Log:          Date          Author    Modified
 *              2021/9/18     hdq       create
 **************************************************************************************************/
@@ -16,17 +16,17 @@
 #define USER_FLAG_SIZE                  (64U)
 #define FLASH_SPI                       (spiREG2)
 
-#define SECTOR_SIZE                     (4096U)                /* ÉÈÇø´óĞ¡ 4KB */
-#define FLASH_MAX_SIZE                  (1024U*1024U*16U)      /* Flash×î´óÈİÁ¿ */
+#define SECTOR_SIZE                     (4096U)                /* æ‰‡åŒºå¤§å° 4KB */
+#define FLASH_MAX_SIZE                  (1024U*1024U*16U)      /* Flashæœ€å¤§å®¹é‡ */
 
-/* Ö¸Áî±í  */
-#define FLASH_WRITE_ENABLE               (0x06U)  /* Ğ´Ê¹ÄÜ */
-#define FLASH_WRITE_DISABLE              (0x04U)  /* Ğ´½ûÄÜ */
-#define FLASH_READ_STATUS_REG            (0x05U)  /* ¶Á×´Ì¬¼Ä´æÆ÷ */
-#define FLASH_READ_DATA                  (0x03U)  /* ÆÕÍ¨¶ÁÊı¾İ */
-#define FLASH_PAGE_PROGRAM               (0x02U)  /* Ò³±à³Ì */
-#define FLASH_SECTOR_ERASE               (0x20U)  /* ²Á³ıÉÈÇø£¬ÉÈÇø´óĞ¡4K */
-#define FLASH_CHIP_ERASE                 (0x60U)  /* ²Á³ıÕû¸öĞ¾Æ¬ */
+/* æŒ‡ä»¤è¡¨  */
+#define FLASH_WRITE_ENABLE               (0x06U)  /* å†™ä½¿èƒ½ */
+#define FLASH_WRITE_DISABLE              (0x04U)  /* å†™ç¦èƒ½ */
+#define FLASH_READ_STATUS_REG            (0x05U)  /* è¯»çŠ¶æ€å¯„å­˜å™¨ */
+#define FLASH_READ_DATA                  (0x03U)  /* æ™®é€šè¯»æ•°æ® */
+#define FLASH_PAGE_PROGRAM               (0x02U)  /* é¡µç¼–ç¨‹ */
+#define FLASH_SECTOR_ERASE               (0x20U)  /* æ“¦é™¤æ‰‡åŒºï¼Œæ‰‡åŒºå¤§å°4K */
+#define FLASH_CHIP_ERASE                 (0x60U)  /* æ“¦é™¤æ•´ä¸ªèŠ¯ç‰‡ */
 
 extern int32_t flashReadByBytes(uint32_t addr, uint8_t *pBuf, uint32_t length);
 extern int32_t flashWriteNoblock(uint32_t dstAddr, const void *pBuf, uint32_t bufSize);

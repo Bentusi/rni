@@ -1,21 +1,21 @@
 /**************************************************************************************************
 *Filename:     global.c
-*Purpose:      ÓëÄ£¿éÎŞ¹ØÈ«¾Ö±äÁ¿¶¨Òå
+*Purpose:      ä¸æ¨¡å—æ— å…³å…¨å±€å˜é‡å®šä¹‰
 *Log:          Date          Author    Modified
 *              2021/9/22     hdq       create
 **************************************************************************************************/
 
 #include "global.h"
 
-/* ramÊ¹ÓÃµØÖ· */
+/* ramä½¿ç”¨åœ°å€ */
 extern uint32_t _end;
 static uint32_t s_usrMemEnd = 0U;
 
-/* ·¢ËÍÁÙÊ±»º³åÇøÓë½ÓÊÕÁÙÊ±»º³åÈ«¾ÖÓÃ */
+/* å‘é€ä¸´æ—¶ç¼“å†²åŒºä¸æ¥æ”¶ä¸´æ—¶ç¼“å†²å…¨å±€ç”¨ */
 uint8_t g_fastRxBuffer[4096] __attribute__((aligned(8)));
 uint8_t g_fastTxBuffer[4096] __attribute__((aligned(8)));
 
-/* Ç¿ÖÆÃüÁîÎÄ¼şÁÙÊ±½ÓÊÕ»º´æ */
+/* å¼ºåˆ¶å‘½ä»¤æ–‡ä»¶ä¸´æ—¶æ¥æ”¶ç¼“å­˜ */
 uint8_t g_flieBuf[FILE_BUF_SIZE_MAX] __attribute__((aligned(8)));
 int32_t g_localSlot = 0;
 
@@ -26,12 +26,12 @@ static slotPortAttr_t s_slotPortMsg[LYNX_SLOT_MAX];
 /**************************************************************************************************
  * Identifier:   SCOD-AMC01-009 (Trace to: SLD-AMC01-009)
  * Function:     glGetPortAttr
- * Description:  »ñÈ¡Í¨ĞÅ¶Ë¿Ú¹ÜÀíĞÅÏ¢
- * Input:        slot ²ÛÎ»ºÅ
- *               port ¶Ë¿ÚºÅ
- *               para 0:½ÓÊÕ¶Ë¿Ú£»·ñÔòÎª·¢ËÍ¶Ë¿Ú
+ * Description:  è·å–é€šä¿¡ç«¯å£ç®¡ç†ä¿¡æ¯
+ * Input:        slot æ§½ä½å·
+ *               port ç«¯å£å·
+ *               para 0:æ¥æ”¶ç«¯å£ï¼›å¦åˆ™ä¸ºå‘é€ç«¯å£
  * Output:       None
- * Return:       ¹ÜÀíĞÅÏ¢µØÖ·
+ * Return:       ç®¡ç†ä¿¡æ¯åœ°å€
  * Date:         Author      Modified
  * 2021-11-26    hdq         Create
  *************************************************************************************************/
@@ -57,10 +57,10 @@ portAttr_t *glGetPortAttr(int32_t slot, int32_t port, int32_t para)
 /**************************************************************************************************
  * Identifier:   SCOD-AMC01-010 (Trace to: SLD-AMC01-010)
  * Function:     glGetMem
- * Description:  ·ÖÅäÄÚ´æ
- * Input:        length ³¤¶È
+ * Description:  åˆ†é…å†…å­˜
+ * Input:        length é•¿åº¦
  * Output:       None
- * Return:       ·ÖÅäµÄÄÚ´æµØÖ·
+ * Return:       åˆ†é…çš„å†…å­˜åœ°å€
  * Date:         Author      Modified
  * 2021-11-26    hdq         Create
  *************************************************************************************************/
@@ -85,7 +85,7 @@ void *glGetMem(uint32_t length)
 /**************************************************************************************************
  * Identifier:   SCOD-AMC01-012 (Trace to: SLD-AMC01-012)
  * Function:     glInit
- * Description:  ÇåÁã²ÛÎ»¶Ë¿ÚĞÅÏ¢
+ * Description:  æ¸…é›¶æ§½ä½ç«¯å£ä¿¡æ¯
  * Input:        none
  * Output:       None
  * Return:       none
@@ -100,10 +100,10 @@ void glInit(void)
 /**************************************************************************************************
  * Identifier:   SCOD-AMC01-065 (Trace to: SLD-AMC01-065)
  * Function:     glMemUsedRatio
- * Description:  ¼ÆËãÄÚ´æÊ¹ÓÃÂÊ
+ * Description:  è®¡ç®—å†…å­˜ä½¿ç”¨ç‡
  * Input:        none
  * Output:       none
- * Return:       ¼ÆËãºóµÄÄÚ´æÊ¹ÓÃÂÊ
+ * Return:       è®¡ç®—åçš„å†…å­˜ä½¿ç”¨ç‡
  * Date:         Author      Modified
  * 2021-11-26    hdq         Create
  *************************************************************************************************/

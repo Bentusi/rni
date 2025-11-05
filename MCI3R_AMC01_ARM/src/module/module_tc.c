@@ -1,6 +1,6 @@
 /**************************************************************************************************
 *Filename:     module_nai01.c
-*Purpose:      ¹«ÓÃÄ£¿énai01·½·¨¶¨Òå
+*Purpose:      å…¬ç”¨æ¨¡å—nai01æ–¹æ³•å®šä¹‰
 *Log:          Date          Author    Modified
 *              2021/9/21     hdq       create
 **************************************************************************************************/
@@ -16,11 +16,11 @@
 /**************************************************************************************************
  * Identifier:   SCOD-AMC01-382 (Trace to: SLD-AMC01-382)
  * Function:     tcFrameHandle
- * Description:  tcÄ£¿é½ÓÊÕÊı¾İÖ¡´¦Àí
- * Input:        slot      ²ÛÎ»ºÅ
- *               copyFlag  0 ²»½øĞĞ¸´ÖÆÇÒÖÊÁ¿Î»ÎŞĞ§£¨Òì³£´¦Àí£© !0 Ö´ĞĞ¸´ÖÆ²Ù×÷
- *               pDst      Ä¿µÄµØÖ·
- *               pSrc      Ô´µØÖ·
+ * Description:  tcæ¨¡å—æ¥æ”¶æ•°æ®å¸§å¤„ç†
+ * Input:        slot      æ§½ä½å·
+ *               copyFlag  0 ä¸è¿›è¡Œå¤åˆ¶ä¸”è´¨é‡ä½æ— æ•ˆï¼ˆå¼‚å¸¸å¤„ç†ï¼‰ !0 æ‰§è¡Œå¤åˆ¶æ“ä½œ
+ *               pDst      ç›®çš„åœ°å€
+ *               pSrc      æºåœ°å€
  * Output:       None                
  * Return:       None                 
  * Date:         Author      Modified 
@@ -55,9 +55,9 @@ static void tcFrameHandle(int32_t slot, int32_t copyFlag, void *pDst, const void
             }
         }
     }
-    else /* Í¨ĞÅÒì³£Ê±£¬ËùÓĞÎïÀíµãÖÊÁ¿Î»ÎŞĞ§ */
+    else /* é€šä¿¡å¼‚å¸¸æ—¶ï¼Œæ‰€æœ‰ç‰©ç†ç‚¹è´¨é‡ä½æ— æ•ˆ */
     {
-        infoSetHw(slot, 0u); /* Âö³å²É¼¯Ä£¿é×ÔÕï¶Ï×´Ì¬·´À¡ */
+        infoSetHw(slot, 0u); /* è„‰å†²é‡‡é›†æ¨¡å—è‡ªè¯Šæ–­çŠ¶æ€åé¦ˆ */
 
         for(ch = 0;ch < TC_CH_MAX;ch++)
         {
@@ -73,8 +73,8 @@ static void tcFrameHandle(int32_t slot, int32_t copyFlag, void *pDst, const void
 /*********************************************************************
 * Identifier:   SCOD-AMC01-383 (Trace to: SLD-AMC01-383)
 * Function:     tcRxHandle
-* Description:  ½ÓÊÕAI°æ¿¨µÄÊı¾İºÍ×´Ì¬
-* Input:        slot ²ÛºÅ
+* Description:  æ¥æ”¶AIç‰ˆå¡çš„æ•°æ®å’ŒçŠ¶æ€
+* Input:        slot æ§½å·
 * Output:       none
 * Return:       0
 *
@@ -92,17 +92,17 @@ int32_t tcRxHandle(int32_t slot, int32_t port, void *pBuf)
 /**************************************************************************************************
 * Identifier:   SCOD-AMC01-384 (Trace to: SLD-AMC01-384)
 * Function:     tcGetRxChAddr
-* Description:  »ñÈ¡tcÄ£¿é¶ÔÓ¦Í¨µÀµÄ»º³åÇøµØÖ·
-* Input:        slot ²ÛºÅ
-*               port IO¿¨±£Áô
-*               ch   Í¨µÀºÅ
+* Description:  è·å–tcæ¨¡å—å¯¹åº”é€šé“çš„ç¼“å†²åŒºåœ°å€
+* Input:        slot æ§½å·
+*               port IOå¡ä¿ç•™
+*               ch   é€šé“å·
 * Output:       none
-* Return:       pSrc Í¨µÀµØÖ·
+* Return:       pSrc é€šé“åœ°å€
 *
 * Others:
 * Log:          Date          Author    Modified
 *               2021/08/31    hdq       create
-*               2023/01/30    wxb       nai01GetInChAddrĞŞ¸ÄÎªnai01GetRxChAddr
+*               2023/01/30    wxb       nai01GetInChAddrä¿®æ”¹ä¸ºnai01GetRxChAddr
 **************************************************************************************************/
 uint8_t *tcGetRxChAddr(int32_t slot, int32_t port, int32_t ch)
 {

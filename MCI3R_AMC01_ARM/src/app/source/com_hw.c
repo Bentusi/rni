@@ -1,6 +1,6 @@
 /**************************************************************************************************
 *Filename:     com_hw.c
-*Purpose:      fpga¶ÁĞ´½Ó¿Ú
+*Purpose:      fpgaè¯»å†™æ¥å£
 *Log:          Date          Author    Modified
 *              2021/9/21     hdq       create
 **************************************************************************************************/
@@ -12,8 +12,8 @@
 #include "module_class.h"
 #include "cfg_class.h"
 
-/* FPGA½Ó¿ÚµØÖ· */
-static uint32_t s_comAllAddr[LYNX_SLOT_MAX][3];  /* 0 ÅäÖÃ 1 ½ÓÊÕ 2 ·¢ËÍ */
+/* FPGAæ¥å£åœ°å€ */
+static uint32_t s_comAllAddr[LYNX_SLOT_MAX][3];  /* 0 é…ç½® 1 æ¥æ”¶ 2 å‘é€ */
 
 static fpgaWriteReg_t s_fpgaWriteReg;
 static fpgaReadReg_t  s_fpgaReadReg;
@@ -21,12 +21,12 @@ static fpgaReadReg_t  s_fpgaReadReg;
 /**************************************************************************************************
  * Identifier:   SCOD-AMC01-344 (Trace to: SLD-AMC01-344)
  * Function:     com1ReadData
- * Description:  ´ÓFPGA¶Á³öµ½Ö¸¶¨³¤¶ÈµÄÊı¾İ²¢¼ÆËãCRC
- * Input:        addr   Ô´µØÖ·
- *               pBuf   Ä¿µÄµØÖ·
- *               length Êı¾İ³¤¶È
+ * Description:  ä»FPGAè¯»å‡ºåˆ°æŒ‡å®šé•¿åº¦çš„æ•°æ®å¹¶è®¡ç®—CRC
+ * Input:        addr   æºåœ°å€
+ *               pBuf   ç›®çš„åœ°å€
+ *               length æ•°æ®é•¿åº¦
  * Output:       None
- * Return:       ret EMIF_CRC_ERROR£ºCRC´íÎó£¬ 0£ºÎŞ´íÎó
+ * Return:       ret EMIF_CRC_ERRORï¼šCRCé”™è¯¯ï¼Œ 0ï¼šæ— é”™è¯¯
  * Date:         Author      Modified
  * 2021-10-14    hdq         Create
  *************************************************************************************************/
@@ -40,7 +40,7 @@ int32_t com1ReadData(void *pBuf, uint32_t addr, uint32_t length)
     if(0ULL != drv2CrcCal(pBuf, length))
     {
         ret = EMIF_CRC_ERROR;
-        errEmifCrcHandle(ret); /* CRCÒì³£´¦Àí·½Ê½ */
+        errEmifCrcHandle(ret); /* CRCå¼‚å¸¸å¤„ç†æ–¹å¼ */
     }
 
     return ret;
@@ -49,10 +49,10 @@ int32_t com1ReadData(void *pBuf, uint32_t addr, uint32_t length)
 /**************************************************************************************************
  * Identifier:   SCOD-AMC01-345 (Trace to: SLD-AMC01-345)
  * Function:     com1WriteData
- * Description:  ÏòFPGAĞ´ÈëÖ¸¶¨³¤¶ÈµÄÊı¾İ²¢°éËæ×ÅCRC
- * Input:        addr   Ä¿µÄµØÖ·
- *               pBuf   Ô´µØÖ·
- *               length Êı¾İ³¤¶È
+ * Description:  å‘FPGAå†™å…¥æŒ‡å®šé•¿åº¦çš„æ•°æ®å¹¶ä¼´éšç€CRC
+ * Input:        addr   ç›®çš„åœ°å€
+ *               pBuf   æºåœ°å€
+ *               length æ•°æ®é•¿åº¦
  * Output:       None
  * Return:       None
  * Date:         Author      Modified
@@ -75,8 +75,8 @@ void com1WriteData(uint32_t addr, void *pBuf, uint32_t length)
 /***************************************************************************************
 * Identifier:   SCOD-AMC01-052 (Trace to: SLD-AMC01-052)
 * Function:     com1UpdateCaseState
-* Description:  »úÏä0½ÓÊÕÊı¾İ×´Ì¬ĞÅÏ¢ÊÕ¼¯
-* Input:        box »úÏäºÅ
+* Description:  æœºç®±0æ¥æ”¶æ•°æ®çŠ¶æ€ä¿¡æ¯æ”¶é›†
+* Input:        box æœºç®±å·
 * Output:       none
 * Return:       none
 * Others:
@@ -94,7 +94,7 @@ void com1UpdateCaseState(int32_t box)
     fpgaModuleState_t *pState = (fpgaModuleState_t *)g_fastRxBuffer;
 
     LYNX_ASSERT(0 == box);
-    /* ¶ÁÈ¡Êı¾İ */
+    /* è¯»å–æ•°æ® */
     ret = com1ReadData((void*)pState, MAIN_BOX_STATUS_ADDR, sizeof(fpgaModuleState_t));
     if(0 == ret)
     {
@@ -102,7 +102,7 @@ void com1UpdateCaseState(int32_t box)
         {
             if(i < 2)
             {
-                /*Ö÷¿ØFPGAÉÏ´«×´Ì¬ĞÅÏ¢ÔÚË÷Òı0*/
+                /*ä¸»æ§FPGAä¸Šä¼ çŠ¶æ€ä¿¡æ¯åœ¨ç´¢å¼•0*/
                 infoSetCom(g_localSlot, (uint32_t)pState->comInfo[0]);
                 infoSetsoft(g_localSlot, (uint32_t)pState->softInfo[0]);
             }
@@ -137,8 +137,8 @@ void com1UpdateCaseState(int32_t box)
 /****************************************************************************************************
 * Identifier:   SCOD-AMC01-053 (Trace to: SLD-AMC01-053)
 * Function:     com1SetArmMS
-* Description:  ÉèÖÃ ARM µ±Ç°Ö÷´Ó×´Ì¬µ½fpga»º³åÇø
-* Input:        state  µ±Ç°×´Ì¬£»MPU_MASTER Ö÷ MPU_SLAVE ´Ó
+* Description:  è®¾ç½® ARM å½“å‰ä¸»ä»çŠ¶æ€åˆ°fpgaç¼“å†²åŒº
+* Input:        state  å½“å‰çŠ¶æ€ï¼›MPU_MASTER ä¸» MPU_SLAVE ä»
 * Output:       none
 * Return:       none
 *
@@ -154,8 +154,8 @@ void com1SetArmMS(uint8_t state)
 /****************************************************************************************************
 * Identifier:   SCOD-AMC01-054 (Trace to: SLD-AMC01-054)
 * Function:     com1ReportArmState
-* Description:  ÏòFPGA Ğ´ARM µ±Ç°×´Ì¬
-* Input:        state  µ±Ç°×´Ì¬
+* Description:  å‘FPGA å†™ARM å½“å‰çŠ¶æ€
+* Input:        state  å½“å‰çŠ¶æ€
 * Output:       none
 * Return:       none
 *
@@ -177,8 +177,8 @@ void com1ReportArmState(uint8_t state)
 /****************************************************************************************************
 * Identifier:   SCOD-AMC01-055 (Trace to: SLD-AMC01-055)
 * Function:     com1EnableFpga
-* Description:  Ê¹ÄÜ»ò¹Ø±ÕFPGA³¬Ê±¼ì²â
-* Input:        state  Ê¹ÄÜ»ò¹Ø±Õ
+* Description:  ä½¿èƒ½æˆ–å…³é—­FPGAè¶…æ—¶æ£€æµ‹
+* Input:        state  ä½¿èƒ½æˆ–å…³é—­
 * Output:       none
 * Return:       none
 *
@@ -195,9 +195,9 @@ void com1EnableFpga(uint8_t state)
 /****************************************************************************************************
 * Identifier:   SCOD-AMC01-005 (Trace to: SLD-AMC01-005)
 * Function:     com1CalReadData
-* Description:  ¼ÆËãÉÏĞĞµØÖ· £¨Êı¾İÁ÷ÏòFPGAµ½ARM    ¶ÁÊı¾İµØÖ·£©
-* Input:        slot         ²ÛÎ»ºÅ
-* Output:       s_comAllAddr FPGA½Ó¿ÚµØÖ·
+* Description:  è®¡ç®—ä¸Šè¡Œåœ°å€ ï¼ˆæ•°æ®æµå‘FPGAåˆ°ARM    è¯»æ•°æ®åœ°å€ï¼‰
+* Input:        slot         æ§½ä½å·
+* Output:       s_comAllAddr FPGAæ¥å£åœ°å€
 * Return:       none
 *
 * Others:       
@@ -208,16 +208,16 @@ void com1CalReadData(int32_t slot)
 {
     uint32_t tmpAddr = 0U;
     
-    /* ÅĞ¶ÏÄ£¿éÀàĞÍÊÇ·ñºÏ·¨ */
+    /* åˆ¤æ–­æ¨¡å—ç±»å‹æ˜¯å¦åˆæ³• */
     LYNX_ASSERT(slot < LYNX_SLOT_MAX);
     
     tmpAddr = (((uint32_t)slot) * ASYNC_EMIF_READ_STEP) + ASYNC_EMIF_READ_MIAN_ADDR;
-    if(slot == 0)  /*Ö÷¿Ø»úÏäÁ½¿éÖ÷¿Ø¿¨ RXµØÖ·Í¬Îª0x68818000ul*/
+    if(slot == 0)  /*ä¸»æ§æœºç®±ä¸¤å—ä¸»æ§å¡ RXåœ°å€åŒä¸º0x68818000ul*/
     {
         tmpAddr = (ASYNC_EMIF_READ_STEP) + ASYNC_EMIF_READ_MIAN_ADDR;
     }
 
-    /* Êµ¼ÊµØÖ·µÈÓÚÆ«ÒÆµØÖ·¼ÓÉÏ»ùµØÖ· */
+    /* å®é™…åœ°å€ç­‰äºåç§»åœ°å€åŠ ä¸ŠåŸºåœ°å€ */
     tmpAddr = (uint32_t)FPGA_BASE_ADDR + tmpAddr;
 
     s_comAllAddr[slot][COM_RX1_ADDR] = tmpAddr;
@@ -226,9 +226,9 @@ void com1CalReadData(int32_t slot)
 /****************************************************************************************************
 * Identifier:   SCOD-AMC01-006 (Trace to: SLD-AMC01-006)
 * Function:     com1CalWriteData
-* Description:  ¼ÆËãÏÂĞĞµØÖ· £¨Êı¾İÁ÷Ïò ARM µ½ FPGA    Ğ´Êı¾İµØÖ·£©
-* Input:        slot ²ÛÎ»ºÅ
-* Output:       s_comAllAddr FPGA½Ó¿ÚµØÖ·
+* Description:  è®¡ç®—ä¸‹è¡Œåœ°å€ ï¼ˆæ•°æ®æµå‘ ARM åˆ° FPGA    å†™æ•°æ®åœ°å€ï¼‰
+* Input:        slot æ§½ä½å·
+* Output:       s_comAllAddr FPGAæ¥å£åœ°å€
 * Return:       none
 *
 * Others:
@@ -239,15 +239,15 @@ void com1CalWriteData(int32_t slot)
 {
     uint32_t tmpAddr = 0U;
 
-    /* ÅĞ¶ÏÄ£¿éÀàĞÍÊÇ·ñºÏ·¨ */
+    /* åˆ¤æ–­æ¨¡å—ç±»å‹æ˜¯å¦åˆæ³• */
     LYNX_ASSERT(slot < LYNX_SLOT_MAX);
     tmpAddr = (((uint32_t)slot) * ASYNC_EMIF_WRITE_STEP) + ASYNC_EMIF_WRITE_MIAN_ADDR;
-    if(slot == 0)/*Ö÷¿Ø»úÏäÁ½¿éÖ÷¿Ø¿¨ TXµØÖ·Í¬Îª0x68018000ul*/
+    if(slot == 0)/*ä¸»æ§æœºç®±ä¸¤å—ä¸»æ§å¡ TXåœ°å€åŒä¸º0x68018000ul*/
     {
         tmpAddr = (ASYNC_EMIF_WRITE_STEP) + ASYNC_EMIF_WRITE_MIAN_ADDR;
     }
 
-    /* Êµ¼ÊµØÖ·µÈÓÚÆ«ÒÆµØÖ·¼ÓÉÏ»ùµØÖ· */
+    /* å®é™…åœ°å€ç­‰äºåç§»åœ°å€åŠ ä¸ŠåŸºåœ°å€ */
     tmpAddr = (uint32_t)FPGA_BASE_ADDR + tmpAddr;
 
     s_comAllAddr[slot][COM_TX1_ADDR] = tmpAddr;
@@ -256,9 +256,9 @@ void com1CalWriteData(int32_t slot)
 /****************************************************************************************************
 * Identifier:   SCOD-AMC01-007 (Trace to: SLD-AMC01-007)
 * Function:     com1CalConfigData
-* Description:  ¼ÆËãÅäÖÃµØÖ· £¨Êı¾İÁ÷Ïò ARM µ½ FPGA   Ğ´ÅäÖÃµØÖ·£©
-* Input:        slot ²ÛÎ»ºÅ
-* Output:       s_comAllAddr FPGA½Ó¿ÚµØÖ·
+* Description:  è®¡ç®—é…ç½®åœ°å€ ï¼ˆæ•°æ®æµå‘ ARM åˆ° FPGA   å†™é…ç½®åœ°å€ï¼‰
+* Input:        slot æ§½ä½å·
+* Output:       s_comAllAddr FPGAæ¥å£åœ°å€
 * Return:       none
 *
 * Others:
@@ -269,11 +269,11 @@ void com1CalConfigData(int32_t slot)
 {
     uint32_t tmpAddr = 0U;
 
-    /* ÅĞ¶ÏÄ£¿éÀàĞÍÊÇ·ñºÏ·¨ */
+    /* åˆ¤æ–­æ¨¡å—ç±»å‹æ˜¯å¦åˆæ³• */
     LYNX_ASSERT(slot < LYNX_SLOT_MAX);
     tmpAddr = (((uint32_t)slot) * ASYNC_EMIF_CONFIG_STEP) + ASYNC_EMIF_CONFIG_MIAN_ADDR;
 
-    /* Êµ¼ÊµØÖ·µÈÓÚÆ«ÒÆµØÖ·¼ÓÉÏ»ùµØÖ· */
+    /* å®é™…åœ°å€ç­‰äºåç§»åœ°å€åŠ ä¸ŠåŸºåœ°å€ */
     tmpAddr = (uint32_t)FPGA_BASE_ADDR + tmpAddr;
     
     s_comAllAddr[slot][COM_CFG_ADDR] = tmpAddr;
@@ -282,7 +282,7 @@ void com1CalConfigData(int32_t slot)
 /****************************************************************************************************
 * Identifier:   SCOD-AMC01-056 (Trace to: SLD-AMC01-056)
 * Function:     checkSlotCycle
-* Description:  ÖÜÆÚĞ£Ñé×ÓÕ¾ºÅ
+* Description:  å‘¨æœŸæ ¡éªŒå­ç«™å·
 * Input:        none
 * Output:       none
 * Return:       none
@@ -310,7 +310,7 @@ static void checkSlotCycle(void)
 /****************************************************************************************************
 * Identifier:   SCOD-AMC01-057 (Trace to: SLD-AMC01-057)
 * Function:     com1UpdateMpuState
-* Description:  ¶ÁÈ¡Ö÷¿ØÄ£¿é×´Ì¬ĞÅÏ¢£¬²¢Ğ£Ñé×ÓÕ¾ÊÇ·ñÕıÈ·
+* Description:  è¯»å–ä¸»æ§æ¨¡å—çŠ¶æ€ä¿¡æ¯ï¼Œå¹¶æ ¡éªŒå­ç«™æ˜¯å¦æ­£ç¡®
 * Input:        none
 * Output:       none
 * Return:       none
@@ -326,12 +326,12 @@ void com1UpdateMpuState(void)
     fpgaReadReg_t *pFpgaReadReg = &s_fpgaReadReg;
     LYNX_ASSERT(NULL != pFpgaReadReg);
     
-    /* ¶ÁÈ¡ Ó²¼şĞÅÏ¢ */
+    /* è¯»å– ç¡¬ä»¶ä¿¡æ¯ */
     ret = com1ReadData((void*)pFpgaReadReg, MPU_HADR_INFO_ADDR, sizeof(fpgaReadReg_t));
     if(0 == ret)
     {
         checkSlotCycle();
-        /* È¡Ö÷»úÏä 0 ~ ×î´ó²ÛÎ»Êı¾İ¿ÕÂú×´Ì¬ */
+        /* å–ä¸»æœºç®± 0 ~ æœ€å¤§æ§½ä½æ•°æ®ç©ºæ»¡çŠ¶æ€ */
         for(i = 0; i < CASE_SLOT_MAX; i += 2)
         {
             int32_t j = 0;
@@ -359,17 +359,17 @@ void com1UpdateMpuState(void)
         }
 
         if(pFpgaReadReg->isMaster == 0xFFU)
-        {/* Ö÷Ä£Ê½ */
+        {/* ä¸»æ¨¡å¼ */
             infoSetMpuMS(MPU_MASTER);
             infoGetAddr()->moduleInfo[1 - g_localSlot].difInfo.mpuInfo.curMSState = MPU_SLAVE;
         }
         else
-        {/* ´ÓÄ£Ê½ */
+        {/* ä»æ¨¡å¼ */
             infoSetMpuMS(MPU_SLAVE);
             infoGetAddr()->moduleInfo[1 - g_localSlot].difInfo.mpuInfo.curMSState = MPU_MASTER;
         }
 
-        /* Ö÷¿ØÄ£¿é¹ÊÕÏ */
+        /* ä¸»æ§æ¨¡å—æ•…éšœ */
         if(((pFpgaReadReg->msg1 & (1UL << 5U)) != 0U) ||
            ((pFpgaReadReg->msg1 & (1UL << 7U)) != 0U))
         {
@@ -380,7 +380,7 @@ void com1UpdateMpuState(void)
             infoClearPfError(MPUS_ERR);
         }
         
-        /* ×éÌ¬ÅäÖÃÓ²¼şĞÅÏ¢ÊÇ·ñÆ¥Åä */
+        /* ç»„æ€é…ç½®ç¡¬ä»¶ä¿¡æ¯æ˜¯å¦åŒ¹é… */
         if((pFpgaReadReg->msg1 & (1UL << 4U)) != 0x10U)
         {
             infoSetPfError(SLOT_NUMBER_ERROR);
@@ -390,7 +390,7 @@ void com1UpdateMpuState(void)
             infoClearPfError(SLOT_NUMBER_ERROR);
         }
 
-        /* ÈÈ±¸Ä£Ê½ÏÂ ²ÅÏÔÊ¾ÈßÓà¶Ë¿ÚºÅ ¹ÊÕÏ */
+        /* çƒ­å¤‡æ¨¡å¼ä¸‹ æ‰æ˜¾ç¤ºå†—ä½™ç«¯å£å· æ•…éšœ */
         if((pFpgaReadReg->msg2 & (1UL << 5U)) != 0U)
         {
             infoSetPfError(BACK_MPU_ERROR);
@@ -400,7 +400,7 @@ void com1UpdateMpuState(void)
             infoClearPfError(BACK_MPU_ERROR);
         }
         
-        /* ¸Ãº¯ÊıÖ´ĞĞºóFPGA²ÅÕæÕıÇĞ»»Íê³É */
+        /* è¯¥å‡½æ•°æ‰§è¡ŒåFPGAæ‰çœŸæ­£åˆ‡æ¢å®Œæˆ */
         com1ReportArmState(ARM_OK);
     }  
 }
@@ -408,11 +408,11 @@ void com1UpdateMpuState(void)
 /**************************************************************************************************
  * Identifier:   SCOD-AMC01-008 (Trace to: SLD-AMC01-008)
  * Function:     com1GetAddr
- * Description:  »ñÈ¡Ã¿¸ö²ÛÎ»µÄIOÄ£Ê½ÏÂÈıµØÖ·
- * Input:        slot ²ÛÎ»ºÅ
- *               idx  µØÖ·ÀàĞÍ
+ * Description:  è·å–æ¯ä¸ªæ§½ä½çš„IOæ¨¡å¼ä¸‹ä¸‰åœ°å€
+ * Input:        slot æ§½ä½å·
+ *               idx  åœ°å€ç±»å‹
  * Output:       None
- * Return:       s_comAllAddr[slot][idx] Ö¸¶¨ÀàĞÍµØÖ·
+ * Return:       s_comAllAddr[slot][idx] æŒ‡å®šç±»å‹åœ°å€
  * Date:         Author      Modified
  * 2021-09-23    hdq         Create
  *************************************************************************************************/

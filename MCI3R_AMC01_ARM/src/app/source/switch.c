@@ -1,6 +1,6 @@
 /***************************************************************************************************
  * Filename: switch.c
- * Purpose:  Ä£Ê½¿ª¹ØÇı¶¯½Ó¿Ú
+ * Purpose:  æ¨¡å¼å¼€å…³é©±åŠ¨æ¥å£
  * Date:         Author      Modified 
  * 2021-11-24    hdq         Create  
 ***************************************************************************************************/
@@ -14,15 +14,15 @@
 /****************************************************************************************************
 * Identifier:   SCOD-AMC01-039 (Trace to: SLD-AMC01-039)
 * Function:     swUserStateCheck
-* Description:  »ñÈ¡ÓÃ»§Ä£Ê½
+* Description:  è·å–ç”¨æˆ·æ¨¡å¼
 * Input:        none
 * Output:       none
-* Return:       ret Ä£Ê½¿ª¹Ø×´Ì¬
+* Return:       ret æ¨¡å¼å¼€å…³çŠ¶æ€
 *               
 * Others:
 * Log:          Date          Author    Modified
 *               2017/10/24        
-*               2021/09/01    hdq       É¾³ı±ÕËø·ÖÖ§
+*               2021/09/01    hdq       åˆ é™¤é—­é”åˆ†æ”¯
 ****************************************************************************************************/
 int32_t swUserStateCheck(void)
 {
@@ -32,15 +32,15 @@ int32_t swUserStateCheck(void)
     switch((uint32_t)ret)
     {
         case 0x01U:
-            ret = SYS_MAIT; /* Î¬»¤ */
+            ret = SYS_MAIT; /* ç»´æŠ¤ */
             break;
 
         case 0x02U:
-            ret = SYS_NOR;  /* Õı³£ */
+            ret = SYS_NOR;  /* æ­£å¸¸ */
             break;
 
         default:
-            ret = SYS_ERR; /* ´íÎó */
+            ret = SYS_ERR; /* é”™è¯¯ */
             break;
     }
 
@@ -50,14 +50,14 @@ int32_t swUserStateCheck(void)
 /*********************************************************************
 * Identifier:   SCOD-AMC01-045 (Trace to: SLD-AMC01-045)
 * Function:     swUserHandle
-* Description:  ÔËĞĞÄ£Ê½ÊµÊ±¼ì²â
+* Description:  è¿è¡Œæ¨¡å¼å®æ—¶æ£€æµ‹
 * Input:        none
 * Output:       none
 * Return:       none
 * Others:
 * Log:          Date          Author    Modified
 *               2017/08/14
-*               2021/09/01    hdq       É¾³ı±ÕËø·ÖÖ§
+*               2021/09/01    hdq       åˆ é™¤é—­é”åˆ†æ”¯
 ***********************************************************************/
 void swUserHandle(void)
 {
@@ -66,7 +66,7 @@ void swUserHandle(void)
     static uint32_t startTime2 = 0U; 
     static uint32_t endTime2   = 0U;
 
-    /* »ñÈ¡Ä£Ê½¿ª¹Ø×´Ì¬ */
+    /* è·å–æ¨¡å¼å¼€å…³çŠ¶æ€ */
     state = swUserStateCheck();
     if(state == SYS_NOR)
     {
@@ -91,7 +91,7 @@ void swUserHandle(void)
         else
         {
             endTime2  = tmGetCurTick();
-            if((endTime2 -startTime2) > (2U * 1000U * 1000U))  /* 2Ãëºó²Å±¨¿ª¹Ø¹ÊÕÏ */
+            if((endTime2 -startTime2) > (2U * 1000U * 1000U))  /* 2ç§’åæ‰æŠ¥å¼€å…³æ•…éšœ */
             {
                 infoSetPfError(KEY_MODE_ERR);
             }
@@ -102,7 +102,7 @@ void swUserHandle(void)
 /*********************************************************************
 * Identifier:   SCOD-AMC01-051 (Trace to: SLD-AMC01-051)
 * Function:     swUserModeInit
-* Description:  »ñÈ¡ÏµÍ³ÉÏµçÊ±ÔËĞĞÄ£Ê½×´Ì¬¼°Ö¸Ê¾µÆÏÔÊ¾
+* Description:  è·å–ç³»ç»Ÿä¸Šç”µæ—¶è¿è¡Œæ¨¡å¼çŠ¶æ€åŠæŒ‡ç¤ºç¯æ˜¾ç¤º
 * Input:        none
 * Output:       none
 * Return:       none
@@ -114,7 +114,7 @@ void swUserModeInit(void)
 {
     int32_t state = 0;
 
-    /* »ñÈ¡Ä£Ê½×´Ì¬ ²¢×ö¶ÔÓ¦µÄ´¦Àí */    
+    /* è·å–æ¨¡å¼çŠ¶æ€ å¹¶åšå¯¹åº”çš„å¤„ç† */    
     state = swUserStateCheck();
     infoSetSysState(state);
     if(state == SYS_NOR)
@@ -127,7 +127,7 @@ void swUserModeInit(void)
     }
     else
     {
-        errStopHandleInit(MODE_INIT_ERROR);/*ËµÃ÷ĞèÒªÓÃ»§ÖØÆôÏµÍ³*/
+        errStopHandleInit(MODE_INIT_ERROR);/*è¯´æ˜éœ€è¦ç”¨æˆ·é‡å¯ç³»ç»Ÿ*/
     }
 }
 

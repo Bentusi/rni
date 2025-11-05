@@ -1,6 +1,6 @@
 /**************************************************************************************************
 *Filename:     module_nhv01.c
-*Purpose:      ¹«ÓÃÄ£¿énhv01·½·¨¶¨Òå
+*Purpose:      å…¬ç”¨æ¨¡å—nhv01æ–¹æ³•å®šä¹‰
 *Log:          Date          Author    Modified
 *              2021/9/21     hdq       create
 **************************************************************************************************/
@@ -15,11 +15,11 @@
 /**************************************************************************************************
  * Identifier:   SCOD-AMC01-377 (Trace to: SLD-AMC01-377)
  * Function:     nhv01FrameHandle
- * Description:  nhv01Ä£¿é½ÓÊÕÊı¾İÖ¡´¦Àí
- * Input:        slot      ²ÛÎ»ºÅ
- *               copyFlag  0£º²»½øĞĞ¸´ÖÆÇÒÖÊÁ¿Î»ÎŞĞ§£¨Òì³£´¦Àí£©£»£¡0£ºÖ´ĞĞ¸´ÖÆ²Ù×÷
- *               pDst      Ä¿µÄµØÖ·
- *               pSrc      Ô´µØÖ·
+ * Description:  nhv01æ¨¡å—æ¥æ”¶æ•°æ®å¸§å¤„ç†
+ * Input:        slot      æ§½ä½å·
+ *               copyFlag  0ï¼šä¸è¿›è¡Œå¤åˆ¶ä¸”è´¨é‡ä½æ— æ•ˆï¼ˆå¼‚å¸¸å¤„ç†ï¼‰ï¼›ï¼0ï¼šæ‰§è¡Œå¤åˆ¶æ“ä½œ
+ *               pDst      ç›®çš„åœ°å€
+ *               pSrc      æºåœ°å€
  * Output:       None
  * Return:       None
  * Date:         Author      Modified
@@ -37,30 +37,30 @@ static void nhv01FrameHandle(int32_t slot, int32_t copyFlag, void *pDst, const v
     {
         infoSetHw(slot, pSrcFrame->info);
 
-        /* ¸ßÑ¹ÆºÇúÏß»æÖÆ×´Ì¬·´À¡ */
+        /* é«˜å‹åªæ›²çº¿ç»˜åˆ¶çŠ¶æ€åé¦ˆ */
         pDstFrame->hiPreflatCurveDrawRec.value = pSrcFrame->hiPreflatCurveDrawRec.value;
         pDstFrame->hiPreflatCurveDrawRec.quality = (pSrcFrame->hiPreflatCurveDrawRec.quality)&0x01U;
         infoSetIoCh(slot, 0, 0U);
-        /* Õı¸ßÑ¹Êä³ö»Ø²É */
+        /* æ­£é«˜å‹è¾“å‡ºå›é‡‡ */
         pDstFrame->posPreOutputRec.value = pSrcFrame->posPreOutputRec.value;
         pDstFrame->posPreOutputRec.quality = (pSrcFrame->posPreOutputRec.quality)&0x01U;
         infoSetIoCh(slot, 1, pSrcFrame->posPreOutputRec.quality);
-        /* µçÁ÷Öµ */
+        /* ç”µæµå€¼ */
         pDstFrame->outputCurrent.value = pSrcFrame->outputCurrent.value;
         pDstFrame->outputCurrent.quality = (pSrcFrame->outputCurrent.quality)&0x01U;
         infoSetIoCh(slot, 2, pSrcFrame->outputCurrent.quality);
     }
-    else /* Í¨ĞÅÒì³£Ê±£¬ËùÓĞÎïÀíµãÖÊÁ¿Î»ÎŞĞ§ */
+    else /* é€šä¿¡å¼‚å¸¸æ—¶ï¼Œæ‰€æœ‰ç‰©ç†ç‚¹è´¨é‡ä½æ— æ•ˆ */
     {
-        infoSetHw(slot, 0u); /* Âö³å²É¼¯Ä£¿é×ÔÕï¶Ï×´Ì¬·´À¡ */
+        infoSetHw(slot, 0u); /* è„‰å†²é‡‡é›†æ¨¡å—è‡ªè¯Šæ–­çŠ¶æ€åé¦ˆ */
 
-        /* ¸ßÑ¹ÆºÇúÏß»æÖÆ×´Ì¬·´À¡ */
+        /* é«˜å‹åªæ›²çº¿ç»˜åˆ¶çŠ¶æ€åé¦ˆ */
         pDstFrame->hiPreflatCurveDrawRec.quality = QUALITY_STATE_INVALID;
         infoSetIoCh(slot, 0, QUALITY_STATE_INVALID);
-        /* Õı¸ßÑ¹Êä³ö»Ø²É */
+        /* æ­£é«˜å‹è¾“å‡ºå›é‡‡ */
         pDstFrame->posPreOutputRec.quality = QUALITY_STATE_INVALID;
         infoSetIoCh(slot, 1, QUALITY_STATE_INVALID);
-        /* µçÁ÷Öµ */
+        /* ç”µæµå€¼ */
         pDstFrame->outputCurrent.quality = QUALITY_STATE_INVALID;
         infoSetIoCh(slot, 2, QUALITY_STATE_INVALID);
     }
@@ -69,10 +69,10 @@ static void nhv01FrameHandle(int32_t slot, int32_t copyFlag, void *pDst, const v
 /*********************************************************************
 * Identifier:   SCOD-AMC01-378 (Trace to: SLD-AMC01-378)
 * Function:     nhv01RxHandle
-* Description:  ½ÓÊÕNHV01°æ¿¨µÄÊı¾İºÍ×´Ì¬
-* Input:        slot  ²ÛºÅ
-*               port  IO¿¨±£Áô
-*               pBuf  ½ÓÊÕÊı¾İÖ¸Õë
+* Description:  æ¥æ”¶NHV01ç‰ˆå¡çš„æ•°æ®å’ŒçŠ¶æ€
+* Input:        slot  æ§½å·
+*               port  IOå¡ä¿ç•™
+*               pBuf  æ¥æ”¶æ•°æ®æŒ‡é’ˆ
 * Output:       none
 * Return:       0
 *
@@ -90,12 +90,12 @@ int32_t nhv01RxHandle(int32_t slot, int32_t port, void *pBuf)
 /**************************************************************************************************
 * Identifier:   SCOD-AMC01-379 (Trace to: SLD-AMC01-379)
 * Function:     nhv01GetRxChAddr
-* Description:  »ñÈ¡nhv01Ä£¿é¶ÔÓ¦Í¨µÀµÄ»º³åÇøµØÖ·
-* Input:        slot  ²ÛºÅ
-*               port  ²ÎÊı±£Áô£¬½Ó¿ÚĞèÒª
-*               ch    Í¨µÀºÅ
+* Description:  è·å–nhv01æ¨¡å—å¯¹åº”é€šé“çš„ç¼“å†²åŒºåœ°å€
+* Input:        slot  æ§½å·
+*               port  å‚æ•°ä¿ç•™ï¼Œæ¥å£éœ€è¦
+*               ch    é€šé“å·
 * Output:       none
-* Return:       pSrc Í¨µÀµØÖ·
+* Return:       pSrc é€šé“åœ°å€
 *
 * Others:
 * Log:          Date          Author    Modified
@@ -119,12 +119,12 @@ uint8_t *nhv01GetRxChAddr(int32_t slot, int32_t port, int32_t ch)
 /**************************************************************************************************
  * Identifier:   SCOD-AMC01-380 (Trace to: SLD-AMC01-380)
  * Function:     nhv01GetTxChAddr
- * Description:  »ñÈ¡nhv01Ä£¿éÍ¨µÀµØÖ·
- * Input:        slot  ²ÛÎ»ºÅ
- *               port  ²ÎÊı±£Áô£¬½Ó¿ÚĞèÒª
- *               ch    Í¨µÀºÅ
+ * Description:  è·å–nhv01æ¨¡å—é€šé“åœ°å€
+ * Input:        slot  æ§½ä½å·
+ *               port  å‚æ•°ä¿ç•™ï¼Œæ¥å£éœ€è¦
+ *               ch    é€šé“å·
  * Output:       None
- * Return:       pDst  ¶ÔÓ¦Í¨µÀµÄµØÖ·Ö¸Õë
+ * Return:       pDst  å¯¹åº”é€šé“çš„åœ°å€æŒ‡é’ˆ
  * Date:         Author      Modified
  * 2021-11-09    hdq         Create
  *************************************************************************************************/

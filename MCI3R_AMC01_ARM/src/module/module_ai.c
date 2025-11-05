@@ -1,6 +1,6 @@
 /**************************************************************************************************
 *Filename:     module_ai.c
-*Purpose:      ¹«ÓÃÄ£¿éai·½·¨¶¨Òå
+*Purpose:      å…¬ç”¨æ¨¡å—aiæ–¹æ³•å®šä¹‰
 *Log:          Date          Author    Modified
 *              2021/9/21     hdq       create
 **************************************************************************************************/
@@ -16,11 +16,11 @@
 /**************************************************************************************************
  * Identifier:   SCOD-AMC01-353 (Trace to: SLD-AMC01-353)
  * Function:     aiFrameHandle
- * Description:  aiÄ£¿é½ÓÊÕÖ¡´¦Àí
- * Input:        slot     ²ÛÎ»ºÅ
- *               copyFlag 0 ²»¿½±´£¬ÖÊÁ¿Î»ÎŞĞ§²Ù×÷ !0 Õı³£¿½±´
- *               pDst     Ä¿µÄµØÖ·
- *               pSrc     Ô´µØÖ·
+ * Description:  aiæ¨¡å—æ¥æ”¶å¸§å¤„ç†
+ * Input:        slot     æ§½ä½å·
+ *               copyFlag 0 ä¸æ‹·è´ï¼Œè´¨é‡ä½æ— æ•ˆæ“ä½œ !0 æ­£å¸¸æ‹·è´
+ *               pDst     ç›®çš„åœ°å€
+ *               pSrc     æºåœ°å€
  * Output:       None
  * Return:       None
  * Date:         Author      Modified
@@ -42,11 +42,11 @@ static void aiFrameHandle(int32_t slot, int32_t copyFlag, void *pDst, const void
 
     if(copyFlag != 0)
     {
-        infoSetHw(slot, pSrcFrame->info);    /* Ó²¼şĞÅÏ¢ */
+        infoSetHw(slot, pSrcFrame->info);    /* ç¡¬ä»¶ä¿¡æ¯ */
         for(ch = 0; ch < AI_CH_MAX; ch++)
         {
             if((enable & ((uint32_t)1<<ch)) != 0U)
-            {   /* Ô­Ê¼Öµ±£´æµ½ */
+            {   /* åŸå§‹å€¼ä¿å­˜åˆ° */
                 pDstFrame->data[ch].value = pSrcFrame->data[ch].value;
                 pDstFrame->data[ch].quality = (pSrcFrame->data[ch].quality) & 0x01U;
                 value = pSrcFrame->data[ch].quality;
@@ -56,12 +56,12 @@ static void aiFrameHandle(int32_t slot, int32_t copyFlag, void *pDst, const void
     }
     else
     {
-        infoSetHw(slot, 0U);    /* Ó²¼şĞÅÏ¢ */
+        infoSetHw(slot, 0U);    /* ç¡¬ä»¶ä¿¡æ¯ */
         /* invalid all quality that channel is enable. */
         for(ch = 0; ch < AI_CH_MAX; ch++)
-        {   /* Í¨ĞÅÒì³£Ê±£¬ËùÓĞÎïÀíµãÖÊÁ¿Î»ÎŞĞ§ */
+        {   /* é€šä¿¡å¼‚å¸¸æ—¶ï¼Œæ‰€æœ‰ç‰©ç†ç‚¹è´¨é‡ä½æ— æ•ˆ */
             if((enable & ((uint32_t)1<<ch)) != 0U)
-            {   /* Öµ²»±ä£¬ÖÊÁ¿Î»ÎŞĞ§ */
+            {   /* å€¼ä¸å˜ï¼Œè´¨é‡ä½æ— æ•ˆ */
                 pDstFrame->data[ch].quality = QUALITY_STATE_INVALID;
                 infoSetIoCh(slot, ch, QUALITY_STATE_INVALID);
             }
@@ -72,10 +72,10 @@ static void aiFrameHandle(int32_t slot, int32_t copyFlag, void *pDst, const void
 /*********************************************************************
 * Identifier:   SCOD-AMC01-354 (Trace to: SLD-AMC01-354)
 * Function:     aiRxHandle
-* Description:  ½ÓÊÕAI°æ¿¨µÄÊı¾İºÍ×´Ì¬
-* Input:        slot ²ÛºÅ
-*               para ²ÎÊı±£Áô£¬½Ó¿ÚĞèÒª
-*               pBuf ½ÓÊÕÊı¾İÖ¸Õë
+* Description:  æ¥æ”¶AIç‰ˆå¡çš„æ•°æ®å’ŒçŠ¶æ€
+* Input:        slot æ§½å·
+*               para å‚æ•°ä¿ç•™ï¼Œæ¥å£éœ€è¦
+*               pBuf æ¥æ”¶æ•°æ®æŒ‡é’ˆ
 * Output:       none
 * Return:       0
 *
@@ -94,12 +94,12 @@ int32_t aiRxHandle(int32_t slot, int32_t para, void *pBuf)
 /**************************************************************************************************
 * Identifier:   SCOD-AMC01-355 (Trace to: SLD-AMC01-355)
 * Function:     aiGetRxChAddr
-* Description:  »ñÈ¡aiÄ£¿é¶ÔÓ¦Í¨µÀµÄ»º³åÇøµØÖ·
-* Input:        slot ²ÛºÅ
-*               port ¶Ë¿ÚºÅ
-*                 ch Í¨µÀºÅ
+* Description:  è·å–aiæ¨¡å—å¯¹åº”é€šé“çš„ç¼“å†²åŒºåœ°å€
+* Input:        slot æ§½å·
+*               port ç«¯å£å·
+*                 ch é€šé“å·
 * Output:       none
-* Return:       pSrc : Í¨µÀÊı¾İµØÖ·
+* Return:       pSrc : é€šé“æ•°æ®åœ°å€
 *
 * Others:
 * Log:          Date          Author    Modified

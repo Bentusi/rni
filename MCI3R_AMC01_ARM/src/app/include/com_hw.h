@@ -1,6 +1,6 @@
 /**************************************************************************************************
 *Filename:     com_hw.h
-*Purpose:      fpga¶ÁĞ´½Ó¿Ú
+*Purpose:      fpgaè¯»å†™æ¥å£
 *Log:          Date          Author    Modified
 *              2021/9/21     hdq       create
 **************************************************************************************************/
@@ -10,57 +10,57 @@
 
 #include "lynx_types.h"
 
-#define EMIF_CRC_ERROR          (0x10000) /* Í¨ĞÅ×´Ì¬ ÊÇ16 Î»ÒªÓëÆäÇø·Ö¿ª */
+#define EMIF_CRC_ERROR          (0x10000) /* é€šä¿¡çŠ¶æ€ æ˜¯16 ä½è¦ä¸å…¶åŒºåˆ†å¼€ */
 
 #define  COM_CFG_ADDR           (0)
 #define  COM_RX1_ADDR           (1)
 #define  COM_TX1_ADDR           (2)
 
-#define FPGA_BASE_ADDR                      (0x68000000U)       /* EMIFÒì²½»ùµØÖ· cs3 */
+#define FPGA_BASE_ADDR                      (0x68000000U)       /* EMIFå¼‚æ­¥åŸºåœ°å€ cs3 */
 
-#define FPGA_WRITE_REG_ADDR                 (FPGA_BASE_ADDR + 0x004000U)   /* FPGA¼Ä´æÆ÷µØÖ· */
-#define MPU_HADR_INFO_ADDR                  (FPGA_BASE_ADDR + 0x804000U)   /* Êı¾İ»º´æ×´Ì¬ + Ö÷¿ØÄ£¿é×ÔÉíÓ²¼şĞÅÏ¢ */
+#define FPGA_WRITE_REG_ADDR                 (FPGA_BASE_ADDR + 0x004000U)   /* FPGAå¯„å­˜å™¨åœ°å€ */
+#define MPU_HADR_INFO_ADDR                  (FPGA_BASE_ADDR + 0x804000U)   /* æ•°æ®ç¼“å­˜çŠ¶æ€ + ä¸»æ§æ¨¡å—è‡ªèº«ç¡¬ä»¶ä¿¡æ¯ */
 
-#define MAIN_BOX_STATUS_ADDR                (FPGA_BASE_ADDR + 0x800000U)   /* Ö÷¿Ø»úÏä  ¸÷²ÛÎ»Êı¾İ ×´Ì¬ĞÅÏ¢ */
+#define MAIN_BOX_STATUS_ADDR                (FPGA_BASE_ADDR + 0x800000U)   /* ä¸»æ§æœºç®±  å„æ§½ä½æ•°æ® çŠ¶æ€ä¿¡æ¯ */
 
 #define SYNC_WRITE_BASE_ADDR                (FPGA_BASE_ADDR + 0x018000U)
 #define SYNC_READ_BASE_ADDR                 (FPGA_BASE_ADDR + 0x818000U)
 
-#define ASYNC_EMIF_COM_STEP_ADDR            (0x100000U)         /* Í¨ĞÅ¿¨ £¨ 2 3 £©£¬ËÄ¸ö port ¼äµÄµØÖ·²½½ø  */
+#define ASYNC_EMIF_COM_STEP_ADDR            (0x100000U)         /* é€šä¿¡å¡ ï¼ˆ 2 3 ï¼‰ï¼Œå››ä¸ª port é—´çš„åœ°å€æ­¥è¿›  */
 
-#define ASYNC_EMIF_READ_MIAN_ADDR           (0x808000U)         /* Ö÷¿Ø»úÏä¶ÁÊı¾İÆ«ÒÆÊ×µØÖ· */
-#define ASYNC_EMIF_READ_EXTEND_ADDR         (0xC08000U)         /* À©Õ¹»úÏä¶ÁÊı¾İÆ«ÒÆÊ×µØÖ· */
-#define ASYNC_EMIF_READ_STEP                (0x010000U)         /* ¶ÁÊı¾İÆ«ÒÆµØÖ·²½½ø */
+#define ASYNC_EMIF_READ_MIAN_ADDR           (0x808000U)         /* ä¸»æ§æœºç®±è¯»æ•°æ®åç§»é¦–åœ°å€ */
+#define ASYNC_EMIF_READ_EXTEND_ADDR         (0xC08000U)         /* æ‰©å±•æœºç®±è¯»æ•°æ®åç§»é¦–åœ°å€ */
+#define ASYNC_EMIF_READ_STEP                (0x010000U)         /* è¯»æ•°æ®åç§»åœ°å€æ­¥è¿› */
 
-#define ASYNC_EMIF_WRITE_MIAN_ADDR          (0x008000U)         /* Ö÷¿Ø»úÏäĞ´Êı¾İÆ«ÒÆÊ×µØÖ· */
-#define ASYNC_EMIF_WRITE_EXTEND_ADDR        (0x408000U)         /* À©Õ¹»úÏäĞ´Êı¾İÆ«ÒÆÊ×µØÖ· */
-#define ASYNC_EMIF_WRITE_STEP               (0x010000U)         /* Ğ´Êı¾İÆ«ÒÆµØÖ·²½½ø */
+#define ASYNC_EMIF_WRITE_MIAN_ADDR          (0x008000U)         /* ä¸»æ§æœºç®±å†™æ•°æ®åç§»é¦–åœ°å€ */
+#define ASYNC_EMIF_WRITE_EXTEND_ADDR        (0x408000U)         /* æ‰©å±•æœºç®±å†™æ•°æ®åç§»é¦–åœ°å€ */
+#define ASYNC_EMIF_WRITE_STEP               (0x010000U)         /* å†™æ•°æ®åç§»åœ°å€æ­¥è¿› */
 
-#define ASYNC_EMIF_CONFIG_MIAN_ADDR         (0x000000U)         /* Ö÷¿Ø»úÏä¶ÁĞ´ÅäÖÃÆ«ÒÆÊ×µØÖ· */
-#define ASYNC_EMIF_CONFIG_EXTEND_ADDR       (0x400000U)         /* À©Õ¹»úÏä¶ÁĞ´ÅäÖÃÊı¾İÆ«ÒÆÊ×µØÖ· */
-#define ASYNC_EMIF_CONFIG_STEP              (0x010000U)         /* Ğ´ÅäÖÃÆ«ÒÆµØÖ·²½½ø */
+#define ASYNC_EMIF_CONFIG_MIAN_ADDR         (0x000000U)         /* ä¸»æ§æœºç®±è¯»å†™é…ç½®åç§»é¦–åœ°å€ */
+#define ASYNC_EMIF_CONFIG_EXTEND_ADDR       (0x400000U)         /* æ‰©å±•æœºç®±è¯»å†™é…ç½®æ•°æ®åç§»é¦–åœ°å€ */
+#define ASYNC_EMIF_CONFIG_STEP              (0x010000U)         /* å†™é…ç½®åç§»åœ°å€æ­¥è¿› */
 
 /**************************************************************************************************
- * FPGAĞ´¼Ä´æÆ÷¶¨Òå
+ * FPGAå†™å¯„å­˜å™¨å®šä¹‰
  *************************************************************************************************/
 typedef struct
 {
     uint8_t    enable;
     uint8_t    fpgaReset;
-    uint8_t    mpuState;    /* ARM  ×´Ì¬      */
-    uint8_t    mpuMode;     /* ARM  ÔËĞĞÄ£Ê½ */
-    uint8_t    msState;     /* Ö÷´Ó×´Ì¬ */
-    uint8_t    res[11];     /* ±£Áô */
+    uint8_t    mpuState;    /* ARM  çŠ¶æ€      */
+    uint8_t    mpuMode;     /* ARM  è¿è¡Œæ¨¡å¼ */
+    uint8_t    msState;     /* ä¸»ä»çŠ¶æ€ */
+    uint8_t    res[11];     /* ä¿ç•™ */
     uint64_t   crc;
 }__attribute__((packed))fpgaWriteReg_t;
 
 /**************************************************************************************************
- * FPGA¶Á¼Ä´æÆ÷¶¨Òå
+ * FPGAè¯»å¯„å­˜å™¨å®šä¹‰
  *************************************************************************************************/
-#define ARM_OK                (0x55U)   /* ARM ÎŞÍ£»ú¹ÊÕÏ */
-#define ARM_ERROR             (0xAAU)   /* ARM Í£»ú¹ÊÕÏ */
-#define RESET_FPGA            (0x55U)   /* ¸´Î» FPGA */
-#define NONRESET_FPGA         (0xAAU)   /* ²»¸´Î» FPGA */
+#define ARM_OK                (0x55U)   /* ARM æ— åœæœºæ•…éšœ */
+#define ARM_ERROR             (0xAAU)   /* ARM åœæœºæ•…éšœ */
+#define RESET_FPGA            (0x55U)   /* å¤ä½ FPGA */
+#define NONRESET_FPGA         (0xAAU)   /* ä¸å¤ä½ FPGA */
 #define ENABLA_FPGA           (0x55U)
 #define DISABLE_FPGA          (0xAAU)
 
@@ -68,7 +68,7 @@ typedef struct
 {
     uint8_t portState[8];
     uint8_t rsv_8;
-    uint8_t slotAndcaseNum;  /* »úÏäºÅ ²ÛºÅ */
+    uint8_t slotAndcaseNum;  /* æœºç®±å· æ§½å· */
 
     uint8_t stationNum;
     uint8_t isMaster;

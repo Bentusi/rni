@@ -1,8 +1,8 @@
 /****************************************************************************************************
 *FILENAME:     tm.c
-*PURPOSE:      Íê³ÉÈÎÎñ¹ÜÀí
+*PURPOSE:      å®Œæˆä»»åŠ¡ç®¡ç†
 *DATE          AUTHOR          CHANGE
-*2017.08.09    ºúµÂÈ«          ´´½¨ÎÄ¼ş
+*2017.08.09    èƒ¡å¾·å…¨          åˆ›å»ºæ–‡ä»¶
 ****************************************************************************************************/
 #include <stddef.h>
 #include "tm_private.h"
@@ -17,7 +17,7 @@ static Tcb_t     s_taskCB[TM_CFG_MAX_TASK_NUMBER];
 static TcbInfo_t s_taskInfo[TM_CFG_MAX_TASK_NUMBER];
 tmState_t g_tmState;
 
-/*º¯ÊıÉùÃ÷*/
+/*å‡½æ•°å£°æ˜*/
 static int32_t taskInit(void);
 static void idleTask(void);
 static void setMaxCycleTick(uint32_t us);
@@ -26,7 +26,7 @@ static void setMaxCycleTick(uint32_t us);
 * Identifier:   SCOD-AMC01-017 (Trace to: SLD-AMC01-017)
 * Function:     tmInit
 * Description:  init the global variable of the NPTM.
-* Input:        maxUS  : ×î´óÖÜÆÚ £¬µ¥Î»: us
+* Input:        maxUS  : æœ€å¤§å‘¨æœŸ ï¼Œå•ä½: us
 * Output:       none
 * Return:       none
 * Others:
@@ -207,16 +207,16 @@ void tmStartSchedule(void)
     fnCycle_t cycle = NULL;
     int32_t ret = 0;
 
-    /* ³õÊ¼»¯ËùÓĞÈÎÎñ */
+    /* åˆå§‹åŒ–æ‰€æœ‰ä»»åŠ¡ */
     ret = taskInit();    
     if(ret != 0)
     {
-        /* ´´½¨£¬²»ÄÜÔËĞĞ */
+        /* åˆ›å»ºï¼Œä¸èƒ½è¿è¡Œ */
         g_tmState.tmError = ret;
         tmStopHook();
     }
 
-    /* ÖÜÆÚÔËĞĞ£¬ÓÀ²»ÍË³ö */
+    /* å‘¨æœŸè¿è¡Œï¼Œæ°¸ä¸é€€å‡º */
     while(1)
     {
         g_cycleStartTick = tmGetCurTick();
@@ -232,7 +232,7 @@ void tmStartSchedule(void)
 
                 if(s_taskCB[i].priority != i)
                 {
-                    /* ÈÎÎñÖ´ĞĞË³ĞòÒì³££¬Í£Ö¹ */
+                    /* ä»»åŠ¡æ‰§è¡Œé¡ºåºå¼‚å¸¸ï¼Œåœæ­¢ */
                     g_tmState.tmError = TM_ERROR_TASK_ORDER;
                     tmStopHook();
                 }
@@ -273,10 +273,10 @@ void tmStartSchedule(void)
 /****************************************************************************************************
 * Identifier:   SCOD-AMC01-268 (Trace to: SLD-AMC01-268)
 * Function:     tmGetTaskTimeoutTick
-* Description:  »ñÈ¡ÈÎÎñ³¬Ê±Ê±¼ä
-* Input:        i : ÈÎÎñÓÅÏÈ¼¶
+* Description:  è·å–ä»»åŠ¡è¶…æ—¶æ—¶é—´
+* Input:        i : ä»»åŠ¡ä¼˜å…ˆçº§
 * Output:       none
-* Return:       ret ÈÎÎñ³¬Ê±Ê±¼äÖµ,µ¥Î»us
+* Return:       ret ä»»åŠ¡è¶…æ—¶æ—¶é—´å€¼,å•ä½us
 * Others:    
 * Log:          Date          Author    Modified
 *               2017/08/09        
@@ -296,10 +296,10 @@ uint32_t tmGetTaskTimeoutTick(int32_t i)
 /****************************************************************************************************
 * Identifier:   SCOD-AMC01-269 (Trace to: SLD-AMC01-269)
 * Function:     tmGetTaskUsedTick
-* Description:  »ñÈ¡ÈÎÎñÒÑÊ¹ÓÃÊ±¼ä
-* Input:        i : ÈÎÎñÓÅÏÈ¼¶
+* Description:  è·å–ä»»åŠ¡å·²ä½¿ç”¨æ—¶é—´
+* Input:        i : ä»»åŠ¡ä¼˜å…ˆçº§
 * Output:       none
-* Return:       Ê±¼äÖµ,µ¥Î»us
+* Return:       æ—¶é—´å€¼,å•ä½us
 * Others:       
 * Log:          Date          Author    Modified
 *               2017/08/09        
@@ -327,10 +327,10 @@ uint32_t tmGetTaskUsedTick(int32_t i)
 /****************************************************************************************************
 * Identifier:   SCOD-AMC01-270 (Trace to: SLD-AMC01-270)
 * Function:     tmCheckRemainTick
-* Description:  »ñÈ¡µ±Ç°ÖÜÆÚÊ£ÓàÊ±¼ä
+* Description:  è·å–å½“å‰å‘¨æœŸå‰©ä½™æ—¶é—´
 * Input:        none
 * Output:       none
-* Return:       Ê±¼äÖµ,µ¥Î»us
+* Return:       æ—¶é—´å€¼,å•ä½us
 * Others:    
 * Log:          Date          Author    Modified
 *               2017/08/09        
@@ -358,8 +358,8 @@ uint32_t tmCheckRemainTick(void)
 /****************************************************************************************************
 * Identifier:   SCOD-AMC01-271 (Trace to: SLD-AMC01-271)
 * Function:     tmSetCycleStart
-* Description:  ÉèÖÃÖÜÆÚ³¬Ê¼Ê±¼ä
-* Input:        tick  ÉèÖÃµÄÊ±¼ä£¬µ¥Î»us
+* Description:  è®¾ç½®å‘¨æœŸè¶…å§‹æ—¶é—´
+* Input:        tick  è®¾ç½®çš„æ—¶é—´ï¼Œå•ä½us
 * Output:       none
 * Return:       none
 * Others:    
@@ -374,8 +374,8 @@ void tmSetCycleStart(uint32_t tick)
 /****************************************************************************************************
 * Identifier:   SCOD-AMC01-043 (Trace to: SLD-AMC01-043)
 * Function:     tmSuspendTask
-* Description:  ¹ÒÆğÖ¸¶¨ÈÎÎñ
-* Input:        i : ÈÎÎñÓÅÏÈ¼¶
+* Description:  æŒ‚èµ·æŒ‡å®šä»»åŠ¡
+* Input:        i : ä»»åŠ¡ä¼˜å…ˆçº§
 * Output:       none
 * Return:       none
 * Others:    
@@ -393,8 +393,8 @@ void tmSuspendTask(int32_t i)
 /****************************************************************************************************
 * Identifier:   SCOD-AMC01-044 (Trace to: SLD-AMC01-044)
 * Function:     tmResumeTask
-* Description:  »½ĞÑÖ¸¶¨ÈÎÎñ
-* Input:        i : ÈÎÎñÓÅÏÈ¼¶
+* Description:  å”¤é†’æŒ‡å®šä»»åŠ¡
+* Input:        i : ä»»åŠ¡ä¼˜å…ˆçº§
 * Output:       none
 * Return:       none
 * Others:    
@@ -413,7 +413,7 @@ void tmResumeTask(int32_t i)
 * Identifier:   SCOD-AMC01-272 (Trace to: SLD-AMC01-272)
 * Function:     setMaxCycleTick
 * Description:  set the max cycle tick of the NPTM.
-* Input:        ÖÜÆÚÊ±¼ä£¬µ¥Î»: Î¢Ãë
+* Input:        å‘¨æœŸæ—¶é—´ï¼Œå•ä½: å¾®ç§’
 * Output:       none
 * Return:       none
 * Others:    

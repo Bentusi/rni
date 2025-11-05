@@ -1,6 +1,6 @@
 /**************************************************************************************************
 *Filename:     module_nai01.h
-*Purpose:      ¹«ÓÃÄ£¿énai01·½·¨¶¨Òå
+*Purpose:      å…¬ç”¨æ¨¡å—nai01æ–¹æ³•å®šä¹‰
 *Log:          Date          Author    Modified
 *              2022/3/18     hdq       create
 **************************************************************************************************/
@@ -13,29 +13,29 @@
 #define TC_FRAME_RSV_SIZE            (70U)
 
 
-/* TCÄ£¿éË½ÓĞÅäÖÃ */
+/* TCæ¨¡å—ç§æœ‰é…ç½® */
 typedef struct
 {
-    uint32_t compensMode;               /*²¹³¥·½Ê½ 0:¾ÍµØ²¹³¥ 1:Ô¶¶Ë²¹³¥ */
+    uint32_t compensMode;               /*è¡¥å¿æ–¹å¼ 0:å°±åœ°è¡¥å¿ 1:è¿œç«¯è¡¥å¿ */
 
-    float32_t maxValue[TC_CH_MAX];      /*¹¤³ÌÁ¿ÉÏÏŞÖµ*/
-    float32_t minValue[TC_CH_MAX];      /*¹¤³ÌÁ¿ÏÂÏŞÖµ*/
+    float32_t maxValue[TC_CH_MAX];      /*å·¥ç¨‹é‡ä¸Šé™å€¼*/
+    float32_t minValue[TC_CH_MAX];      /*å·¥ç¨‹é‡ä¸‹é™å€¼*/
 
-    float32_t maxViewValue[TC_CH_MAX];  /*¼à²âµçÆøÁ¿ÉÏÏŞÖµ*/
-    float32_t minViewValue[TC_CH_MAX];  /*¼à²âµçÆøÁ¿ÏÂÏŞÖµ*/
+    float32_t maxViewValue[TC_CH_MAX];  /*ç›‘æµ‹ç”µæ°”é‡ä¸Šé™å€¼*/
+    float32_t minViewValue[TC_CH_MAX];  /*ç›‘æµ‹ç”µæ°”é‡ä¸‹é™å€¼*/
 
 } tcPrivCfg_t;
 
 
-/* Tc°å¿¨Êı¾İÖ¡¶¨Òå */
+/* Tcæ¿å¡æ•°æ®å¸§å®šä¹‰ */
 typedef struct
 {
-    uint32_t info;                    /* ¶ÔÓÚ¹¤³ÌÊ¦Õ¾ ±íÊ¾°å¿¨ID 4B */
-    analog6BF_t data[TC_CH_MAX];      /* 7Í¨µÀ£¬Ã¿Í¨µÀÒ»¸öÄ£ÄâÁ¿£¬7x6 = 42B */
-    uint8_t rsv[TC_FRAME_RSV_SIZE];   /* ±£Áô×Ö¶Î 70B */
-    uint8_t rsv1[2];                  /* fpga crc16 Ê¹ÓÃ 2B */
-    uint16_t comState;                /* fpga Í¨ĞÅ×´Ì¬Ê¹ÓÃ 2B */
-    uint64_t crc;                     /* fpga Ğ£Ñé 8B */
+    uint32_t info;                    /* å¯¹äºå·¥ç¨‹å¸ˆç«™ è¡¨ç¤ºæ¿å¡ID 4B */
+    analog6BF_t data[TC_CH_MAX];      /* 7é€šé“ï¼Œæ¯é€šé“ä¸€ä¸ªæ¨¡æ‹Ÿé‡ï¼Œ7x6 = 42B */
+    uint8_t rsv[TC_FRAME_RSV_SIZE];   /* ä¿ç•™å­—æ®µ 70B */
+    uint8_t rsv1[2];                  /* fpga crc16 ä½¿ç”¨ 2B */
+    uint16_t comState;                /* fpga é€šä¿¡çŠ¶æ€ä½¿ç”¨ 2B */
+    uint64_t crc;                     /* fpga æ ¡éªŒ 8B */
 }__attribute__((packed)) tcFrame_t;
 
 extern int32_t tcRxHandle(int32_t slot, int32_t ch, void *pBuf);

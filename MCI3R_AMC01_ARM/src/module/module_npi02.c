@@ -1,6 +1,6 @@
 /**************************************************************************************************
 *Filename:     module_npi02.c
-*Purpose:      ¹«ÓÃÄ£¿énpi02·½·¨¶¨Òå
+*Purpose:      å…¬ç”¨æ¨¡å—npi02æ–¹æ³•å®šä¹‰
 *Log:          Date          Author    Modified
 *              2021/9/21     hdq       create
 **************************************************************************************************/
@@ -15,11 +15,11 @@
 /**************************************************************************************************
  * Identifier:   SCOD-AMC01-369 (Trace to: SLD-AMC01-369)
  * Function:     npi02FrameHandle            
- * Description:  npi02Ä£¿é½ÓÊÕÊı¾İÖ¡´¦Àí                     
- * Input:        slot      ²ÛÎ»ºÅ                 
- *               copyFlag  0 ²»½øĞĞ¸´ÖÆÇÒÖÊÁ¿Î»ÎŞĞ§£¨Òì³£´¦Àí£© !0 Ö´ĞĞ¸´ÖÆ²Ù×÷
- *               pDst      Ä¿µÄµØÖ·
- *               pSrc      Ô´µØÖ· 
+ * Description:  npi02æ¨¡å—æ¥æ”¶æ•°æ®å¸§å¤„ç†                     
+ * Input:        slot      æ§½ä½å·                 
+ *               copyFlag  0 ä¸è¿›è¡Œå¤åˆ¶ä¸”è´¨é‡ä½æ— æ•ˆï¼ˆå¼‚å¸¸å¤„ç†ï¼‰ !0 æ‰§è¡Œå¤åˆ¶æ“ä½œ
+ *               pDst      ç›®çš„åœ°å€
+ *               pSrc      æºåœ°å€ 
  * Output:       None
  * Return:       None
  * Date:         Author      Modified
@@ -37,64 +37,64 @@ static void npi02FrameHandle(int32_t slot, int32_t copyFlag, void *pDst, const v
     {
         infoSetHw(slot, pSrcFrame->info);
 
-        /* ²âÊÔÍ¨µÀÇĞ»»×´Ì¬ */
+        /* æµ‹è¯•é€šé“åˆ‡æ¢çŠ¶æ€ */
         pDstFrame->channelSwitchRec.value = pSrcFrame->channelSwitchRec.value;
         pDstFrame->channelSwitchRec.quality = (pSrcFrame->channelSwitchRec.quality)&0x01U;
         infoSetIoCh(slot, 0, pSrcFrame->channelSwitchRec.quality);
-        /* Õç±ğãĞÆºÇúÏß»æÖÆ×´Ì¬ */
+        /* ç”„åˆ«é˜ˆåªæ›²çº¿ç»˜åˆ¶çŠ¶æ€ */
         pDstFrame->thresholdFlatCurveDraw.value = pSrcFrame->thresholdFlatCurveDraw.value;
         pDstFrame->thresholdFlatCurveDraw.quality = (pSrcFrame->thresholdFlatCurveDraw.quality)&0x01U;
         infoSetIoCh(slot, 1, pSrcFrame->thresholdFlatCurveDraw.quality);
-        /* Âö³å¼ÆÊıÂÊ */
+        /* è„‰å†²è®¡æ•°ç‡ */
         pDstFrame->countRate.value = pSrcFrame->countRate.value;
         pDstFrame->countRate.quality = (pSrcFrame->countRate.quality)&0x01U;
         infoSetIoCh(slot, 2, pSrcFrame->countRate.quality);
-        /* MSVÍ¨µÀ·½²î1±¶ */
+        /* MSVé€šé“æ–¹å·®1å€ */
         pDstFrame->MSVChVariance1.value = pSrcFrame->MSVChVariance1.value;
         pDstFrame->MSVChVariance1.quality = (pSrcFrame->MSVChVariance1.quality)&0x01U;
         infoSetIoCh(slot, 3, pSrcFrame->MSVChVariance1.quality);
-        /* MSVÍ¨µÀ·½²î10±¶ */
+        /* MSVé€šé“æ–¹å·®10å€ */
         pDstFrame->MSVChVariance10.value = pSrcFrame->MSVChVariance10.value;
         pDstFrame->MSVChVariance10.quality = (pSrcFrame->MSVChVariance10.quality)&0x01U;
         infoSetIoCh(slot, 4, pSrcFrame->MSVChVariance10.quality);
-        /* Õç±ğãĞÊä³ö»Ø²ÉÖµ */
+        /* ç”„åˆ«é˜ˆè¾“å‡ºå›é‡‡å€¼ */
         pDstFrame->thresholdOutputRec.value = pSrcFrame->thresholdOutputRec.value;
         pDstFrame->thresholdOutputRec.quality = (pSrcFrame->thresholdOutputRec.quality)&0x01U;
         infoSetIoCh(slot, 5, pSrcFrame->thresholdOutputRec.quality);
-        /* ¼ÆÊıÂÊÂË²¨²ÎÊı·µÀ¡ */
+        /* è®¡æ•°ç‡æ»¤æ³¢å‚æ•°è¿”é¦ˆ */
         pDstFrame->countRateFilterParaRec.value = pSrcFrame->countRateFilterParaRec.value;
         pDstFrame->countRateFilterParaRec.quality = (pSrcFrame->countRateFilterParaRec.quality)&0x01U;
         infoSetIoCh(slot, 6, pSrcFrame->countRateFilterParaRec.quality);
-        /* µÍ¼ÆÊıÂÊ¸üĞÂÊ±¼ät1 */
+        /* ä½è®¡æ•°ç‡æ›´æ–°æ—¶é—´t1 */
         pDstFrame->lowCountRateUpdate_T1.value = pSrcFrame->lowCountRateUpdate_T1.value;
         pDstFrame->lowCountRateUpdate_T1.quality = (pSrcFrame->lowCountRateUpdate_T1.quality)&0x01U;
         infoSetIoCh(slot, 7, pSrcFrame->lowCountRateUpdate_T1.quality);
     }
-    else /* Í¨ĞÅÒì³£Ê±£¬ËùÓĞÎïÀíµãÖÊÁ¿Î»ÎŞĞ§ */
+    else /* é€šä¿¡å¼‚å¸¸æ—¶ï¼Œæ‰€æœ‰ç‰©ç†ç‚¹è´¨é‡ä½æ— æ•ˆ */
     {
-        infoSetHw(slot, 0u); /* Âö³å²É¼¯Ä£¿é×ÔÕï¶Ï×´Ì¬·´À¡ */
-        /* ²âÊÔÍ¨µÀÇĞ»»×´Ì¬ */
+        infoSetHw(slot, 0u); /* è„‰å†²é‡‡é›†æ¨¡å—è‡ªè¯Šæ–­çŠ¶æ€åé¦ˆ */
+        /* æµ‹è¯•é€šé“åˆ‡æ¢çŠ¶æ€ */
         pDstFrame->channelSwitchRec.quality = QUALITY_STATE_INVALID;
         infoSetIoCh(slot, 0, QUALITY_STATE_INVALID);
-        /* Õç±ğãĞÆºÇúÏß»æÖÆ×´Ì¬ */
+        /* ç”„åˆ«é˜ˆåªæ›²çº¿ç»˜åˆ¶çŠ¶æ€ */
         pDstFrame->thresholdFlatCurveDraw.quality = QUALITY_STATE_INVALID;
         infoSetIoCh(slot, 1, QUALITY_STATE_INVALID);
-        /* Âö³å¼ÆÊıÂÊ */
+        /* è„‰å†²è®¡æ•°ç‡ */
         pDstFrame->countRate.quality = QUALITY_STATE_INVALID;
         infoSetIoCh(slot, 2, QUALITY_STATE_INVALID);
-        /* MSVÍ¨µÀ·½²î1±¶ */
+        /* MSVé€šé“æ–¹å·®1å€ */
         pDstFrame->MSVChVariance1.quality = QUALITY_STATE_INVALID;
         infoSetIoCh(slot, 3, QUALITY_STATE_INVALID);
-        /* MSVÍ¨µÀ·½²î10±¶ */
+        /* MSVé€šé“æ–¹å·®10å€ */
         pDstFrame->MSVChVariance10.quality = QUALITY_STATE_INVALID;
         infoSetIoCh(slot, 4, QUALITY_STATE_INVALID);
-        /* Õç±ğãĞÊä³ö»Ø²ÉÖµ */
+        /* ç”„åˆ«é˜ˆè¾“å‡ºå›é‡‡å€¼ */
         pDstFrame->thresholdOutputRec.quality = QUALITY_STATE_INVALID;
         infoSetIoCh(slot, 5, QUALITY_STATE_INVALID);
-        /* ¼ÆÊıÂÊÂË²¨²ÎÊı·µÀ¡ */
+        /* è®¡æ•°ç‡æ»¤æ³¢å‚æ•°è¿”é¦ˆ */
         pDstFrame->countRateFilterParaRec.quality = QUALITY_STATE_INVALID;
         infoSetIoCh(slot, 6, QUALITY_STATE_INVALID);
-        /* µÍ¼ÆÊıÂÊ¸üĞÂÊ±¼ät1 */
+        /* ä½è®¡æ•°ç‡æ›´æ–°æ—¶é—´t1 */
         pDstFrame->lowCountRateUpdate_T1.quality = QUALITY_STATE_INVALID;
         infoSetIoCh(slot, 7, QUALITY_STATE_INVALID);
     }
@@ -103,10 +103,10 @@ static void npi02FrameHandle(int32_t slot, int32_t copyFlag, void *pDst, const v
 /*********************************************************************
 * Identifier:   SCOD-AMC01-370 (Trace to: SLD-AMC01-370)
 * Function:     npi02RxHandle
-* Description:  ½ÓÊÕNPI02°æ¿¨µÄÊı¾İºÍ×´Ì¬
-* Input:        slot  ²ÛºÅ
-*               port  IO¿¨±£Áô
-*               pBuf  ½ÓÊÕÊı¾İÖ¸Õë
+* Description:  æ¥æ”¶NPI02ç‰ˆå¡çš„æ•°æ®å’ŒçŠ¶æ€
+* Input:        slot  æ§½å·
+*               port  IOå¡ä¿ç•™
+*               pBuf  æ¥æ”¶æ•°æ®æŒ‡é’ˆ
 * Output:       none
 * Return:       0
 *
@@ -124,12 +124,12 @@ int32_t npi02RxHandle(int32_t slot, int32_t port, void *pBuf)
 /**************************************************************************************************
 * Identifier:   SCOD-AMC01-371 (Trace to: SLD-AMC01-371)
 * Function:     npi02GetRxChAddr
-* Description:  »ñÈ¡npi02Ä£¿é¶ÔÓ¦Í¨µÀµÄ»º³åÇøµØÖ·
-* Input:        slot  ²ÛºÅ
-*               port  ¶Ë¿ÚºÅ
-*               ch    Í¨µÀºÅ
+* Description:  è·å–npi02æ¨¡å—å¯¹åº”é€šé“çš„ç¼“å†²åŒºåœ°å€
+* Input:        slot  æ§½å·
+*               port  ç«¯å£å·
+*               ch    é€šé“å·
 * Output:       none
-* Return:       pSrc Í¨µÀµØÖ·
+* Return:       pSrc é€šé“åœ°å€
 *
 * Others:
 * Log:          Date          Author    Modified
@@ -153,12 +153,12 @@ uint8_t *npi02GetRxChAddr(int32_t slot, int32_t port, int32_t ch)
 /**************************************************************************************************
  * Identifier:   SCOD-AMC01-372 (Trace to: SLD-AMC01-372)
  * Function:     npi02GetTxChAddr
- * Description:  »ñÈ¡npi02Ä£¿éÍ¨µÀµØÖ·
- * Input:        slot  ²ÛÎ»ºÅ
- *               port  ²ÎÊı±£Áô£¬½Ó¿ÚĞèÒª
- *               ch    Í¨µÀºÅ
+ * Description:  è·å–npi02æ¨¡å—é€šé“åœ°å€
+ * Input:        slot  æ§½ä½å·
+ *               port  å‚æ•°ä¿ç•™ï¼Œæ¥å£éœ€è¦
+ *               ch    é€šé“å·
  * Output:       None
- * Return:       pDst  ¶ÔÓ¦Í¨µÀµÄµØÖ·Ö¸Õë
+ * Return:       pDst  å¯¹åº”é€šé“çš„åœ°å€æŒ‡é’ˆ
  * Date:         Author      Modified
  * 2021-11-09    hdq         Create
  *************************************************************************************************/

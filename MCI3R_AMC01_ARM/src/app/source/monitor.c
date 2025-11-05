@@ -1,6 +1,6 @@
 /***************************************************************************************************
  * Filename: monitor.c
- * Purpose:  °å¿¨µçÔ´µçÑ¹Õï¶Ï´¦Àí
+ * Purpose:  æ¿å¡ç”µæºç”µå‹è¯Šæ–­å¤„ç†
  * Date:         Author      Modified 
  * 2021-09-23    hdq         Create  
 ***************************************************************************************************/
@@ -45,10 +45,10 @@ static const float32 volmax[CH_NUM] =
 /****************************************************************************************************
 * Identifier:   SCOD-AMC01-084 (Trace to: SLD-AMC01-084)
 * Function:     volProcess
-* Description:  ´¦ÀíÅĞ¶Ï¸÷Â·µçÑ¹ÊÇ·ñÕı³£
-* Input:        voltage ²É¼¯Êı×é
+* Description:  å¤„ç†åˆ¤æ–­å„è·¯ç”µå‹æ˜¯å¦æ­£å¸¸
+* Input:        voltage é‡‡é›†æ•°ç»„
 * Output:       none
-* Return:       ret ¹ÊÕÏ´úÂë
+* Return:       ret æ•…éšœä»£ç 
 *               
 * Others:
 * Log:          Date          Author    Modified
@@ -69,7 +69,7 @@ static uint32_t volProcess(const adcValue_t voltage[])
         }
     }
 
-    /* VCC_5VAUX_CHID Í¨µÀ²»Ê¹ÓÃ */
+    /* VCC_5VAUX_CHID é€šé“ä¸ä½¿ç”¨ */
     ret &= ~((uint32_t)1U << VCC_5VAUX_CHID);
 
     return ret;
@@ -78,8 +78,8 @@ static uint32_t volProcess(const adcValue_t voltage[])
 /****************************************************************************************************
 * Identifier:   SCOD-AMC01-085 (Trace to: SLD-AMC01-085)
 * Function:     volDiganostic
-* Description:  ¸÷Â·µçÔ´µçÑ¹Õï¶Ï
-* Input:        flag ¼ì²â±êÖ¾ 0 ÖÜÆÚµ÷ÓÃ£¨¹ÊÕÏ¾¯¸æ£© 1 ÉÏµçµ÷ÓÃ£¨¹ÊÕÏÍ£»ú£©
+* Description:  å„è·¯ç”µæºç”µå‹è¯Šæ–­
+* Input:        flag æ£€æµ‹æ ‡å¿— 0 å‘¨æœŸè°ƒç”¨ï¼ˆæ•…éšœè­¦å‘Šï¼‰ 1 ä¸Šç”µè°ƒç”¨ï¼ˆæ•…éšœåœæœºï¼‰
 * Output:       none
 * Return:       
 *               
@@ -93,15 +93,15 @@ void volDiganostic(uint8_t flag)
     uint32_t  mask = ((uint32_t)1U << VCC_24V1_CHID) | ((uint32_t)1U << VCC_24V2_CHID);
     adcValue_t volValue[MAX_ADC_CH] = {{0U, 0.0f}};
 
-    /* ²É¼¯µçÑ¹Öµ */
+    /* é‡‡é›†ç”µå‹å€¼ */
     sampleVol(volValue);
     
-    /* ±È½Ï ¸÷Õï¶ÏµçÑ¹ ÊÇ·ñÔÚÕı³£·¶Î§ÄÚ */
+    /* æ¯”è¾ƒ å„è¯Šæ–­ç”µå‹ æ˜¯å¦åœ¨æ­£å¸¸èŒƒå›´å†… */
     ret = volProcess(volValue);
 
     if(ret != 0u)
     {
-        if(((ret & mask) == mask)&&(flag == 1U)) /* ¿ª»úÊ±Á½Â·24VµçÑ¹ ¶¼Òì³£ */
+        if(((ret & mask) == mask)&&(flag == 1U)) /* å¼€æœºæ—¶ä¸¤è·¯24Vç”µå‹ éƒ½å¼‚å¸¸ */
         {
             errStopHandleInit(POWER_ON_ERROR);
         }
@@ -119,14 +119,14 @@ void volDiganostic(uint8_t flag)
 /****************************************************************************************************
 * Identifier:   SCOD-AMC01-086 (Trace to: SLD-AMC01-086)
 * Function:     sampleVol
-* Description:  ²É¼¯¸÷Í¨µÀµçÑ¹Öµ£¬ADC²ÉÑù10´Î£¬È¡Æ½¾ùÖµ¼ÆËã³öµçÑ¹Öµ
+* Description:  é‡‡é›†å„é€šé“ç”µå‹å€¼ï¼ŒADCé‡‡æ ·10æ¬¡ï¼Œå–å¹³å‡å€¼è®¡ç®—å‡ºç”µå‹å€¼
 * Input:        none
-* Output:       voltage : ´æ·ÅµçÑ¹×îÖÕ×ª»»µÄµçÑ¹ÖµºÍ¶ÔÓ¦Í¨µÀID
+* Output:       voltage : å­˜æ”¾ç”µå‹æœ€ç»ˆè½¬æ¢çš„ç”µå‹å€¼å’Œå¯¹åº”é€šé“ID
 * Return:       
 *               
 * Others:
 * Log:          Date          Author    Modified
-*               2019/07/04    wxb       smapleVolĞŞ¸ÄÎªsampleVol
+*               2019/07/04    wxb       smapleVolä¿®æ”¹ä¸ºsampleVol
 ****************************************************************************************************/
 static void sampleVol(adcValue_t voltage[])
 {
@@ -135,20 +135,20 @@ static void sampleVol(adcValue_t voltage[])
     uint32_t tmpData = 0U;
     float32_t tmpVoltage = 0.0f;
 
-    adcData_t averageData[32U] = {{0U,0U}};  /* ADCÊı×ÖÁ¿ */
+    adcData_t averageData[32U] = {{0U,0U}};  /* ADCæ•°å­—é‡ */
     uint32_t  totalData[32U] = {0U};
 
     for(i = 0U; i< SMAPLE_COUNT; i++)
     {
-        adcStartConversion(adcREG1, GROUP1);/* Æô¶¯ADC×ª»»Æ÷ */
-        while(adcIsConversionComplete(adcREG1, GROUP1) == 0u)/* µÈ´ı×ª»»Íê³É */
+        adcStartConversion(adcREG1, GROUP1);/* å¯åŠ¨ADCè½¬æ¢å™¨ */
+        while(adcIsConversionComplete(adcREG1, GROUP1) == 0u)/* ç­‰å¾…è½¬æ¢å®Œæˆ */
         {
             ; /* Do nothing */
         }
-        /* ADC RAMÇø¶ÁÈ¡ ADCÖµ */
+        /* ADC RAMåŒºè¯»å– ADCå€¼ */
         (void)adcGetData(adcREG1, GROUP1, (adcData_t *)averageData);
 
-        /* ÀÛ¼Ó¸÷Í¨µÀADCÖµ */
+        /* ç´¯åŠ å„é€šé“ADCå€¼ */
         for(j = 0U; j< CH_NUM; j++)
         {
             totalData[j] += averageData[j].value;

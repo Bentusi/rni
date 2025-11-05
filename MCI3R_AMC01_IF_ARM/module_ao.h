@@ -1,6 +1,6 @@
 /**************************************************************************************************
 *Filename:     module_ao.h
-*Purpose:      ¹«ÓÃÄ£¿éao·½·¨¶¨Òå
+*Purpose:      å…¬ç”¨æ¨¡å—aoæ–¹æ³•å®šä¹‰
 *Log:          Date          Author    Modified
 *              2021/9/21     hdq       create
 **************************************************************************************************/
@@ -10,19 +10,19 @@
 #define AO_TYPE             (4U)
 #define AO_CH_MAX           (12)
 
-/* AOÄ£¿éË½ÓĞÅäÖÃ */
+/* AOæ¨¡å—ç§æœ‰é…ç½® */
 typedef struct
 {
-    float32_t maxValue[AO_CH_MAX];      /* ¹¤³ÌÁ¿ÉÏÏŞÖµ */
-    float32_t minValue[AO_CH_MAX];      /* ¹¤³ÌÁ¿ÏÂÏŞÖµ */
+    float32_t maxValue[AO_CH_MAX];      /* å·¥ç¨‹é‡ä¸Šé™å€¼ */
+    float32_t minValue[AO_CH_MAX];      /* å·¥ç¨‹é‡ä¸‹é™å€¼ */
 
-    float32_t maxOriValue[AO_CH_MAX];   /* µçÆøÁ¿ÉÏÏŞÖµ */
-    float32_t minOriValue[AO_CH_MAX];   /* µçÆøÁ¿ÏÂÏŞÖµ */
+    float32_t maxOriValue[AO_CH_MAX];   /* ç”µæ°”é‡ä¸Šé™å€¼ */
+    float32_t minOriValue[AO_CH_MAX];   /* ç”µæ°”é‡ä¸‹é™å€¼ */
 
-    float32_t defValue[AO_CH_MAX];      /* Ä¬ÈÏÊä³öÖµ */
+    float32_t defValue[AO_CH_MAX];      /* é»˜è®¤è¾“å‡ºå€¼ */
 
-    uint8_t action[AO_CH_MAX];          /* Òì³£Ê±¶¯×÷ */
-    uint32_t outType;                   /* ¸÷Í¨µÀÊä³öÀàĞÍ */
+    uint8_t action[AO_CH_MAX];          /* å¼‚å¸¸æ—¶åŠ¨ä½œ */
+    uint32_t outType;                   /* å„é€šé“è¾“å‡ºç±»å‹ */
 } aoPrivCfg_t;
 
 typedef aiFrame_t  aoFrame_t;

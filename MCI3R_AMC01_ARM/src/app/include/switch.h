@@ -18,7 +18,7 @@ typedef enum
     SYS_NOR,
     SYS_MAIT = 3,
     SYS_ERR
-}SysMode_t;  /* 运行模式 */
+}SysMode_t;  /* 鏉╂劘锟藉本膩瀵拷 */
 
 extern int32_t swUserStateCheck(void);
 extern void swUserHandle(void);

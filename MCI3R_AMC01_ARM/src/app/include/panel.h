@@ -1,6 +1,6 @@
 /*********************************************************
  * FILENAME:panel.h
- * PURPOSE: Ç°Ãæ°åÖ¸Ê¾µÆÇı¶¯
+ * PURPOSE: å‰é¢æ¿æŒ‡ç¤ºç¯é©±åŠ¨
  * DATE             ARTHOR             CHANGE
  *2017-10-9         wch                Created
  *********************************************************/
@@ -25,7 +25,7 @@
 
 typedef enum 
 {
-    PanelLedPwr = 0,        /* µçÔ´ Ö¸Ê¾µÆ */
+    PanelLedPwr = 0,        /* ç”µæº æŒ‡ç¤ºç¯ */
     PanelLedRun,
     PanelLedSync,
     PanelLedMaint,

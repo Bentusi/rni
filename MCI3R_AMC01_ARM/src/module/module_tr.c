@@ -1,6 +1,6 @@
 /**************************************************************************************************
 *Filename:     module_tr.c
-*Purpose:      ¹«ÓÃÄ£¿étr·½·¨¶¨Òå
+*Purpose:      å…¬ç”¨æ¨¡å—træ–¹æ³•å®šä¹‰
 *Log:          Date          Author    Modified
 *              2021/9/21     hdq       create
 **************************************************************************************************/
@@ -16,11 +16,11 @@
 /**************************************************************************************************
  * Identifier:   SCOD-AMC01-385 (Trace to: SLD-AMC01-385)
  * Function:     trFrameHandle
- * Description:  trÄ£¿é½ÓÊÕÊı¾İÖ¡´¦Àí
- * Input:        slot      ²ÛÎ»ºÅ
- *               copyFlag  0£º²»½øĞĞ¸´ÖÆÇÒÖÊÁ¿Î»ÎŞĞ§£¨Òì³£´¦Àí£©£»£¡0£ºÖ´ĞĞ¸´ÖÆ²Ù×÷
- *               pDst      Ä¿µÄµØÖ·
- *               pSrc      Ô´µØÖ·
+ * Description:  træ¨¡å—æ¥æ”¶æ•°æ®å¸§å¤„ç†
+ * Input:        slot      æ§½ä½å·
+ *               copyFlag  0ï¼šä¸è¿›è¡Œå¤åˆ¶ä¸”è´¨é‡ä½æ— æ•ˆï¼ˆå¼‚å¸¸å¤„ç†ï¼‰ï¼›ï¼0ï¼šæ‰§è¡Œå¤åˆ¶æ“ä½œ
+ *               pDst      ç›®çš„åœ°å€
+ *               pSrc      æºåœ°å€
  * Output:       None
  * Return:       None
  * Date:         Author      Modified
@@ -55,9 +55,9 @@ static void trFrameHandle(int32_t slot, int32_t copyFlag, void *pDst, const void
             }
         }
     }
-    else /* Í¨ĞÅÒì³£Ê±£¬ËùÓĞÎïÀíµãÖÊÁ¿Î»ÎŞĞ§ */
+    else /* é€šä¿¡å¼‚å¸¸æ—¶ï¼Œæ‰€æœ‰ç‰©ç†ç‚¹è´¨é‡ä½æ— æ•ˆ */
     {
-        infoSetHw(slot, 0u); /* Âö³å²É¼¯Ä£¿é×ÔÕï¶Ï×´Ì¬·´À¡ */
+        infoSetHw(slot, 0u); /* è„‰å†²é‡‡é›†æ¨¡å—è‡ªè¯Šæ–­çŠ¶æ€åé¦ˆ */
 
         for(ch = 0;ch < TC_CH_MAX;ch++)
         {
@@ -73,10 +73,10 @@ static void trFrameHandle(int32_t slot, int32_t copyFlag, void *pDst, const void
 /*********************************************************************
 * Identifier:   SCOD-AMC01-386 (Trace to: SLD-AMC01-386)
 * Function:     trRxHandle
-* Description:  ½ÓÊÕtr°æ¿¨µÄÊı¾İºÍ×´Ì¬
-* Input:        slot  ²ÛºÅ
-*               port  IO¿¨±£Áô
-*               pBuf  ½ÓÊÕÊı¾İÖ¸Õë
+* Description:  æ¥æ”¶trç‰ˆå¡çš„æ•°æ®å’ŒçŠ¶æ€
+* Input:        slot  æ§½å·
+*               port  IOå¡ä¿ç•™
+*               pBuf  æ¥æ”¶æ•°æ®æŒ‡é’ˆ
 * Output:       none
 * Return:       0
 *
@@ -94,12 +94,12 @@ int32_t trRxHandle(int32_t slot, int32_t port, void *pBuf)
 /**************************************************************************************************
 * Identifier:   SCOD-AMC01-387 (Trace to: SLD-AMC01-387)
 * Function:     trGetRxChAddr
-* Description:  »ñÈ¡trÄ£¿é¶ÔÓ¦Í¨µÀµÄ»º³åÇøµØÖ·
-* Input:        slot  ²ÛºÅ
-*               port  ²ÎÊı±£Áô£¬½Ó¿ÚĞèÒª
-*               ch    Í¨µÀºÅ
+* Description:  è·å–træ¨¡å—å¯¹åº”é€šé“çš„ç¼“å†²åŒºåœ°å€
+* Input:        slot  æ§½å·
+*               port  å‚æ•°ä¿ç•™ï¼Œæ¥å£éœ€è¦
+*               ch    é€šé“å·
 * Output:       none
-* Return:       pSrc Í¨µÀµØÖ·
+* Return:       pSrc é€šé“åœ°å€
 *
 * Others:
 * Log:          Date          Author    Modified

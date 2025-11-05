@@ -18,7 +18,7 @@ MEMORY
 
     RAM             (xrw)   : ORIGIN = 0x08040000, LENGTH = 0x0003F000    /* 64K*7 -4K */
 
-    RAM_SL          (xrw)   : ORIGIN = 0x0807F000, LENGTH = 0x00001000    /* 4K flash ×ÔÕï¶Ïº¯ÊýÇø   */
+    RAM_SL          (xrw)   : ORIGIN = 0x0807F000, LENGTH = 0x00001000    /* 4K flash è‡ªè¯Šæ–­å‡½æ•°åŒº   */
     MEMORY_B1       (rx)    : ORIGIN = 0x60000000, LENGTH = 0K
 }
 

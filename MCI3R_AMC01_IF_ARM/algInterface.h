@@ -1,8 +1,8 @@
 /**************************************************************************************************
 *FILENAME:     algInterface.h
-*PURPOSE:      »ù´¡¹Ì¼şÓëÏµÍ³Ó¦ÓÃ½Ó¿Ú
+*PURPOSE:      åŸºç¡€å›ºä»¶ä¸ç³»ç»Ÿåº”ç”¨æ¥å£
 *DATE          AUTHOR          CHANGE
-*2023.05.12    wxb             ´´½¨ÎÄ¼ş
+*2023.05.12    wxb             åˆ›å»ºæ–‡ä»¶
 **************************************************************************************************/
 #ifndef _ALGINTERFACE_H_
 #define _ALGINTERFACE_H_
@@ -11,14 +11,14 @@
 
 #define ALG_VERSION    (GEN_VERSION('3','0','0','0'))
 
-/* Ëã·¨²¿·Ö½Ó¿ÚµØÖ· */
+/* ç®—æ³•éƒ¨åˆ†æ¥å£åœ°å€ */
 #define USER_IMAGE_LOAD_INIT_ADDR        (0x80000U)
 #define USER_IMAGE_INIT_ADDR             (0x80004U)
 #define USER_IMAGE_CYCLE_ADDR            (0x80008U)
 #define USER_IMAGE_GET_FORCE_ADDR        (0x8000CU)
 #define USER_IMAGE_GET_PARA_ADDR         (0x80010U)
 
-/* ¹©Ëã·¨µ÷ÓÃº¯Êı½Ó¿Ú */
+/* ä¾›ç®—æ³•è°ƒç”¨å‡½æ•°æ¥å£ */
 typedef struct
 {
     uint64_t (*pFunDrv2CrcCal)(const void *pSrc, uint32_t len);
@@ -35,7 +35,7 @@ typedef struct
     void (*pFunLxGetStation)(uint8_t* st);
 } algMethod_t;
 
-/* Íâ²¿º¯ÊıÉùÃ÷ */
+/* å¤–éƒ¨å‡½æ•°å£°æ˜ */
 extern int32_t ifAgLoadInit(void);
 extern void ifAgLogicTaskInit(void);
 extern int32_t ifAgLogicTaskRun(void);

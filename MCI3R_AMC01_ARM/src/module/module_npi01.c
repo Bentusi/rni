@@ -1,6 +1,6 @@
 /**************************************************************************************************
 *Filename:     module_npi01.c
-*Purpose:      ¹«ÓÃÄ£¿énpi01·½·¨¶¨Òå
+*Purpose:      å…¬ç”¨æ¨¡å—npi01æ–¹æ³•å®šä¹‰
 *Log:          Date          Author    Modified
 *              2021/9/21     hdq       create
 **************************************************************************************************/
@@ -15,11 +15,11 @@
 /**************************************************************************************************
 * Identifier:   SCOD-AMC01-365 (Trace to: SLD-AMC01-365)
 * Function:     npi01FrameHandle
-* Description:  npi01Ä£¿é½ÓÊÕÊı¾İÖ¡´¦Àí
-* Input:        slot      ²ÛÎ»ºÅ
-*               copyFlag  0 ²»½øĞĞ¸´ÖÆÇÒÖÊÁ¿Î»ÎŞĞ§£¨Òì³£´¦Àí£© !0 Ö´ĞĞ¸´ÖÆ²Ù×÷
-*               pDst      Ä¿µÄµØÖ·
-*               pSrc      Ô´µØÖ·
+* Description:  npi01æ¨¡å—æ¥æ”¶æ•°æ®å¸§å¤„ç†
+* Input:        slot      æ§½ä½å·
+*               copyFlag  0 ä¸è¿›è¡Œå¤åˆ¶ä¸”è´¨é‡ä½æ— æ•ˆï¼ˆå¼‚å¸¸å¤„ç†ï¼‰ !0 æ‰§è¡Œå¤åˆ¶æ“ä½œ
+*               pDst      ç›®çš„åœ°å€
+*               pSrc      æºåœ°å€
 * Output:       None
 * Return:       None
 * Date:         Author      Modified
@@ -37,71 +37,71 @@ static void npi01FrameHandle(int32_t slot, int32_t copyFlag, void *pDst, const v
     {
         infoSetHw(slot, pSrcFrame->info);
 
-        /* ¸ßÑ¹ÇĞ³ı·´À¡ĞÅºÅ */
+        /* é«˜å‹åˆ‡é™¤åé¦ˆä¿¡å· */
         pDstFrame->hiPreLoseFeedback.value = pSrcFrame->hiPreLoseFeedback.value;
         pDstFrame->hiPreLoseFeedback.quality = (pSrcFrame->hiPreLoseFeedback.quality)&0x01U;
         infoSetIoCh(slot, 0, pSrcFrame->hiPreLoseFeedback.quality);
-        /* ²âÊÔÍ¨µÀÇĞ»»×´Ì¬·´À¡ */
+        /* æµ‹è¯•é€šé“åˆ‡æ¢çŠ¶æ€åé¦ˆ */
         pDstFrame->channelSwitchRec.value = pSrcFrame->channelSwitchRec.value;
         pDstFrame->channelSwitchRec.quality = (pSrcFrame->channelSwitchRec.quality)&0x01U;
         infoSetIoCh(slot, 1, pSrcFrame->channelSwitchRec.quality);
-        /* ÆºÇúÏß»æÖÆÊ¹ÄÜ */
+        /* åªæ›²çº¿ç»˜åˆ¶ä½¿èƒ½ */
         pDstFrame->flatCurveDrawEn.value = pSrcFrame->flatCurveDrawEn.value;
         pDstFrame->flatCurveDrawEn.quality = (pSrcFrame->flatCurveDrawEn.quality)&0x01U;
         infoSetIoCh(slot, 2, pSrcFrame->flatCurveDrawEn.quality);
-        /* µÍ¼ÆÊıÂÊ¸üĞÂÊ±¼ät1 */
+        /* ä½è®¡æ•°ç‡æ›´æ–°æ—¶é—´t1 */
         pDstFrame->lowCountRateUpdate_T1.value = pSrcFrame->lowCountRateUpdate_T1.value;
         pDstFrame->lowCountRateUpdate_T1.quality = (pSrcFrame->lowCountRateUpdate_T1.quality)&0x01U;
         infoSetIoCh(slot, 3, pSrcFrame->lowCountRateUpdate_T1.quality);
-        /* Âö³å¼ÆÊıÂÊ */
+        /* è„‰å†²è®¡æ•°ç‡ */
         pDstFrame->countRate.value = pSrcFrame->countRate.value;
         pDstFrame->countRate.quality = (pSrcFrame->countRate.quality)&0x01U;
         infoSetIoCh(slot, 4, pSrcFrame->countRate.quality);
-        /* ¸ßÑ¹Êä³ö»Ø²É */
+        /* é«˜å‹è¾“å‡ºå›é‡‡ */
         pDstFrame->hiPreOutputRec.value = pSrcFrame->hiPreOutputRec.value;
         pDstFrame->hiPreOutputRec.quality = (pSrcFrame->hiPreOutputRec.quality)&0x01U;
         infoSetIoCh(slot, 5, pSrcFrame->hiPreOutputRec.quality);
-        /* Õç±ğ·§Êä³ö»Ø²É */
+        /* ç”„åˆ«é˜€è¾“å‡ºå›é‡‡ */
         pDstFrame->thresholdOutputRec.value = pSrcFrame->thresholdOutputRec.value;
         pDstFrame->thresholdOutputRec.quality = (pSrcFrame->thresholdOutputRec.quality)&0x01U;
         infoSetIoCh(slot, 6, pSrcFrame->thresholdOutputRec.quality);
-        /* TTLĞÅºÅ±ÕËø·´À¡ */
+        /* TTLä¿¡å·é—­é”åé¦ˆ */
         pDstFrame->ttlSignalLookRec.value = pSrcFrame->ttlSignalLookRec.value;
         pDstFrame->ttlSignalLookRec.quality = (pSrcFrame->ttlSignalLookRec.quality)&0x01U;
         infoSetIoCh(slot, 7, pSrcFrame->ttlSignalLookRec.quality);
-        /* ¼ÆÊıÂÊÂË²¨²ÎÊı·´À¡Öµ   */
+        /* è®¡æ•°ç‡æ»¤æ³¢å‚æ•°åé¦ˆå€¼   */
         pDstFrame->countRateRec.value = pSrcFrame->countRateRec.value;
         pDstFrame->countRateRec.quality = (pSrcFrame->countRateRec.quality)&0x01U;
         infoSetIoCh(slot, 8, pSrcFrame->countRateRec.quality);
     }
-    else /* Í¨ĞÅÒì³£Ê±£¬ËùÓĞÎïÀíµãÖÊÁ¿Î»ÎŞĞ§ */
+    else /* é€šä¿¡å¼‚å¸¸æ—¶ï¼Œæ‰€æœ‰ç‰©ç†ç‚¹è´¨é‡ä½æ— æ•ˆ */
     {
-        infoSetHw(slot, 0u); /* Âö³å²É¼¯Ä£¿é×ÔÕï¶Ï×´Ì¬·´À¡ */
-        /* ¸ßÑ¹ÇĞ³ı·´À¡ĞÅºÅ */
+        infoSetHw(slot, 0u); /* è„‰å†²é‡‡é›†æ¨¡å—è‡ªè¯Šæ–­çŠ¶æ€åé¦ˆ */
+        /* é«˜å‹åˆ‡é™¤åé¦ˆä¿¡å· */
         pDstFrame->hiPreLoseFeedback.quality = QUALITY_STATE_INVALID;
         infoSetIoCh(slot, 0, QUALITY_STATE_INVALID);
-        /* ²âÊÔÍ¨µÀÇĞ»»×´Ì¬·´À¡ */
+        /* æµ‹è¯•é€šé“åˆ‡æ¢çŠ¶æ€åé¦ˆ */
         pDstFrame->channelSwitchRec.quality = QUALITY_STATE_INVALID;
         infoSetIoCh(slot, 1, QUALITY_STATE_INVALID);
-        /* ÆºÇúÏß»æÖÆÊ¹ÄÜ */
+        /* åªæ›²çº¿ç»˜åˆ¶ä½¿èƒ½ */
         pDstFrame->flatCurveDrawEn.quality = QUALITY_STATE_INVALID;
         infoSetIoCh(slot, 2, QUALITY_STATE_INVALID);
-        /* µÍ¼ÆÊıÂÊ¸üĞÂÊ±¼ät1 */
+        /* ä½è®¡æ•°ç‡æ›´æ–°æ—¶é—´t1 */
         pDstFrame->lowCountRateUpdate_T1.quality = QUALITY_STATE_INVALID;
         infoSetIoCh(slot, 3, QUALITY_STATE_INVALID);
-        /* Âö³å¼ÆÊıÂÊ */
+        /* è„‰å†²è®¡æ•°ç‡ */
         pDstFrame->countRate.quality = QUALITY_STATE_INVALID;
         infoSetIoCh(slot, 4, QUALITY_STATE_INVALID);
-        /* ¸ßÑ¹Êä³ö»Ø²É */
+        /* é«˜å‹è¾“å‡ºå›é‡‡ */
         pDstFrame->hiPreOutputRec.quality = QUALITY_STATE_INVALID;
         infoSetIoCh(slot, 5, QUALITY_STATE_INVALID);
-        /* Õç±ğ·§Êä³ö»Ø²É */
+        /* ç”„åˆ«é˜€è¾“å‡ºå›é‡‡ */
         pDstFrame->thresholdOutputRec.quality = QUALITY_STATE_INVALID;
         infoSetIoCh(slot, 6, QUALITY_STATE_INVALID);
-        /* TTLĞÅºÅ±ÕËø·´À¡ */
+        /* TTLä¿¡å·é—­é”åé¦ˆ */
         pDstFrame->ttlSignalLookRec.quality = QUALITY_STATE_INVALID;
         infoSetIoCh(slot, 7, QUALITY_STATE_INVALID);
-        /* ¼ÆÊıÂÊÂË²¨²ÎÊı·´À¡Öµ   */
+        /* è®¡æ•°ç‡æ»¤æ³¢å‚æ•°åé¦ˆå€¼   */
         pDstFrame->countRateRec.quality = QUALITY_STATE_INVALID;
         infoSetIoCh(slot, 8, QUALITY_STATE_INVALID);
     }
@@ -110,10 +110,10 @@ static void npi01FrameHandle(int32_t slot, int32_t copyFlag, void *pDst, const v
 /*********************************************************************
 * Identifier:   SCOD-AMC01-366 (Trace to: SLD-AMC01-366)
 * Function:     npi01RxHandle
-* Description:  ½ÓÊÕNPI01°æ¿¨µÄÊı¾İºÍ×´Ì¬
-* Input:        slot  ²ÛºÅ
-*               port  IO¿¨±£Áô
-*               pBuf  ½ÓÊÕÊı¾İÖ¸Õë
+* Description:  æ¥æ”¶NPI01ç‰ˆå¡çš„æ•°æ®å’ŒçŠ¶æ€
+* Input:        slot  æ§½å·
+*               port  IOå¡ä¿ç•™
+*               pBuf  æ¥æ”¶æ•°æ®æŒ‡é’ˆ
 * Output:       none
 * Return:       0
 *
@@ -131,12 +131,12 @@ int32_t npi01RxHandle(int32_t slot, int32_t port, void *pBuf)
 /**************************************************************************************************
 * Identifier:   SCOD-AMC01-367 (Trace to: SLD-AMC01-367)
 * Function:     npi01GetRxChAddr
-* Description:  »ñÈ¡npi01Ä£¿é¶ÔÓ¦Í¨µÀµÄ»º³åÇøµØÖ·
-* Input:        slot  ²ÛºÅ
-*               port  ¶Ë¿ÚºÅ
-*               ch:   Í¨µÀºÅ
+* Description:  è·å–npi01æ¨¡å—å¯¹åº”é€šé“çš„ç¼“å†²åŒºåœ°å€
+* Input:        slot  æ§½å·
+*               port  ç«¯å£å·
+*               ch:   é€šé“å·
 * Output:       none
-* Return:       pSrc Í¨µÀµØÖ·
+* Return:       pSrc é€šé“åœ°å€
 *
 * Others:
 * Log:          Date          Author    Modified
@@ -160,12 +160,12 @@ uint8_t *npi01GetRxChAddr(int32_t slot, int32_t port, int32_t ch)
 /**************************************************************************************************
  * Identifier:   SCOD-AMC01-368 (Trace to: SLD-AMC01-368)
  * Function:     npi01GetTxChAddr
- * Description:  »ñÈ¡npi01Ä£¿éÍ¨µÀµØÖ·
- * Input:        slot  ²ÛÎ»ºÅ
- *               port  ²ÎÊı±£Áô£¬½Ó¿ÚĞèÒª
- *               ch    Í¨µÀºÅ
+ * Description:  è·å–npi01æ¨¡å—é€šé“åœ°å€
+ * Input:        slot  æ§½ä½å·
+ *               port  å‚æ•°ä¿ç•™ï¼Œæ¥å£éœ€è¦
+ *               ch    é€šé“å·
  * Output:       None
- * Return:       pDst ¶ÔÓ¦Í¨µÀµÄµØÖ·Ö¸Õë
+ * Return:       pDst å¯¹åº”é€šé“çš„åœ°å€æŒ‡é’ˆ
  * Date:         Author      Modified
  * 2021-11-09    hdq         Create
  *************************************************************************************************/

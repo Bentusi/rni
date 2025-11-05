@@ -1,6 +1,6 @@
 /**************************************************************************************************
 *Filename:     module_npi02.h
-*Purpose:      ¹«ÓÃÄ£¿énpi02·½·¨¶¨Òå
+*Purpose:      å…¬ç”¨æ¨¡å—npi02æ–¹æ³•å®šä¹‰
 *Log:          Date          Author    Modified
 *              2021/9/21     hdq       create
 **************************************************************************************************/
@@ -15,54 +15,54 @@
 #define NPI02_RX_FRAME_RSV_SIZE       (64U)
 #define NPI02_TX_FRAME_RSV_SIZE       (60U)
 /**************************************************************************************************
- * ËùÓĞÄ£¿éÅäÖÃĞÅÏ¢
+ * æ‰€æœ‰æ¨¡å—é…ç½®ä¿¡æ¯
  *************************************************************************************************/
 
-/*  NPI02Ë½ÓĞÅäÖÃ  */
+/*  NPI02ç§æœ‰é…ç½®  */
 typedef struct
 {
-    uint32_t  t1;           /* µÍ¼ÆÊıÂÊ¸üĞÂÊ±¼ät1 */
+    uint32_t  t1;           /* ä½è®¡æ•°ç‡æ›´æ–°æ—¶é—´t1 */
 }npi02PrivCfg_t;
 
 /**************************************************************************************************
- * Í¨ĞÅÊı¾İÖ¡¶¨Òå
+ * é€šä¿¡æ•°æ®å¸§å®šä¹‰
  *************************************************************************************************/
 
-/* ¿íÁ¿³ÌÂö³å²É¼¯Ä£¿é£¨NPI02£©ÉÏĞĞÊı¾İÖ¡½á¹¹ */
+/* å®½é‡ç¨‹è„‰å†²é‡‡é›†æ¨¡å—ï¼ˆNPI02ï¼‰ä¸Šè¡Œæ•°æ®å¸§ç»“æ„ */
 typedef struct
 {
-    uint32_t info;                          /* IRµçÁ÷²É¼¯Ä£¿éII×ÔÕï¶Ï×´Ì¬·´À¡,¶ÔÓÚ¹¤³ÌÊ¦Õ¾ ±íÊ¾°å¿¨ID 4B */
-    binary6B_t channelSwitchRec;            /* ²âÊÔÍ¨µÀÇĞ»»×´Ì¬ */
-    binary6B_t thresholdFlatCurveDraw;      /* Õç±ğãĞÆºÇúÏß»æÖÆ×´Ì¬ */
-    analog6BF_t countRate;                  /* Âö³å¼ÆÊıÂÊ */
-    analog6BF_t MSVChVariance1;             /* MSVÍ¨µÀ¾ù·½¸ùµçÑ¹£¨1±¶£© */
-    analog6BF_t MSVChVariance10;            /* MSVÍ¨µÀ¾ù·½¸ùµçÑ¹£¨10±¶£© */
-    analog6BF_t thresholdOutputRec;         /* Õç±ğãĞÊä³ö»Ø²ÉÖµ */
-    analog6BF_t countRateFilterParaRec;     /* ¼ÆÊıÂÊÂË²¨²ÎÊı·´À¡ */
-    analog6BI_t lowCountRateUpdate_T1;      /* µÍ¼ÆÊıÂÊ¸üĞÂÊ±¼ät1 */
-    uint8_t rsv[NPI02_RX_FRAME_RSV_SIZE];   /* ±£Áô×Ö¶Î 70B */
-    uint8_t rsv1[2];                        /* fpga crc16 Ê¹ÓÃ  2B */
-    uint16_t comState;                      /* fpga Í¨ĞÅ×´Ì¬Ê¹ÓÃ  2B */
-    uint64_t crc;                           /* fpga Ğ£Ñé 8B */
+    uint32_t info;                          /* IRç”µæµé‡‡é›†æ¨¡å—IIè‡ªè¯Šæ–­çŠ¶æ€åé¦ˆ,å¯¹äºå·¥ç¨‹å¸ˆç«™ è¡¨ç¤ºæ¿å¡ID 4B */
+    binary6B_t channelSwitchRec;            /* æµ‹è¯•é€šé“åˆ‡æ¢çŠ¶æ€ */
+    binary6B_t thresholdFlatCurveDraw;      /* ç”„åˆ«é˜ˆåªæ›²çº¿ç»˜åˆ¶çŠ¶æ€ */
+    analog6BF_t countRate;                  /* è„‰å†²è®¡æ•°ç‡ */
+    analog6BF_t MSVChVariance1;             /* MSVé€šé“å‡æ–¹æ ¹ç”µå‹ï¼ˆ1å€ï¼‰ */
+    analog6BF_t MSVChVariance10;            /* MSVé€šé“å‡æ–¹æ ¹ç”µå‹ï¼ˆ10å€ï¼‰ */
+    analog6BF_t thresholdOutputRec;         /* ç”„åˆ«é˜ˆè¾“å‡ºå›é‡‡å€¼ */
+    analog6BF_t countRateFilterParaRec;     /* è®¡æ•°ç‡æ»¤æ³¢å‚æ•°åé¦ˆ */
+    analog6BI_t lowCountRateUpdate_T1;      /* ä½è®¡æ•°ç‡æ›´æ–°æ—¶é—´t1 */
+    uint8_t rsv[NPI02_RX_FRAME_RSV_SIZE];   /* ä¿ç•™å­—æ®µ 70B */
+    uint8_t rsv1[2];                        /* fpga crc16 ä½¿ç”¨  2B */
+    uint16_t comState;                      /* fpga é€šä¿¡çŠ¶æ€ä½¿ç”¨  2B */
+    uint64_t crc;                           /* fpga æ ¡éªŒ 8B */
 }__attribute__((packed)) npi02FrameRx_t;
 
-/* ¿íÁ¿³ÌÂö³å²É¼¯Ä£¿é£¨NPI02£©ÏÂĞĞÊı¾İÖ¡½á¹¹ */
+/* å®½é‡ç¨‹è„‰å†²é‡‡é›†æ¨¡å—ï¼ˆNPI02ï¼‰ä¸‹è¡Œæ•°æ®å¸§ç»“æ„ */
 typedef struct
 {
-    uint32_t info;                           /* 4¶ÔÓÚ¹¤³ÌÊ¦Õ¾ ±íÊ¾°å¿¨ID */
-    binary6B_t channelSwitchEn;              /* ²âÊÔÍ¨µÀÇĞ»»Ê¹ÄÜ */
-    binary6B_t hiPreflatCurveDrawEn;         /* Õç±ğãĞÆºÇúÏß»æÖÆÊ¹ÄÜ */
-    analog6BF_t countRateFilterPara;         /* ¼ÆÊıÂÊÂË²¨²ÎÊıÉè¶¨Öµ£¬±£Áô */
-    analog6BF_t thresholdSetVal;             /* Õç±ğãĞÉè¶¨Öµ */
-    binary6B_t thresholdLowAlarm;            /* Õç±ğãĞµÍ±¨¾¯ */
-    binary6B_t cntRateMode;                  /* ¼ÆÊıÂÊÄ£Ê½ */
-    binary6B_t MSVChVariance10Mode;          /* 10±¶MSVÄ£Ê½ */
-    binary6B_t MSVChVariance1Mode;           /* 1±¶MSVÄ£Ê½ */
-    binary6B_t currentMode;                  /* µçÁ÷Ä£Ê½ */
-    uint8_t rsv[NPI02_TX_FRAME_RSV_SIZE];    /* ±£Áô×Ö¶Î */
-    uint8_t rsv1[2];                         /* fpga crc16 Ê¹ÓÃ  2B */
-    uint16_t comState;                       /* fpga Í¨ĞÅ×´Ì¬Ê¹ÓÃ  2B */
-    uint64_t crc;                            /* fpga Ğ£Ñé 8B */
+    uint32_t info;                           /* 4å¯¹äºå·¥ç¨‹å¸ˆç«™ è¡¨ç¤ºæ¿å¡ID */
+    binary6B_t channelSwitchEn;              /* æµ‹è¯•é€šé“åˆ‡æ¢ä½¿èƒ½ */
+    binary6B_t hiPreflatCurveDrawEn;         /* ç”„åˆ«é˜ˆåªæ›²çº¿ç»˜åˆ¶ä½¿èƒ½ */
+    analog6BF_t countRateFilterPara;         /* è®¡æ•°ç‡æ»¤æ³¢å‚æ•°è®¾å®šå€¼ï¼Œä¿ç•™ */
+    analog6BF_t thresholdSetVal;             /* ç”„åˆ«é˜ˆè®¾å®šå€¼ */
+    binary6B_t thresholdLowAlarm;            /* ç”„åˆ«é˜ˆä½æŠ¥è­¦ */
+    binary6B_t cntRateMode;                  /* è®¡æ•°ç‡æ¨¡å¼ */
+    binary6B_t MSVChVariance10Mode;          /* 10å€MSVæ¨¡å¼ */
+    binary6B_t MSVChVariance1Mode;           /* 1å€MSVæ¨¡å¼ */
+    binary6B_t currentMode;                  /* ç”µæµæ¨¡å¼ */
+    uint8_t rsv[NPI02_TX_FRAME_RSV_SIZE];    /* ä¿ç•™å­—æ®µ */
+    uint8_t rsv1[2];                         /* fpga crc16 ä½¿ç”¨  2B */
+    uint16_t comState;                       /* fpga é€šä¿¡çŠ¶æ€ä½¿ç”¨  2B */
+    uint64_t crc;                            /* fpga æ ¡éªŒ 8B */
 }__attribute__((packed)) npi02FrameTx_t;
 
 extern int32_t npi02RxHandle(int32_t slot, int32_t para, void *pBuf);

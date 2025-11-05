@@ -1,8 +1,8 @@
 /****************************************************************************************************
 *FILENAME:     standby.c
-*PURPOSE:      ÈÈ±¸ÈßÓàÄ£¿é
+*PURPOSE:      çƒ­å¤‡å†—ä½™æ¨¡å—
 *DATE          AUTHOR          CHANGE
-*2017.08.14    ºúµÂÈ«          ´´½¨ÎÄ¼ş
+*2017.08.14    èƒ¡å¾·å…¨          åˆ›å»ºæ–‡ä»¶
 ****************************************************************************************************/
 #include "lynx_types.h"
 #include "standby.h"
@@ -24,12 +24,12 @@
 #include "switch.h"
 #include "algInterface.h"
 
-static int32_t s_cycleDataType =  TYPE_CPU_STATE; /* ÖÜÆÚÍ¬²½Êı¾İ¾»ºÉ×é³É 20 ±¾CPU×´Ì¬ºÍÊ±¼äÏà¹Ø±äÁ¿ 21 Î¬»¤Êı¾İÖ¡ºÍÊ±¼äÏà¹Ø±äÁ¿ */
+static int32_t s_cycleDataType =  TYPE_CPU_STATE; /* å‘¨æœŸåŒæ­¥æ•°æ®å‡€è·ç»„æˆ 20 æœ¬CPUçŠ¶æ€å’Œæ—¶é—´ç›¸å…³å˜é‡ 21 ç»´æŠ¤æ•°æ®å¸§å’Œæ—¶é—´ç›¸å…³å˜é‡ */
 
 static syncFrame_t *s_pRxFrame = NULL;
 static syncFrame_t *s_pTxFrame = NULL;
 
-/* º¯ÊıÉùÃ÷ */
+/* å‡½æ•°å£°æ˜ */
 static int32_t initSyncData(int8_t cmd,const uint8_t *pBuf,uint32_t size);
 static void slaveTxProcess(void);
 
@@ -42,8 +42,8 @@ static int32_t sbRecvData(syncFrame_t *pBuf);
 /****************************************************************************************************
 * Identifier:   SCOD-AMC01-228 (Trace to: SLD-AMC01-228)
 * Function:     sbSendData
-* Description:  ÈÈ±¸ÈßÓà·¢ËÍÊı¾İ½Ó¿Ú
-* Input:        pBuf ·¢ËÍÊı¾İ»º´æ
+* Description:  çƒ­å¤‡å†—ä½™å‘é€æ•°æ®æ¥å£
+* Input:        pBuf å‘é€æ•°æ®ç¼“å­˜
 * Output:       none
 * Return:       ret 0
 *
@@ -71,10 +71,10 @@ static int32_t sbSendData(syncFrame_t *pBuf)
 /****************************************************************************************************
 * Identifier:   SCOD-AMC01-229 (Trace to: SLD-AMC01-229)
 * Function:     sbRecvData
-* Description:  ÈÈ±¸ÈßÓà½ÓÊÕÊı¾İ½Ó¿Ú
-* Input:        pBuf ½ÓÊÕÊı¾İ»º´æ
+* Description:  çƒ­å¤‡å†—ä½™æ¥æ”¶æ•°æ®æ¥å£
+* Input:        pBuf æ¥æ”¶æ•°æ®ç¼“å­˜
 * Output:       none
-* Return:       ret 0 Êı¾İÓĞĞ§ 1 Êı¾İÎŞĞ§
+* Return:       ret 0 æ•°æ®æœ‰æ•ˆ 1 æ•°æ®æ— æ•ˆ
 *
 * Others:
 * Log:          Date          Author    Modified
@@ -82,7 +82,7 @@ static int32_t sbSendData(syncFrame_t *pBuf)
 ****************************************************************************************************/
 static int32_t sbRecvData(syncFrame_t *pBuf)
 {
-    int32_t ret = 1;    /* Ä¬ÈÏÊı¾İÎŞĞ§ */
+    int32_t ret = 1;    /* é»˜è®¤æ•°æ®æ— æ•ˆ */
     LYNX_ASSERT(NULL != pBuf);
     
     void *pCur = (void *)pBuf;
@@ -98,7 +98,7 @@ static int32_t sbRecvData(syncFrame_t *pBuf)
 /****************************************************************************************************
 * Identifier:   SCOD-AMC01-230 (Trace to: SLD-AMC01-230)
 * Function:     slaveTxProcess
-* Description:  ´ÓÄ£¿éÇëÇóÖÜÆÚÍ¬²½Êı¾İ
+* Description:  ä»æ¨¡å—è¯·æ±‚å‘¨æœŸåŒæ­¥æ•°æ®
 * Input:        none
 * Output:       none
 * Return:       none
@@ -127,12 +127,12 @@ static void slaveTxProcess(void)
 /****************************************************************************************************
 * Identifier:   SCOD-AMC01-231 (Trace to: SLD-AMC01-231)
 * Function:     initSyncData
-* Description:  Í¬²½Êı¾İ´¦Àí
-* Input:        cmd ÇëÇóÃüÁî
-*               pBuf ½ÓÊÕÊı¾İ»º´æµØÖ·
-*               size Êı¾İ³¤¶È
+* Description:  åŒæ­¥æ•°æ®å¤„ç†
+* Input:        cmd è¯·æ±‚å‘½ä»¤
+*               pBuf æ¥æ”¶æ•°æ®ç¼“å­˜åœ°å€
+*               size æ•°æ®é•¿åº¦
 * Output:       none
-* Return:       ret: ´íÎóÂë 0: ³É¹¦ 1 ²»³É¹¦ 2 Í¬²½¹ı³ÌÖĞÓÉ´ÓÉıÎªÖ÷
+* Return:       ret: é”™è¯¯ç  0: æˆåŠŸ 1 ä¸æˆåŠŸ 2 åŒæ­¥è¿‡ç¨‹ä¸­ç”±ä»å‡ä¸ºä¸»
 *
 * Others:
 * Log:          Date          Author    Modified
@@ -143,7 +143,7 @@ static int32_t initSyncData(int8_t cmd, const uint8_t *pBuf, uint32_t size)
     uint16_t idx = 0U;
     uint32_t maxIndex = 0U;
     int32_t ret = 0;
-    uint32_t reCnt = 0U;    /* ½ÓÊÕµ½ÃüÁîÂë»òÖ¡ĞòºÅ³ö´íÊ±ÖØĞÂÇëÇó´ÎÊı */
+    uint32_t reCnt = 0U;    /* æ¥æ”¶åˆ°å‘½ä»¤ç æˆ–å¸§åºå·å‡ºé”™æ—¶é‡æ–°è¯·æ±‚æ¬¡æ•° */
     const uint8_t *baseAddr = NULL;
     uint32_t offset = 0U;
     uint16_t i = 0U;
@@ -172,13 +172,13 @@ static int32_t initSyncData(int8_t cmd, const uint8_t *pBuf, uint32_t size)
         wdFeed(WD_1);
 
         for(i = 0U; i< (cfgMpuPeriod() / 5U) ;i++)
-        {/* ÑÓÊ± È·±£1¸öÖÜÆÚ */
+        {/* å»¶æ—¶ ç¡®ä¿1ä¸ªå‘¨æœŸ */
             com1ReportArmState(ARM_OK);
             tmDelayms(5U);
         }
 
         com1UpdateMpuState();
-        /* ½âÎöÊı¾İ  */
+        /* è§£ææ•°æ®  */
         if((sbRecvData(pRxFrame) == 0) &&
                 (pRxFrame->head.cmd == (cmd + 1)))
         {
@@ -195,7 +195,7 @@ static int32_t initSyncData(int8_t cmd, const uint8_t *pBuf, uint32_t size)
         }
         else
         {
-            reCnt++;  /* Á¬Ğø100´ÎÊı¾İ ½ÓÊÕ¶¼²»ÕıÈ· ÔòÍË³öÊı¾İÇëÇó */
+            reCnt++;  /* è¿ç»­100æ¬¡æ•°æ® æ¥æ”¶éƒ½ä¸æ­£ç¡® åˆ™é€€å‡ºæ•°æ®è¯·æ±‚ */
             com1ReportArmState(ARM_OK);
             if(reCnt > 100U)
             {
@@ -204,7 +204,7 @@ static int32_t initSyncData(int8_t cmd, const uint8_t *pBuf, uint32_t size)
             }
         }
 
-        /* Í¬²½¹ı³ÌÖĞ ¼ì²éÊÇ·ñ·¢ÉúÖ÷´Ó±ä»¯  */
+        /* åŒæ­¥è¿‡ç¨‹ä¸­ æ£€æŸ¥æ˜¯å¦å‘ç”Ÿä¸»ä»å˜åŒ–  */
         mode = infoGetMpuMS();
         if(mode == MPU_MASTER)
         {
@@ -224,19 +224,19 @@ static int32_t initSyncData(int8_t cmd, const uint8_t *pBuf, uint32_t size)
 /****************************************************************************************************
 * Identifier:   SCOD-AMC01-232 (Trace to: SLD-AMC01-232)
 * Function:     cfgFileVerCmp
-* Description:  Ö÷´ÓÄ£¿é¹¤³ÌÎÄ¼ş°æ±¾ĞÅÏ¢±È½Ï
+* Description:  ä¸»ä»æ¨¡å—å·¥ç¨‹æ–‡ä»¶ç‰ˆæœ¬ä¿¡æ¯æ¯”è¾ƒ
 * Input:        none
 * Output:       none
-* Return:       0:ÍêÈ«Ò»ÖÂ£»1£º²ÎÊı²»Ò»ÖÂ; -2£º¹Ì¼ş²»Ò»ÖÂ; -1£º½ÓÊÕÊı¾İÊ§°Ü
+* Return:       0:å®Œå…¨ä¸€è‡´ï¼›1ï¼šå‚æ•°ä¸ä¸€è‡´; -2ï¼šå›ºä»¶ä¸ä¸€è‡´; -1ï¼šæ¥æ”¶æ•°æ®å¤±è´¥
 * Others:
 * Log:          Date          Author    Modified
 *               2017/08/14
-*               2019/07/05              º¯ÊıÃû¸ü¸Ä Ô­º¯ÊıÃû:sbVersionCmp
+*               2019/07/05              å‡½æ•°åæ›´æ”¹ åŸå‡½æ•°å:sbVersionCmp
 ****************************************************************************************************/
 static int32_t cfgFileVerCmp(void)
 {
     syncVerInfo_t verInfo = {0U,0UL,0U,0UL,0U,0UL,0U,0UL};
-    uint32_t timeCnt = 0U;    /* ÑÓÊ±¼ÆÊıÆ÷ */
+    uint32_t timeCnt = 0U;    /* å»¶æ—¶è®¡æ•°å™¨ */
     uint32_t delayMaxCnt = 0U;
     int32_t ret = -1;
     syncFrame_t *pTxFrame = s_pTxFrame;
@@ -247,9 +247,9 @@ static int32_t cfgFileVerCmp(void)
     syncVerInfo_t *pVerInfo = (syncVerInfo_t *)pRxFrame->data;
     LYNX_ASSERT(NULL != pVerInfo);
     
-    verInfo.logicVer = lxGetImageHead()->version;     /* ÓÃ»§Ëã·¨°æ±¾ÓëCRC */
+    verInfo.logicVer = lxGetImageHead()->version;     /* ç”¨æˆ·ç®—æ³•ç‰ˆæœ¬ä¸CRC */
     verInfo.logicCrc = lxGetImageHead()->crc;
-    verInfo.cfgVer   = lxGetCfgHead()->version;       /* Æ½Ì¨ÅäÖÃ°æ±¾ÓëCRC */
+    verInfo.cfgVer   = lxGetCfgHead()->version;       /* å¹³å°é…ç½®ç‰ˆæœ¬ä¸CRC */
     verInfo.cfgCrc   = lxGetCfgHead()->crc;
 
     delayMaxCnt = ((uint32_t)2000U / 10U);
@@ -273,26 +273,26 @@ static int32_t cfgFileVerCmp(void)
             if((pRxFrame->head.cmd == SYNC_REPLAY_VERSION) ||
                     (pRxFrame->head.cmd == SYNC_REQ_VERSION))
             {
-                verInfo.paraVer  = pVerInfo->paraVer;     /* Ëã·¨²ÎÊı°æ±¾ÓëCRC */
+                verInfo.paraVer  = pVerInfo->paraVer;     /* ç®—æ³•å‚æ•°ç‰ˆæœ¬ä¸CRC */
                 verInfo.paraCrc  = pVerInfo->paraCrc;
                 if(memcmp((const void*)&verInfo, (const void*)pRxFrame->data, sizeof(syncVerInfo_t)) != 0)
                 {
-                    /* ×éÌ¬ÅäÖÃ²»Ò»ÖÂ */
+                    /* ç»„æ€é…ç½®ä¸ä¸€è‡´ */
                     ret = -2;
                 }
                 else
                 {
-                    verInfo.paraVer  = lxGetParaHead()->version;     /* Ëã·¨²ÎÊı°æ±¾ÓëCRC */
+                    verInfo.paraVer  = lxGetParaHead()->version;     /* ç®—æ³•å‚æ•°ç‰ˆæœ¬ä¸CRC */
                     verInfo.paraCrc  = lxGetParaHead()->crc;
                     if((verInfo.paraVer != pVerInfo->paraVer) ||
                             (verInfo.paraCrc != pVerInfo->paraCrc))
                     {
-                        /* ×éÌ¬²ÎÊı²»Ò»ÖÂ */
+                        /* ç»„æ€å‚æ•°ä¸ä¸€è‡´ */
                         ret = 1;
                     }
                     else
                     {
-                        /* ×éÌ¬ÅäÖÃÍêÈ«Ò»ÖÂ */
+                        /* ç»„æ€é…ç½®å®Œå…¨ä¸€è‡´ */
                         ret = 0;
                     }
                     break;
@@ -301,7 +301,7 @@ static int32_t cfgFileVerCmp(void)
         }
 
         if(timeCnt > delayMaxCnt)
-        {   /* ³¬³ö2Ãë¶¼Ã»ÓĞ½ÓÊÕµ½Í¬²½Êı¾İ ÔòÈÏÎªÁíÍâÒ»¸ö²ÛÎ»Ã»ÓĞ²å¿¨,ÏµÍ³Õı³£ÔËĞĞ */
+        {   /* è¶…å‡º2ç§’éƒ½æ²¡æœ‰æ¥æ”¶åˆ°åŒæ­¥æ•°æ® åˆ™è®¤ä¸ºå¦å¤–ä¸€ä¸ªæ§½ä½æ²¡æœ‰æ’å¡,ç³»ç»Ÿæ­£å¸¸è¿è¡Œ */
             break;
         }
     }
@@ -312,7 +312,7 @@ static int32_t cfgFileVerCmp(void)
 /****************************************************************************************************
 * Identifier:   SCOD-AMC01-233 (Trace to: SLD-AMC01-233)
 * Function:     sbTaskInit
-* Description:  ÈÈ±¸ÈßÓà³õÊ¼»¯
+* Description:  çƒ­å¤‡å†—ä½™åˆå§‹åŒ–
 * Input:        none
 * Output:       none
 * Return:       none
@@ -337,12 +337,12 @@ void sbTaskInit(void)
     LYNX_ASSERT(NULL != s_pRxFrame);
     LYNX_ASSERT(NULL != s_pTxFrame);
 
-    /* ³õÊ¼»¯Ëã·¨ */
+    /* åˆå§‹åŒ–ç®—æ³• */
     ifAgLogicTaskInit();
 
     if(mode == MPU_SLAVE)
     {
-        ret = cfgFileVerCmp();            /* Ö÷´Ó ¹¤³ÌÎÄ¼şÒ»ÖÂĞÔ¼ì²â */
+        ret = cfgFileVerCmp();            /* ä¸»ä» å·¥ç¨‹æ–‡ä»¶ä¸€è‡´æ€§æ£€æµ‹ */
         if(ret == -1)
         {
             errStopHandleInit(MPUS_COM_SYNC_INIT_ERROR);
@@ -356,12 +356,12 @@ void sbTaskInit(void)
             /* do nothing */
         }
 
-        /* ´ÓÄ£¿é ÉÏµçÇëÇóÍ¬²½Êı¾İ */
+        /* ä»æ¨¡å— ä¸Šç”µè¯·æ±‚åŒæ­¥æ•°æ® */
         drv2LcdStrDisp((const int8_t *)"SYNC");
 
         if(ret == 1)
         {
-            /* ÇëÇó²ÎÊı±äÁ¿ */
+            /* è¯·æ±‚å‚æ•°å˜é‡ */
             size = cfgParaRamSize();
             pAddr = (uint8_t*)lxGetPara();
             ret = initSyncData(SYNC_REQ_PARA_DATA, pAddr, size);
@@ -379,14 +379,14 @@ void sbTaskInit(void)
             }
         }
 
-        /* ÇëÇóÇ¿ÖÆÊı¾İ */
+        /* è¯·æ±‚å¼ºåˆ¶æ•°æ® */
         if(0 == ret)
         {
             size = cfgForceRamSize();
             ret = initSyncData(SYNC_REQ_FORCE_DATA, (uint8_t *)lxGetForce(), size);
         }
 
-        /* ÇëÇóÊ±¼äÏà¹Ø±äÁ¿ */
+        /* è¯·æ±‚æ—¶é—´ç›¸å…³å˜é‡ */
         if(0 == ret)
         {
             size = cfgLogicGlobalSize();
@@ -409,10 +409,10 @@ void sbTaskInit(void)
 /****************************************************************************************************
 * Identifier:   SCOD-AMC01-234 (Trace to: SLD-AMC01-234)
 * Function:     sbSyncForceData
-* Description:  ¿½±´Î¬»¤Êı¾İÖ¡µ½Í¬²½Êı¾İ·¢ËÍ»º´æ
-* Input:        pBuf            ĞèÒªÍ¬²½µÄÎ¬»¤Êı¾İÖ¸Õë
-* Output:       s_pTxFrame      ·¢ËÍÊı¾İ»º´æ
-*               s_cycleDataType Í¬²½Êı¾İÖ¡µÄÊı¾İÄÚÈİ
+* Description:  æ‹·è´ç»´æŠ¤æ•°æ®å¸§åˆ°åŒæ­¥æ•°æ®å‘é€ç¼“å­˜
+* Input:        pBuf            éœ€è¦åŒæ­¥çš„ç»´æŠ¤æ•°æ®æŒ‡é’ˆ
+* Output:       s_pTxFrame      å‘é€æ•°æ®ç¼“å­˜
+*               s_cycleDataType åŒæ­¥æ•°æ®å¸§çš„æ•°æ®å†…å®¹
 * Return:       none
 *
 * Others:
@@ -437,7 +437,7 @@ void sbSyncForceData(const uint8_t *pBuf)
 /****************************************************************************************************
 * Identifier:   SCOD-AMC01-235 (Trace to: SLD-AMC01-235)
 * Function:     errSyncState
-* Description:  Ö÷¿ØÄ£¿é¹ÊÕÏÍ£»ú×´Ì¬ÏÂÍ¬²½CPU×´Ì¬ĞÅÏ¢
+* Description:  ä¸»æ§æ¨¡å—æ•…éšœåœæœºçŠ¶æ€ä¸‹åŒæ­¥CPUçŠ¶æ€ä¿¡æ¯
 * Input:        none
 * Output:       none
 * Return:       none
@@ -450,10 +450,10 @@ void errSyncState(void)
 {
     syncFrame_t *pRxFrame = s_pRxFrame;
     LYNX_ASSERT(NULL != pRxFrame);
-    /* ·¢ËÍ ±¾µØÖ÷¿Ø×´Ì¬ µ½¶Ô¶Ë */
+    /* å‘é€ æœ¬åœ°ä¸»æ§çŠ¶æ€ åˆ°å¯¹ç«¯ */
     slaveTxProcess();
 
-    /* ½ÓÊÕ ¶Ô¶ËÄ£¿éµÄ×´Ì¬ */
+    /* æ¥æ”¶ å¯¹ç«¯æ¨¡å—çš„çŠ¶æ€ */
     if(sbRecvData(pRxFrame) == 0)
     {
         if(((pRxFrame->head.cmd ==  SYNC_REPLY_DATA_CYCLE) || \
@@ -470,8 +470,8 @@ void errSyncState(void)
 /****************************************************************************************************
 * Identifier:   SCOD-AMC01-327 (Trace to: SLD-AMC01-327)
 * Function:     memCpyToGlobal
-* Description:  ¸´ÖÆÊı¾İµ½Âß¼­Ëã·¨Êä³öÇøµÄÖ¸¶¨µØÖ·ÇøÓòÄÚ
-* Input:        src Ô´µØÖ·£¬³¤¶ÈÓÉÆ½Ì¨ÅäÖÃÎÄ¼ş»ñÈ¡
+* Description:  å¤åˆ¶æ•°æ®åˆ°é€»è¾‘ç®—æ³•è¾“å‡ºåŒºçš„æŒ‡å®šåœ°å€åŒºåŸŸå†…
+* Input:        src æºåœ°å€ï¼Œé•¿åº¦ç”±å¹³å°é…ç½®æ–‡ä»¶è·å–
 * Output:       none
 * Return:       none
 *
@@ -491,15 +491,15 @@ static void memCpyToGlobal(const void *src)
 /**************************************************************************************************
 * Identifier:   SCOD-AMC01-328 (Trace to: SLD-AMC01-328)
 * Function:     memCpyFromGlobal
-* Description:  µÃµ½Ëã·¨µÄDATA¶ÎÊı¾İ
-* Input:        pDst Ä¿µÄµØÖ·£¬³¤¶ÈÓÉÆ½Ì¨ÅäÖÃÎÄ¼ş»ñÈ¡
+* Description:  å¾—åˆ°ç®—æ³•çš„DATAæ®µæ•°æ®
+* Input:        pDst ç›®çš„åœ°å€ï¼Œé•¿åº¦ç”±å¹³å°é…ç½®æ–‡ä»¶è·å–
 * Output:       none
 * Return:       none
 *
 * Others:
 * Log:          Date          Author    Modified
 *               2017/08/14
-*               2021/08/31    hdq       Ê¹ÓÃ»ñÈ¡Êä³öbufferµØÖ·º¯Êı´úÌæÈ«¾Ö±äÁ¿
+*               2021/08/31    hdq       ä½¿ç”¨è·å–è¾“å‡ºbufferåœ°å€å‡½æ•°ä»£æ›¿å…¨å±€å˜é‡
 **************************************************************************************************/
 static void memCpyFromGlobal(void *pDst)
 {
@@ -513,7 +513,7 @@ static void memCpyFromGlobal(void *pDst)
 /****************************************************************************************************
 * Identifier:   SCOD-AMC01-236 (Trace to: SLD-AMC01-236)
 * Function:     cmdReqDataCycle
-* Description:  Ö÷Ä£¿é·¢ËÍÖÜÆÚÍ¬²½Êı¾İ
+* Description:  ä¸»æ¨¡å—å‘é€å‘¨æœŸåŒæ­¥æ•°æ®
 * Input:        none
 * Output:       none
 * Return:       none
@@ -533,34 +533,34 @@ static void cmdReqDataCycle(void)
 
     type = pRxFrame->head.type;
 
-    /* ½âÎö´ÓÄ£¿éµÄcpu×´Ì¬ */
+    /* è§£æä»æ¨¡å—çš„cpuçŠ¶æ€ */
     if(type == TYPE_CPU_STATE)
     {
-        /* ½âÎö¶Ô¶ËÖ÷¿ØCPU×´Ì¬ */
+        /* è§£æå¯¹ç«¯ä¸»æ§CPUçŠ¶æ€ */
         (void)memcpy((void*)&infoGetAddr()->moduleInfo[1 - g_localSlot],
                (const void*)&pRxFrame->data[0],
                sizeof(moduleInfo_t));
     }
 
-    /* ÖÜÆÚÍ¬²½ Ö¡Í·Ìî³ä */
+    /* å‘¨æœŸåŒæ­¥ å¸§å¤´å¡«å…… */
     pTxFrame->head.cmd = SYNC_REPLY_DATA_CYCLE;
     pTxFrame->head.idx = 0U;
 
     if(s_cycleDataType == TYPE_MATAIN_DATA)
     {
         pTxFrame->head.type = TYPE_MATAIN_DATA;
-        s_cycleDataType = TYPE_CPU_STATE;           /* Î¬»¤Êı¾İÖ¡·¢ËÍºó½«¼ÌĞø·¢ËÍÖ÷¿Ø×´Ì¬ */
+        s_cycleDataType = TYPE_CPU_STATE;           /* ç»´æŠ¤æ•°æ®å¸§å‘é€åå°†ç»§ç»­å‘é€ä¸»æ§çŠ¶æ€ */
     }
     else
     {
-        /* ½«±¾Ö÷¿ØµÄ cpu×´Ì¬ Ìî³äµ½·¢ËÍÊı¾İÖ¡ÖĞ */
+        /* å°†æœ¬ä¸»æ§çš„ cpuçŠ¶æ€ å¡«å……åˆ°å‘é€æ•°æ®å¸§ä¸­ */
         (void)memcpy((void*)&pTxFrame->data[0],
                (const void*)&infoGetAddr()->moduleInfo[g_localSlot],
                sizeof(moduleInfo_t));
         pTxFrame->head.type = TYPE_CPU_STATE;
     }
 
-    /* ·¢ËÍÊ±¼äÏà¹Ø±äÁ¿ */
+    /* å‘é€æ—¶é—´ç›¸å…³å˜é‡ */
     pTxFrame->head.size = (uint16_t)cfgLogicGlobalSize();
     if(pTxFrame->head.size <= (SYNC_FRAME_DATA_MAX - SYNC_SEG_SIZE))
     {
@@ -572,7 +572,7 @@ static void cmdReqDataCycle(void)
 /****************************************************************************************************
 * Identifier:   SCOD-AMC01-237 (Trace to: SLD-AMC01-237)
 * Function:     masterRxProcess
-* Description:  Ö÷Ä£¿é´¦ÀíÍ¬²½Êı¾İ
+* Description:  ä¸»æ¨¡å—å¤„ç†åŒæ­¥æ•°æ®
 * Input:        none
 * Output:       none
 * Return:       none
@@ -601,11 +601,11 @@ static void masterRxProcess(void)
             idx = pRxFrame->head.idx;
             pTxFrame->head.cmd = SYNC_REPLAY_VERSION;
             pTxFrame->head.idx = idx;
-            verInfo.logicVer = lxGetImageHead()->version;     /* ÓÃ»§Ëã·¨°æ±¾ÓëCRC */
+            verInfo.logicVer = lxGetImageHead()->version;     /* ç”¨æˆ·ç®—æ³•ç‰ˆæœ¬ä¸CRC */
             verInfo.logicCrc = lxGetImageHead()->crc;
-            verInfo.cfgVer   = lxGetCfgHead()->version;       /* Æ½Ì¨ÅäÖÃ°æ±¾ÓëCRC */
+            verInfo.cfgVer   = lxGetCfgHead()->version;       /* å¹³å°é…ç½®ç‰ˆæœ¬ä¸CRC */
             verInfo.cfgCrc   = lxGetCfgHead()->crc;
-            verInfo.paraVer  = lxGetParaHead()->version;      /* Ëã·¨²ÎÊı°æ±¾ÓëCRC */
+            verInfo.paraVer  = lxGetParaHead()->version;      /* ç®—æ³•å‚æ•°ç‰ˆæœ¬ä¸CRC */
             verInfo.paraCrc  = lxGetParaHead()->crc;
             tag = pTxFrame->data;
             src = (uint8_t *)&verInfo;
@@ -624,7 +624,7 @@ static void masterRxProcess(void)
                 maxIndex++;
             }
             if((idx + 1U ) == maxIndex)
-            {   /* ×îºó Ò»Ö¡ */
+            {   /* æœ€å ä¸€å¸§ */
                 pTxFrame->head.size = (uint16_t)(size - ((uint32_t)idx * (uint32_t)SYNC_FRAME_DATA_MAX));
             }
             else
@@ -666,7 +666,7 @@ static void masterRxProcess(void)
             break;
 
         case SYNC_REQ_TIME_DATA:
-            /* Ê±¼äÏà¹Ø±äÁ¿ Ö»ÓĞ1Ö¡Êı¾İ */
+            /* æ—¶é—´ç›¸å…³å˜é‡ åªæœ‰1å¸§æ•°æ® */
             pTxFrame->head.cmd = SYNC_REPLAY_TIME_DATA;
             pTxFrame->head.idx = 0U;
             pTxFrame->head.size = (uint16_t)cfgLogicGlobalSize();
@@ -674,7 +674,7 @@ static void masterRxProcess(void)
             break;
 
         case SYNC_REQ_DATA_CYCLE:
-            cmdReqDataCycle();      /* ÖÜÆÚ Í¬²½Ê±¼äÏà¹ØÊı¾İ */
+            cmdReqDataCycle();      /* å‘¨æœŸ åŒæ­¥æ—¶é—´ç›¸å…³æ•°æ® */
             break;
 
         default:
@@ -688,7 +688,7 @@ static void masterRxProcess(void)
 /****************************************************************************************************
 * Identifier:   SCOD-AMC01-238 (Trace to: SLD-AMC01-238)
 * Function:     sbSlaveRxProcess
-* Description:  ´ÓÄ£¿é½âÎöÖÜÆÚÍ¬²½Êı¾İ
+* Description:  ä»æ¨¡å—è§£æå‘¨æœŸåŒæ­¥æ•°æ®
 * Input:        none
 * Output:       none
 * Return:       none
@@ -708,19 +708,19 @@ void sbSlaveRxProcess(void)
     {
         type = pRxFrame->head.type;
         if(type == TYPE_MATAIN_DATA)
-        {   /* ½âÎö Î¬»¤Êı¾İÖ¡ */
+        {   /* è§£æ ç»´æŠ¤æ•°æ®å¸§ */
             mtSaveFile(pRxFrame->data);
-            /* ¿½±´Ê±¼äÏà¹Ø±äÁ¿µ½Ëã·¨Êä³öÇø */
+            /* æ‹·è´æ—¶é—´ç›¸å…³å˜é‡åˆ°ç®—æ³•è¾“å‡ºåŒº */
             baseAddr = pRxFrame->data + SYNC_SEG_SIZE;
             memCpyToGlobal((const void*)baseAddr);
         }
         else if(type == TYPE_CPU_STATE)
-        {   /* ½âÎö¶Ô¶ËCPU×´Ì¬ */
+        {   /* è§£æå¯¹ç«¯CPUçŠ¶æ€ */
             (void)memcpy((void*)&infoGetAddr()->moduleInfo[1 - g_localSlot],
                    (const void*)&pRxFrame->data,
                    sizeof(moduleInfo_t));
 
-            /* ¿½±´Ê±¼äÏà¹Ø±äÁ¿µ½Ëã·¨Êä³öÇø */
+            /* æ‹·è´æ—¶é—´ç›¸å…³å˜é‡åˆ°ç®—æ³•è¾“å‡ºåŒº */
             baseAddr = pRxFrame->data + SYNC_SEG_SIZE;
             memCpyToGlobal((const void*)baseAddr);
         }
@@ -734,7 +734,7 @@ void sbSlaveRxProcess(void)
 /****************************************************************************************************
 * Identifier:   SCOD-AMC01-239 (Trace to: SLD-AMC01-239)
 * Function:     sbTask
-* Description:  Ö÷»úÏò´Ó»ú·¢ËÍÍ¬²½Êı¾İ£¬´Ó»ú½ÓÊÕÍ¬²½Êı¾İ
+* Description:  ä¸»æœºå‘ä»æœºå‘é€åŒæ­¥æ•°æ®ï¼Œä»æœºæ¥æ”¶åŒæ­¥æ•°æ®
 * Input:        none
 * Output:       none
 * Return:       0
@@ -745,20 +745,20 @@ void sbSlaveRxProcess(void)
 ****************************************************************************************************/
 int32_t sbTask(void)
 {
-    /* »ñÈ¡±¾ÉíµÄÖ÷´ÓÄ£Ê½ */
+    /* è·å–æœ¬èº«çš„ä¸»ä»æ¨¡å¼ */
     uint32_t mode = infoGetMpuMS();
     portState_t *pPortState0 = infoGetPortState(g_localSlot, 0, RX_PORT);
     static uint8_t syncFlag = 1U;
 
-    /* ÅĞ¶Ï ÊÇ·ñÎªÓĞĞ§Êı¾İÖ¡ */
+    /* åˆ¤æ–­ æ˜¯å¦ä¸ºæœ‰æ•ˆæ•°æ®å¸§ */
     if(pPortState0->avail == 0)
     {
         syncFlag = 1U;
-        /* ½ÓÊÕ³É¹¦ */
+        /* æ¥æ”¶æˆåŠŸ */
         infoClearPfError(MPUS_COM_RX_FIAL);
         if(mode == MPU_MASTER)
         {
-            /* Ö÷Ä£¿é½âÎöÃüÁî ²¢´¦Àí */
+            /* ä¸»æ¨¡å—è§£æå‘½ä»¤ å¹¶å¤„ç† */
             masterRxProcess();
         }
     }
@@ -766,9 +766,9 @@ int32_t sbTask(void)
     {
         if(syncFlag > 1)
         {
-            /* CRC Êı¾İĞ£ÑéÊ§°ÜÊ± ÇÒ¶Ô¶ËÖ÷¿ØÎŞ¹ÊÕÏ Ôò±íÃ÷ ½ÓÊÕÊı¾İÊ§°Ü */
+            /* CRC æ•°æ®æ ¡éªŒå¤±è´¥æ—¶ ä¸”å¯¹ç«¯ä¸»æ§æ— æ•…éšœ åˆ™è¡¨æ˜ æ¥æ”¶æ•°æ®å¤±è´¥ */
             infoSetPfError(MPUS_COM_RX_FIAL);
-            infoSetCom(1 - g_localSlot,0x01U);   /* µ±´Ó¿¨±»²¦³öÊ±±¨Í¨ĞÅ¹ÊÕÏ */
+            infoSetCom(1 - g_localSlot,0x01U);   /* å½“ä»å¡è¢«æ‹¨å‡ºæ—¶æŠ¥é€šä¿¡æ•…éšœ */
             if(infoGetPfErrorState(BACK_MPU_ERROR) != 0)
             {
                 infoClearSlot(1 - g_localSlot);
@@ -781,7 +781,7 @@ int32_t sbTask(void)
     }
     if(mode == MPU_SLAVE)
     {
-        /* ·¢ÆğĞÂµÄÇëÇó */
+        /* å‘èµ·æ–°çš„è¯·æ±‚ */
         slaveTxProcess();
     }
     return 0;
@@ -790,7 +790,7 @@ int32_t sbTask(void)
 /****************************************************************************************************
 * Identifier:   SCOD-AMC01-097 (Trace to: SLD-AMC01-097)
 * Function:     sbSyncLedShow
-* Description:  Í¬²½Êı¾İÖ¸Ê¾µÆ¿ØÖÆ
+* Description:  åŒæ­¥æ•°æ®æŒ‡ç¤ºç¯æ§åˆ¶
 * Input:        none
 * Output:       none
 * Return:       none
@@ -815,10 +815,10 @@ void sbSyncLedShow(void)
 /****************************************************************************************************
 * Identifier:   SCOD-AMC01-240 (Trace to: SLD-AMC01-240)
 * Function:     sbCheckMode
-* Description:  Ğ£ÑéÈßÓàÅäÖÃÖ÷¿ØÄ£¿éÔËĞĞÄ£Ê½
+* Description:  æ ¡éªŒå†—ä½™é…ç½®ä¸»æ§æ¨¡å—è¿è¡Œæ¨¡å¼
 * Input:        none
 * Output:       none
-* Return:       ret 0 Ä£Ê½Ò»ÖÂ 1 Ä£Ê½²»Ò»ÖÂ
+* Return:       ret 0 æ¨¡å¼ä¸€è‡´ 1 æ¨¡å¼ä¸ä¸€è‡´
 *               
 * Others:
 * Log:          Date          Author    Modified
@@ -832,7 +832,7 @@ int32_t sbCheckMode(void)
     
     if(cfgLocalPfMode() == CFG_REDUNDANCY)
     {
-        /* Ä£Ê½²»Ò»ÖÂ  ½ûÖ¹Ö´ĞĞÎ¬»¤ÃüÁî */
+        /* æ¨¡å¼ä¸ä¸€è‡´  ç¦æ­¢æ‰§è¡Œç»´æŠ¤å‘½ä»¤ */
         if((localTrueMode != standbyTrueMode) &&
                 (standbyTrueMode != SYS_INIT))
         {
